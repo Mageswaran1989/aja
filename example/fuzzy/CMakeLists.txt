@@ -1,4 +1,4 @@
-include_directories(../../include)
+INCLUDE_DIRECTORIES(../../include)
 
 ADD_EXECUTABLE(example_fuzzifier example_fuzzifier.cpp)
-target_link_libraries (example_fuzzifier  ${EXTRA_LIBS})
+TARGET_LINK_LIBRARIES(example_fuzzifier LINK_PUBLIC aja_fuzzy)

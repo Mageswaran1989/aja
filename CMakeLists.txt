@@ -1,23 +1,23 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-PROJECT (Aja)
+PROJECT(Aja)
 
 #The version Number
-SET (Aja_MAJOR_NUMBER 0)
-SET (Aja_MINOR_NUMBER 1)
+SET(Aja_MAJOR_NUMBER 0)
+SET(Aja_MINOR_NUMBER 1)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
-CONFIGURE_FILE (
+CONFIGURE_FILE(
   "${PROJECT_SOURCE_DIR}/cmake/aja_config.h.in"
   "${PROJECT_BINARY_DIR}/include/aja/config/aja_config.h"
   )
 
 # make sure the directory exiats before copying config header
-FILE (MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/include/aja/config/)
-INCLUDE_DIRECTORIES ("${PROJECT_BINARY_DIR}/include/aja/config/")
+FILE(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/include/aja/config/)
+INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}/include/aja/config/")
 
-SET (CMAKE_MODULE_PATH ${Aja_SOURCE_DIR}/cmake)
+SET(CMAKE_MODULE_PATH ${Aja_SOURCE_DIR}/cmake)
 
 # find OpenCL
 #find_package(OpenCL REQUIRED)
@@ -34,30 +34,27 @@ SET (CMAKE_MODULE_PATH ${Aja_SOURCE_DIR}/cmake)
 #endif()
 
 # options
-OPTION (AJA_MAKE_VERBOSE "Verbose mode in make" ON)
-OPTION (AJA_HAVE_OPENCV "Have OpenCV" OFF)
-OPTION (AJA_HAVE_QT "Have Qt" OFF)
-OPTION (AJA_HAVE_VTK "Have VTK" OFF)
-OPTION (AJA_HAVE_CUDA "Have CUDA" OFF)
-OPTION (AJA_HAVE_TBB "Have TBB" OFF)
-OPTION (AJA_BUILD_DEBUG "Build with debug symbols" ON)
+OPTION(AJA_MAKE_VERBOSE "Verbose mode in make" ON)
+OPTION(AJA_HAVE_OPENCV "Have OpenCV" OFF)
+OPTION(AJA_HAVE_QT "Have Qt" OFF)
+OPTION(AJA_HAVE_VTK "Have VTK" OFF)
+OPTION(AJA_HAVE_CUDA "Have CUDA" OFF)
+OPTION(AJA_HAVE_TBB "Have TBB" OFF)
+OPTION(AJA_BUILD_DEBUG "Build with debug symbols" ON)
 
-IF (${AJA_MAKE_VERBOSE})
-   SET (CMAKE_VERBOSE_MAKEFILE on)
+IF(${AJA_MAKE_VERBOSE})
+   SET(CMAKE_VERBOSE_MAKEFILE on)
 ENDIF()
 
-IF (${AJA_BUILD_DEBUG})
+IF(${AJA_BUILD_DEBUG})
    SET(CMAKE_BUILD_TYPE Debug)
-ELSE (!${AJA_BUILD_DEBUG})
+ELSE(!${AJA_BUILD_DEBUG})
    SET(CMAKE_BUILD_TYPE Release)
 ENDIF()
 
-include_directories(include)
+INCLUDE_DIRECTORIES(include)
 
-ADD_SUBDIRECTORY (src)
-
-set (EXTRA_LIBS ${EXTRA_LIBS} ${src})
-
-ADD_SUBDIRECTORY (test)
-ADD_SUBDIRECTORY (example)
+ADD_SUBDIRECTORY(src)
+ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(example)
 
