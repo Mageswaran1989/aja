@@ -1,0 +1,8 @@
+Syntax
+=======
+https://help.github.com/articles/github-flavored-markdown/
+https://guides.github.com/features/mastering-markdown/
+
+http://dillinger.io/
+Browser-based text editor that can render Markdown on the fly.
+
