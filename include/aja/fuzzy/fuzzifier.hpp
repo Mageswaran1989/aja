@@ -16,4 +16,4 @@ private:
     char name[30];
     float lowval,highval,midval;
 };
-int randnum(int);
+int randomnum(int maxval);

@@ -1,4 +1,6 @@
-cmake_minimum_required (VERSION 2.6)
-project (iVizonAnn)
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (aja_fuzzy)
 
-add_library(iVizonAnn, 
+ADD_LIBRARY(aja_fuzzy SHARED fuzzifier.cpp) 
+SET (EXTRA_LIBS ${EXTRA_LIBS} aja_fuzzy)
+#INSTALL(TARGETS aja_fuzzy DESTINATION ${HelloCMake_SOURCE_DIR}/assets)

@@ -1,0 +1,3 @@
+// the configured options and settings for Aja
+#define Aja_VERSION_MAJOR @Aja_MAJOR_NUMBER@
+#define Aja_VERSION_MINOR @Aja_MINOR_NUMBER@

@@ -1,0 +1,6 @@
+Find files with extensions and delete it
+========================================
+#to check
+find . -name "*.*~" -type f 
+#to delete
+find . -name "*.*~" -type f -delete
