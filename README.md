@@ -15,7 +15,7 @@ A C++ Library with Artificial Intelligence
 
 ## About
 --------
-An attempt to create a student friendly library unifying Artficial Neural Network, Android/Linux sensors, Microcontroller based sensors to sense the environment, etc., from scratch.
+An attempt to create a student friendly library unifying Artficial Neural Network, Android/Linux sensors services, Microcontroller based sensors etc., to sense the environment, from scratch.
 
 ## Dependent Libraries
 ----------------------
