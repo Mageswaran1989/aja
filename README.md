@@ -1,21 +1,21 @@
 # Aja
 ======
 
-A C++ Library for Artificial Neural Networks  
+A C++ Library with Artificial Intelligence  
 
 ## Etymology
 ------------
-- Unborn or uncreated.
-- Existing from all eternity.
-- Goat.
-- Strong willed, 
-- Stubborn.
-- Unconquerable.
-- To drive.
+- Unborn or uncreated
+- Existing from all eternity
+- Goat
+- Strong willed 
+- Stubborn
+- Unconquerable
+- To drive
 
 ## About
 --------
-An attempt to create a student friendly library for Artficial Neural Network from scratch.
+An attempt to create a student friendly library unifying Artficial Neural Network, Android/Linux sensors, Microcontroller based sensors to sense the environment, etc., from scratch.
 
 ## Dependent Libraries
 ----------------------
