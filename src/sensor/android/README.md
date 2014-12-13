@@ -1,0 +1,1 @@
+**This folder contains Android java based applications that streams sensor data over Wi-Fi or Blueetooth and may have C++ wrapper APIs to access the Linux based sensors on Android which are been explored by Aja team.**

@@ -16,33 +16,34 @@
 
 using namespace std;
 
-int main()
+/// A fuzzifier program that takes category information:
+/// lowval, midval and highval and category name
+/// and fuzzifies an input based on
+/// the total number of categories and the membership
+/// in each category
+
+int main(int argc, char *argv[])
 {
-    // a fuzzifier program that takes Category information:
-    // lowval, midval and highval and Category name
-    // and fuzzifies an input based on
-    // the total number of categories and the membership
-    // in each Category
     int i=0,j=0,numcat=0,randnum;
     float l,m,h, inval=1.0;
     char input[30]=" ";
-    Category * ptr[10];
+    category * ptr[10];
     float relprob[10];
     float total=0, runtotal=0;
-    //input the Category information; terminate with `done';
+    //input the category information; terminate with `done';
     while (1)
     {
-        cout << "\nPlease type in a Category name, e.g. Cool\n";
+        cout << "\nPlease type in a category name, e.g. Cool\n";
         cout << "Enter one word without spaces\n";
         cout << "When you are done, type `done' :\n\n";
-        ptr[i]= new Category;
+        ptr[i]= new category;
         cin >> input;
         if ((input[0]=='d' && input[1]=='o' &&
              input[2]=='n' && input[3]=='e')) break;
         ptr[i]->setname(input);
         cout << "\nType in the lowval, midval and highval\n";
-        cout << "for each Category, separated by spaces\n";
-        cout << " e.g. 1.0 3.0 5.0 :\n\n";
+        cout << "for each category, separated by spaces\n";
+        cout << " e.g. 10.0 20.0 30.0  :\n\n";
         cin >> l >> m >> h;
         ptr[i]->setval(h,m,l);
         i++;
@@ -59,7 +60,7 @@ int main()
         cin >> inval;
         if (inval == 0) break;
         // calculate relative probabilities of
-        // input being in each Category
+        // input being in each category
         total=0;
         for (j=0;j<numcat;j++)
         {
@@ -79,9 +80,9 @@ int main()
             j++;
             runtotal += relprob[j];
         }
-        cout << "\nOutput fuzzy Category is ==> " <<
+        cout << "\nOutput fuzzy category is ==> " <<
                 ptr[j]->getname()<<"<== \n";
-        cout <<"Category\t"<<"membership\n";
+        cout <<"category\t"<<"membership\n";
         cout <<"---------------\n";
         for (j=0;j<numcat;j++)
         {

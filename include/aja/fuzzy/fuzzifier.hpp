@@ -1,9 +1,9 @@
 // fuzzfier.h
 // program to fuzzify data
-class Category
+class category
 {
 public:
-    Category(){};
+    category(){};
     void setname(char *);
     char * getname();
     void setval(float&,float&,float&);
@@ -11,7 +11,7 @@ public:
     float getmidval();
     float gethighval();
     float getshare(const float&);
-    ~Category(){};
+    ~category(){};
 private:
     char name[30];
     float lowval,highval,midval;
