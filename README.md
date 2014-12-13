@@ -45,7 +45,8 @@ Linux Ubuntu 12.04+
 - [ros](www.ros.org)
 
 ##Wiki
-	https://github.com/Mageswaran1989/aja/wiki
+https://github.com/Mageswaran1989/aja/wiki
+- [How to start?](https://github.com/Mageswaran1989/aja/wiki/How-to-start%3F)
 	
 ## Contribution
 **Let us begin our jouney from here!**
