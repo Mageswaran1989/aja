@@ -17,40 +17,40 @@
 
 using namespace std;
 
-void Category::setname(char *n)
+void category::setname(char *n)
 {
     strcpy(name,n);
 }
 
-char * Category::getname()
+char * category::getname()
 {
     return name;
 }
 
-void Category::setval(float &h, float &m, float &l)
+void category::setval(float &h, float &m, float &l)
 {
     highval=h;
     midval=m;
     lowval=l;
 }
 
-float Category::getlowval()
+float category::getlowval()
 {
     return lowval;
 }
-float Category::getmidval()
+float category::getmidval()
 {
     return midval;
 }
-float Category::gethighval()
+float category::gethighval()
 {
     return highval;
 }
 
-float Category::getshare(const float & input)
+float category::getshare(const float & input)
 {
     // this member function returns the relative membership
-    // of an input in a Category, with a maximum of 1.0
+    // of an input in a category, with a maximum of 1.0
     float output;
     float midlow, highmid;
     midlow=midval-lowval;
