@@ -49,5 +49,7 @@ https://github.com/Mageswaran1989/aja/wiki
 - [How to start?](https://github.com/Mageswaran1989/aja/wiki/How-to-start%3F)
 	
 ## Contribution
+- [How to set up GIT](https://github.com/Mageswaran1989/aja/wiki/Setting-up-the-GIT)
+
 **Let us begin our jouney from here!**
 > *Contact: mageswaran1989@gmail.com*
