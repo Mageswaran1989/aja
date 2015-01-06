@@ -1,0 +1,6 @@
+*.aux
+*.log
+*.bak
+*.gz
+*.json
+*.user

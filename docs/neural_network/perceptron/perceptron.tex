@@ -1,0 +1,155 @@
+\documentclass[12pt, right open]{memoir}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
+\usetikzlibrary{shapes.geometric, calc, intersections}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+
+\usepackage{ifthen}
+\setcounter{secnumdepth}{5}
+
+%To reduce vetical line spaces between list items
+\usepackage{enumitem}
+\setlist{nolistsep,leftmargin=*}
+
+\newcommand{\matplus}{
+~~
+  }
+
+\begin{document}
+
+%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
+
+% >>>>>>>> Tikz Style sheet
+\tikzstyle{every pin edge}=[<-,shorten <=1pt]
+\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!50]
+\tikzstyle{output neuron}=[neuron, fill=black!50]
+\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{annot} = [text width=4em, text centered]
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+% <<<<<<<< Tikz Style sheet
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{What is Perceptron?}
+In machine learning, the perceptron is an algorithm for supervised classification of an input into one of several possible non-binary outputs. It is a type of linear classifier, i.e. a classification algorithm that makes its predictions based on a linear predictor function combining a set of weights with the feature vector. The algorithm allows for online learning, in that it processes elements in the training set one at a time.
+
+The perceptron algorithm dates back to the late 1950s; its first implementation, in custom hardware, was one of the first artificial neural networks to be produced.
+
+\section{A Bit of History}
+The perceptron algorithm was invented in 1957 at the Cornell Aeronautical Laboratory by Frank Rosenblatt, funded by the United States Office of Naval Research. \hfill \\
+
+More on the web!
+
+\section{Definition}
+In the modern sense, the perceptron is an algorithm for learning a \textbf{binary classifier}: a function that maps its input x (a real-valued vector) to an output value f(x) (a single binary value):
+
+\[ f(x) = \left\{ 
+               \begin{array}{l l}
+                1  : & \quad w.x+b > 0 \\
+                0  : & \quad otherwise
+               \end{array} 
+       \right.
+\]
+
+where...
+\begin{itemize}
+%\itemsep0em 
+\item $\mathbf{w}$ is a vector of real-valued weights, 
+\item $\mathbf{w \cdot x}$ is the dot product (which here computes a weighted sum), and $\mathbf{b}$ is the 'bias', 
+\item a constant term that does not depend on any input value.
+\end{itemize}
+
+If $b$ is negative, then the weighted combination of inputs must produce a positive value greater than $|b|$ in order to push the classifier neuron over the 0 threshold. Spatially, the bias alters the position (though not the orientation) of the decision boundary. The perceptron learning algorithm does not terminate if the learning set is not linearly separable. If the vectors are not linearly separable learning will never reach a point where all vectors are classified properly. The most famous example of the perceptron's inability to solve problems with linearly nonseparable vectors is the Boolean exclusive-or problem.
+
+In the context of neural networks, a perceptron is an \textbf{artificial neuron} using the \textbf{Heaviside step function} as the activation function. The perceptron algorithm is also termed the \textbf{single-layer perceptron}, to distinguish it from a multilayer perceptron, which is a misnomer for a more complicated neural network. As a linear classifier, the single-layer perceptron is the \textbf{simplest feedforward neural network}.
+
+\section{Learning Algorithm}
+Below is an example of a learning algorithm for a (single-layer) perceptron. For multilayer perceptrons, where a hidden layer exists, more sophisticated algorithms such as \textbf{backpropagation} must be used. Alternatively, methods such as the \textbf{delta rule} can be used if the function is \textbf{non-linear} and \textbf{differentiable}, although the one below will work as well.
+
+When multiple perceptrons are combined in an artificial neural network, each output neuron operates independently of all the others; thus, learning each output can be considered in isolation.
+
+\subsubsection{Definition}
+We first define some variables:
+\begin{itemize}
+\item $y = f(\vec{\mathbf{z}})$ \, denotes the output from the perceptron for an input vector $\vec{\mathbf{z}}$.
+\item $\mathbf{b}$ \, is the bias term, which in the example below we take to be 0.
+\item $D = \{\vec{\mathbf{X}}_1,d_1)$,$\dots$,$(\vec{\mathbf{X}}_s,d_s)\}$ \, is the training set of s samples, where:
+\begin{itemize}
+\item $\vec{\mathbf{X}}_j$ is the n-dimensional input vector.
+\item $\mathbf{d_j}$ \, is the desired output value of the perceptron for that input. \hfill \\
+\end{itemize}
+
+We show the values of the features as follows:
+\item $x_{j,i}$ \, is the value of the ith feature of the jth training input vector.
+\item $x_{j,0} = 1$ \,. 
+
+\hfill \\ To represent the weights:
+\item $w_i$ \, is the $i$th value in the weight vector, to be multiplied by the value of the $i$th input feature.
+\item Because $x_{j,0}$ = 1 \,, the $w_0$ \, is effectively a learned bias that we use instead of the bias constant $b$.
+
+\hfill \\ To show the time-dependence of $\mathbf{w}$, we use:
+\item $w_i(t)$ \, is the weight $i$ at time $t$.
+\item $\alpha$ \, is the learning rate, where $0 < \alpha \leq 1$.
+
+Too high a learning rate makes the perceptron periodically oscillate around the solution unless additional steps are taken.
+\end{itemize}
+
+\subsection{Steps}
+
+\begin{enumerate}
+
+\item Initialise the weights and the threshold. Weights may be initialised to $0$ or to a small random value. In the example below, we use $0$.
+
+\item  For each example $j$ \, in our training set $D$ \,, perform the following steps over the input $\mathbf{x}_j$\, and desired output $d_j$ \,:
+
+\begin{enumerate}
+\item Calculate the actual output: \hfill \\
+$\mathbf{y_j(t) = f[\mathbf{w}(t)\cdot\mathbf{x}_j] = f[w_0(t) + w_1(t)x_{j,1} + w_2(t)x_{j,2} + \dotsb + w_n(t)x_{j,n}]}$
+\item Update the weights: \hfill \\
+$\mathbf{w_i(t+1) = w_i(t) + \alpha (d_j - y_j(t)) x_{j,i}}$ \, for all feature $\mathbf{0 \leq i \leq n}$.
+\end{enumerate}
+
+\item  For offline learning, the step 2 may be repeated until the iteration error 
+$\mathbf{\frac{1}{s} \sum_{j=1}^s |d_j - y_j(t)|}$ \, is less than a user-specified error threshold $\mathbf{\gamma}$\,, or a predetermined number of iterations have been completed.
+
+\end{enumerate}
+
+The algorithm updates the weights after steps $2a$ and $2b$. These weights are immediately applied to a pair in the training set, and subsequently updated, rather than waiting until all pairs in the training set have undergone these steps.
+
+\section{Convergence}
+The perceptron is a linear classifier, therefore it will never get to the state with all the input vectors classified correctly if the training set $\mathbf{D}$ is not linearly separable, i.e. if the positive examples can not be separated from the negative examples by a hyperplane.
+
+\section{Pocket Algorithm}
+The pocket algorithm with ratchet (Gallant, 1990) solves the stability problem of perceptron learning by keeping the best solution seen so far "in its pocket". The pocket algorithm then returns the solution in the pocket, rather than the last solution. It can be used also for non-separable data sets, where the aim is to find a perceptron with a small number of misclassifications.
+
+
+\section{Example}
+A perceptron learns to perform a binary NAND function on inputs $x_1$ \, and $x_2$ \,.
+
+\begin{itemize}
+\item Inputs: $x_0$ \,, $x_1$ \,, $x_2$ \,, with input $x_0$ \, held constant at 1.
+\item Threshold ($\theta$): $0.5$
+\item Bias ($b$): 0
+\item Learning rate ($r$): 0.1
+\item Training set, consisting of four samples: $\{((1, 0, 0), 1), ((1, 0, 1), 1), ((1, 1, 0), 1), ((1, 1, 1), 0)\}$ \,
+\end{itemize}
+
+
+In the following, the final weights of one iteration become the initial weights of the next. Each cycle over all the samples in the training set is demarcated with heavy lines.
+
+
+\section{References}
+Without following links Ctrl + c and Ctrl + v would have not happened!
+
+http://en.wikipedia.org/wiki/Perceptron
+\end{document}
