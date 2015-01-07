@@ -8,13 +8,19 @@
 \usepackage{float}
 \floatstyle{boxed}
 \restylefloat{figure}
-
+\usepackage{multirow} %for tables
 \usepackage{ifthen}
 \setcounter{secnumdepth}{5}
 
 %To reduce vetical line spaces between list items
 \usepackage{enumitem}
 \setlist{nolistsep,leftmargin=*}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
+%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
+%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
 
 \newcommand{\matplus}{
 ~~
@@ -147,6 +153,26 @@ A perceptron learns to perform a binary NAND function on inputs $x_1$ \, and $x_
 
 In the following, the final weights of one iteration become the initial weights of the next. Each cycle over all the samples in the training set is demarcated with heavy lines.
 
+\begin{center}
+
+\begin{table}[ht]
+\caption{Example of weight updates for the Perceptron Network}
+\label{tab:example_of_weight_update_for_the_perceptron_network}
+%\resizebox{\textwidth}{!}
+
+\begin{tabular}{|l|*{17}{c|}}
+\hline
+\multicolumn{2}{|c|} {I/P} & \specialcell{Intial\\Weights} & \multicolumn{3}{|c|}{O/P} & Error & Correction & Final Weights \\
+\hline
+\specialcell{Sensor\\Values} & \specialcell{Desired\\O/P} &  & Per sensor  & Sum & Network & & & \\
+\hline
+\multicolumn{3}{|c|} $x_0$ & $x_1$ & $x_2$ & $z$ & $w_0$ & $w_1$ & $w_2$ & $c_0$ & $c_1$ & $c_2$ & $s$ & $n$ & $e$ & $d$ & $w_0$ & $w_1$ & $w_2$ \\
+\hline
+\end{tabular}
+
+\end{table}
+
+\end{center}
 
 \section{References}
 Without following links Ctrl + c and Ctrl + v would have not happened!
