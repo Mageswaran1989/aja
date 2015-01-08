@@ -26,6 +26,20 @@
 ~~
   }
 
+%For C++ code
+\usepackage{listings}
+\usepackage{xcolor} % for setting colors
+
+% set the default code style
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+ %   numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
+}
 \begin{document}
 
 %http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
@@ -153,26 +167,116 @@ A perceptron learns to perform a binary NAND function on inputs $x_1$ \, and $x_
 
 In the following, the final weights of one iteration become the initial weights of the next. Each cycle over all the samples in the training set is demarcated with heavy lines.
 
-\begin{center}
+%For time being we will capture the image from wiki and put it here!
 
-\begin{table}[ht]
+%\begin{center}
+%
+%\begin{table}[ht]
+%\caption{Example of weight updates for the Perceptron Network}
+%\label{tab:example_of_weight_update_for_the_perceptron_network}
+%%\resizebox{\textwidth}{!}
+%
+%\begin{tabular}{|l|*{17}{c|}}
+%\hline
+%\multicolumn{2}{|c|} {I/P} & \specialcell{Intial\\Weights} & \multicolumn{3}{|c|}{O/P} & Error & Correction & Final Weights \\
+%\hline
+%\specialcell{Sensor\\Values} & \specialcell{Desired\\O/P} &  & Per sensor  & Sum & Network & & & \\
+%\hline
+%\multicolumn{3}{|c|} $x_0$ & $x_1$ & $x_2$ & $z$ & $w_0$ & $w_1$ & $w_2$ & $c_0$ & $c_1$ & $c_2$ & $s$ & $n$ & $e$ & $d$ & $w_0$ & $w_1$ & $w_2$ \\
+%\hline
+%\end{tabular}
+%
+%\end{table}
+%
+%\end{center}
+
+\begin{figure}
 \caption{Example of weight updates for the Perceptron Network}
 \label{tab:example_of_weight_update_for_the_perceptron_network}
-%\resizebox{\textwidth}{!}
+\centering
+\includegraphics[scale=.5]{example_weight_updates_perceptron_network.png}
+\end{figure}
 
-\begin{tabular}{|l|*{17}{c|}}
-\hline
-\multicolumn{2}{|c|} {I/P} & \specialcell{Intial\\Weights} & \multicolumn{3}{|c|}{O/P} & Error & Correction & Final Weights \\
-\hline
-\specialcell{Sensor\\Values} & \specialcell{Desired\\O/P} &  & Per sensor  & Sum & Network & & & \\
-\hline
-\multicolumn{3}{|c|} $x_0$ & $x_1$ & $x_2$ & $z$ & $w_0$ & $w_1$ & $w_2$ & $c_0$ & $c_1$ & $c_2$ & $s$ & $n$ & $e$ & $d$ & $w_0$ & $w_1$ & $w_2$ \\
-\hline
-\end{tabular}
+\section{Example : $aja/example/ann/perceptron\_network.cpp$}
 
-\end{table}
 
-\end{center}
+In our C++ implementation of this network, we have the following classes: we have separate classes for input neurons and output neurons. The \textbf{input\_neuron} class is for the input neurons. This class has weight and activation as data members. The \textbf{output\_neuron} class is similar and is for the output neuron. It is declared as a friend class in the \textbf{input\_neuron} class. The output neuron class has also a data member called output. There is a network class, which is a friend class in the \textbf{output\_neuron} class. An instance of the network class is created with four input neurons. These four neurons are all connected with one output neuron.
+
+\subsubsection{input\_neuron class}
+The member functions of the input\_neuron class are: 
+\begin{itemize}
+\item A default constructor, 
+\item A second constructor that takes a real number as an argument, and 
+\item A function that calculates the output of the input neuron. \\
+\end{itemize}
+
+
+The constructor taking one argument uses that argument to set the value of the weight on the connection between the input neuron and the output neuron. The functions that determine the neuron activations and the network output are declared public. The activations of the neurons are calculated with functions defined in the neuron classes. A threshold value is used by a member function of the output neuron to determine if the neuron’s activation is
+large enough for it to fire, giving an output of 1.
+
+\subsubsection{Implementation of Functions}
+
+
+The network is designed to have four neurons in the input layer. Each of them is an object of class input\_neuron, and these are member classes in the class network. There is one explicitly defined output neuron of the class out\_neuron. The network constructor also invokes the neuron constructor for each input layer neuron in the network by providing it with the initial weight for its connection to the neuron in the output layer. The constructor for the output neuron is also invoked by the network constructor, at the same time initializing the output and activation data members of the output neuron each to zero. To make sure there is access to needed information and functions, the output neuron is declared a friend class in the class input\_neuron. The network is declared as a friend class in the class out\_neuron.
+
+\subsubsection{Input/Output}
+There are two data files used in this program. One is for setting up the weights, and the other for setting up the input vectors. On the command line, you enter the program name followed by the weight file name and the input file name. 
+You can find a file called weight.dat, which contains the following data: \\
+2.0 3.0 3.0 2.0 \\
+3.0 0.0 6.0 2.0 \\
+These are two weight vectors. \\
+You can find a file called input.dat with the two data vectors below: \\
+1.95 0.27 0.69 1.25 \\
+0.30 1.05 0.75 0.19 \\
+
+\subsection{Execution}
+\begin{lstlisting}[caption={perceptron\_netwotk.cpp output}] %language=C++, 
+example/ann/perceptron_network example/ann/weight.dat example/ann/input.dat
+
+This program is for a perceptron network with  
+input layer of 4 neurons, each connected to the 
+output neuron.
+
+This example takes Real number as Input Signals
+Please enter the number of weights/vectors : 2
+This is vector # 1
+Please enter a threshold value for 
+output neuron, eg 7.0 : 7
+
+Input neuron 1 value is : 1.95 weight is : 2  
+and its activation is : 3.9
+Input neuron 2 value is : 0.27 weight is : 3  
+and its activation is : 0.81
+Input neuron 3 value is : 0.69 weight is : 3  
+and its activation is : 2.07
+Input neuron 4 value is : 1.25 weight is : 2  
+and its activation is : 2.5
+
+Output neuron activation is : 9.28
+
+The output neuron activation exceeds the-
+threshold value of 7
+Output value is 1
+
+This is vector # 2
+Please enter a threshold value for 
+output neuron, eg 7.0 : 7
+
+Input neuron 1 value is : 0.3 weight is : 3  
+and its activation is : 0.9
+Input neuron 2 value is : 1.05 weight is : 0  
+and its activation is : 0
+Input neuron 3 value is : 0.75 weight is : 6  
+and its activation is : 4.5
+Input neuron 4 value is : 0.19 weight is : 2  
+and its activation is : 0.38
+
+Output neuron activation is : 5.78
+
+The output neuron activation is smaller than the- 
+threshold value of 7
+Output value is 0
+\end{lstlisting}
 
 \section{References}
 Without following links Ctrl + c and Ctrl + v would have not happened!
