@@ -1,6 +1,6 @@
 # Aja
 
-A library with a Brain! Thus said, what we are trying is, to create a C++ based library that incorporates Artificial Neural Networks and Fuzzy Logic which can measure/sense and learn its environment and control itself! 
+A library with a Brain! Thus said, what we are trying is, to create a C++/Java based library that incorporates Artificial Neural Networks and Fuzzy Logic which can measure/get any kind of data and analyse it to make some sense out of it.
 
 With possible contributions Aja would be able to include other programming languages and library support.
  
@@ -35,8 +35,10 @@ Creating a four wheel rover/bot with on board sensors and actuators which is con
 ##Sensors
 - As on demand
 
-##Build Tools
-CMake
+##Tools
+- CMake
+- Latex 
+- R
 
 ##Build Environment
 Linux Ubuntu 12.04+
