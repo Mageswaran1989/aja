@@ -3,9 +3,6 @@
 A library with a Brain! Thus said, what we are trying is, to create a C++/Java based library that incorporates Artificial Neural Networks and Fuzzy Logic which can measure/get any kind of data and analyse it to make some sense out of it.
 
 With possible contributions Aja would be able to include other programming languages and library support.
- 
-## First Milestone
-Creating a four wheel rover/bot with on board sensors and actuators which is controlled from a Android/Linux developer board, http://www.raspberrypi.org/ or http://www.udoo.org/. Aja playing the role of a Brain! 
 
 ## Etymology
 - Unborn or uncreated
