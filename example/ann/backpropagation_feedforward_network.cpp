@@ -59,8 +59,8 @@ class layer
 protected:
     int num_inputs;
     int num_outputs;
-    float  * outputs;// pointer to array of outputs
-    float  * inputs; // pointer to array of inputs, which
+    float  *outputs;// pointer to array of outputs
+    float  *inputs; // pointer to array of inputs, which
     // are outputs of some other layer
     friend network;
 public:
@@ -82,11 +82,11 @@ class output_layer: public layer
 {
 protected:
 
-    float  *  weights;
-    float  *  output_errors;
+    float  *weights;
+    float  *output_errors;
     // array of errors at output
-    float  *  back_errors;
-    float  *  expected_values;
+    float  *back_errors;
+    float  *expected_values;
     friend network;
     // array of errors back - propagated
     // to inputs

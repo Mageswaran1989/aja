@@ -7,4 +7,4 @@ FILE(GLOB aja_ann_src
 )
 
 ADD_LIBRARY(aja_ann SHARED ${aja_ann_src})
-target_include_directories (aja_ann PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+#target_include_directories (aja_ann PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
