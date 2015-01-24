@@ -1,3 +1,5 @@
+//For background theory : aja/docs/neural_network/perceptron/perceptron.pdf
+
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
