@@ -1,18 +1,96 @@
+%Frequently update this section from aja/docs/latex_tutorial/latex_template.tex
+%To get all latest inclusion updates on book seetings.
+
 \documentclass[12pt, right open]{memoir}
-%To get started we need to load up the TikZ package, the ‘shapes.geometric’ TikZ library and the ‘arrows’ library.
+\usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows}
-\usetikzlibrary{shapes.geometric}
+\usepackage{xcolor}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
+\usetikzlibrary{shapes.geometric, calc, intersections}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+\usepackage{multirow} %for tables
+\usepackage{ifthen}
+\setcounter{secnumdepth}{5}
+
+%To reduce vetical line spaces between list items
+\usepackage{enumitem}
+\setlist{nolistsep,leftmargin=*}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
+%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
+%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
+
+\newcommand{\matplus}{
+~~
+  }
+
+%For C++ code
+\usepackage{listings}
+\usepackage{xcolor} % for setting colors
+
+% set the default code style
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+ %   numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
+    breaklines=true,
+}
+
+\lstdefinestyle{codeTex}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Tex,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+%\begin{lstlisting}
+%---------------
+%\end{lstlisting}
+%\lstinputlisting[caption=Scheduler, style=customc]{hello.c}
 
 
-%Begin the document here
 \begin{document}
 
-%Main title for this book
+%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
 
+% >>>>>>>> Tikz Style sheet
+\tikzstyle{every pin edge}=[<-,shorten <=1pt]
+\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!50]
+\tikzstyle{output neuron}=[neuron, fill=black!50]
+\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{annot} = [text width=4em, text centered]
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+% <<<<<<<< Tikz Style sheet
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{References for complex Latex commands}
 %Sub heading in the chapter
 \section{Basic Flowchart}
 
+All flowcharts related latex commands can be followed here.
+ 
 Reference: https://www.sharelatex.com/blog/2013/08/29/tikz-series-pt3.html
 
 % Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
@@ -57,4 +135,50 @@ Reference: https://www.sharelatex.com/blog/2013/08/29/tikz-series-pt3.html
 \end{tikzpicture}
 \end{figure}
 
+\begin{lstlisting}[style=codeTex]
+% Create Tikz style, something like typedef in C, 
+where we can specify the shape, color, size, text details etc
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, 
+minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{figure}[h!] %Create figure holder
+\begin{tikzpicture}[node distance=2cm] %use the ‘tikzpicture’ environment
+
+% Nodes are very powerful as we can easily position them, make them draw a shape, heavily format them and give them some text. In square brackets at the end of the begin command we specify a node distance of 2cm. This is so that the nodes we use to build the blocks are automatically spaced 2cm apart from their centres.
+
+%      node_var  style   display text
+\node (start) [startstop] {Start};
+\node (in1) [io, below of=start] {Input};
+\node (pro1) [process, below of=in1] {Process 1};
+\node (dec1) [decision, below of=pro1] {Decision 1};
+\node (dec1) [decision, below of=pro1, yshift=-0.5cm] {Decision 1};
+\node (pro2a) [process, below of=dec1, yshift=-0.5cm] {Process 2a};
+\node (pro2b) [process, right of=dec1, xshift=2cm] {Process 2b};
+\node (out1) [io, below of=pro2a] {Output};
+\node (stop) [startstop, below of=out1] {Stop};
+
+\draw [arrow] (start) -- (in1);
+\draw [arrow] (in1) -- (pro1);
+\draw [arrow] (pro1) -- (dec1);
+\draw [arrow] (dec1) -- (pro2a);
+\draw [arrow] (dec1) -- (pro2b);
+\draw [arrow] (dec1) -- node[anchor=east] {yes} (pro2a);
+\draw [arrow] (dec1) -- node[anchor=south] {no} (pro2b);
+
+\draw [arrow] (pro2b) |- (pro1);
+\draw [arrow] (pro2a) -- (out1);
+\draw [arrow] (out1) -- (stop);
+
+\node (pro2a) [process, below of=dec1, yshift=-0.5cm] {Process 2a text text text text text text text text text text};
+
+\end{tikzpicture}
+\end{figure}
+\end{lstlisting}
+%\lstinputlisting[caption=FlowChart, style=codeTex]{}
 \end{document}
