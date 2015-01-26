@@ -1,0 +1,276 @@
+%Frequently update this section from aja/docs/latex_tutorial/latex_template.tex
+%To get all latest inclusion updates on book seetings.
+
+%TODO: This should be made as book template for aja use!
+%memoir  is the book template from LaTeX
+\documentclass[12pt, right open]{memoir}
+%To draw stuff on out documents
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+%indivudual library needed on ad-hoc basis
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
+%To perform coordinate calculations, the calc library is required,
+%calculations are enclosed in $
+\usetikzlibrary{shapes.geometric, calc, intersections}
+%Maths tools
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+\usepackage{multirow} %for tables
+\usepackage{ifthen}
+\setcounter{secnumdepth}{5}
+
+%To reduce vetical line spaces between list items
+\usepackage{enumitem}
+\setlist{nolistsep,leftmargin=*}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
+%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
+%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
+
+%to tackle spaces in -1 n +1
+\newcommand{\matplus}{
+~~
+  }
+
+%For listing code
+\usepackage{listings}
+\usepackage{xcolor} % for setting colors
+
+% set the default code style
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+ %   numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
+    breaklines=true,
+}
+
+\lstdefinestyle{codeTex}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Tex,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{codeC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+%\begin{lstlisting}[style=codeC]
+%---------------
+%\end{lstlisting}
+%\lstinputlisting[caption=Scheduler, style=customc]{hello.c}
+
+
+\begin{document}
+
+%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
+
+%TODO: Needs to find an easy way to draw neural nets
+
+% >>>>>>>> Tikz Style sheet
+% Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
+
+\tikzstyle{every pin edge}=[<-,shorten <=1pt]
+\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!50]
+\tikzstyle{output neuron}=[neuron, fill=black!50]
+\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{annot} = [text width=4em, text centered]
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+% <<<<<<<< Tikz Style sheet
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Backpropagation}
+
+\section{Feedforward Backpropagation Network}
+The feedforward backpropagation network is a \textbf{very popular model} in neural
+networks. It \textbf{does not have feedback connections}, but errors are
+backpropagated during training. \textbf{Least mean squared error} is used. Many
+applications can be formulated for using a feedforward backpropagation
+network, and the methodology has been a model for most multilayer neural
+networks. Errors in the output determine measures of hidden layer output
+errors, which are used as a basis for adjustment of connection weights between
+the input and hidden layers. Adjusting the two sets of weights between the
+pairs of layers and recalculating the outputs is an iterative process that is
+carried on until the errors fall below a tolerance level. Learning rate
+parameters scale the adjustments to weights. A momentum parameter can also
+be used in scaling the adjustments from a previous iteration and adding to the
+adjustments in the current iteration.
+
+\subsection{Mapping}
+The feedforward backpropagation network maps the input vectors to output
+vectors. Pairs of input and output vectors are chosen to train the network first.
+Once training is completed, the weights are set and the network can be used to
+find outputs for new inputs. The \textbf{dimension of the input vector determines} the
+\textbf{number of neurons in the input layer}, and the \textbf{number of neurons in the output
+layer} is determined by the \textbf{dimension of the outputs}. If there are $k$ neurons in
+the input layer and $m$ neurons in the output layer, then this network can make a
+mapping from $k$-dimensional space to an $m$-dimensional space. Of course,
+what that mapping is depends on what pair of patterns or vectors are used as 
+exemplars to train the network, which determine the network weights. Once
+trained, the network gives you the image of a new input vector under this
+mapping. Knowing what mapping you want the feedforward backpropagation
+network to be trained for implies the dimensions of the input space and the
+output space, so that you can determine the numbers of neurons to have in the
+input and output layers.
+
+\subsection{Layers}
+
+The architecture of a feedforward backpropagation network is shown in Figure \ref{fig:simple_backpropagation}. While there can be many hidden layers, we will illustrate this network with only one hidden layer. Also, the number of neurons in the input layer and
+that in the output layer are determined by the dimensions of the input and
+output patterns, respectively. It is not easy to determine how many neurons are
+needed for the hidden layer. In order to avoid cluttering the figure, we will
+show the layout in Figure \ref{fig:simple_backpropagation} with four input neurons, three neurons in the
+hidden layer, and one output neuron(s), with a few representative connections.
+The network has three fields of neurons: one for input neurons, one for hidden
+processing elements, and one for the output neurons. As already stated,
+connections are for feed forward activity. There are connections from every
+neuron in field A to every one in field B, and, in turn, from every neuron in
+field B to every neuron in field C. Thus, there are two sets of weights, those
+figuring in the activations of hidden layer neurons, and those that help
+determine the output neuron activations. In training, all of these weights are
+adjusted by considering what can be called a cost function in terms of the error
+in the computed output pattern and the desired output pattern.
+
+\def\layersep{2.5cm}
+\begin{figure}[ht!]
+\caption{An simple Backpropagation Network} 
+\label{fig:simple_backpropagation}
+\centering
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    % Draw the input layer nodes
+    \foreach \neuron in {1,...,3}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+    \node[input neuron] (I-\neuron) at (0,-\neuron-0.5) {\neuron};
+    
+    \foreach \neuron in {1,...,4}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+    \node[input neuron, right of=I-0] (H-\neuron) at (0,-\neuron) {\neuron};
+
+    % Draw the output layer node
+    \node[output neuron,pin={[pin edge={->}]right:Output}, right of=H-2] (Output) {o};
+
+    % Connect every node in the input layer with the output layer
+    \foreach \InputLayerNeuron in {1,...,3}
+    	\foreach \HiddenLayerNeuron in {1,...,4}
+    	        	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
+        	\path (I-\InputLayerNeuron)  edge (H-\HiddenLayerNeuron);
+
+     \foreach \HiddenLayerNeuron in {1,...,4}
+     	\path (H-\HiddenLayerNeuron) edge node[above]{$w_{o\HiddenLayerNeuron}$} (Output);
+    % Annotate the layers
+    \node[annot,below of=I-2] {Input layer};
+    \node[annot,below of=Output] {Output layer};
+\end{tikzpicture}
+\end{figure}
+
+\section{Training}
+
+The feedforward backpropagation network undergoes supervised training, with
+a finite number of pattern pairs consisting of an input pattern and a desired or
+target output pattern. An input pattern is presented at the input layer. The
+neurons here pass the pattern activations to the next layer neurons, which are
+in a hidden layer. The outputs of the hidden layer neurons are obtained by
+using perhaps a \textbf{bias}, and also a threshold function with the activations
+determined by the weights and the inputs. These hidden layer outputs become
+inputs to the output neurons, which process the inputs using an optional bias
+and a threshold function. The final output of the network is determined by the
+activations from the output layer.
+The computed pattern and the input pattern are compared, a function of this
+error for each component of the pattern is determined, and adjustment to
+weights of connections between the \textbf{hidden layer} and \textbf{the output layer} is
+computed. A similar computation, still based on the error in the output, is
+made for the connection weights between the \textbf{input} and \textbf{hidden layers}. The
+procedure is repeated with each pattern pair assigned for training the network.Each pass through all the training patterns is called a \textbf{cycle or an epoch}. The
+process is then repeated as many cycles as needed until the error is within a
+prescribed tolerance.
+
+\section{Illustration}
+\subsection{Adjustment of Weights of Connections from a Neuron in
+the Hidden Layer}
+
+We will be as specific as is needed to make the computations clear. First recall that the activation of a neuron in a layer other than the input layer is the sum of products of its inputs and the weights corresponding to the connections that bring in those inputs. Let us discuss the $j$th neuron in the hidden layer. Let us be specific and say $j = 2$. Suppose that the input pattern is $(1.1, 2.4, 3.2, 5.1, 3.9)$ and the target output pattern is $(0.52, 0.25, 0.75, 0.97)$. Let the weights be given for the second hidden layer
+neuron by the vector $(-0.33, 0.07, -0.45, 0.13, 0.37)$. The activation will be the quantity:\\
+
+$(-0.33 * 1.1) + (0.07 * 2.4) + (-0.45 * 3.2) + (0.13 * 5.1)
++ (0.37 * 3.9) = 0.471$\\
+
+Now add to this an optional bias of, say, $0.679$, to give $1.15$. 
+If we use the sigmoid function given by:
+\[
+ \frac{1}{1+\exp{^{-x}}}
+\]
+with x = 1.15, we get the output of this hidden layer neuron as $0.7595$.
+
+We need the computed output pattern also. Let us say it turns out to be $actual = (0.61, 0.41, 0.57, 0.53)$, while the desired pattern is $desired = (0.52, 0.25, 0.75, 0.97)$. Obviously, there is a discrepancy between what is desired and what is computed. The component-wise differences are given in the vector, $desired - actual = (-0.09, -0.16, 0.18, 0.44)$. We use these to form another vector where each component is a product of the error component, corresponding computed pattern component, and the complement of the latter with respect to 1. For example, for the first component, error is $-0.09$, computed pattern component is 0.61, and its complement is 0.39. Multiplying these together $(0.61*0.39*-0.09)$, we get $-0.02$. Calculating the other components similarly, we get the vector $(-0.02, -0.04, 0.04, 0.11)$. The $desired-actual vector$, which is the error vector multiplied by the actual output vector, gives you a value of error reflected back at the output of the hidden layer. This is scaled by a value of (1-output vector), which is the first derivative of the output activation function for numerical stability). You will see the
+formulas for this process later in this chapter. The backpropagation of errors needs to be carried further. We need now the weights on the connections between the second neuron in the hidden layer that we are concentrating on, and the different output neurons. Let us say these weights are given by the vector $(0.85, 0.62, –0.10, 0.21)$. The error of the second neuron in the hidden layer is now calculated as below, using its output.\\
+
+$error = 0.7595 * (1 - 0.7595) * ( (0.85 * -0.02) + (0.62 * -0.04)
++ ( -0.10 * 0.04) + (0.21 * 0.11)) = -0.0041.$\\
+
+Again, here we multiply the error $(e.g., -0.02)$ from the output of the current layer, by the output value $(0.7595)$ and the value $(1-0.7595)$. We use the weights on the connections between neurons to work backwards through the network. Next, we need the learning rate parameter for this layer; let us set it as $0.2$. We multiply this by the output of the second neuron in the hidden layer, to get $0.1519$. Each of the components of the vector $(-0.02, -0.04, 0.04, 0.11)$ is multiplied now by $0.1519$, which our latest computation gave. The result is a vector that gives the adjustments to the weights on the connections that go from the second neuron in the hidden layer to the output neurons. These values are given in the vector $(-0.003, -0.006, 0.006,0.017)$. After these adjustments are added, the weights to be used in the next cycle on the connections between the second neuron in the hidden layer and the output neurons become those in the vector
+$(0.847, 0.614, -0.094, 0.227)$.
+
+\subsection{Adjustment of Weights of Connections from a Neuron in
+the Input Layer}
+
+Let us look at how adjustments are calculated for the weights on connections going from the ith neuron in the input layer to neurons in the hidden layer. Let us take specifically i = 3, for illustration. Much of the information we need is already obtained in the previous discussion for the second hidden layer neuron. We have the errors in the computed output as the vector (–0.09, –0.16, 0.18, 0.44), and we obtained the error for the second neuron in the hidden layer as –0.0041, which was not used above. Just as the error in the output is propagated back to assign errors for the neurons in the hidden layer, those errors can be propagated to the input layer neurons.
+To determine the adjustments for the weights on connections between the input and hidden layers, we need the errors determined for the outputs of hidden layer neurons, a learning rate parameter, and the activations of the input neurons, which are just the input values for the input layer. Let us take the learning rate parameter to be 0.15. Then the weight adjustments for the connections from the third input neuron to the hidden layer neurons are obtained by multiplying the particular hidden layer neuron’s output error by the learning rate parameter and by the input component from the input neuron. The adjustment for the weight on the connection from the third input neuron to the second hidden layer neuron is 0.15 * 3.2 * –0.0041, which works out to –0.002. If the weight on this connection is, say, –0.45, then adding the adjustment of -0.002, we get the modified
+weight of –0.452, to be used in the next iteration of the network operation. Similar calculations are made to modify all other weights as well.
+
+\subsection{Adjustments to Threshold Values or Biases}
+The bias or the threshold value we added to the activation, before applying the
+threshold function to get the output of a neuron, will also be adjusted based on
+the error being propagated back. The needed values for this are in the previous
+discussion.
+The adjustment for the threshold value of a neuron in the output layer is
+obtained by multiplying the calculated error (not just the difference) in the
+output at the output neuron and the learning rate parameter used in the
+adjustment calculation for weights at this layer. In our previous example, we
+have the learning rate parameter as 0.2, and the error vector as (–0.02, –0.04,
+0.04, 0.11), so the adjustments to the threshold values of the four output
+neurons are given by the vector (–0.004, –0.008, 0.008, 0.022). These
+adjustments are added to the current levels of threshold values at the output
+neurons.
+The adjustment to the threshold value of a neuron in the hidden layer is
+obtained similarly by multiplying the learning rate with the computed error in
+the output of the hidden layer neuron. Therefore, for the second neuron in the
+hidden layer, the adjustment to its threshold value is calculated as 0.15 *
+–0.0041, which is –0.0006. Add this to the current threshold value of 0.679 to
+get 0.6784, which is to be used for this neuron in the next training pattern for
+the neural network.
+
+\end{document}
