@@ -273,4 +273,73 @@ hidden layer, the adjustment to its threshold value is calculated as 0.15 *
 get 0.6784, which is to be used for this neuron in the next training pattern for
 the neural network.
 
+\section{Mathematical Derivations}
+
+\begin{itemize}
+
+\item Uses Delta learning rule
+\[ 
+\Delta w = \eta r x 
+\]
+\[
+rx = \Delta E
+\]
+\[
+\Delta w = - \eta \Delta E
+\]
+\item It follows gradient descent method
+\end{itemize}
+
+\def\layersep{2.5cm}
+\begin{figure}[ht!]
+\caption{An Multi Layer Backpropagation Network} 
+\label{fig:an_multi_layer_backpropagation}
+\centering
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    % Draw the input layer nodes
+    \foreach \neuron in {1,...,3}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+    \node[input neuron] (I-\neuron) at (0,-\neuron) {$x_\neuron$};
+    
+    \foreach \neuron in {1,...,3}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+    \node[input neuron] (H-\neuron) at (2,-\neuron) {$z_\neuron$};
+    
+    \node[input neuron] (B-0) at (.5,-4) {$x_0$};
+
+	\foreach \neuron in {1,...,3}    
+    % Draw the output layer node
+    \node[output neuron] (O-\neuron) at (4, -\neuron) {$y_\neuron$};
+    
+    \node[input neuron] (B-1) at (2.5,-4) {$z_0$};
+
+    % Connect every node in the input layer with the output layer
+    \foreach \InputLayerNeuron in {1,...,3}
+    	\foreach \HiddenLayerNeuron in {1,...,3}
+    	        	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
+        	\path (I-\InputLayerNeuron)  edge (H-\HiddenLayerNeuron);
+
+     \foreach \HiddenLayerNeuron in {1,...,3}
+     \foreach \OutputLayerNeuron in {1,...,3}
+    	        	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
+        	\path (H-\HiddenLayerNeuron)  edge (O-\OutputLayerNeuron);
+        	
+     % Connect every node in the input layer with the output layer
+    \foreach \HiddenLayerNeuron in {1,...,3}
+    		\path (B-0)  edge (H-\HiddenLayerNeuron);
+    
+     \foreach \OutputLayerNeuron in {1,...,3}
+    	     	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
+        	\path (B-1)  edge (O-\OutputLayerNeuron);
+        	
+    % Annotate the layers
+    \node[annot,below of=I-2] {Input layer};
+    \node[annot,below of=Output] {Output layer};
+\end{tikzpicture}
+\end{figure}
+
+If bias is not included in the network the activation fuction 
+\[
+f(net) = \{
+
 \end{document}
