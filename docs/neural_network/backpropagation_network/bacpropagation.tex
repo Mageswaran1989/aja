@@ -21,6 +21,8 @@
 \restylefloat{figure}
 \usepackage{multirow} %for tables
 \usepackage{ifthen}
+%http://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
 
 %To reduce vetical line spaces between list items
@@ -97,10 +99,10 @@
 % Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
 
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-\tikzstyle{input neuron}=[neuron, fill=black!50]
-\tikzstyle{output neuron}=[neuron, fill=black!50]
-\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!40]
+\tikzstyle{output neuron}=[neuron, fill=black!40]
+\tikzstyle{hidden neuron}=[neuron, fill=black!10]
 \tikzstyle{annot} = [text width=4em, text centered]
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
@@ -110,7 +112,6 @@
 \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 % <<<<<<<< Tikz Style sheet
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Backpropagation}
@@ -178,7 +179,7 @@ in the computed output pattern and the desired output pattern.
     
     \foreach \neuron in {1,...,4}
     % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-    \node[input neuron, right of=I-0] (H-\neuron) at (0,-\neuron) {\neuron};
+    \node[hidden neuron, right of=I-0] (H-\neuron) at (0,-\neuron) {\neuron};
 
     % Draw the output layer node
     \node[output neuron,pin={[pin edge={->}]right:Output}, right of=H-2] (Output) {o};
@@ -233,9 +234,13 @@ If we use the sigmoid function given by:
 \[
  \frac{1}{1+\exp{^{-x}}}
 \]
-with x = 1.15, we get the output of this hidden layer neuron as $0.7595$.
+with x = 1.15, we get the output of this hidden layer neuron as $0.7595$.\\
 
-We need the computed output pattern also. Let us say it turns out to be $actual = (0.61, 0.41, 0.57, 0.53)$, while the desired pattern is $desired = (0.52, 0.25, 0.75, 0.97)$. Obviously, there is a discrepancy between what is desired and what is computed. The component-wise differences are given in the vector, $desired - actual = (-0.09, -0.16, 0.18, 0.44)$. We use these to form another vector where each component is a product of the error component, corresponding computed pattern component, and the complement of the latter with respect to 1. For example, for the first component, error is $-0.09$, computed pattern component is 0.61, and its complement is 0.39. Multiplying these together $(0.61*0.39*-0.09)$, we get $-0.02$. Calculating the other components similarly, we get the vector $(-0.02, -0.04, 0.04, 0.11)$. The $desired-actual vector$, which is the error vector multiplied by the actual output vector, gives you a value of error reflected back at the output of the hidden layer. This is scaled by a value of (1-output vector), which is the first derivative of the output activation function for numerical stability). You will see the
+We need the computed output pattern also. Let us say it turns out to be $actual = (0.61, 0.41, 0.57, 0.53)$, while the desired pattern is $desired = (0.52, 0.25, 0.75, 0.97)$. Obviously, there is a discrepancy between what is desired and what is computed. The component-wise differences are given in the vector, $desired - actual = (-0.09, -0.16, 0.18, 0.44)$.\\
+
+We use these to form another vector where each component is a product of the error component, corresponding computed pattern component, and the complement of the latter with respect to 1. For example, for the first component, error is $-0.09$, computed pattern component is 0.61, and its complement is 0.39. Multiplying these together $(0.61*0.39*-0.09)$, we get $-0.02$. Calculating the other components similarly, we get the vector $(-0.02, -0.04, 0.04, 0.11)$.  i.e  error = $actual \times (1 - actual) \times (d - a)$ \\
+
+The $desired-actual$ vector, which is the error vector multiplied by the actual output vector, gives you a value of error reflected back at the output of the hidden layer. This is scaled by a value of (1-output vector), which is the first derivative of the output activation function for numerical stability). You will see the
 formulas for this process later in this chapter. The backpropagation of errors needs to be carried further. We need now the weights on the connections between the second neuron in the hidden layer that we are concentrating on, and the different output neurons. Let us say these weights are given by the vector $(0.85, 0.62, –0.10, 0.21)$. The error of the second neuron in the hidden layer is now calculated as below, using its output.\\
 
 $error = 0.7595 * (1 - 0.7595) * ( (0.85 * -0.02) + (0.62 * -0.04)
@@ -282,58 +287,65 @@ the neural network.
 \begin{align*}
 \Delta w = \eta r x \\
 rx = \Delta E \\
-rx = \Delta E \\
 \Delta w = - \eta \Delta E \\
 \end{align*}
 
 \item It follows gradient descent method
 
-
-\def\layersep{2.5cm}
+\def\layersep{3.5cm}
 \begin{figure}[ht!]
 \caption{An Multi Layer Backpropagation Network} 
 \label{fig:an_multi_layer_backpropagation}
 \centering
-\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
-    % Draw the input layer nodes
-    \foreach \neuron in {1,...,3}
-    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-    \node[input neuron] (I-\neuron) at (0,-\neuron) {$x_\neuron$};
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!20, node distance=\layersep]
+    % Draw the input layer neurons
+    \node[input neuron] (I-1) at (0,-1) {$x_1$};
+    \node[input neuron] (I-2) at (0,-2) {$x_i$};
+    \node[input neuron] (I-3) at (0,-3) {$x_n$};
     
-    \foreach \neuron in {1,...,3}
-    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
-    \node[input neuron] (H-\neuron) at (2,-\neuron) {$z_\neuron$};
+    % Draw the hidden layer neurons
+    \node[hidden neuron] (H-1) at (2,-1) {$z_1$};
+    \node[hidden neuron] (H-2) at (2,-2) {$z_j$};
+    \node[hidden neuron] (H-3) at (2,-3) {$z_p$};
     
-    \node[input neuron] (B-0) at (.5,-4) {$x_0$};
+    \node[hidden neuron] (B-0) at (.5,-4) {$x_0$};
 
-	\foreach \neuron in {1,...,3}    
-    % Draw the output layer node
-    \node[output neuron] (O-\neuron) at (4, -\neuron) {$y_\neuron$};
+    \node[output neuron] (O-1) at (4, -1) {$y_1$};
+    \node[output neuron] (O-2) at (4, -2) {$y_k$};
+    \node[output neuron] (O-3) at (4, -3) {$y_m$};
     
-    \node[input neuron] (B-1) at (2.5,-4) {$z_0$};
+    \node[hidden neuron] (B-1) at (2.5,-4) {$z_0$};
 
     % Connect every node in the input layer with the output layer
     \foreach \InputLayerNeuron in {1,...,3}
     	\foreach \HiddenLayerNeuron in {1,...,3}
-    	        	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
-        	\path (I-\InputLayerNeuron)  edge (H-\HiddenLayerNeuron);
+        	\path (I-\InputLayerNeuron)  edge (H-\HiddenLayerNeuron);	
 
      \foreach \HiddenLayerNeuron in {1,...,3}
      \foreach \OutputLayerNeuron in {1,...,3}
-    	        	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
         	\path (H-\HiddenLayerNeuron)  edge (O-\OutputLayerNeuron);
         	
+     %\node[output neuron,pin={[pin edge={->}]right:Output}, right of=I-2] (Output) {o};
+     \draw[thick, ->] (O-2) -- (6, -2) node[above] {$O_{jk}$} ;
      % Connect every node in the input layer with the output layer
     \foreach \HiddenLayerNeuron in {1,...,3}
     		\path (B-0)  edge (H-\HiddenLayerNeuron);
     
      \foreach \OutputLayerNeuron in {1,...,3}
-    	     	%edge node[above] {$w_{\HiddenLayerNeuron\InputLayerNeuron}$}
         	\path (B-1)  edge (O-\OutputLayerNeuron);
         	
-    % Annotate the layers
-    \node[annot,below of=I-2] {Input layer};
-    \node[annot,below of=Output] {Output layer};
+    % Annotate the layers and weigths
+    \node[annot] at(-0.5, -5) {Input layer};
+    \node[annot] at(2, -5) {Hidden layer};
+    \node[annot] at(4.5, -5) {Output layer};
+    
+    \path (I-1) edge node[above] {$V_{11}$} (H-1);
+    \path (I-2) edge node[above] {$V_{ij}$} (H-2);
+    \path (I-3) edge node[above] {$V_{np}$} (H-3);
+    
+    \path (H-1) edge node[above] {$W_{11}$} (O-1);
+    \path (H-2) edge node[above] {$W_{jk}$} (O-2);
+    \path (H-3) edge node[above] {$W_{pm}$} (O-3);
 \end{tikzpicture}
 \end{figure}
 
@@ -359,49 +371,73 @@ f(net) = \begin{cases}
 % Use & to align the equation to the left marigin
 \section{Weight Updation in Output Layer}
 \begin{align*}
-&W_{j,k} = W_{j,k}(t) + \Delta W_{j,k} \\
-&\Delta W_{j,k} = \eta r x \\ \\
-&\text{In delta} \\
-&r = (d_i - O_i) f' (O_{j,k})O_{j,k}
+& W_{jk}(t+1) = W_{jk}(t) + \Delta W_{jk}  \\ 
+& \Delta W_{jk} = \eta r x  \\
+& \text{In delta rule}  \\
+& r = (d_i - O_i) f'(Net)  \\
+& \Delta W_{jk}= \eta (t_k - O_{jk}) f' (O_{jk})O_{jk}  \\
 \end{align*}
 \begin{align}
-\Delta W_{j,k} = \eta (t_k - O_{j,k}) O_{j,k}(1-O_{j,k})O_{j,k}
+\Delta W_{jk} = \eta (t_k - O_{jk}) O_{jk}(1-O_{jk})O_{ij}
 \end{align}
 
 \subsection{Proof:}
 
 \begin{align*}
 &E = t_k - O_{j,k} \\
-\end{align*}
-
-By Least Mean Square
-
-\begin{align}
-E = \frac{1}{2}(t_k-O_{j,k})^2
-\end{align}
-
-\begin{align*}
-O_{j,k} = f(Net_{j,k})
+&By Least Mean Square \\
+&E = \frac{1}{2}(t_k-O_{jk})^2 \\
+&O_{jk} = f(Net_{jk})
 \end{align*}
 
 \begin{align}
-Net_{j,k} = \sum W_{j,k} O{j,k}
+Net_{jk} = \sum W_{jk} \times O{jk}
 \end{align}
 
 According to delta learning rule
 
 \begin{align*}
 \Delta W &= - \eta \Delta E \\
-\Delta W_{j,k} &= - \eta \frac{\partial \Delta E}{\partial W_{j,k}} \\
+\Delta W_{jk} &= - \eta \frac{\partial \Delta E}{\partial W_{j,k}} \\
 \end{align*}
 
 \begin{align}
 \frac{\partial \Delta E}{\partial W_{j,k}} &= \frac{\partial \Delta E}{\partial Net_{j,k}} \times
-                                             \frac{\partial Net_{j,k}}{\partial W_{j,k}} \\
-                                     &= - \eta \frac{\partial \Delta E}{\partial Net_{j,k}} \times
-                                             \frac{\partial Net_{j,k}}{\partial W_{j,k}} \\
-                                     &= - \frac{\partial \Delta E}{\partial Net_{j,k}} \times
-                                          \frac{\partial Net_{j,k}}{\partial W_{j,k}}
-\end{align}
+                                             \frac{\partial Net_{j,k}}{\partial W_{j,k}} 
+\end{align}  
+\begin{align*}                                        
+\Delta W_{jk} &= - \eta \frac{\partial \Delta E}{\partial Net_{j,k}} \times
+                   \frac{\partial Net_{j,k}}{\partial W_{j,k}} \\
+              &= - \frac{\partial \Delta E}{\partial Net_{j,k}} \times
+                   \frac{\partial Net_{j,k}}{\partial W_{j,k}} \\
+\text{By considering~~~~}  \eta = -1 \\
+		      &=  \partial_{jk} \times
+                  \frac{\partial Net_{jk}}{\partial W_{jk}}
+\end{align*} 
 
+\section{Algorithm}
+\begin{enumerate}
+\item Initialize the weights
+\item Choose proper activation function
+\item For each training input vector do the following steps until $\Delta w = 0$
+\begin{enumerate}
+\item Calculate the net value of hidden layer using inputs and weights \\
+$ Net_{i,j} = \sum V_{i,j}x_i $
+\item Apply activation function and find output of hidden layer or input of output layer \\
+$ O_{i,j} = f(Net_{i,j}) $
+\item Calculate the Net value of the output layer \\
+$ Net_{i,j} = \sum W_{i,j} O_{i,j} $
+\item Apply activation function and find output of output layer \\
+$ O_{j,k} = f(Net_{j,k}) $ 
+\item Calculate the error $E = t_k - O_{j,k} $, using LMS error principle
+\item Calculate the portion of the error $ \partial_{jk} $ which has to be back propagated to the hidden layer \\
+$ \partial_{jk} = - \frac{\partial E}{\partial Net_{jk}} $ \\
+$          ~~~~~= (t_k - O_{jk}) O_{jk}(1-O_{jk}) $
+\item Adjust the weights $\Delta W_{jk} = \eta \partial_{jk} O_{ij} $
+\item Calculate the portion of the error $ \partial_{ij} $ that has to be back propagated to input layers \\
+$ \partial_{ij} = \partial_{jk} \sum (W_{jk})O_{ij}(1-O_{ij}) $
+\item Adjust the weights 
+\item Check for weight convergence
+\end{enumerate}
+\end{enumerate}
 \end{document}
