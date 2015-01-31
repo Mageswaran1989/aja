@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
-%indivudual library needed on ad-hoc basis
+%indivudual library needed on ad-hoc bas-is
 \usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
 %To perform coordinate calculations, the calc library is required,
 %calculations are enclosed in $
@@ -411,10 +411,33 @@ According to delta learning rule
               &= - \frac{\partial \Delta E}{\partial Net_{j,k}} \times
                    \frac{\partial Net_{j,k}}{\partial W_{j,k}} \\
 \text{By considering~~~~}  \eta = -1 \\
-		      &=  \partial_{jk} \times
-                  \frac{\partial Net_{jk}}{\partial W_{jk}}
+		      &=  \delta_{jk} \times
+                  \frac{\partial Net_{jk}}{\partial W_{jk}} \\
+\frac{\partial Net_{jk}}{\partial W_{jk}} &= \frac{ \partial \sum W_{jk} O_{ij}}{\partial W_{jk}} \\
+										  &= O_{ij} \\
+\Delta W_{jk} &= \delta_{jk} O_{ij} \\
+\delta _{jk}       &= - \frac{\partial E}{\partial Net_{jk}} \\
+\text{By chain rule}  \\
+\delta_{jk}   &= - \frac{\partial E}{\partial O_{jk}} \times \frac{\partial O_{jk}}{\partial Net_{jk}} \\
+\frac{\partial E}{\partial O_{jk}} &= \frac{\partial \frac{1}{2}(t_k - O_{jk})^2}{\partial O_{jk}} \\
+			  &= -t_k + O_{jk} \\
+\frac{\partial O_{jk}}{\partial Net_{jk}} &= \frac{\partial F(Net_{jk})}{\partial Net_{jk}} \\
+										  &= F'(Net_{jk}) \\
+										  &= O_{jk} (1-O_{jk}) \\
+\delta_{jk} &= (t_k - O_{jk})O_{jk}(1-O{jk}) \\
+\Delta      &= (t_k - O_{jk})O_{jk}(1-O_{jk})O_{ij}
 \end{align*} 
 
+\subsection{Weight  Updation in the Hidden Layer}
+\begin{align*}
+\Delta V_{ij} = \eta~\delta_{ij}~x \\
+\delta_{ij} &= - \frac{\partial \Delta E}{\partial Net_{ij}} \\
+       &= - \frac{\partial \Delta E}{\partial O_{ij}} \times \frac{O_{ij}}{\partial Net_{ij}} \\
+       &= - \frac{\partial \Delta E}{\partial Net_{jk}} \times \frac{\partial Net_{jk}}{\partial O_{ij}} \times \frac{\partial}{\partial Net_{ij}} f(Net_{ij}) \\
+       &= - \delta_{jk} \times \frac{\partial}{\partial O_{ij}} \sum W_{jk} O_{ij} \times f'(Net_{ij}) \\
+       &= - \delta_{jk} \times \sum W_{jk} \times O_{ij}(1-O_{ij}) \\
+\Delta V_{ij} = \eta~\delta_{jk} ~ \sum W_{jk} ~ O_{ij}(1-O_{ij})~x
+\end{align*}
 \section{Algorithm}
 \begin{enumerate}
 \item Initialize the weights
