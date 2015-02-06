@@ -1,6 +1,11 @@
+%Frequently update this section from aja/docs/latex_tutorial/latex_template.tex
+%To get all latest inclusion updates on book seetings.
+
+%TODO: This should be made as book template for aja use!
 \documentclass[12pt, right open]{memoir}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{xcolor}
 \usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
 \usetikzlibrary{shapes.geometric, calc, intersections}
 \usepackage{mathtools}
@@ -8,32 +13,78 @@
 \usepackage{float}
 \floatstyle{boxed}
 \restylefloat{figure}
-
+\usepackage{multirow}
 \usepackage{ifthen}
+\usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
+\usepackage{enumitem}
+\setlist{nolistsep,leftmargin=*}
+\usepackage{listings}
+\usepackage{xcolor}
 
-\newcommand{\matplus}{
+\newcommand{\specialcell}[2][c]
+{
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+}
+\newcommand{\matplus}
+{
 ~~
-  }
+}
+\lstset{
+    frame=tb, 
+    tabsize=4, 
+    showstringspaces=false, 
+ %   numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, 
+    keywordstyle=\color{blue}, 
+    stringstyle=\color{red},
+    breaklines=true,
+}
 
+\lstdefinestyle{codeTex}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Tex,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{codeC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
 \begin{document}
-
-%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
-
-% >>>>>>>> Tikz Style sheet
+%TODO: Needs to find an easy way to draw neural nets
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-\tikzstyle{input neuron}=[neuron, fill=black!50]
-\tikzstyle{output neuron}=[neuron, fill=black!50]
-\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!40]
+\tikzstyle{output neuron}=[neuron, fill=black!40]
+\tikzstyle{hidden neuron}=[neuron, fill=black!10]
 \tikzstyle{annot} = [text width=4em, text centered]
 
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-% <<<<<<<< Tikz Style sheet
+
+
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{What is Hopfield?}

@@ -1,14 +1,20 @@
 %Frequently update this section from aja/docs/latex_tutorial/latex_template.tex
 %To get all latest inclusion updates on book seetings.
 
+%TODO: This should be made as book template for aja use!
+%memoir  is the book template from LaTeX
 \documentclass[12pt, right open]{memoir}
+%To draw stuff on out documents
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
+%indivudual library needed on ad-hoc basis
 \usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
-\usetikzlibrary{shapes.geometric, calc, intersections}
 %To perform coordinate calculations, the calc library is required,
 %calculations are enclosed in $
+\usetikzlibrary{shapes.geometric, calc, intersections}
+\usepackage{pgfplots}
+%Maths tools
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{float}
@@ -16,6 +22,8 @@
 \restylefloat{figure}
 \usepackage{multirow} %for tables
 \usepackage{ifthen}
+%http://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
 
 %To reduce vetical line spaces between list items
@@ -28,11 +36,12 @@
 %Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
 %Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
 
+%to tackle spaces in -1 n +1
 \newcommand{\matplus}{
 ~~
   }
 
-%For C++ code
+%For listing code
 \usepackage{listings}
 \usepackage{xcolor} % for setting colors
 
@@ -61,7 +70,21 @@
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
 }
-%\begin{lstlisting}
+
+\lstdefinestyle{codeC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+%\begin{lstlisting}[style=codeC]
 %---------------
 %\end{lstlisting}
 %\lstinputlisting[caption=Scheduler, style=customc]{hello.c}
@@ -71,14 +94,16 @@
 
 %http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
 
+%TODO: Needs to find an easy way to draw neural nets
+
 % >>>>>>>> Tikz Style sheet
 % Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
 
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-\tikzstyle{input neuron}=[neuron, fill=black!50]
-\tikzstyle{output neuron}=[neuron, fill=black!50]
-\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!40]
+\tikzstyle{output neuron}=[neuron, fill=black!40]
+\tikzstyle{hidden neuron}=[neuron, fill=black!10]
 \tikzstyle{annot} = [text width=4em, text centered]
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
@@ -89,6 +114,7 @@
 \tikzstyle{arrow} = [thick,->,>=stealth]
 % <<<<<<<< Tikz Style sheet
 
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{References for complex Latex commands}
@@ -293,6 +319,51 @@ We will cover the basics here, most of the stuff are explained in the code.
 \fill[red] ($2*(A)$) circle (2pt);
 \fill[green] ($(A) + (-1, 1)$) circle (2pt);
 \fill[blue] ($(A) - (-1, 1)$) circle (2pt);
+\end{tikzpicture}
+\end{figure}
+
+%\tikzstyle{probState}=[ circle,
+%                    thick,
+%                    minimum size=45pt,
+%                    draw=blue!50,
+%                    fill=white,
+%                    line width=2.5pt,
+%                    font=\large]
+%\node [probState] (test){
+%        \begin{tikzpicture}[trim axis left, trim axis right, baseline]
+%        \begin{axis}[axis lines=none,width=80pt,height=80pt,
+%         ylabel shift=-0.1cm]
+%        \addplot[color=red]{1/(1+exp(-x))-2};
+%        \end{axis}
+%        \end{tikzpicture}
+%    };
+    
+\begin{figure}[h!]
+\caption{Basics 6}
+    \begin{tikzpicture}
+    \begin{axis}[
+    	legend pos=north west,
+        axis x line=middle,
+        axis y line=middle,
+        grid = major,
+        width=16cm,
+        height=8cm,
+        grid style={dashed, gray!30},
+        xmin=-1,     % start the diagram at this x-coordinate
+        xmax= 1,    % end   the diagram at this x-coordinate
+        ymin= 0,     % start the diagram at this y-coordinate
+        ymax= 1,   % end   the diagram at this y-coordinate
+        %axis background/.style={fill=white},
+        xlabel=x,
+        ylabel=y,
+        tick align=outside,
+        enlargelimits=false]
+      % plot the stirling-formulae
+      \addplot[domain=-1:1, red, ultra thick,samples=500] {1/(1+exp(-5*x))}; 
+      \addplot[domain=-1:1, blue, ultra thick,samples=500] {1/(1+exp(-10*x))}; 
+      \addlegendentry{$f(x)=\frac{1}{1+e^{-5x}}$}
+      \addlegendentry{$g(x)=\frac{1}{1+e^{-10x}}$}
+    \end{axis} 
 \end{tikzpicture}
 \end{figure}
 

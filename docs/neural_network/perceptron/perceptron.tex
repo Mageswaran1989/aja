@@ -1,3 +1,7 @@
+%Frequently update this section from aja/docs/latex_tutorial/latex_template.tex
+%To get all latest inclusion updates on book seetings.
+
+%TODO: This should be made as book template for aja use!
 \documentclass[12pt, right open]{memoir}
 \usepackage{graphicx}
 \usepackage{tikz}
@@ -9,58 +13,81 @@
 \usepackage{float}
 \floatstyle{boxed}
 \restylefloat{figure}
-\usepackage{multirow} %for tables
+\usepackage{multirow}
 \usepackage{ifthen}
+\usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
-
-%To reduce vetical line spaces between list items
 \usepackage{enumitem}
 \setlist{nolistsep,leftmargin=*}
-
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
-%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
-%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
-
-\newcommand{\matplus}{
-~~
-  }
-
-%For C++ code
 \usepackage{listings}
-\usepackage{xcolor} % for setting colors
+\usepackage{xcolor}
 
-% set the default code style
+\newcommand{\specialcell}[2][c]
+{
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+}
+\newcommand{\matplus}
+{
+~~
+}
 \lstset{
-    frame=tb, % draw a frame at the top and bottom of the code block
-    tabsize=4, % tab space width
-    showstringspaces=false, % don't mark spaces in strings
+    frame=tb, 
+    tabsize=4, 
+    showstringspaces=false, 
  %   numbers=left, % display line numbers on the left
-    commentstyle=\color{green}, % comment color
-    keywordstyle=\color{blue}, % keyword color
-    stringstyle=\color{red} % string color
+    commentstyle=\color{green}, 
+    keywordstyle=\color{blue}, 
+    stringstyle=\color{red},
+    breaklines=true,
+}
+
+\lstdefinestyle{codeTex}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Tex,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{codeC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
 }
 \begin{document}
-
-%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
-
-% >>>>>>>> Tikz Style sheet
+%TODO: Needs to find an easy way to draw neural nets
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
-\tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
-\tikzstyle{input neuron}=[neuron, fill=black!50]
-\tikzstyle{output neuron}=[neuron, fill=black!50]
-\tikzstyle{hidden neuron}=[neuron, fill=black!50]
+\tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!40]
+\tikzstyle{output neuron}=[neuron, fill=black!40]
+\tikzstyle{hidden neuron}=[neuron, fill=black!10]
 \tikzstyle{annot} = [text width=4em, text centered]
 
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-% <<<<<<<< Tikz Style sheet
+
+
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{What is Perceptron?}
 In machine learning, the perceptron is an algorithm for supervised classification of an input into one of several possible non-binary outputs. It is a type of linear classifier, i.e. a classification algorithm that makes its predictions based on a linear predictor function combining a set of weights with the feature vector. The algorithm allows for online learning, in that it processes elements in the training set one at a time.
 
