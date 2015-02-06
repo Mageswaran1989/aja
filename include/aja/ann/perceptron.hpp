@@ -4,6 +4,13 @@
 #include <vector> //TODO: Platform independent
 
 //TODO: Header
+/// Class that represents a single neuron
+/// A single neuron shall have
+/// * weight
+/// * input
+/// * activation function
+/// * thersold value
+/// * output
 
 //TODO: Description
 namespace aja
@@ -46,7 +53,5 @@ class perceptron
         bool debug_msgs;
         activation_functions activation_function;
 }
-
 }
-
 #endif
