@@ -4,7 +4,7 @@ PROJECT(Aja)
 
 #The version Number
 SET(Aja_MAJOR_NUMBER 0)
-SET(Aja_MINOR_NUMBER 1)
+SET(Aja_MINOR_NUMBER 2)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -34,22 +34,24 @@ SET(CMAKE_MODULE_PATH ${Aja_SOURCE_DIR}/cmake)
 #endif()
 
 # options
-OPTION(AJA_MAKE_VERBOSE "Verbose mode in make" ON)
-OPTION(AJA_HAVE_OPENCV "Have OpenCV" OFF)
-OPTION(AJA_HAVE_QT "Have Qt" OFF)
-OPTION(AJA_HAVE_VTK "Have VTK" OFF)
-OPTION(AJA_HAVE_CUDA "Have CUDA" OFF)
-OPTION(AJA_HAVE_TBB "Have TBB" OFF)
-OPTION(AJA_BUILD_DEBUG "Build with debug symbols" ON)
+OPTION(Aja_MAKE_VERBOSE "Verbose mode in make" ON)
+OPTION(Aja_HAVE_OPENCV "Have OpenCV" OFF)
+OPTION(Aja_HAVE_QT "Have Qt" OFF)
+OPTION(Aja_HAVE_VTK "Have VTK" OFF)
+OPTION(Aja_HAVE_CUDA "Have CUDA" OFF)
+OPTION(Aja_HAVE_TBB "Have TBB" OFF)
+OPTION(Aja_BUILD_DEBUG "Build with debug symbols" ON)
 
-IF(${AJA_MAKE_VERBOSE})
+IF(${Aja_MAKE_VERBOSE})
    SET(CMAKE_VERBOSE_MAKEFILE on)
 ENDIF()
 
-IF(${AJA_BUILD_DEBUG})
+IF(${Aja_BUILD_DEBUG})
    SET(CMAKE_BUILD_TYPE Debug)
-ELSE(!${AJA_BUILD_DEBUG})
+   SET(Aja_DEBUG 1)
+ELSE(!${Aja_BUILD_DEBUG})
    SET(CMAKE_BUILD_TYPE Release)
+   SET(Aja_DEBUG 0)
 ENDIF()
 
 INCLUDE_DIRECTORIES(include)
