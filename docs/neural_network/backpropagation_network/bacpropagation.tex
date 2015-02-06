@@ -2,57 +2,49 @@
 %To get all latest inclusion updates on book seetings.
 
 %TODO: This should be made as book template for aja use!
-%memoir  is the book template from LaTeX
 \documentclass[12pt, right open]{memoir}
-%To draw stuff on out documents
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
-%indivudual library needed on ad-hoc bas-is
 \usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
-%To perform coordinate calculations, the calc library is required,
-%calculations are enclosed in $
+\usepackage{pgfplots}
 \usetikzlibrary{shapes.geometric, calc, intersections}
-%Maths tools
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{float}
 \floatstyle{boxed}
 \restylefloat{figure}
-\usepackage{multirow} %for tables
+\usepackage{multirow}
 \usepackage{ifthen}
-%http://en.wikibooks.org/wiki/LaTeX/Algorithms
 \usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
-
-%To reduce vetical line spaces between list items
 \usepackage{enumitem}
 \setlist{nolistsep,leftmargin=*}
-
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
-%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
-%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
-
-%to tackle spaces in -1 n +1
-\newcommand{\matplus}{
-~~
-  }
-
-%For listing code
 \usepackage{listings}
-\usepackage{xcolor} % for setting colors
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fixmath}
 
-% set the default code style
+\newcommand{\specialcell}[2][c]
+{
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+}
+\newcommand{\matplus}
+{
+~~
+}
+\newcommand{\tabh}
+{
+~~~~
+}
 \lstset{
-    frame=tb, % draw a frame at the top and bottom of the code block
-    tabsize=4, % tab space width
-    showstringspaces=false, % don't mark spaces in strings
+    frame=tb, 
+    tabsize=4, 
+    showstringspaces=false, 
  %   numbers=left, % display line numbers on the left
-    commentstyle=\color{green}, % comment color
-    keywordstyle=\color{blue}, % keyword color
-    stringstyle=\color{red} % string color
+    commentstyle=\color{green}, 
+    keywordstyle=\color{blue}, 
+    stringstyle=\color{red},
     breaklines=true,
 }
 
@@ -83,21 +75,8 @@
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
 }
-%\begin{lstlisting}[style=codeC]
-%---------------
-%\end{lstlisting}
-%\lstinputlisting[caption=Scheduler, style=customc]{hello.c}
-
-
 \begin{document}
-
-%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
-
 %TODO: Needs to find an easy way to draw neural nets
-
-% >>>>>>>> Tikz Style sheet
-% Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
-
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
 \tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
 \tikzstyle{input neuron}=[neuron, fill=black!40]
@@ -107,11 +86,12 @@
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-% <<<<<<<< Tikz Style sheet
+
+
+\tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Backpropagation}
@@ -164,8 +144,7 @@ field B to every neuron in field C. Thus, there are two sets of weights, those
 figuring in the activations of hidden layer neurons, and those that help
 determine the output neuron activations. In training, all of these weights are
 adjusted by considering what can be called a cost function in terms of the error
-in the computed output pattern and the desired output pattern.
-
+in the computed output pattern and the desired output pattern. \\
 \def\layersep{2.5cm}
 \begin{figure}[ht!]
 \caption{An simple Backpropagation Network} 
@@ -267,18 +246,90 @@ output at the output neuron and the learning rate parameter used in the
 adjustment calculation for weights at this layer. In our previous example, we
 have the learning rate parameter as 0.2, and the error vector as (–0.02, –0.04,
 0.04, 0.11), so the adjustments to the threshold values of the four output
-neurons are given by the vector (–0.004, –0.008, 0.008, 0.022). These
+neurons are given by the vector $(–0.004, –0.008, 0.008, 0.022)$. These
 adjustments are added to the current levels of threshold values at the output
 neurons.
 The adjustment to the threshold value of a neuron in the hidden layer is
 obtained similarly by multiplying the learning rate with the computed error in
 the output of the hidden layer neuron. Therefore, for the second neuron in the
-hidden layer, the adjustment to its threshold value is calculated as 0.15 *
-–0.0041, which is –0.0006. Add this to the current threshold value of 0.679 to
+hidden layer, the adjustment to its threshold value is calculated as $0.15 *
+–0.0041$, which is $–0.0006$. Add this to the current threshold value of 0.679 to
 get 0.6784, which is to be used for this neuron in the next training pattern for
 the neural network.
 
 \section{Mathematical Derivations}
+
+\subsection{Nomenclature}
+The nomenclature we use in the training algorithm for the backpropagation net is as follows: \\
+$\mathbold{x}$ \indent Input training vector: $X = (x_1,...,x_i,...,x_n)$. \\
+$\mathbold{t}$ \indent Output target vector: $t = (t_1,...,t_k,...,t_m)$. \\ 
+$\mathbold{\delta_k}$ \indent Portion of error correction weight adjustment for $w_{jk}$ that is due to an error at output unit $Y_k$; also, the information at the unit $Y_k$ that is propagated back to the hidden units that feed into one unit $Y_k$. \\
+$\mathbold{\delta_i}$ \indent Portion of error correction weight adjustment for $V_{ij}$ that is due to the backpropagation of error information from the output layer to the hidden unit $Z_j$. \\
+$\mathbold{\eta}$ \indent Learning rate \\
+$\mathbold{X_i}$ \indent Input unit $i$: For an input unit, the input signal and output signal are the same, namely, $x_i$. \\
+$\mathbold{v_{Oj}}$ \indent Bias on the hidden unit $j$. \\
+$\mathbold{Z_j}$ \indent Hidden unit j: \\
+\indent \indent The net input to $Z_j$ is denoted $z\_in_i = v_{oj} + \sum_i x_i v_{ij} $. \\
+\indent \indent The output signal(activation) of $Z_j$ is denoted by $z_j = f(z\_in_i)$. \\
+$\mathbold{w_{ok}}$ Bias on output unit k. \\
+$\mathbold{Y_k}$ Output unit k: \\
+\indent \indent The net input to $Y_k$ is denoted by $y\_in_k = w_{ok} + \sum_j z_j w_{jk}$ \\
+\indent \indent The output signal(activation) of $Y_k$ is denoted by $y_k = f(y\_in_k)$. \\
+
+
+\subsection{Activation Function}
+An activation function for back propagation should have several important characteristics: 
+\begin{enumerate}
+\item It should be continuous, differentiable, and monotonically decreasing.
+\item Furthermore, for computational efficiency, it is desirable that its derivative be easy to compute. 
+For the most commonly used activation functions, the value of the derivative (at particular value of the independent variable) can be expressed in terms of the value of the function (at that value of the independent variable). Usually the function is expected to \textit{saturate}, i.e., approach finite maximum and minimum values asymptotically.
+\end{enumerate}
+
+ \subsubsection{Sigmoid Function}
+ One of the most typical activation functions is the binary sigmoid function, which has range (0,1) and is defined as \\
+ $f_1(x) = \frac{1}{1 + \exp(-x)}$, \\
+ with \\
+ $f_1'(x) = f_1(x)[1-f_1(x)]$ \\
+
+\begin{tikzpicture}
+    \begin{axis}[
+    	legend pos=north west,
+        axis x line=middle,
+        axis y line=middle,
+        grid = major,
+        width=12cm,
+        height=8cm,
+        grid style={dashed, gray!30},
+        xmin=-1,     % start the diagram at this x-coordinate
+        xmax= 1,    % end   the diagram at this x-coordinate
+        ymin= 0,     % start the diagram at this y-coordinate
+        ymax= 1,   % end   the diagram at this y-coordinate
+        %axis background/.style={fill=white},
+        xlabel=x,
+        ylabel=y,
+        tick align=outside,
+        enlargelimits=false]
+      % plot the stirling-formulae
+      \addplot[domain=-1:1, red, ultra thick,samples=500] {1/(1+exp(-x))}; 
+      \addplot[domain=-1:1, blue, ultra thick,samples=500] {1/(1+exp(-5*x))}; 
+      \addlegendentry{$f(x)=\frac{1}{1+e^{-x}}$}
+      \addlegendentry{$g(x)=\frac{1}{1+e^{-5x}}$}
+    \end{axis} 
+\end{tikzpicture}
+
+\begin{tikzpicture}[domain=-5:5, smooth, samples=20]
+	\draw[very thin, color=gray] (-4.9,0.0) grid (4.9,2.4);
+
+	\draw[->] (-5.2,0) -- (5.2,0) node[right] {$x$};
+	\draw[->] (0,-0.2) -- (0,2.7) node[above] {$f(x|a=1)$};
+	\draw (-0.1,2.5) --(0.1,2.5) node [left] {$1~$};
+	\draw (-0.1,1.25) -- (0.1,1.25) node [left] {$0.5~$};
+
+	\draw[color=blue] plot (\x,{2.5 / (1+exp(-\x))}) node[right] {$\frac{1}{1+e^{-ax}}$};
+	\draw[color=red]  plot (\x,{2.5 / (1+exp(-\x)) * (1-1/(1+exp(-\x)))}) node[above right] {$sig'(x)=sig(t)(1-sig(t))$};
+\end{tikzpicture}
+
+\subsection{Derivation}
 
 \begin{itemize}
 
@@ -463,4 +514,23 @@ $ \partial_{ij} = \partial_{jk} \sum (W_{jk})O_{ij}(1-O_{ij}) $
 \item Check for weight convergence
 \end{enumerate}
 \end{enumerate}
+
+
+\chapter{Reference Links}
+
+\section{Backpropagation:}
+\url{http://en.wikipedia.org/wiki/Delta_rule} \\
+\url{http://en.wikipedia.org/wiki/Backpropagation} \\ 
+\url{https://www4.rgu.ac.uk/files/chapter3\%20-\%20bp.pdf} \\ 
+\url{http://docs.opencv.org/modules/ml/doc/neural_networks.html} \\ 
+
+
+\section{Maths}
+\url{http://en.wikipedia.org/wiki/Partial_derivative} \\
+\url{http://en.wikipedia.org/wiki/Gradient_descent} \\
+\url{http://en.wikipedia.org/wiki/Chain_rule} \\
+\url{http://en.wikipedia.org/wiki/Power_rule} \\
+
+
+
 \end{document}
