@@ -36,47 +36,30 @@
  *
  */
 
-#ifndef _AJA_PROCESSING_PERCEPTRON_HPP_
-#define _AJA_PROCESSING_PERCEPTRON_HPP_
+#ifndef _AJA_LAYERS_INPUT_LAYER_H_
+#define _AJA_LAYERS_INPUT_LAYER_H_
 
 #include <vector>
 #include <aja/ann/activation_function.hpp>
+#include <aja/ann/perceptron.hpp>
+
 namespace aja
 {
-  /** \brief Class that represents a single neuron
-    * A single neuron shall have
-    * weight
-    * input
-    * activation function
-    * thersold value
-    * output
-    * \author Mageswaran
-    * \ingroup Processing
-    */
-  class Perceptron
+  class InputLayer
   {
     public:
-      perceptron(const& perceptron);
-
-      explicit perceptron(void);
-      explicit perceptron(unsigned int num_inputs);
-
-      ~perceptron();
-
-      perceptron operator = (const perceptron&);
-      bool operator == (const perceptron&) const;
-
-      void set(void);
-    protected:
+      InputLayer(unsigned int num_perceptrons,
+                 std::vector<int> input_data);
     private:
-      double bias;
-      unsigned int num_inputs;
-      unsigned int num_output;
-      std::vector<double> synaptic_weights;
-      bool debug_msgs;
-      activation_functions activation_function;
+    protected:
+      unsigned int num_perceptrons;
+      unsigned int num_;
+      std::vector<Perceptron> perceptrons;
+      double layer_bias;
+      activation_functions layer_activation_function;
+      double layer_alpha;
+      double layer_beta;
+
   };
-
-} //_AJA_PROCESSING_PERCEPTRON_HPP_
-
-#endif
+}
+#endif //_AJA_LAYERS_INPUT_LAYER_H_

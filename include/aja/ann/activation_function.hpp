@@ -36,47 +36,20 @@
  *
  */
 
-#ifndef _AJA_PROCESSING_PERCEPTRON_HPP_
-#define _AJA_PROCESSING_PERCEPTRON_HPP_
+#ifndef _AJA_PROCESSING_ACTIVATION_H_
+#define _AJA_PROCESSING_ACTIVATION_H_
 
-#include <vector>
-#include <aja/ann/activation_function.hpp>
 namespace aja
 {
-  /** \brief Class that represents a single neuron
-    * A single neuron shall have
-    * weight
-    * input
-    * activation function
-    * thersold value
-    * output
-    * \author Mageswaran
-    * \ingroup Processing
-    */
-  class Perceptron
+  enum activation_functions
   {
-    public:
-      perceptron(const& perceptron);
-
-      explicit perceptron(void);
-      explicit perceptron(unsigned int num_inputs);
-
-      ~perceptron();
-
-      perceptron operator = (const perceptron&);
-      bool operator == (const perceptron&) const;
-
-      void set(void);
-    protected:
-    private:
-      double bias;
-      unsigned int num_inputs;
-      unsigned int num_output;
-      std::vector<double> synaptic_weights;
-      bool debug_msgs;
-      activation_functions activation_function;
+    THRESHOLD_ACTIVATION_FUNCTION = 0,
+    LINEAR_ACTIVATION_FUNCTION    = 1,
+    SIGMOIDAL_ACTIVATION_FUNCTION = 2,
+    SIGN_ACTIVATION_FUNCTION      = 3,
+    LOGRATHEMIC_ACTIVATION_FUNCTION = 4,
+    HYPERBOLIC_TANGENT_FUNCTION   =5
   };
-
-} //_AJA_PROCESSING_PERCEPTRON_HPP_
+}
 
 #endif

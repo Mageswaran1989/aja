@@ -1,4 +1,4 @@
-#include<aja/ann/perceptron.cpp>
+#include <aja/ann/perceptron.hpp>
 
 namespace aja
 {
