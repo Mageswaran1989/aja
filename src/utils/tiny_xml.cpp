@@ -1,4 +1,8 @@
 // g++ -o tiny_xml tiny_xml.cpp -ltinyxml
+//http://www.dinomage.com/2012/01/tutorial-using-tinyxml-part-1/
+//http://www.w3.org/TR/2004/REC-xml-20040204/
+//http://www.grinninglizard.com/tinyxmldocs/tutorial0.html
+//https://alikhuram.wordpress.com/2013/06/17/parsing-a-simple-xml-document-using-c/
 #include<iostream>
 #include <stdexcept> 
 #include <exception>
