@@ -121,8 +121,9 @@ Some vector functions available:
 
 \subsection{Matrix}
 To create a matrix in R, we may use the matrix function.  We need to provide a vector containing the elements of the matrix, and specify either the number of rows or the number of columns of the matrix.  This number should divide evenly into the length of the vector, or we will get a warning.  \\
-\lstinputlisting[language=R, firstline=1, lastline=39, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
-
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=1, lastline=49, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
+%=====================================================================================================================
 \subsubsection{Inverse of a Matrix}
 %http://www.mathwords.com/i/inverse_of_a_matrix.htm
 For a square matrix A, the inverse is written $A^-1$. When A is multiplied by A$^-1$ the result is the identity matrix I. Non-square matrices do not have inverses.
@@ -404,6 +405,38 @@ A^{-1} = \frac{1}{22}
 \end{bmatrix}
 $ \\ \\ \\ \\
 
-\lstinputlisting[language=R, firstline=40, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=51, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
+%=====================================================================================================================
+
+\subsubsection{Solving Systems of Linear Equation}
+Let the system of equations be \\
+$
+3x_1 + 2x_2 -1 x_3 = 1 \\
+2x_1 - 2x_2 +4x_3 = -2 \\
+-x_1 + 0.5x_2 -x_3 = 0 
+\\ \\
+\begin{bmatrix}
+3 & 2 & -1 \\
+2 & -2 & +4 \\
+-1 & 0.5 & -1
+\end{bmatrix} *
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+1 \\
+-2 \\
+0
+\end{bmatrix} \\ \\
+A * x =b \\
+A^{-1} * b = x
+$
+
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=1, commentstyle=\itshape\color{purple!40!black}]{./r_code/system_of_equations.R}
+%=====================================================================================================================
 
 \end{document}
