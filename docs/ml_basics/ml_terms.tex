@@ -2,44 +2,58 @@
 %To get all latest inclusion updates on book seetings.
 
 %TODO: This should be made as book template for aja use!
+%memoir  is the book template from LaTeX
 \documentclass[12pt, right open]{memoir}
+%To draw stuff on out documents
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
+%indivudual library needed on ad-hoc basis
 \usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
+%To perform coordinate calculations, the calc library is required,
+%calculations are enclosed in $
 \usetikzlibrary{shapes.geometric, calc, intersections}
+\usepackage{pgfplots}
+%Maths tools
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{float}
 \floatstyle{boxed}
 \restylefloat{figure}
-\usepackage{multirow}
+\usepackage{multirow} %for tables
 \usepackage{ifthen}
+%http://en.wikibooks.org/wiki/LaTeX/Algorithms
 \usepackage{algorithmic}
 \setcounter{secnumdepth}{5}
+
+%To reduce vetical line spaces between list items
 \usepackage{enumitem}
 \setlist{nolistsep,leftmargin=*}
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{hyperref}
 
-\newcommand{\specialcell}[2][c]
-{
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
-}
-\newcommand{\matplus}
-{
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
+%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
+%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
+
+%to tackle spaces in -1 n +1
+\newcommand{\matplus}{
 ~~
-}
+  }
 
+%For listing code
+\usepackage{listings}
+\usepackage{xcolor} % for setting colors
+
+% set the default code style
 \lstset{
-    frame=tb, 
-    tabsize=4, 
-    showstringspaces=false, 
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
  %   numbers=left, % display line numbers on the left
-    commentstyle=\color{green}, 
-    keywordstyle=\color{blue}, 
-    stringstyle=\color{red},
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red} % string color
     breaklines=true,
 }
 
@@ -70,8 +84,21 @@
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
 }
+%\begin{lstlisting}[style=codeC]
+%---------------
+%\end{lstlisting}
+%\lstinputlisting[caption=Scheduler, style=customc]{hello.c}
+
+
 \begin{document}
+
+%http://www.comp.leeds.ac.uk/ai23/reading/Hopfield.pdf
+
 %TODO: Needs to find an easy way to draw neural nets
+
+% >>>>>>>> Tikz Style sheet
+% Create Tikz style, something like typedef in C, where we can specify the shape, color, size, text details etc
+
 \tikzstyle{every pin edge}=[<-,shorten <=1pt]
 \tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
 \tikzstyle{input neuron}=[neuron, fill=black!40]
@@ -81,22 +108,21 @@
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+%\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-
+% <<<<<<<< Tikz Style sheet
 
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Machine Learning Terms}
 
-\chapter{Bayesian Statistics}
-Bayesian statistics is a collection of tools that is used in a special form of statistical
-inference which applies in the analysis of experimental data in many practical
-situations in science and engineering. Bayes’ rule is one of the most important
-rules in probability theory.
-
-
-\section{YYY}
-
+\section{Regression}
+\section{Over Fitting}
+\section{Generalization}
+The process of generalization can be regarded as a search through an enormous, but
+finite, search space.
+\section{Greedy Search}
 \end{document}
