@@ -1,0 +1,666 @@
+\chapter{What is Hopfield?}
+\section{Introduction}
+
+\def\layersep{2.5cm}
+\begin{figure}[h!]
+\caption{An artificial neuron as used in a Hopfield network} 
+\label{fig:simple_hopfield_network}
+\centering
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    % Draw the input layer nodes
+    \foreach \neuron in {1,...,3}
+    % This is the same as writing \foreach \name / \y in {1/1,2/2,3/3,4/4}
+        \node[input neuron] (I-\neuron) at (0,-\neuron) {\neuron};
+
+    % Draw the output layer node
+    \node[output neuron,pin={[pin edge={->}]right:Output}, right of=I-2] (O) {o};
+
+    % Connect every node in the input layer with the output layer
+    \foreach \source in {1,...,3}
+        \path (I-\source) edge node[above] {$w_\source$} (O);
+
+    % Annotate the layers
+    \node[annot,below of=I-2] {Input layer};
+    \node[annot,below of=O] {Output layer};
+
+\end{tikzpicture}
+
+\end{figure}
+
+Hopfield networks are constructed from artificial neurons Figure~\ref{fig:simple_hopfield_network}. These
+artificial neurons have N inputs. With each input $i$ there is a weight $w_i$ associated.
+They also have an output. The state of the output is maintained, until
+the neuron is updated. Updating the neuron entails the following operations:
+	
+\begin{itemize}
+\item The value of each input, $x_i$ is determined and the weighted sum of all inputs,\(\vspace{2mm} \sum\limits_{i=1}^n {w_ix_i}\) is calculated.
+\item The output state of the neuron is set to $+1$ if the weighted input sum is
+larger or equal to $0$. It is set to $-1$ if the weighted input sum is smaller
+than $0$.
+\item A neuron retains its output state until it is updated again.
+\end{itemize}
+
+Written as formula: \\*
+\[ o = \left\{ 
+               \begin{array}{l l}
+               \hspace{3 mm} 1  : & \quad \sum_{i} w_ix_i >= 0 \\
+                            -1  : & \quad \sum_{i} w_ix_i < 0
+               \end{array} 
+       \right.
+\]
+  
+  
+A Hopfield network is a network of $N$ such artificial neurons, which are fully
+connected. The connection weight from neuron $j$ to neuron $i$ is given by a
+number $w$$_i$$_j$. The collection of all such numbers is represented by the weight
+matrix $W$, whose components are $w$$_i$$_j$.
+
+Now given the weight matrix and the updating rule for neurons the dynamics
+of the network is defined if we tell in which order we update the neurons. There
+are two ways of updating them:
+
+\begin {itemize}
+\item \textbf{Asynchronous}: one picks one neuron, calculates the weighted input sum
+and updates immediately. This can be done in a fixed order, or neurons
+can be picked at random, which is called asynchronous random updating.
+\item \textbf{Synchronous}: the weighted input sums of all neurons are calculated without
+updating the neurons. Then all neurons are set to their new value,
+according to the value of their weighted input sum. The lecture slides
+contain an explicit example of synchronous updating.
+\end{itemize}
+
+\section {Use of the Hopfield network}
+The way in which the Hopfield network is used is as follows. 
+A pattern is entered in the network by setting all nodes to a specific value, or by setting
+only part of the nodes. The network is then subject to a number of iterations
+using asynchronous or synchronous updating. This is stopped after a while.
+The network neurons are then read out to see which pattern is in the network.
+The idea behind the Hopfield network is that patterns are stored in the
+weight matrix. The input must contain part of these patterns. The dynamics
+of the network then retrieve the patterns stored in the weight matrix. This is
+called \textbf{Content Addressable Memory (CAM)}. The network can also be used for
+auto-association. The patterns that are stored in the network are divided in two
+parts: \textbf{cue} and \textbf{association}. By entering the cue into the network,
+the entire pattern, which is stored in the weight matrix, is retrieved. In this
+way the network restores the association that belongs to a given cue.
+The stage is now almost set for the Hopfield network, we must only decide
+how we determine the weight matrix. We will do that in the next section, but
+in general we always impose two conditions on the weight matrix:
+\begin{itemize}
+\item Symmetry : $w$$_i$$_j$ = $w$$_i$$_j$
+\item No self connections: $w$$_i$$_i$ = 0
+\end{itemize}
+
+\begin{figure}
+\centering
+\caption{A two-neuron network}
+\caption{There are just two options for the weight
+matrix: $w_{i,j}$ = 1  or $w_{i,j}$ = -1. If the weight is 1, there are two stable
+states under synchronous updating \{+1, +1\}, or \{-1, -1\}. For a weight of -1,
+the stable states will be \{-1, +1\} or \{+1, -1\} depending on initial conditions.
+Under synchrononous updating the states are oscillatory.}
+\label{fig:a_two_neuron_network}
+\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=1cm,semithick]
+    \node[input neuron] (N1) at (0,0) {1};
+    \node[input neuron] (N2) at (4,0) {2};
+
+    \path ([yshift= .5ex]N1.east) edge node[above] {$w_1$$_2$} ([yshift= .5ex]N2.west);
+    \path ([yshift=-.5ex]N2.west) edge node[below] {$w_2$$_1$}([yshift=-.5ex]N1.east);
+\end{tikzpicture}
+\end{figure}
+
+It turns out that we can guarantee that the network converges under asynchronous
+updating when we use these conditions
+
+\section{Training the network}
+\subsection{A Simple Example}
+
+Consider the two nodes in Fig~\ref{fig:a_two_neuron_network} Depending on which values they contain initially they will reach end states {+1, +1} or {-1,-1} under asynchronous
+updating. \\
+This simple example illustrates two important aspects of the Hopfield network:
+the steady final state is determined by the value of the weight and the
+network is ’sign-blind’; it depends on the initial conditions which final state will
+be reached, \{+1,+1\} or \{-1, -1\} Figure~\ref{fig:a_two_neuron_network}.
+
+\section{Setting the weight matrix}
+\subsection{A single pattern}
+Consider two neurons. If the weight between them is positive, then they will
+tend to drive each other in the same direction: this is clear from the two-neuron
+network in the example. It is also true in larger networks: suppose we have
+neuron $i$ connected to neuron $j$ with a weight of $+1$, then the contribution of
+neuron $i$ to the weighted input sum of neuron $j$ is \textbf{positive} if $x_i$ = $1$ and negative if $x = -1$. In other words neuron, $i$ tries to drive neuron $j$ to the same value as it has currently. If the connection weights between them is negative, however,
+neuron $i$ will try to drive neuron $j$ to the opposite value! This inspires the
+choice of the Hebb rule: given a network of N nodes and faced with a pattern
+$~x = (x_1, ..., x_N )$ that we want to store in the network, we chose the values of
+the weight matrix as follows:
+\[ 
+ w_{i,j} = x_ix_j
+\]
+
+\def\layersep{6cm}
+\begin{figure}[h!]
+\caption{Single Layer Hopfield network} 
+\label{fig:single_layer_hopfield_network}
+\centering
+
+%\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep, semithick]
+\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=1cm,semithick]
+    % Draw the input layer nodes
+    \node[input neuron] (N3) at (0,0) {3};
+    \node[input neuron] (N1) at (0,4) {1};
+    \node[input neuron] (N4) at (4,0) {4};
+    \node[input neuron] (N2) at (4,4) {2};
+
+    \path ([yshift= .5ex]N1.east) edge node[above] {-1} ([yshift= .5ex]N2.west);
+    \path ([yshift=-.5ex]N2.west) edge node[below] {-1}([yshift=-.5ex]N1.east);
+    
+    \path ([xshift= .5ex]N2.south) edge node[right] {-1} ([xshift= .5ex]N4.north);
+    \path ([xshift=-.5ex]N4.north) edge node[left] {-1}([xshift=-.5ex]N2.south);
+    
+    \path ([xshift= .5ex]N1.south) edge node[right] {1} ([xshift= .5ex]N3.north);
+    \path ([xshift=-.5ex]N3.north) edge node[left] {1}([xshift=-.5ex]N1.south);
+    
+    \path ([yshift= .5ex]N3.east) edge node[above] {1} ([yshift= .5ex]N4.west);
+    \path ([yshift=-.5ex]N4.west) edge node[below] {1}([yshift=-.5ex]N3.east); 
+    
+    \path ([xshift= 1ex]N1) edge node[right, pos =0.3] {1}([yshift= 1ex]N4.north west);
+    \path ([xshift= 1ex]N4) edge node[left, pos =0.3] {1}([yshift=-1ex]N1.south east);
+
+    \path ([xshift= 1ex]N3) edge node[left, pos =0.3] {-1}([yshift= 1ex]N2.south west);
+    \path ([xshift= 1ex]N2) edge node[right, pos = 0.3] {-1}([yshift=-1ex]N3.north east);
+        
+\end{tikzpicture}
+\end{figure}
+
+To see how this works out in a network of four nodes, consider Figure~\ref{fig:a_two_neuron_network}. Note
+that weights are optimal for this example in the sense that if the pattern (1, -1,
+1, 1) is present in the network, each input node receives the maximal or minimal
+(in the case of neuron 2) input some possible!
+We can actually prove this: suppose the pattern $\vec{x}$, which has been used to
+train the network, is present in the network and we update neuron i, what will
+happen? The weighted input sum of a node is often denoted by $h_i = \sum_j w_{i,j}x_j$ ,
+which is called the local field. If $w_{ij}$ was chosen to store this very same pattern,
+we can calculate $h_i$:
+\[
+h_i = \sum_j w_{i,j}x_ix_j = \sum_{j=1}^3 = x_ix_jx_j = x_i + x_i + x_i = 3x_i 
+\]
+
+This is true for all nodes i. So all other three nodes (self connections are
+forbidden!) in the network give a summed contribution of $3x_i$. This means that $x_i$ will never change value, the pattern is stable!
+
+\[
+h_i = \sum_j w_{i,j}v_j = - \sum_j w_{i,j}x_j = - \sum_j x_ix_jx_j = -\sum^3_{j=1} x_i = −3x_i = 3v_i
+\]
+Again, this pattern is maximally stable: the Hopfield network is ’sign-blind’.
+
+\subsection{Weight Determination}
+How to determine weight matrix for multiple patters? You can go about this in the following way.
+\subsubsection{Binary to Bipolar Mapping}
+By replacing each $0$ in a binary string with a $-1$, you get the corresponding bipolar string.
+\[
+f(x) = 2x - 1
+\]
+For inverse mapping, which turns a bipolar string into a binary string, you use
+the following function:
+\[
+f(x) = (x + 1) / 2
+\]
+\subsubsection{Pattern’s Contribution to Weight}
+We work with the bipolar versions of the input patterns. We take each
+pattern to be recalled, one at a time, and determine its contribution to the
+weight matrix of the network. The contribution of each pattern is itself a
+matrix. The size of such a matrix is the same as the weight matrix of the
+network. Then add these contributions, in the way matrices are added, and you
+end up with the weight matrix for the network, which is also referred to as the
+correlation matrix. Let us find the contribution of the pattern $A = (1, 0, 1, 0)$:
+First, we notice that the binary to bipolar mapping of $A = (1, 0, 1, 0)$ gives the
+vector $(1, –1, 1, –1)$.
+Then we take the transpose, and multiply, the way matrices are multiplied, and
+we see the following:
+
+\[ 
+\begin{bmatrix}
+\matplus1  \\
+-1  \\
+\matplus1  \\
+-1  \\
+\end{bmatrix}
+*
+\begin{bmatrix}
+ \matplus1 & -1 & \matplus1 & -1  \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+ \matplus1 & -1 &  \matplus1 & -1 \\
+-1 &  \matplus1 & -1 &  \matplus1 \\
+ \matplus1 & -1 &  \matplus1 & -1 \\
+-1 & \matplus1 & -1 &  \matplus1 \\
+\end{bmatrix}
+\]
+
+Now subtract $1$ from each element in the main diagonal (that runs from top left
+to bottom right). This operation gives the same result as subtracting the
+identity matrix from the given matrix, obtaining $0$’s in the main diagonal. The
+resulting matrix, which is given next, is the contribution of the pattern $(1, 0, 1,
+0)$ to the weight matrix.
+\[
+ W_1 = \begin{bmatrix}
+ \matplus0 & -1 &  \matplus1 & -1 \\
+-1 &  \matplus0 & -1 &  \matplus1 \\
+ \matplus1 & -1 &  \matplus0 & -1 \\
+-1 &  \matplus1 & -1 &  \matplus0 \\
+\end{bmatrix}
+\]
+
+Similarly, we can calculate the contribution from the pattern \\ $B = (0, 1, 0, 1)$ its bipolar version $B = (-1, 1, -1, 1)$ by verifying that pattern B's contribution is the same matrix as pattern A's contribution.
+
+\[ 
+\begin{bmatrix}
+ -1  \\
+  \matplus1  \\
+ -1  \\
+  \matplus1  \\
+\end{bmatrix}
+*
+\begin{bmatrix}
+ -1 & 1 & -1 & 1  \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+ \matplus1 & -1 &  \matplus1 & -1 \\
+-1 &  \matplus1 & -1 &  \matplus1 \\
+ \matplus1 & -1 &  \matplus1 & -1 \\
+-1 &  \matplus1 & -1 &  \matplus1 \\
+\end{bmatrix}
+\]
+\[
+W_2 =
+\begin{bmatrix}
+ \matplus0 & -1 &  \matplus1 & -1 \\
+-1 &  \matplus0 & -1 &  \matplus1 \\
+ \matplus1 & -1 &  \matplus0 & -1 \\
+-1 &  \matplus1 & -1 &  \matplus0 \\
+\end{bmatrix}
+\]
+
+\[
+W_1 + W_2 =
+\begin{bmatrix}
+ \matplus0 & -2 &  \matplus2 & -2 \\
+-2 &  \matplus0 & -2 &  \matplus2 \\
+ \matplus1 & -2 &  \matplus0 & -2 \\
+-2 &  \matplus1 & -2 &  \matplus0 \\
+\end{bmatrix}
+\]
+We can now optionally apply an arbitrary scalar multiplier to all the entries of
+the matrix if you wish. This is shown in the \ref{sec:example_a_simple_hopfield_network}.
+\subsubsection{Autoassociative Network}
+The Hopfield network just shown has the feature that the network associates an
+input pattern with itself in recall. This makes the network an \textbf{autoassociative}
+network. The patterns used for determining the proper weight matrix are also
+the ones that are \textbf{autoassociatively} recalled. These patterns are called the
+exemplars. A pattern other than an exemplar may or may not be recalled by the
+network. Of course, when you present the pattern $0 0 0 0$, it is stable, even
+though it is not an exemplar pattern.
+\subsubsection{Orthogonal Bit Patterns}
+You may be wondering how many patterns the network with four nodes is able
+to recall. Let us first consider how many different bit patterns are orthogonal to
+a given bit pattern. This question really refers to bit patterns in which at least
+one bit is equal to 1. A little reflection tells us that if two bit patterns are to be
+orthogonal, they cannot both have $1$'s in the same position, since the dot
+product would need to be $0$. In other words, a bitwise logical $AND$ operation
+of the two bit patterns has to result in a $0$. This suggests the following. If a
+pattern $P$ has $k$, less than $4$, bit positions with $0$ (and so $4-k$ bit positions with
+$1$), and if pattern $Q$ is to be orthogonal to $P$, then $Q$ can have $0$ or $1$ in those $k$ positions, but it must have only $0$ in the rest $4-k$ positions. Since there are two
+choices for each of the $k$ positions, there are $2^k$ possible patterns orthogonal to
+$P$. This number $2^k$ of patterns includes the pattern with all zeroes. So there
+really are $2^k-1$ non-zero patterns orthogonal to $P$. Some of these $2^k-1$ patterns are not orthogonal to each other. As an example, $P$ can be the pattern (0 1 0 0),
+which has $k=3$ positions with $0$. There are $2^3-1=7$ nonzero patterns
+orthogonal to (0 1 0 0). Among these are patterns (1 0 1 0) and (1 0 0 1), which are
+not orthogonal to each other, since their dot product is $1$ and not $0$.
+
+\subsubsection{Network Nodes and Input Patterns}
+Since our network has four neurons in it, it also has four nodes in the directed
+graph that represents the network. These are laterally connected because
+connections are established from node to node. They are lateral because the
+nodes are all in the same layer. We started with the patterns A = (1, 0, 1, 0)
+and B = (0, 1, 0, 1) as the exemplars. If we take any other nonzero pattern that
+is orthogonal to A, it will have a 1 in a position where B also has a 1. So the
+new pattern will not be orthogonal to B. Therefore, the orthogonal set of
+patterns that contains A and B can have only those two as its elements. If you
+remove B from the set, you can get (at most) two others to join A to form an
+orthogonal set. They are the patterns (0, 1, 0, 0) and (0, 0, 0, 1).
+If you follow the procedure described earlier to get the correlation matrix, you
+will get the following weight matrix:
+
+
+\[ 
+W = \begin{bmatrix}
+ \matplus0 & -1         &  \matplus3 & -1 \\
+  -1       &  \matplus0 &  -1        &  -1 \\
+ \matplus3 & -1         &  \matplus0 & -1 \\
+-1         &  -1        & -1         &  \matplus0 \\
+\end{bmatrix}
+\]
+
+With this matrix, pattern A is recalled, but the zero pattern (0, 0, 0, 0) is
+obtained for the two patterns (0, 1, 0, 0) and (0, 0, 0, 1). Once the zero pattern
+is obtained, its own recall will be stable.
+
+\section{Energy}
+We can define an energy for each node:
+\[
+E_i = - \frac{1}{2}h_ix_i
+\]
+
+Note that the energy is positive if the sign of $h_i$ and $x_i$
+is different! An update of node i will result in a sign change in this case because the local field $h_i$ has a different sign. The updating will change the energy form a positive number
+to a negative number. This corresponds to the intuitive idea that stable states
+have a low energy. We can define an energy for the entire network:
+
+\[
+E(\vec{x}) = \sum_i E_i = - \sum_{i,j}\frac{1}{2}h_ix_i = -\frac{1}{2}\sum_{i,j}w_{i,j}x_ix_j
+\]
+
+Again, it is clear that for the pattern that has been used to train the weight
+matrix the energy is minimal. In this case:
+
+\[
+E = -\frac{1}{2} \sum_{i,j}w_{i,j}x_ix_j = -\frac{1}{2} \sum_{i,j}x_ix_jx_j = -\frac{1}{2}
+\sum_{i,j}1 = -\frac{1}{2}(N-1)^2
+\]
+\section{Stability of a single pattern}
+So far we have looked at the situation where the same patterns was in the
+network that was used to train the network. Now let us assume that another
+pattern is in the network. It is pattern $\vec{y}$ which is the same as pattern $\vec{x}$ except for three nodes. The network, as usual, has $N$ nodes. No we are updating a
+node $i$ of the network. What is the local field? It is given by:
+
+\[
+h_i = \sum_j w_{i,j}y_j = \sum_j x_ix_jy_j 
+\]
+
+We can split this sum in 3 nodes, which have an opposite value of $\vec{x}$ and
+$N − 3$ nodes which have the same value:
+
+\[
+h_i = \sum^{N-3}_{j=1} x_ix_jx_j + \sum^3_{j=1} x_ix_j · -x_j = (N - 3)x_i - 3x_i = (N - 6)x_i
+\]
+
+For $N > 6$ all the local fields point the direction of $x_i$, the pattern that was
+used to define the weight matrix!. So updating will result in no change (if the
+value of node i is equal to $x_i$) or an update (if the value of node $i$ is equal to
+$-x_i$). So, the pattern that is stored into the network is stable: up to half of the
+nodes can be inverted and the network will still reproduce $\vec{x}$.
+
+%There is also another way to look at this. The pattern that was used to train
+%the network is an absolute energy minimum. This follows from equation 6. One
+%can show the following important proposition, which is true for any symmetric
+%weight matrix.
+%
+%Proposition 1:
+%The energy of a Hopfield network can only decrease or stay the same. If an
+%update cause a neuron to change sign, then the energy will decrease, otherwise
+%it will stay the same.
+%The condition that the energy of a Hopfield network can only decrease only rests
+%on the condition that the weight matrix is symmetric. This is true for the Heb
+%rule and also the generalised Hebb rule (see below). The undergraduates need
+%not know this proof, but the postgraduates must be able to reproduce it. We
+%will proof proposition 1 in section A.
+%Since there is only one absolute minimum in a Hopfield network that has
+%been trained with a single pattern (equation 6 is proof of that) and the minimum
+%is reached when the training pattern (or its negative inverse; the same pattern
+%with multiplied by -1) is in the network, the network must converge to the
+%trained pattern (or its negative inverse).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{C++ Code}
+
+\textbf{Code} :  aja/example/ann/hopfield\_network.cpp
+
+\subsection {Example — A Simple Hopfield Network}
+\label{sec:example_a_simple_hopfield_network}
+A simple single layer Hopfield network is created with four neurons. We place, in
+this layer, four neurons, each connected to the rest, as shown in Figure~\ref{fig:single_layer_hopfield_network}. Some of the connections have a positive weight, 
+and the rest have a negative weight. The network
+will be presented with two input patterns, one at a time, and it is supposed to recall them.
+The inputs would be binary patterns having in each component a 0 or 1. If two patterns
+of equal length are given and are treated as vectors, their dot product is obtained by first
+multiplying corresponding components together and then adding these products. Two
+vectors are said to be orthogonal, if their dot product is 0. The mathematics involved in
+computations done for neural networks include matrix multiplication, transpose of a
+matrix, and transpose of a vector. The inputs (which are stable, stored patterns) to be given should be orthogonal to one another.
+
+\def\layersep{6cm}
+\begin{figure}[h!]
+\caption{Single Layer Hopfield network} 
+\label{fig:single_layer_hopfield_network}
+\centering
+
+%\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep, semithick]
+\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=1cm,semithick]
+    % Draw the input layer nodes
+    \node[input neuron] (N3) at (0,0) {3};
+    \node[input neuron] (N1) at (0,4) {1};
+    \node[input neuron] (N4) at (4,0) {4};
+    \node[input neuron] (N2) at (4,4) {2};
+
+    \path ([yshift= .5ex]N1.east) edge node[above] {$w_1$$_2$} ([yshift= .5ex]N2.west);
+    \path ([yshift=-.5ex]N2.west) edge node[below] {$w_2$$_1$}([yshift=-.5ex]N1.east);
+    
+    \path ([xshift= .5ex]N2.south) edge node[right] {$w_2$$_4$} ([xshift= .5ex]N4.north);
+    \path ([xshift=-.5ex]N4.north) edge node[left] {$w_4$$_2$}([xshift=-.5ex]N2.south);
+    
+    \path ([xshift= .5ex]N1.south) edge node[right] {$w_1$$_3$} ([xshift= .5ex]N3.north);
+    \path ([xshift=-.5ex]N3.north) edge node[left] {$w_3$$_1$}([xshift=-.5ex]N1.south);
+    
+    \path ([yshift= .5ex]N3.east) edge node[above] {$w_3$$_4$} ([yshift= .5ex]N4.west);
+    \path ([yshift=-.5ex]N4.west) edge node[below] {$w_4$$_3$}([yshift=-.5ex]N3.east); 
+    
+    \path ([xshift= 1ex]N1) edge node[right, pos =0.3] {$w_1$$_4$}([yshift= 1ex]N4.north west);
+    \path ([xshift= 1ex]N4) edge node[left, pos =0.3] {$w_4$$_1$}([yshift=-1ex]N1.south east);
+
+    \path ([xshift= 1ex]N3) edge node[left, pos =0.3] {$w_3$$_2$}([yshift= 1ex]N2.south west);
+    \path ([xshift= 1ex]N2) edge node[right, pos = 0.3] {$w_2$$_3$}([yshift=-1ex]N3.north east);
+        
+\end{tikzpicture}
+\end{figure}
+
+The two patterns we want the network to recall are $A = (1, 0, 1, 0)$ and $B = (0, 1, 0, 1)$,
+which you can verify to be orthogonal. Recall that two vectors A and B are orthogonal if
+their dot product is equal to zero. This is true in this case since
+
+$A_1$$B_1$ + $A_2$$B_2$ + $A_3$$B_3$ + $A_4$$B_4$ = $(1\times0 + 0\times1 + 1\times0 + 0\times1) = 0$
+
+The following matrix W gives the weights on the connections in the network.
+
+\[ 
+W = \begin{bmatrix}
+ \matplus0 & -3 &  \matplus3 & -3 \\
+-3 &  \matplus0 & -3 &  \matplus3 \\
+ \matplus3 & -3 &  \matplus0 & -3 \\
+-3 &  \matplus3 & -3 &  \matplus0 \\
+\end{bmatrix}
+\]
+
+We need a threshold function also, and we define it as follows. The threshold value $\theta$ is 0.
+
+\[ f(t) = \left\{ 
+                  \begin{array}{l l}
+                   1 & \mbox{if $t \geq \theta$}\\
+                   0 & \mbox{if $t < \theta$}
+                  \end{array} 
+          \right. 
+\]
+ 
+ 
+ We have four neurons in the only layer in this network. We need to compute
+the activation of each neuron as the weighted sum of its inputs. The activation
+at the first node is the dot product of the input vector and the first column of
+the weight matrix (0 -3 3 -3). We get the activation at the other nodes
+similarly. The output of a neuron is then calculated by evaluating the threshold
+function at the activation of the neuron. So if we present the input vector A,
+the dot product works out to 3 and f(3) = 1. Similarly, we get the dot products
+of the second, third, and fourth nodes to be -6, 3, and -6, respectively. The
+corresponding outputs therefore are 0, 1, and 0. This means that the output of
+the network is the vector (1, 0, 1, 0), same as the input pattern. The network
+has recalled the pattern as presented, or we can say that pattern A is stable,
+since the output is equal to the input. When B is presented, the dot product
+obtained at the first node is -6 and the output is 0. The outputs for the rest of
+the nodes taken together with the output of the first node gives (0, 1, 0, 1),
+which means that the network has stable recall for B also.
+
+So far we have presented easy cases to the network—vectors that the Hopfield
+network was specifically designed (through the choice of the weight matrix) to
+recall. What will the network give as output if we present a pattern different
+from both A and B? Let C = (0, 1, 0, 0) be presented to the network. The
+activations would be -3, 0, -3, 3, making the outputs 0, 1, 0, 1, which means
+that B achieves stable recall. This is quite interesting. Suppose we did intend to
+input B and we made a slight error and ended up presenting C, instead. The
+network did what we wanted and recalled B. But why not A? To answer this,
+let us ask is C closer to A or B? How do we compare? We use the distance
+formula for two four-dimensional points. If (a, b, c, d) and (e, f, g, h) are two
+four-dimensional points, the distance between them is:
+
+\[\sqrt{(a – e)^2 + (b – f)^2 + (c – g)^2 + (d – h)^2}\]
+
+The distance between A and C is $\sqrt{3}$, whereas the distance between B and
+C is just 1. So since B is closer in this sense, B was recalled rather than A. You
+may verify that if we do the same exercise with D = (0, 0, 1, 0), we will see
+that the network recalls A, which is closer than B to D.
+
+
+\section{Asynchronous Update}
+
+The Hopfield network is a recurrent network. This means that outputs from
+the network are fed back as inputs. This is not apparent from Figure\ref{fig:asynchonous_update_flow}.
+
+The Hopfield network always stabilizes to a fixed point. There is a very
+important detail regarding the Hopfield network to achieve this stability. In the
+examples thus far, we have not had a problem getting a stable output from the
+network, so we have not presented this detail of network operation. This detail
+is the need to update the network asynchronously. This means that changes do
+not occur simultaneously to outputs that are fed back as inputs, but rather
+occur for one vector component at a time.
+
+\begin{figure}[!ht] %Create figure holder
+\caption{Asynchonous Update Flow}
+\label{fig:asynchonous_update_flow}
+\centering
+\begin{tikzpicture}[node distance=2cm] %use the ‘tikzpicture’ environment
+
+%      node_var  style   display text
+\node (start) [startstop] {Start};
+\node (input) [io, below of=start] {Inputs};
+\node (hopfield_network) [process, below of=input] {Hopfield Network};
+\node (update) [process, left of=hopfield_network, xshift=-2cm] {Update};
+\node (threshold_function) [process, below of=hopfield_network] {Threshold Function};
+\node (output) [io, below of=threshold_function] {Output};
+\node (stop) [startstop, below of=output] {Stop};
+%
+\draw [arrow] (start) -- (input);
+\draw [arrow] (input) -- (hopfield_network);
+\draw [arrow] (hopfield_network) -- (threshold_function);
+\draw [arrow] (threshold_function) -- (output);
+\draw [arrow] (output) -- (stop);
+
+\draw [arrow] (output) -|  (update);
+\draw [arrow] (update) |- (input);
+
+\end{tikzpicture}
+\end{figure}
+
+The true operation of the Hopfield network follows the procedure below for input vector \textbf{Invec} and output vector \textbf{Outvec}:
+
+\begin {itemize}
+\item Apply an input, Invec, to the network, and initialize Outvec = Invec
+\item Start with i = 1
+\item Calculate Value i = DotProduct ( Invec i, Column i of Weight matrix)4. 
+\item Calculate Outvec i = f(Value i ) where f is the threshold function discussed previously
+\item Update the input to the network with component Outvec i
+\item Increment i, and repeat steps 3, 4, 5, and 6 until Invec = Outvec(note that when i reaches its maximum value, it is then next reset to 1 for the cycle to continue)
+\end{itemize}
+
+Now let’s see how to apply this procedure. Building on the last example, we
+now input E = (1, 0, 0, 1), which is at an equal distance from A and B. Without
+applying the asynchronous procedure above, but instead using the shortcut
+procedure we’ve been using so far, you would get an output F = (0, 1, 1, 0).
+This vector, F, as subsequent input would result in E as the output. This is
+incorrect since the network oscillates between two states. We have updated the
+entire input vector synchronously.
+Now let’s apply asynchronous update. For input E, (1,0,0,1) we arrive at the
+following results detailed for each update step, in Table \ref{tab:example_of_asynchronous_update_for_the_hopfield_network}
+
+\begin{center}
+\begin{table}
+\caption{Example of Asynchronous Update for the Hopfield Network}
+\label{tab:example_of_asynchronous_update_for_the_hopfield_network}
+\begin{tabular}{|l|l|l|p{3cm}|l|l|p{3cm}|}
+\hline
+Step & i & Invec & Column of weight vectors & Value & Outvec & notes \\
+\hline
+0    &   & 1001  &                          &       & 1001   & initialization : set Outvec = Invec =Input pattern\\
+\hline
+1    & 1 & 1001  & 0 -3 3 -3                & -3    & 0001   & column 1 of Outvec
+changed to 0\\
+\hline
+2    & 2 & 0001  & -3 0 -3 3                &  3    & 0101   & column 2 of Outvec
+changed to 1\\
+\hline
+3    & 3 & 0101  & 3 -3 0 -3                & -6    & 0101   & column 3 of Outvec
+stays as 0\\
+\hline
+4    & 4 & 0101  & -3 3 -3 0                &  3    & 0101   & column 4 of Outvec
+stays as 1\\
+\hline
+5    & 1 & 0101  & 0 -3 3 -3                & -6    & 0101   & column 1 stable as 0\\
+\hline
+6    & 2 & 0101  & -3 0 -3 3                &  3    & 0101   & column 2 stable as 1\\
+\hline
+7    & 3 & 0101  & 3 -3 0 -3                & -6    & 0101   & column 3 stable as 0\\
+\hline
+8    & 4 & 0101  & -3 3 -3 0                &  3    & 0101   & column 4 stable as
+1; stable recalled pattern = 0101\\
+\hline
+\end{tabular}
+\end{table}
+\end{center}
+
+\section{Classes in C++ Implementation}
+In our C++ implementation of this network, there are the following classes: a
+\textbf{network class}, and a \textbf{neuron class}. In our implementation, we create the
+network with four neurons, and these four neurons are all connected to one
+another. A neuron is not self-connected, though. That is, there is no edge in the
+directed graph representing the network, where the edge is from one node to
+itself. But for simplicity, we could pretend that such a connection exists
+carrying a weight of 0, so that the weight matrix has 0’s in its principal
+diagonal.
+
+The functions that determine the neuron activations and the network output are
+declared public. Therefore they are visible and accessible without restriction.
+The activations of the neurons are calculated with functions defined in theneuron class. When there are more than one layer in a neural network, the
+outputs of neurons in one layer become the inputs for neurons in the next
+layer. In order to facilitate passing the outputs from one layer as inputs to
+another layer, our C++ implementations compute the neuron outputs in the
+network class. For this reason the threshold function is made a member of the
+network class. We do this for the Hopfield network as well. To see if the
+network has achieved correct recall, you make comparisons between the
+presented pattern and the network output, component by component.
+
+\section{A New Weight Matrix to Recall More Patterns}
+Let’s continue to discuss this example. Suppose we are interested in having the
+patterns $E = (1, 0, 0, 1)$ and $F = (0, 1, 1, 0)$ also recalled correctly, in addition
+to the patterns $\vec{A}$ and $\vec{B}$. In this case we would need to train the network and
+come up with a learning algorithm, which we will discuss in more detail later
+in the book. We come up with the matrix $W_1$, which follows...
+\[ 
+W_1 = \begin{bmatrix}
+ \matplus0 & -5 &  \matplus4 & \matplus4 \\
+-5 &  \matplus0 &  \matplus4 & \matplus4 \\
+ \matplus4 &  \matplus4 &  \matplus0 & -5 \\
+ \matplus4 &  \matplus4 & -5 &  \matplus0 \\
+\end{bmatrix}
+\]
+Try to use this modification of the weight matrix in the source program, and
+then compile and run the program to see that the network successfully recalls
+all four patterns A, B, E, and F.
+

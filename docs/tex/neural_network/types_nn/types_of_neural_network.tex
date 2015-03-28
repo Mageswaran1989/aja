@@ -1,0 +1,41 @@
+\chapter{Types of Networks}
+
+%\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+%\newcommand{\tab} [1]{\hspace{.2\textwidth}\rlap{#1}}
+
+The models that we overview in this chapter are the \\
+
+\begin{enumerate}
+\item Perceptron
+\item Hopfield
+\item Adaline
+\item Feed-Forward Backpropagation
+\item Bidirectional Associative Memory
+\item Brain-State-in-a-Box
+\item Neocognitron
+\item Fuzzy Associative Memory
+\item ART1
+\item ART2
+\end{enumerate}
+
+
+%Sub heading in the chapter
+\section{Based on Learning}
+
+A network can be subject to supervised or unsupervised learning. The learning would be supervised if external criteria are used and matched by the network output, and if not, the learning is unsupervised. This is one broad way to divide different neural network approaches. Unsupervised approaches are also termed self-organizing. There is more interaction between neurons, typically with feedback and intralayer connections between neurons promoting self-organization. \\*
+Supervised networks are a little more straightforward to conceptualize than unsupervised networks. You apply the inputs to the supervised network along with an expected response, much like the Pavlovian conditioned stimulus and response regimen. You mold the network with stimulus-response pairs. Astock market forecaster may present economic data (the stimulus) along with metrics of stock market performance (the response) to the neural network to the present and attempt to predict the future once training is complete. \\*
+You provide unsupervised networks with only stimulus. You may, for example, want an unsupervised network to correctly classify parts from a conveyor belt into part numbers, providing an image of each part to do the classification (the stimulus). The unsupervised network in this case would act like a look-up memory that is indexed by its contents, or a Content-Addressable-Memory (CAM). \\*
+
+\tikzstyle{rectangular_box} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=black!30]
+
+%\begin{figure}[h!] 
+%\centering
+%\begin{tikzpicture}[node distance=2cm] 
+%
+%\node (learning_types) [rectangular box, xshift=8cm] {Learning};
+%\node (supervised) [rectangular box, below of=learning_types, xshift=2cm] {Supervised};
+%\node (unsupervised) [rectangular box, left of=supervised, xshift=8cm] {UnSupervised};
+%
+%\end{tikzpicture}
+%\end{figure}
+

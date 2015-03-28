@@ -1,0 +1,60 @@
+\chapter{Common Terms to Start with Neural Network}
+\section{Neural Network}
+A neural network is a massively parallel distributed processor made up of simple processing units, which has a natural propensity for storing experimental knowledge and making it available for use. It resembles the brain in two aspects:
+\begin{enumerate}
+\item Knowledge is acquired by the network from its environment through a learning process.
+\item Inter-neuron connections strengths, known as synaptic weights, are used to store the acquired knowledge. 
+\end{enumerate} 
+\section{Stability for a Neural Network}
+Stability refers to such convergence that facilitates an end to the iterative
+process. For example, if any two consecutive cycles result in the same output
+for the network, then there may be no need to do more iterations. In this case,
+convergence has occurred, and the network has stabilized in its operation. If
+weights are being modified after each cycle, then convergence of weights
+would constitute stability for the network.
+In some situations, it takes many more iterations than you desire, to have
+output in two consecutive cycles to be the same. Then a tolerance level on the
+convergence criterion can be used. With a tolerance level, you accomplish
+early but satisfactory termination of the operation of the network.
+
+\section{Plasticity for a Neural Network}
+Suppose a network is trained to learn some patterns, and in this process the
+weights are adjusted according to an algorithm. After learning these patterns
+and encountering a new pattern, the network may modify the weights in order
+to learn the new pattern. But what if the new weight structure is not responsive
+to the new pattern? Then the network does not possess plasticity—the ability
+to deal satisfactorily with new short-term memory (STM) while retaining
+long-term memory (LTM). Attempts to endow a network with plasticity may
+have some adverse effects on the stability of your network.
+
+Plasticity permits the developing nervous system to adapt to its surrounding environment.
+\section{Short-Term Memory and Long-Term Memory}
+We alluded to short-term memory (STM) and long-term memory (LTM) in the
+previous paragraph. STM is basically the information that is currently and
+perhaps temporarily being processed. It is manifested in the patterns that the
+network encounters. LTM, on the other hand, is information that is already
+stored and is not being currently processed. In a neural network, STM isusually characterized by patterns and LTM is characterized by the
+connections’ weights. The weights determine how an input is processed in the
+network to yield output. During the cycles of operation of a network, the
+weights may change. After convergence, they represent LTM, as the weight
+levels achieved are stable.
+
+\section{Generalization}
+It refers to the ability of neural networks to produce reasonable outputs for inputs not encountered during the training.
+
+\section{Learning Algorithm}
+The procedure used to perform the learning process is called a learning algorithm, the function of which is to modify the synaptic weights of the network in an orderly fashion to attain the design objective.
+
+\section{Layers in a Neural Network}
+A neural network has its neurons divided into subgroups, or fields, and
+elements in each subgroup are placed in a row, or a column, in the diagram
+depicting the network. Each subgroup is then referred to as a layer of neurons
+in the network.A great many models of neural networks have two layers, quite
+a few have one layer, and some have three or more layers. A number of
+additional, so-called hidden layers are possible in some networks, such as the
+Feed-forward backpropagation network. When the network has a single layer,
+the input signals are received at that layer, processing is done by its neurons,and output is generated at that layer. When more than one layer is present, the
+first field is for the neurons that supply the input signals for the neurons in the
+next layer.
+A layer is also referred to as a field. Then the different layers can be designated
+as field A, field B, and so on, or shortly, $F_A$ , $F_B$ .

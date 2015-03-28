@@ -1,0 +1,332 @@
+\chapter{Linear Algebra}
+
+\section{With R}
+Reader is assumed to have installed R in the machine and have some Google knowledge on R. Aja captures the essence of Linear Algebra through R language, peculiar syntax of R is explained wherever needed. We knew you are more active and eager in trying out following code and we being lazy skipped the outputs!
+
+\subsection{Vector}
+To create a vector in R, there are several approaches. 
+Lets create a vector called \textbf{"vec"}:
+\lstinputlisting[language=R, firstline=1, lastline=19, commentstyle=\itshape\color{purple!40!black}]{./r_code/vector.R}
+
+Some vector functions available:
+\lstinputlisting[language=R, firstline=21, lastline=27, commentstyle=\itshape\color{purple!40!black}]{./r_code/vector.R}
+
+\subsection{Matrix}
+To create a matrix in R, we may use the matrix function.  We need to provide a vector containing the elements of the matrix, and specify either the number of rows or the number of columns of the matrix.  This number should divide evenly into the length of the vector, or we will get a warning.  \\
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=1, lastline=49, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
+%=====================================================================================================================
+\subsubsection{Inverse of a Matrix}
+%http://www.mathwords.com/i/inverse_of_a_matrix.htm
+For a square matrix A, the inverse is written $A^-1$. When A is multiplied by A$^-1$ the result is the identity matrix I. Non-square matrices do not have inverses.
+
+\textbf{Note}: Not all square matrices have inverses. A square matrix which has an inverse is called \textbf{invertible} or \textbf{nonsingular}, and a square matrix without an inverse is called \textbf{noninvertible} or \textbf{singular}.
+
+$AA^{-1} = A^{-1}A = I$ \\
+\textbf{Example :} \\
+For matrix 
+$
+A_{2,2} = 
+\begin{bmatrix}
+4 & 3 \\
+3 & 2 
+\end{bmatrix}
+$, its inverse is 
+$A^{-1} =
+\begin{bmatrix}
+-2 & 3 \\
+3 & -4 
+\end{bmatrix}
+$ since \\ \\
+
+$
+AA^{-1} = 
+\begin{bmatrix}
+4 & 3 \\
+3 & 2 
+\end{bmatrix}
+\begin{bmatrix}
+-2 & 3 \\
+3 & -4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 
+\end{bmatrix}
+$ and \\ \\
+$
+A^{-1}A = 
+\begin{bmatrix}
+-2 & 3 \\
+3 & -4 
+\end{bmatrix}
+\begin{bmatrix}
+4 & 3 \\
+3 & 2 
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 
+\end{bmatrix}
+$ \\ \\
+
+Here are three ways to find the inverse of a matrix:
+
+\paragraph{Shortcut for 2x2 matrices}
+For 
+$
+A = 
+\begin{bmatrix}
+a & b \\
+c & d 
+\end{bmatrix}
+$, the inverse can be found using this formula: \\
+$ A^{-1} = \frac{1}{det A}
+\begin{bmatrix}
+d & -b \\
+-c & a 
+\end{bmatrix}
+=
+\frac{1}{ad-bc}
+\begin{bmatrix}
+d & -b \\
+-c & a 
+\end{bmatrix}
+$ \\ \\
+
+\paragraph{Augmented matrix method}
+
+Before we find the inverse, we see how to do \textbf{Gauss-Jordan elimination}. \\
+Use Gauss-Jordan elimination to transform [ A | I ] into [ I | A-1 ].
+
+Example :  The following steps result in 
+$
+\begin{bmatrix}
+1 & 2 \\
+3 & 4 
+\end{bmatrix} ^ {-1}
+$ \\
+
+Finding the $A^{-1}$ \\ \\
+\begin{align*}   
+\begin{bmatrix} [cc|cc]
+1 & 2 & 1 & 0 \\
+3 & 4 & 0 & 1 
+\end{bmatrix} 
+=
+\begin{bmatrix} [cc|cc]
+1 & 2 & 1 & 0 \\
+0 & -2 & -3 & 1 
+\end{bmatrix}  
+&=
+\begin{bmatrix} [cc|cc]
+1 & 2 & 1 & 0 \\
+0 & 1 & 3/2 & -1/2 
+\end{bmatrix} \\
+&=
+\begin{bmatrix} [cc|cc]
+1 & 0 & -2 & 1 \\
+0 & 1 & 3/2 & -1/2 
+\end{bmatrix} \\
+\end{align*}  
+
+So we see that
+$
+\begin{bmatrix}
+1 & 2 \\
+3 & 4 
+\end{bmatrix} ^ {-1} 
+=
+\begin{bmatrix} [cc|cc]
+1 & 0 & -2 & 1 \\
+0 & 1 & 3/2 & -1/2 
+\end{bmatrix}
+$ 
+\\
+
+\subparagraph{Gauss-Jordan elimination}
+The system of equations \\
+$
+ x +  y +  z = 3 \\
+2x + 3y + 7z = 0 \\
+ x + 3y - 2z = 17
+ $ \\
+$
+\begin{bmatrix} [ccc|c]
+1 & 1 & 1 & 3 \\
+2 & 3 & 7 & 0 \\
+1 & 3 & -2 & 17
+\end{bmatrix}
+$ \\
+Row operations can be used to express the matrix in reduced row-echelon form. \\
+Which has following properties
+\begin{itemize}
+\item Each row contains only zerosuntil the first nonzero element, which must be 1.
+\item As the rows are followed from top to bottom, the first nonzero number occurs further to the right than in the previous row.
+\item The entries above and below the first 1 in each row must all be 0.
+\item Matrix in the reduced row-echelon form :
+$
+\begin{bmatrix} 
+1 & 0 & -2 & 0 & 6\\
+0 & 1 & 7 & 0 & 1\\
+0 & 0 & 0 & 1 & 5
+\end{bmatrix}
+$ \\
+\end{itemize}
+
+Solving the system of equations \\
+\begin{align*}   
+\begin{bmatrix} [ccc|c]
+1 & 1 & 1 & 3 \\
+2 & 3 & 7 & 0 \\
+1 & 3 & -2 & 17
+\end{bmatrix} 
+&=
+\begin{bmatrix} [ccc|c]
+1 & 1 & 1 & 3 \\
+0 & 1 & 5 & -6 \\
+0 & 2 & -3 & 14
+\end{bmatrix} \\
+&=
+\begin{bmatrix} [ccc|c]
+1 & 0 & -4 & 9 \\
+0 & 1 & 5 & -6 \\
+0 & 0 & -13 & 26
+\end{bmatrix} \\
+&=
+\begin{bmatrix} [ccc|c]
+1 & 0 & -4 & 9 \\
+0 & 1 & 5 & -6 \\
+0 & 0 & 1 & -2
+\end{bmatrix} \\
+&=
+\begin{bmatrix} [ccc|c]
+1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 4 \\
+0 & 0 & 1 & -2
+\end{bmatrix}
+\end{align*}   
+
+The augmented matrix now says that x=1, y=4, and z=-2.
+
+
+\paragraph{Adjoint method}
+
+$
+A^{-1} = \frac{1}{det A} (adjoint of A) \\
+or \\
+A^{-1} = \frac{1}{det A} (cofactor of A)^T
+$
+
+Example: \\
+
+\[
+A = 
+\begin{bmatrix}
+1 & 2 & 3 \\
+0 & 4 & 5 \\
+1 & 0 & 6
+\end{bmatrix}
+\]
+
+Cofactor matrix is
+\[
+\begin{bmatrix}
+A_{1,1} & -A_{1,2} & A_{1,3} \\
+-A_{2,1} & A_{2,2} & -A_{2,3} \\
+A_{3,1} & -A_{3,2} & A_{3,3} \
+\end{bmatrix}
+\]
+
+where 
+$
+A_{1,1} = 
+\begin{bmatrix}
+4 & 5 \\
+0 & 6 
+\end{bmatrix}
+= 24
+$
+$
+A_{1,2} = 
+\begin{bmatrix}
+0 & 5 \\
+1 & 6 
+\end{bmatrix}
+= 5  ....
+$
+$
+A_{3,3} = 
+\begin{bmatrix}
+1 & 2 \\
+0 & 4 
+\end{bmatrix}
+= 4
+$ \\ \\ 
+
+The cofactor matrix for A is 
+$
+\begin{bmatrix}
+24 & 5 & -4 \\
+-12 & 3 & 2 \\
+-2 & -5 & 4
+\end{bmatrix}
+$, so the adjoint is 
+$
+\begin{bmatrix}
+24 & -12 & -2 \\
+5 & 3 & -5 \\
+-4 & 2 & 4
+\end{bmatrix}
+$. \\
+Since det A = 22, we get
+$
+A^{-1} = \frac{1}{22}
+\begin{bmatrix}
+24 & -12 & -2 \\
+5 & 3 & -5 \\
+-4 & 2 & 4
+\end{bmatrix}
+=
+\begin{bmatrix}
+12/11 & -6/11 & -1/11 \\
+5/22 & 3/22 & -5/22 \\
+-2/11 & 1/11 & 2/11
+\end{bmatrix}
+$ \\ \\ \\ \\
+
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=51, commentstyle=\itshape\color{purple!40!black}]{./r_code/matrix.R}
+%=====================================================================================================================
+
+\subsubsection{Solving Systems of Linear Equation}
+Let the system of equations be \\
+$
+3x_1 + 2x_2 -1 x_3 = 1 \\
+2x_1 - 2x_2 +4x_3 = -2 \\
+-x_1 + 0.5x_2 -x_3 = 0 
+\\ \\
+\begin{bmatrix}
+3 & 2 & -1 \\
+2 & -2 & +4 \\
+-1 & 0.5 & -1
+\end{bmatrix} *
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+1 \\
+-2 \\
+0
+\end{bmatrix} \\ \\
+A * x =b \\
+A^{-1} * b = x
+$
+
+%=====================================================================================================================
+\lstinputlisting[language=R, firstline=1, commentstyle=\itshape\color{purple!40!black}]{./r_code/system_of_equations.R}
+%=====================================================================================================================
