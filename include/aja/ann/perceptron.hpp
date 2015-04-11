@@ -46,15 +46,15 @@ namespace aja
      */
   class Perceptron
   {
-      perceptron(const& perceptron);
+      Perceptron(const Perceptron& other);
 
-      explicit perceptron(void);
-      explicit perceptron(unsigned int num_inputs);
+      explicit Perceptron(void);
+      explicit Perceptron(unsigned int num_inputs);
 
-      ~perceptron();
+      ~Perceptron();
 
-      perceptron operator = (const perceptron&);
-      bool operator == (const perceptron&) const;
+      Perceptron operator = (const Perceptron&);
+      bool operator == (const Perceptron&) const;
 
       void set(void);
     protected:

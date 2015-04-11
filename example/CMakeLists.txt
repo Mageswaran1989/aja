@@ -1,3 +1,5 @@
 ADD_SUBDIRECTORY(ann)
 ADD_SUBDIRECTORY(fuzzy)
+ADD_SUBDIRECTORY(algorithms)
+ADD_SUBDIRECTORY(design_patterns)
 
