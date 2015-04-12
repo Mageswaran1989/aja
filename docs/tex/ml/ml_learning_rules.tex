@@ -1,0 +1,54 @@
+\chapter{Learning Rules}
+
+\section{Delta Rule}
+In machine learning, the delta rule is a gradient descent learning rule for updating the weights of the inputs to artificial neurons in single-layer neural network. It is a special case of the more general backpropagation algorithm. For a neuron $j$, with activation function $g(x)$, the delta rule for $j's$ $i$th weight $w_{ji}$, is given by
+
+\begin{align*}
+\Delta w_{ji} &= \eta (t_i, y_i) g'(h_j)x_i
+\end{align*}
+where
+$\eta$ \, is a small constant called learning rate \\
+$g(x)$ \, is the neuron's activation function \\
+$t_j$ \, is the target output \\
+$h_j$ \, is the weighted sum of the neuron's inputs \\
+$y_j$ \, is the actual output \\
+$x_i$ \, is the i \,th input. \\
+\\
+
+
+It holds that \\
+$h_j = \sum x_i w_{ji}$ \\
+$y_i = g(h_j)$
+
+\subsection{Derivation}
+
+The delta rule is derived by attempting to minimize the error in the output of the neural network through gradient descent. The error for a neural network with j, outputs can be measured as
+
+\begin{align*}
+E &= \frac{1}{2} \sum_j (t_j - y_j)^2
+\end{align*}
+\\
+In this case, we wish to move through "weight space" of the neuron (the space of all possible values of all of the neuron's weights) in proportion to the gradient of the error function with respect to each weight. In order to do that, we calculate the partial derivative of the error with respect to each weight. For the i ,th weight, this derivative can be written as
+\begin{align*}
+\frac{\partial E}{ \partial w_{ji} }
+\end{align*}
+Because we are only concerning ourselves with the j \,th neuron, we can substitute the error formula above while omitting the summation:
+
+\begin{align*}
+\frac{\partial E}{ \partial w_{ji} } &= \frac{ \partial \left ( \frac{1}{2} \left( t_j-y_j \right ) ^2 \right ) }{ \partial w_{ji} } \\
+\text{Next we use the chain rule to split this into two derivatives}  \\
+									 &= \frac{ \partial \left ( \frac{1}{2} \left( t_j-y_j \right ) ^2 \right ) }{ \partial y_j } \frac{ \partial y_j }{ \partial w_{ji} } \\
+\text{To find the left derivative, we simply apply the general power rule}  \\									 
+									 &= - \left ( t_j-y_j \right ) \frac{ \partial y_j }{ \partial w_{ji} }  \\
+									 &= - \left ( t_j-y_j \right ) \frac{ \partial (g(h_j)) }{ \partial h_j } \frac{ \partial h_j }{ \partial w_{ji} } \\
+									 &= - \left ( t_j-y_j \right ) g'(h_j) \frac{ \partial h_j }{ \partial w_{ji} } \\
+									 &= - \left ( t_j-y_j \right ) g'(h_j) \frac{ \partial \left ( \sum_{k} x_i w_{ji} \right ) }{ \partial w_{ji} } \\
+\frac{ \partial x_i w_{ji} }{ \partial w_{ji} } &= x_i \\
+\frac{\partial E}{ \partial w_{ji} } &= - \left ( t_j-y_j \right ) g'(h_j) x_i \,
+\end{align*}
+
+As noted above, gradient descent tells us that our change for each weight should be proportional to the gradient. Choosing a proportionality constant $\eta$ \, and eliminating the minus sign to enable us to move the weight in the negative direction of the gradient to minimize error, we arrive at our target equation:
+
+\[
+\Delta w_{ji}=\alpha(t_j-y_j) g'(h_j) x_i \,.
+\]
