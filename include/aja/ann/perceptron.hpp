@@ -27,14 +27,14 @@
 //SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <vector>
-#ifndef _AJA_PROCESSING_PERCEPTRON_HPP_
-#define _AJA_PROCESSING_PERCEPTRON_HPP_
+#ifndef _AJA_PROCESSING_perceptron_HPP_
+#define _AJA_PROCESSING_perceptron_HPP_
 
 #include <vector>
 #include <aja/ann/activation_function.hpp>
 namespace aja
 {
-  /** \brief Class that represents a single neuron
+/** \brief Class that represents a single neuron
      * A single neuron shall have
      * weight
      * input
@@ -44,27 +44,39 @@ namespace aja
      * \author Mageswaran
      * \ingroup Processing
      */
-  class Perceptron
-  {
-      Perceptron(const Perceptron& other);
+class perceptron
+{
+public:
+    perceptron(const perceptron& other);
 
-      explicit Perceptron(void);
-      explicit Perceptron(unsigned int num_inputs);
+    explicit perceptron(void);
+    explicit perceptron(unsigned int num_inputs);
 
-      ~Perceptron();
+    ~perceptron();
 
-      Perceptron operator = (const Perceptron&);
-      bool operator == (const Perceptron&) const;
+    perceptron operator = (const perceptron&);
+    bool operator == (const perceptron&) const;
 
-      void set(void);
-    protected:
-    private:
-      double bias;
-      unsigned int num_inputs;
-      unsigned int num_output;
-      std::vector<double> synaptic_weights;
-      bool debug_msgs;
-      activation_functions activation_function;
-  };
+    void set(void);
+    std::vector<double> get_weights()
+    {
+        return synaptic_weights;
+    }
+
+protected:
+private:
+    double bias;
+    unsigned int num_inputs;
+    unsigned int num_output;
+    std::vector<double> input_vector;
+    std::vector<double> output_vector;
+    std::vector<double> synaptic_weights;
+    bool debug_msgs;
+    activation_functions activation_function;
+};
 }
-#endif //_AJA_PROCESSING_PERCEPTRON_HPP_
+#endif //_AJA_PROCESSING_perceptron_HPP_
+
+//Reference : http://www.cse.unsw.edu.au/~cs9417ml/MLP2/
+//http://sydney.edu.au/engineering/it/~comp4302/ann4-6s.pdf
+//http://www.myreaders.info/03_Back_Propagation_Network.pdf
