@@ -7,4 +7,5 @@
 *.json
 *.user
 *.idx
+*.class
 *.*~
