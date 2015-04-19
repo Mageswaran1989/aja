@@ -20,15 +20,14 @@ class Date(y: Int, m: Int, d: Int) extends Ord
       o.day == day && o.month == month && o.year == year
     }
 
-  def <(that: Any): Boolean = 
-    {
-      if (!that.isInstanceOf[Date])
-        error("cannot compare " + that + " and a Date")
-      val o = that.asInstanceOf[Date] 
+  def <(that: Any): Boolean = {
+    if (!that.isInstanceOf[Date])
+      error("cannot compare " + that + " and a Date")
+    val o = that.asInstanceOf[Date] 
       (year < o.year) || 
       (year == o.year && (month < o.month ||
                          (month == o.month && day < o.day)))                          
-    }
+  }
 }
 
 object TestTraits
@@ -41,7 +40,17 @@ object TestTraits
     if (d < d1)
       println ("Date d < d1")
     else
-      println ("Date d > d1")
+     println ("Date d > d1")
+
+    //FunctionX[] type is a Scala triat/interface with single function
+    // apply(). (Int, Int) => Boolean
+    //val lessThan = (a: Int, b: Int) => { def apply(a: Int, b: Int) = a < b }
+    val lessThan = new Function2[Int, Int, Boolean] {
+      def apply(a: Int, b: Int) = a < b
+    }
+
+    val b = lessThan.apply(5, 7)
+    println("Is 5 lessThan 7 : %b".format(b))
   }
 
 }

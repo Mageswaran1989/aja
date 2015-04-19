@@ -15,17 +15,17 @@ object Timer
     while(true)
     {
       callback();
-      Thread sleep 1000 //so called easy way
-      Thread.sleep(1000) //our way
+      Thread sleep 1000; //so called easy way
+      Thread.sleep(1000); //our way
     }
   }
   def timeFlies()
   {
-    println("Time flies like an arrow ----->")
+    println("Time flies like an arrow ----->");
   }
   def main(args: Array[String])
   {
-    oncePerSecond(timeFlies)
+    oncePerSecond(timeFlies);
   }
   
 }
