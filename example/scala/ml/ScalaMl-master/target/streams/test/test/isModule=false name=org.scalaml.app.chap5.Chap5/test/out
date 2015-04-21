@@ -1,0 +1,27 @@
+[0m[[0minfo[0m] [0m[32mChap5:[0m[0m
+[0m[[0minfo[0m] [0m[32m- Chap5 Binomial Naive Bayes (3 seconds, 31 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31mException encountered when attempting to run a suite with class name: org.scalaml.app.chap5.Chap5 *** ABORTED *** (3 seconds, 39 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m  java.lang.ExceptionInInitializerError:[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.Chap5$$anonfun$2.apply(Chap5.scala:58)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.Chap5$$anonfun$2.apply(Chap5.scala:58)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer.apply(Transformer.scala:20)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.FunSuiteLike$$anon$1.apply(FunSuiteLike.scala:158)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Suite$class.withFixture(Suite.scala:1121)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  Cause: java.io.FileNotFoundException: resources/text/lexicon.txt (No such file or directory)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.io.FileInputStream.open(Native Method)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.io.FileInputStream.<init>(FileInputStream.java:146)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.io.Source$.fromFile(Source.scala:90)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.io.Source$.fromFile(Source.scala:75)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.io.Source$.fromFile(Source.scala:53)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.TextBayesEval$.loadLexicon(TextBayesEval.scala:140)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.TextBayesEval$.<init>(TextBayesEval.scala:67)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.TextBayesEval$.<clinit>(TextBayesEval.scala)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.Chap5$$anonfun$2.apply(Chap5.scala:58)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap5.Chap5$$anonfun$2.apply(Chap5.scala:58)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m

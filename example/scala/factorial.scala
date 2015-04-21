@@ -55,3 +55,13 @@ def factorial1(n: Int): Int =
 val fact1 = factorial1(5)
 
 println("Values of fact1 is %d".format(fact1))
+
+def factorial2(n: BigInt): BigInt = {
+    if (n <= 0)                                                                                                           
+      1                                                                                                                   
+    else                                                                                                                  
+      n * factorial2(n-1)                                                               
+} 
+val fact2 = factorial2(30)                                                                                               
+                                                                                                                        
+println("Values of 30! is %d".format(fact2)) 

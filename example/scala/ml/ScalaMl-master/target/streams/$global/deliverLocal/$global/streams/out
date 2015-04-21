@@ -1,0 +1,4 @@
+[0m[[0minfo[0m] [0m:: delivering :: Patrick Nicolas#scalaml_2.10;0.98 :: 0.98 :: release :: Mon Apr 20 20:37:23 IST 2015[0m
+[0m[[0mdebug[0m] [0m	options = status=release pubdate=Mon Apr 20 20:37:23 IST 2015 validate=true resolveDynamicRevisions=true merge=true resolveId=null pubBranch=null[0m
+[0m[[0minfo[0m] [0m	delivering ivy file to /opt/aja/example/scala/ml/ScalaMl-master/target/scala-2.10/ivy-0.98.xml[0m
+[0m[[0mdebug[0m] [0m	deliver done (43ms)[0m

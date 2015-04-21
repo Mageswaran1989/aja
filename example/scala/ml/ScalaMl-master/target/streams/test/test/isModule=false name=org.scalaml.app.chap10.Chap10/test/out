@@ -1,0 +1,13 @@
+[0m[[0minfo[0m] [0m[32mChap10:[0m[0m
+[0m[[0minfo[0m] [0m[31m- Chapter 10 Genetic algorithm *** FAILED *** (262 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m  OK (ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  org.scalatest.exceptions.TestFailedException:[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply$mcVI$sp(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.concurrent.Futures$class.whenReady(Futures.scala:685)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap10.Chap10.whenReady(Chap10.scala:27)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$class.evaluate(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap10.Chap10.evaluate(Chap10.scala:27)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m

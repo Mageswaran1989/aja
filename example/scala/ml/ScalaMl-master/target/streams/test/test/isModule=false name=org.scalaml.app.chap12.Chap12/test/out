@@ -1,0 +1,50 @@
+[0m[[0minfo[0m] [0m[32mChap12:[0m[0m
+[0m[[0minfo[0m] [0m[31m- Chapter 12 Scala parallel collections *** FAILED *** (21 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m  OK (ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  org.scalatest.exceptions.TestFailedException:[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply$mcVI$sp(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$evaluate$1.apply(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.concurrent.Futures$class.whenReady(Futures.scala:685)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12.whenReady(Chap12.scala:30)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$class.evaluate(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12.evaluate(Chap12.scala:30)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m- Chapter 12 Akka actors Master-worker *** FAILED *** (7 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m  The future returned an exception of type: java.lang.ArrayIndexOutOfBoundsException, with message: 0. (ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  org.scalatest.exceptions.TestFailedException:[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$class.evaluate(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12.evaluate(Chap12.scala:30)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12$$anonfun$2.apply(Chap12.scala:44)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12$$anonfun$2.apply(Chap12.scala:44)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  Cause: java.lang.ArrayIndexOutOfBoundsException: 0[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.ActorsManagerEval$.run(ActorsManagerEval.scala:101)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$1.apply(ScalaMlTest.scala:45)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$$anonfun$1.apply(ScalaMlTest.scala:45)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.impl.ExecutionContextImpl$$anon$3.exec(ExecutionContextImpl.scala:107)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[32m- Chapter 12 Akka futures (10 seconds, 889 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m- Chapter 12 Apache Spark MLlib-K-means *** FAILED *** (40 seconds, 76 milliseconds)[0m[0m
+[0m[[0minfo[0m] [0m[31m  A timeout occurred waiting for a future to complete. Queried 161 times, sleeping 250 milliseconds between each query. (ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  org.scalatest.concurrent.Futures$FutureConcept$$anon$1:[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.ScalaMlTest$class.evaluate(ScalaMlTest.scala:47)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12.evaluate(Chap12.scala:30)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12$$anonfun$4.apply(Chap12.scala:52)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalaml.app.chap12.Chap12$$anonfun$4.apply(Chap12.scala:52)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
