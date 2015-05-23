@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -18,6 +11,21 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="true" assert-keyword="true" jdk-15="true">
-    <output url="file://$PROJECT_DIR$/classes" />
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

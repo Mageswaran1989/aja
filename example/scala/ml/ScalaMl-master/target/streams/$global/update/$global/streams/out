@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for Patrick Nicolas#scalaml_2.10;0.98 [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies Patrick Nicolas#scalaml_2.10;0.98->org.scala-lang#scala-library;2.10.4 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@72919bdb[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3dcbeabf[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -18333,13 +18333,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] io.netty#netty;3.6.6.Final!netty.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.spark-project.protobuf#protobuf-java;2.4.1-shaded!protobuf-java.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.uncommons.maths#uncommons-maths;1.2.2a!uncommons-maths.jar[0m
-[0m[[0mdebug[0m] [0m		tried /home/mdhandapani/.ivy2/local/org.json4s/json4s-core_2.10/3.2.6/jars/json4s-core_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.6/json4s-core_2.10-3.2.6.jar[0m
-[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.6/json4s-core_2.10-3.2.6.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.6/json4s-core_2.10-3.2.6.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.6/json4s-core_2.10-3.2.6.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/json4s/json4s-core_2.10/3.2.6/json4s-core_2.10-3.2.6.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.json4s#json4s-core_2.10;3.2.6!json4s-core_2.10.jar (3662ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.json4s#json4s-core_2.10;3.2.6!json4s-core_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.fasterxml.jackson.core#jackson-databind;2.3.0!jackson-databind.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.json4s#json4s-ast_2.10;3.2.6!json4s-ast_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.thoughtworks.paranamer#paranamer;2.6!paranamer.jar[0m
@@ -18369,7 +18363,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.spire-math#spire-macros_2.10;0.7.1!spire-macros_2.10.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 8158ms :: artifacts dl 3847ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3790ms :: artifacts dl 56ms[0m
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 compile produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 runtime produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 test produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-test.xml[0m
@@ -18383,5 +18377,5 @@
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 docs produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 pom produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for Patrick Nicolas#scalaml_2.10;0.98 scala-tool produced in /opt/aja/example/scala/ml/ScalaMl-master/target/resolution-cache/reports/Patrick Nicolas-scalaml_2.10-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (8158ms resolve - 3847ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (3790ms resolve - 56ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
