@@ -1,0 +1,57 @@
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mInitial source changes: [0m
+[0m[[0mdebug[0m] [0m	removed:Set()[0m
+[0m[[0mdebug[0m] [0m	added: Set(/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java)[0m
+[0m[[0mdebug[0m] [0m	modified: Set()[0m
+[0m[[0mdebug[0m] [0mRemoved products: Set()[0m
+[0m[[0mdebug[0m] [0mExternal API changes: API Changes: Set()[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set(/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java)[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m	product: Set()[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java)[0m
+[0m[[0mdebug[0m] [0mRecompiling all 1 sources: invalidated sources (1) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 1 Java source to /opt/aja/example/spark/hello_world/target/scala-2.10/classes...[0m
+[0m[[0mdebug[0m] [0mAttempting to call com.sun.tools.javac.api.JavacTool@1d285324 directly...[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:3: package org.apache.spark.api.java does not exist[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:4: package org.apache.spark does not exist[0m
+[0m[[31merror[0m] [0morg.apache.spark.SparkConf[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:5: package org.apache.spark.api.java.function does not exist[0m
+[0m[[31merror[0m] [0morg.apache.spark.api.java.function.Function[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:8: package org.apache.spark.api.java does not exist[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:9: package org.apache.spark does not exist[0m
+[0m[[31merror[0m] [0morg.apache.spark.SparkConf[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:10: package org.apache.spark.api.java.function does not exist[0m
+[0m[[31merror[0m] [0morg.apache.spark.api.java.function.Function[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:15: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class SparkConf[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mSparkConf[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:15: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class SparkConf[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mSparkConf[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:16: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class JavaSparkContext[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mJavaSparkContext[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:16: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class JavaSparkContext[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mJavaSparkContext[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:17: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class JavaRDD[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mJavaRDD[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:19: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class Function[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mFunction[0m
+[0m[[31merror[0m] [0m/opt/aja/example/spark/hello_world/src/main/java/SimpleApp.java:23: cannot find symbol[0m
+[0m[[31merror[0m] [0m  symbol:   class Function[0m
+[0m[[31merror[0m] [0m  location: class src.main.java.SimpleApp[0m
+[0m[[31merror[0m] [0mFunction[0m
+[0m[[31merror[0m] [0m(compile:[31mcompileIncremental[0m) javac returned nonzero exit code[0m

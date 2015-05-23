@@ -1,21 +1,23 @@
-#include<aja/ann/perceptron.cpp>
+#include <aja/ann/perceptron.hpp>
 
 namespace aja
 {
 
-perceptron::perceptron(const perceptron& other)
-{
-}
+  perceptron::perceptron(const perceptron& other)
+  {
+  }
 
-explicit perceptron::perceptron(void)
-{
-}
+  perceptron::perceptron(void)
+  {
+  }
 
-explicit perceptron::perceptron(unsigned int num_inputs)
-{
-}
+  perceptron::perceptron(unsigned int num_inputs)
+  {
+  }
 
-void perceptron::set(void)
-{
+  void perceptron::set(void)
+  {
     activation_function = HYPERBOLIC_TANGENT_FUNCTION;
+  }
+
 }

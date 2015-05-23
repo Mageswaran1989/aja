@@ -19,35 +19,35 @@
 #define MAX_LAYERS 5
 #define MAX_VECTORS 100
 
-#define TRAINING_FILE "training.dat"
+#define TRAINING_FILE "bp_training.dat"
 #define WEIGHTS_FILE "bp_weights.dat"
 #define OUTPUT_FILE "bp_output.dat"
 #define TEST_FILE "bp_test.dat"
 
-//• void set_training(const unsigned &) Sets the value of the private data member, training; use 1 for
+//void set_training(const unsigned &) Sets the value of the private data member, training; use 1 for
 //training mode, and 0 for test mode.
-//• unsigned get_training_value() Gets the value of the training constant that gives the mode in use.
-//• void get_layer_info() Gets information about the number of layers and layer sizes from the user.
-//• void set_up_network() This routine sets up the connections between layers by assigning pointers
+//unsigned get_training_value() Gets the value of the training constant that gives the mode in use.
+//void get_layer_info() Gets information about the number of layers and layer sizes from the user.
+//void set_up_network() This routine sets up the connections between layers by assigning pointers
 //appropriately.
-//• void randomize_weights() At the beginning of the training process, this routine is used to
+//void randomize_weights() At the beginning of the training process, this routine is used to
 //randomize all of the weights in the network.
-//• void update_weights(const float) As part of training, weights are updated according to the
+//void update_weights(const float) As part of training, weights are updated according to the
 //learning law used in backpropagation.
-//• void write_weights(FILE *) This routine is used to write weights to a file.
-//• void read_weights(FILE *) This routine is used to read weights into the network from a file.
-//• void list_weights() This routine can be used to list weights while a simulation is in progress.
-//• void write_outputs(FILE *) This routine writes the outputs of the network to a file.
-//• void list_outputs() This routine can be used to list the outputs of the network while a simulation is
+//void write_weights(FILE *) This routine is used to write weights to a file.
+//void read_weights(FILE *) This routine is used to read weights into the network from a file.
+//void list_weights() This routine can be used to list weights while a simulation is in progress.
+//void write_outputs(FILE *) This routine writes the outputs of the network to a file.
+//void list_outputs() This routine can be used to list the outputs of the network while a simulation is
 //in progress.
-//• void list_errors() Lists errors for all layers while a simulation is in progress.
-//• void forward_prop() Performs the forward propagation.
-//• void backward_prop(float &) Performs the backward error propagation.
-//• int fill_IObuffer(FILE *) This routine fills the internal IO buffer with data from the training or
+//void list_errors() Lists errors for all layers while a simulation is in progress.
+//void forward_prop() Performs the forward propagation.
+//void backward_prop(float &) Performs the backward error propagation.
+//int fill_IObuffer(FILE *) This routine fills the internal IO buffer with data from the training or
 //test data sets.
-//• void set_up_pattern(int) This routine is used to set up one pattern from the IO buffer for training.
-//• inline float squash(float input) This function performs the sigmoid function.
-//• inline float randomweight (unsigned unit) This routine returns a random weight between –1 and
+//void set_up_pattern(int) This routine is used to set up one pattern from the IO buffer for training.
+//inline float squash(float input) This function performs the sigmoid function.
+//inline float randomweight (unsigned unit) This routine returns a random weight between –1 and
 //1; use 1 to initialize the generator, and 0 for all subsequent calls.
 
 using namespace std;
@@ -170,7 +170,7 @@ inline float randomweight(unsigned init)
     num = rand() % 100;
     return 2 * (float(num/100.00)) - 1;
 }
-// the next function is needed for Turbo C +  +
+// the next function is needed for Turbo C ++
 // and Borland C++ to link in the appropriate
 // functions for fscanf floating point formats:
 static void force_fpf()
@@ -211,13 +211,13 @@ void input_layer::calc_out()
 //-------------------- -
 output_layer::output_layer(int i, int o)
 {
-    num_inputs     =  i;
-    num_outputs      =  o;
-    weights      =  new float[num_inputs * num_outputs];
-    output_errors      =  new float[num_outputs];
-    back_errors      =  new float[num_inputs];
-    outputs      =  new float[num_outputs];
-    expected_values      =  new float[num_outputs];
+    num_inputs      =  i;
+    num_outputs     =  o;
+    weights         =  new float[num_inputs * num_outputs];
+    output_errors   =  new float[num_outputs];
+    back_errors     =  new float[num_inputs];
+    outputs         =  new float[num_outputs];
+    expected_values =  new float[num_outputs];
 
     if ((weights == 0)||(output_errors == 0)||(back_errors == 0)
             ||(outputs == 0)||(expected_values == 0))
@@ -261,7 +261,7 @@ void output_layer::calc_out()
         accumulator = 0;
     }
 }
-void output_layer::calc_error(float & error)
+void output_layer::calc_error(float &error)
 {
     int i, j, k;
     float accumulator = 0;
@@ -277,8 +277,7 @@ void output_layer::calc_error(float & error)
         k = i * num_outputs;
         for (j = 0; j < num_outputs; j++)
         {
-            back_errors[i] =
-                    weights[k + j] * output_errors[j];
+            back_errors[i] = weights[k + j] * output_errors[j];
             accumulator += back_errors[i];
         }
         back_errors[i] = accumulator;
@@ -477,7 +476,7 @@ network::~network()
     delete [/*(i + j) * k*/]buffer;
 }
 
-void network::set_training(const unsigned & value)
+void network::set_training(const unsigned &value)
 {
     training = value;
 }
@@ -579,7 +578,7 @@ void network::randomize_weights()
     int i;
     for (i = 1; i < number_of_layers; i++)
     {
-        ((output_layer  * )layer_ptr[i])->randomize_weights();
+        ((output_layer*)layer_ptr[i])->randomize_weights();
     }
 }
 
@@ -588,25 +587,25 @@ void network::update_weights(const float beta)
     int i;
     for (i = 1; i < number_of_layers; i++)
     {
-        ((output_layer  * )layer_ptr[i])->update_weights(beta);
+        ((output_layer*)layer_ptr[i])->update_weights(beta);
     }
 }
 
-void network::write_weights(FILE  *  weights_file_ptr)
+void network::write_weights(FILE* weights_file_ptr)
 {
     int i;
     for (i = 1; i < number_of_layers; i++)
     {
-        ((output_layer  * )layer_ptr[i])->write_weights(i,weights_file_ptr);
+        ((output_layer*)layer_ptr[i])->write_weights(i,weights_file_ptr);
     }
 }
 
-void network::read_weights(FILE  *  weights_file_ptr)
+void network::read_weights(FILE* weights_file_ptr)
 {
     int i;
     for (i = 1; i < number_of_layers; i++)
     {
-        ((output_layer  * )layer_ptr[i])->read_weights(i,weights_file_ptr);
+        ((output_layer*)layer_ptr[i])->read_weights(i,weights_file_ptr);
     }
 }
 
@@ -616,7 +615,7 @@ void network::list_weights()
     for (i = 1; i < number_of_layers; i++)
     {
         cout  <<  "layer number : "  << i <<  "\n";
-        ((output_layer  * )layer_ptr[i]) ->list_weights();
+        ((output_layer*)layer_ptr[i])->list_weights();
     }
 }
 
@@ -626,7 +625,7 @@ void network::list_outputs()
     for (i = 1; i < number_of_layers; i++)
     {
         cout  <<  "layer number : "  << i <<  "\n";
-        ((output_layer  * )layer_ptr[i])->list_outputs();
+        ((output_layer*)layer_ptr[i])->list_outputs();
     }
 }
 void network::write_outputs(FILE  * outfile)
@@ -750,24 +749,23 @@ void network::backward_prop(float & toterror)
 {
     int i;
     // error for the output layer
-    ((output_layer * )layer_ptr[number_of_layers - 1])->
+    ((output_layer*)layer_ptr[number_of_layers - 1])->
             calc_error(toterror);
     // error for the middle layer(s)
     for (i = number_of_layers - 2; i>0; i--)
     {
-        ((middle_layer * )layer_ptr[i])->
-                calc_error();
+        ((middle_layer*)layer_ptr[i])->calc_error();
     }
 }
 int main()
 {
-    float error_tolerance = 0.1;
-    float total_error = 0.0;
-    float avg_error_per_cycle = 0.0;
-    float error_last_cycle = 0.0;
-    float avgerr_per_pattern = 0.0; // for the latest cycle
-    float error_last_pattern = 0.0;
-    float learning_parameter = 0.02;
+    float error_tolerance       = 0.1;
+    float total_error           = 0.0;
+    float avg_error_per_cycle   = 0.0;
+    float error_last_cycle      = 0.0;
+    float avgerr_per_pattern    = 0.0; // for the latest cycle
+    float error_last_pattern    = 0.0;
+    float learning_parameter    = 0.02;
     unsigned temp, startup;
     long int vectors_in_buffer;
     long int max_cycles;
@@ -777,8 +775,8 @@ int main()
     int i;
     // create a network object
     network backp;
-    FILE  *  training_file_ptr,  *  weights_file_ptr,  *  output_file_ptr;
-    FILE  *  test_file_ptr,  *  data_file_ptr;
+    FILE* training_file_ptr,  *weights_file_ptr,  *output_file_ptr;
+    FILE* test_file_ptr,  *data_file_ptr;
     // open output file for writing
     if ((output_file_ptr = fopen(OUTPUT_FILE,"w")) == NULL)
     {
@@ -794,7 +792,7 @@ int main()
     cout  <<  "------------------------\n";
     cout  <<  "Please enter 1 for TRAINING on, or 0 for off: \n\n";
     cout  <<  "Use training to change weights according to your\n";
-    cout  <<  "expected outputs. Your training.dat file should contain\n";
+    cout  <<  "expected outputs. Your bp_training.dat file should contain\n";
     cout  <<  "a set of inputs and expected outputs. The number of\n";
     cout  <<  "inputs determines the size of the first (input) layer\n";
     cout  <<  "while the number of outputs determines the size of the\n";
@@ -803,15 +801,15 @@ int main()
     if (backp.get_training_value()  ==  1)
     {
         cout  <<  " --> Training mode is  * ON * . weights will be saved\n";
-        cout  <<  "in the file weights.dat at the end of the\n";
+        cout  <<  "in the file bp_weights.dat at the end of the\n";
         cout  <<  "current set of input (training) data\n";
     }
     else
     {
         cout  <<  " --> Training mode is  * OFF * . weights will be loaded\n";
-        cout  <<  "from the file weights.dat and the current\n";
+        cout  <<  "from the file bp_weights.dat and the current\n";
         cout  <<  "(test) data set will be used. For the test\n";
-        cout  <<  "data set, the test.dat file should contain\n";
+        cout  <<  "data set, the bp_test.dat file should contain\n";
         cout  <<  "only inputs, and no expected outputs.\n";
     }
     if (backp.get_training_value() == 1)
@@ -905,7 +903,7 @@ int main()
     //            cycles
     //            is exceeded.
     //            if training is off, go through the input data once. report // outputs
-    //            with inputs to file output.dat
+    //            with inputs to file bf_output.dat
     startup = 1;
     vectors_in_buffer  =  MAX_VECTORS; // startup condition
     total_error  =  0;
@@ -982,7 +980,7 @@ int main()
     } // end main loop
     cout  <<  "\n\n\n\n\n\n\n\n\n\n\n";
     cout  <<  "------------------------\n";
-    cout  <<  " done:  results in file output.dat\n";
+    cout  <<  " done:  results in file bp_output.dat\n";
     cout  <<  " training: last vector only\n";
     cout  <<  " not training: full cycle\n\n";
     if (backp.get_training_value() == 1)
@@ -992,7 +990,7 @@ int main()
         avg_error_per_cycle  =  (float)sqrt((double)total_error/
                                             total_cycles);
         error_last_cycle  =  (float)sqrt((double)error_last_cycle);
-        cout  <<  "weights saved in file weights.dat\n";
+        cout  <<  "weights saved in file bp_weights.dat\n";
         cout  <<  "\n";
         cout  <<  " -->average error per cycle  =  "  <<
                   avg_error_per_cycle  <<  "  <- \n";

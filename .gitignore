@@ -1,6 +1,11 @@
+*.out
+*.toc
 *.aux
 *.log
 *.bak
 *.gz
 *.json
 *.user
+*.idx
+*.class
+*.*~
