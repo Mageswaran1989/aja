@@ -24,6 +24,7 @@ model.userFeatures.count
 
 model.productFeatures.count
 
+// User Recomendations
 // user item
 val predictedRating = model.predict(789, 123)
 
@@ -54,5 +55,33 @@ println(moviesForUser.size)
 moviesForUser.sortBy(-_.rating).take(10).map(rating => (titles(rating.product), rating.rating)).foreach(println)
 
 topKRecs.map(rating => (titles(rating.product), rating.rating)).foreach(println)
+
+//Item Based Recomendations
+
+import org.jblas.DoubleMatrix
+val aMatrix = new DoubleMatrix(Array(1.0, 2.0, 3.0))
+
+def cosineSimilarity(vec1: DoubleMatrix, vec2: DoubleMatrix): Double =
+{
+  vec1.dot(vec2) / (vec1.norm2() * vec2.norm2())
+}
+
+val itemId = 567
+val itemFactor = model.productFeatures.lookup(itemId).head
+val itemVector = new DoubleMatrix(itemFactor)
+cosineSimilarity(itemVector, itemVector)
+
+val sims = model.productFeatures.map{ case (id, factor) =>
+  val factorVector = new DoubleMatrix(factor)
+  val sim = cosineSimilarity(factorVector, itemVector)
+  (id, sim)
+}
+
+// recall we defined K = 10 earlier
+val sortedSims = sims.top(K)(Ordering.by[(Int, Double), Double] { 
+case(id, similarity) => similarity })
+
+println(sortedSims.take(10).mkString("\n))
+
 
 
