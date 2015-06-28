@@ -1,0 +1,15 @@
+[0m[[0minfo[0m] [0mPackaging /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/simple-project_2.10-1.0.jar ...[0m
+[0m[[0mdebug[0m] [0mInput file mappings:[0m
+[0m[[0mdebug[0m] [0m	Post.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/Post.class[0m
+[0m[[0mdebug[0m] [0m	StackTable.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/StackTable.class[0m
+[0m[[0mdebug[0m] [0m	Post$.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/Post$.class[0m
+[0m[[0mdebug[0m] [0m	StackOverflowMain.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/StackOverflowMain.class[0m
+[0m[[0mdebug[0m] [0m	StackOverflowMain$.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/StackOverflowMain$.class[0m
+[0m[[0mdebug[0m] [0m	StackOverflowMain$delayedInit$body.class[0m
+[0m[[0mdebug[0m] [0m	  /opt/aja/scala/example/spark/spark_hello/target/scala-2.10/classes/StackOverflowMain$delayedInit$body.class[0m
+[0m[[0minfo[0m] [0mDone packaging.[0m
