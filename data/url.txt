@@ -1,0 +1,14 @@
+ToDo: comeup with a script to download datasets 
+
+MovieLens:
+http://files.grouplens.org/datasets/movielens/ml-100k.zip
+http://grouplens.org/datasets/movielens/
+
+Kaggle:
+https://www.kaggle.com/c/stumbleupon/data
+$ sed 1d stumbleupon_train.tsv > stumbleupon_train_noheader.tsv
+
+Bike Sharing:
+http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset
+http://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip
+$ sed 1d hour.csv > hour_noheader.csv
