@@ -32,13 +32,16 @@ def dump_stock_codes_to_disk(nse):
     stock_codes_dataframe = DataFrame(stock_codes.items(), columns = ['NSE ID', 'Full Name'])
     stock_codes_dataframe.to_csv('stock_codes.csv')
 
-def toCsv(stock, name):
+def toCsv(stock, name, header=False):
     ts = time.time()
     timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     transposedEntry = DataFrame(stock.values(), index=stock.keys(), columns=[timeStamp])
     entry = transposedEntry.T
     with open(name+".csv", 'a') as file:
-        entry.to_csv(file, header=False)
+        if header:
+           entry.to_csv(file, header=True)
+        else:
+           entry.to_csv(file, header=False)
 
 #################################################################################################
 #Intialize Nse
@@ -47,10 +50,10 @@ nse = Nse()
 stock_name = raw_input("Enter the stock nse id (eg: infy):")
 
 past_stock_value = nse.get_quote(stock_name)
-toCsv(past_stock_value, stock_name)
+toCsv(past_stock_value, stock_name, True)
 
 while True:
-#    time.sleep(1) #assuming this delay will come from network :p
+    time.sleep(1) #assuming this delay will come from network :p
     print "Getting stock value"
     current_stock_value = nse.get_quote(stock_name)
     print current_stock_value["sellPrice1"]
