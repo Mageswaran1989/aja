@@ -35,23 +35,27 @@ def stumpClassify(dataMatrix,dimen,threshVal,threshIneq):#just classify the data
         retArray[dataMatrix[:,dimen] > threshVal] = -1.0
     return retArray
     
-
+# Find the best threshold and lt/gt for all data rows(records) based on each dimension(column)
 def buildStump(dataArr,classLabels,D):
-    dataMatrix = mat(dataArr); labelMat = mat(classLabels).T
+    dataMatrix = mat(dataArr); 
+    labelMat = mat(classLabels).T
     m,n = shape(dataMatrix)
-    numSteps = 10.0; bestStump = {}; bestClasEst = mat(zeros((m,1)))
+    numSteps = 10.0; 
+    bestStump = {}; 
+    bestClasEst = mat(zeros((m,1)))#For each entry the best class entry
     minError = inf #init error sum, to +infinity
     for i in range(n):#loop over all dimensions
-        rangeMin = dataMatrix[:,i].min(); rangeMax = dataMatrix[:,i].max();
+        rangeMin = dataMatrix[:,i].min(); 
+        rangeMax = dataMatrix[:,i].max();
         stepSize = (rangeMax-rangeMin)/numSteps
         for j in range(-1,int(numSteps)+1):#loop over all range in current dimension
             for inequal in ['lt', 'gt']: #go over less than and greater than
                 threshVal = (rangeMin + float(j) * stepSize)
                 predictedVals = stumpClassify(dataMatrix,i,threshVal,inequal)#call stump classify with i, j, lessThan
                 errArr = mat(ones((m,1)))
-                errArr[predictedVals == labelMat] = 0
+                errArr[predictedVals == labelMat] = 0 # set same values to 0
                 weightedError = D.T*errArr  #calc total error multiplied by D
-                #print "split: dim %d, thresh %.2f, thresh ineqal: %s, the weighted error is %.3f" % (i, threshVal, inequal, weightedError)
+                print "split: dim %d, thresh %.2f, thresh ineqal: %s, the weighted error is %.3f" % (i, threshVal, inequal, weightedError)
                 if weightedError < minError:
                     minError = weightedError
                     bestClasEst = predictedVals.copy()
@@ -59,9 +63,19 @@ def buildStump(dataArr,classLabels,D):
                     bestStump['thresh'] = threshVal
                     bestStump['ineq'] = inequal
     return bestStump,minError,bestClasEst
-
-
+ 
+'''
+ import adaboost
+ from numpy import *
+ datMat,classLabels=adaboost.loadSimpData()
+ D = mat(ones((5,1))/5)
+ adaboost.buildStump(datMat,classLabels,D)
+ classifierArray = adaboost.adaBoostTrainDS(datMat,classLabels,9)
+ 
+ dataArr,classLabels,numIt = datMat,classLabels,9
+'''
 def adaBoostTrainDS(dataArr,classLabels,numIt=40):
+ #   import ipdb; ipdb.set_trace() # add breakpoint and step in
     weakClassArr = []
     m = shape(dataArr)[0]
     D = mat(ones((m,1))/m)   #init D to all equal
@@ -83,7 +97,9 @@ def adaBoostTrainDS(dataArr,classLabels,numIt=40):
         errorRate = aggErrors.sum()/m
         print "total error: ",errorRate
         if errorRate == 0.0: break
-    return weakClassArr
+    #return weakClassArr
+    return weakClassArr,aggClassEst
+
 
 def adaClassify(datToClass,classifierArr):
     dataMatrix = mat(datToClass)#do stuff similar to last aggClassEst in adaBoostTrainDS
@@ -96,7 +112,11 @@ def adaClassify(datToClass,classifierArr):
         aggClassEst += classifierArr[i]['alpha']*classEst
         print aggClassEst
     return sign(aggClassEst)
-
+'''
+adaboost.plotROC(aggClassEst.T,labelArr)
+classifierArray,aggClassEst = adaboost.adaBoostTrainDS(datArr,labelArr,10)
+adaboost.plotROC(aggClassEst.T,labelArr)
+'''
 def plotROC(predStrengths, classLabels):
     import matplotlib.pyplot as plt
     cur = (1.0,1.0) #cursor
