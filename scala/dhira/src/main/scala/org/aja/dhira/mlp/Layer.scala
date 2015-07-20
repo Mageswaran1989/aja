@@ -18,7 +18,7 @@ import org.aja.dhira.utils.FormatUtils
  * @since July 19, 2015
  * @note Aja dhira project
  */
-class Layer(id: Int, length: Int) {
+class Layer(val id: Int, val length: Int) {
 
   val output = new DoubleList(length)
   val delta = new DoubleList(length)
@@ -27,12 +27,12 @@ class Layer(id: Int, length: Int) {
   output.update(0, 1.0)
 
   def setInput(_x: DoubleList): Unit = {
-    require(!_x.isEmpty, s"Layer.set cannot intialize this layer $id with undefined data")
+    require(!_x.isEmpty, s"Layer.set cannot initialize this layer $id with undefined data")
     _x.copyToArray(output, 1)
   }
 
   final def sse(labels: DoubleList): Double = {
-    require(!labels.isEmpty, s"Lables/Target cannot be empty!")
+    require(!labels.isEmpty, s"Label/Target cannot be empty!")
     require(labels.length == output.length /*+ 1*/, s"Label/Target size != Output size")
 
     var _sse = 0.0
@@ -49,7 +49,7 @@ class Layer(id: Int, length: Int) {
   def isOutputLayer(lastLayerId: Int): Boolean =  id == lastLayerId
 
   override def toString: String = {
-    var buf = new StringBuilder
+    val buf = new StringBuilder
 
     buf.append(s"\nLayer: $id \n output: \t delta\n")
     output.drop(1).zip(delta).foreach(x => buf.append(s"${FormatUtils.format(x,"", FormatUtils.ShortFormat)}\n"))
