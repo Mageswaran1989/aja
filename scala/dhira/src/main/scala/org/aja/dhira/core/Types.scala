@@ -14,7 +14,4 @@ object Types {
   //List of data of type double for each neuron
   type DoubleList = Array[Double]
 
-  //Represents test points with their label/output
-  case class LabeledPoint(label: Double, points: Double*)
-
 }

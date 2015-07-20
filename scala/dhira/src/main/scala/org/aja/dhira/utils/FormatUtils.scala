@@ -78,6 +78,11 @@ object FormatUtils {
   object ShortFormatRoundingError extends FormatType("%8s", "#,##0.000", ROUNDING_ERROR)
 
   /**
+   * Medium format as 6.004912491 => 6.00491
+   */
+  object MediumFormat extends FormatType("%11s", "#,##0.00000")
+
+  /**
    * Method to format a single floating point value using a given format
    * @param x value of type Double
    * @param label for y-Axis or values
