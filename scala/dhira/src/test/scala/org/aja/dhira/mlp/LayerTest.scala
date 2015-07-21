@@ -1,4 +1,7 @@
 package org.aja.dhira.mlp
+
+import org.scalatest.FeatureSpec
+
 /**
  * Created by mageswaran on 19/7/15.
  */

@@ -1,7 +1,7 @@
 package org.aja.dhira.mlp
 
 import org.aja.dhira.core.Types.DoubleList
-import org.scalaml.util.FileUtils
+import org.aja.dhira.utils.FileUtils
 
 /**
  * <p>Define the model trait for classification and optimization algorithms.</p>
@@ -9,14 +9,14 @@ import org.scalaml.util.FileUtils
  * @since March 4, 2014
  * @note Scala for Machine Learning Chapter 2 Hello World!
  */
-trait Model {
+trait ModelTrait {
   /**
    * Write the model parameters associated to this object into a file
    * @param content to write into a file
    * @return true if the write operation is successful, false otherwise
    */
   protected def write(content: String): Boolean  =
-    FileUtils.write(content, Model.RELATIVE_PATH, getClass.getSimpleName)
+    FileUtils.write(content, ModelTrait.RELATIVE_PATH, getClass.getSimpleName)
 
   /**
    * This operation or method has to be overwritten for a model to be saved into a file
@@ -32,7 +32,7 @@ trait Model {
  * @since March 4, 2014
  * @note Scala for Machine Learning Chapter 2 Hello World!
  */
-object Model {
+object ModelTrait {
   private val RELATIVE_PATH = "models/"
   /**
    * Read this model parameters from a file defined as <b>models/className</b>
@@ -68,7 +68,7 @@ final protected class Model(
                                 config: Config,
                                 nInputs: Int,
                                 nOutputs: Int)
-                              (implicit val mlpObjective: MLP.MLPObjective) extends Model {
+                              (implicit val mlpObjective: MLPMain.Objective) extends ModelTrait {
 
   import Model._
 
@@ -118,7 +118,7 @@ final protected class Model(
    */
   def trainEpoch(x: DoubleList, y: DoubleList): Double = {
     // Initialize the input layer
-    inLayer.set(x)
+    inLayer.setInput(x)
     // Apply the forward progapation of input to all the connections
     // starting with the input layer
     connections.foreach( _.connectionForwardPropagation)
@@ -159,7 +159,7 @@ final protected class Model(
    */
   def getOutput(x: DoubleList): DoubleList = {
     require( !x.isEmpty, "Model.getOutput Input values undefined")
-    inLayer.set(x)
+    inLayer.setInput(x)
 
     // Apply the forward propagation with an input vector ...
     connections.foreach( _.connectionForwardPropagation)

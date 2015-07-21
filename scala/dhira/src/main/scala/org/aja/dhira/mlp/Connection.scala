@@ -1,9 +1,5 @@
 package org.aja.dhira.mlp
 
-import org.aja.dhira.core.Types.DoubleList
-import org.aja.dhira.mlp.Layer
-import org.aja.dhira.mlp.Config
-import org.aja.dhira.mlp.MLP
 import org.aja.dhira.utils.FormatUtils
 
 import scala.util.Random
@@ -27,7 +23,7 @@ final protected class Connection(
                                      config: Config,
                                      src: Layer,
                                      dst: Layer)
-                                   (implicit mlpObjective: MLP.Objective)  {
+                                   (implicit mlpObjective: MLPMain.Objective)  {
   import Connection._
 
   /**

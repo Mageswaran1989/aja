@@ -106,7 +106,7 @@ object Config {
     new Config(alpha, eta, Array[Int](numHiddenNeurons), numEpochs, eps, activation)
 
   /**
-   * Constructor for the MLP class with a logistic function as activation
+   * Constructor for the MLPMain class with a logistic function as activation
    * @param alpha  Momentum parameter used to adjust the value of the gradient of the weights
    * with previous value (smoothing)
    * @param eta   Learning rate ]0, 1] used in the computation of the gradient of the weights

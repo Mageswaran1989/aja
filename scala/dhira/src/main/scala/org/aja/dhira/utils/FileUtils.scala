@@ -1,10 +1,10 @@
 package org.aja.dhira.utils
 
-import org.apache.log4j.Logger
+//import org.apache.log4j.Logger
 
 import scala.io.Source._
 import scala.util.{Try, Success, Failure}
-import org.apache.log4j.Logger
+//import org.apache.log4j.Logger
 
 /**
  * Basic utility singleton to read and write content from and to a file
@@ -13,22 +13,22 @@ import org.apache.log4j.Logger
  * @note Scala for Machine Learning
  */
 object FileUtils {
-  private val logger = Logger.getLogger("FileUtils")
+  //private val logger = Logger.getLogger("FileUtils")
 
   /**
    * Read the content of a file as a String
-   * @param pathName Name of the file to read the content form
+   * @param toFile Name of the file to read the content form
    * @param className Name of the class to read from
    * @return Content of the file if successful, None otherwise
    */
   def read(toFile: String, className: String): Option[String]=Try(fromFile(toFile).mkString) match {
     case Success(content) => Some(content)
-    case Failure(e) => DisplayUtils.none(s"$className.<< failed for $toFile", logger, e)
+    case Failure(e) => None //DisplayUtils.none(s"$className.<< failed for $toFile", logger, e)
   }
 
   /**
    * Write the content into a file. The content is defined as a string.
-   * @param conntent content to write into a file
+   * @param content content to write into a file
    * @param pathName Name of the file to read the content form
    * @param className Name of the class to read from
    * @return true is successful, false otherwise
@@ -46,13 +46,13 @@ object FileUtils {
     match {
       // Catch and display exception description and return false
       case Failure(e) => {
-        DisplayUtils.error(s"$className.write failed for $pathName", logger, e)
+        //DisplayUtils.error(s"$className.write failed for $pathName", logger, e)
 
         if( printWriter != None) {
           Try(printWriter.map(_.close) ) match {
             case Success(res) => res
             case Failure(e) =>
-              DisplayUtils.error(s"$className.write Failed for $pathName", logger, e)
+              None //DisplayUtils.error(s"$className.write Failed for $pathName", logger, e)
           }
         }
       }

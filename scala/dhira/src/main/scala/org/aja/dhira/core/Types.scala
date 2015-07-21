@@ -13,5 +13,9 @@ object Types {
 
   //List of data of type double for each neuron
   type DoubleList = Array[Double]
+  type DVector[T] = Array[T]
+
+  type DMatrix[T] = Array[Array[T]]
+  type DblMatrix = DMatrix[Double]
 
 }
