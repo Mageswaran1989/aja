@@ -1,9 +1,4 @@
-# Aja
-
-A library with a Brain! Thus said, what we are trying is, to create a C++/Java based library that incorporates Artificial Neural Networks and Fuzzy Logic which can measure/get any kind of data and analyse it to make some sense out of it.
-
-With possible contributions Aja would be able to include other programming languages and library support.
-
+# AJA - Accomplish Joyfull Adventures
 ## Etymology
 - Unborn or uncreated
 - Existing from all eternity
@@ -26,8 +21,8 @@ With possible contributions Aja would be able to include other programming langu
 - OpenCL
 - Boost Compute
 - vexCL
-- ROS
 - Qt for GUI
+- Spark
 
 ##Sensors
 - As on demand
@@ -36,6 +31,7 @@ With possible contributions Aja would be able to include other programming langu
 - CMake
 - Latex 
 - R
+- Latex
 
 ##Build Environment
 Linux Ubuntu 12.04+
@@ -44,7 +40,6 @@ Linux Ubuntu 12.04+
 - [aja](https://github.com/Mageswaran1989/aja)
 - [compute](https://github.com/kylelutz/compute)
 - [vexcl](https://github.com/ddemidov/vexcl)
-- [ros](www.ros.org)
 
 ##Wiki
 https://github.com/Mageswaran1989/aja/wiki
@@ -56,4 +51,3 @@ https://github.com/Mageswaran1989/aja/wiki
 **Let us begin our jouney from here!**
 > *Contact: mageswaran1989@gmail.com*
 
-# ** MADE IN INDIA  **

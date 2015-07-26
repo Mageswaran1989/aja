@@ -47,8 +47,8 @@ def download_file(url, desc=None):
 
     return filename
 
-#url = "http://files.grouplens.org/datasets/movielens/ml-100k.zip"
-url = "http://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
+url = "http://files.grouplens.org/datasets/movielens/ml-100k.zip"
+#url = "http://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
 filename = download_file(url)
 print(filename)
 
