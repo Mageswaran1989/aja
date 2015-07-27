@@ -20,23 +20,23 @@ import org.aja.dhira.utils.FormatUtils
  */
 class Layer(val id: Int, val length: Int) {
 
-  val output = new DoubleList(length)
+  val data = new DoubleList(length)
   val delta = new DoubleList(length)
 
   //Set bias element weight as 1
-  output.update(0, 1.0)
+  data.update(0, 1.0)
 
-  def setInput(_x: DoubleList): Unit = {
+  def setData(_x: DoubleList): Unit = {
     require(!_x.isEmpty, s"Layer.set cannot initialize this layer $id with undefined data")
-    _x.copyToArray(output, 1)
+    _x.copyToArray(data, 1)
   }
 
   final def sse(labels: DoubleList): Double = {
     require(!labels.isEmpty, s"Label/Target cannot be empty!")
-    require(labels.length == output.length /*+ 1*/, s"Label/Target size != Output size")
+    require(labels.length == data.length + 1, s"Label/Target size != Output size")
 
     var _sse = 0.0
-    output.drop(1).zipWithIndex.foreach{case(predictedOutput, index) => {
+    data.drop(1).zipWithIndex.foreach{case(predictedOutput, index) => {
       val error: Double = labels(index) - predictedOutput
       delta.update(index+1, predictedOutput * (1.0 - predictedOutput) * error)
       _sse += error * error
@@ -52,7 +52,7 @@ class Layer(val id: Int, val length: Int) {
     val buf = new StringBuilder
 
     buf.append(s"\nLayer: $id \n output: \t delta\n")
-    output.drop(1).zip(delta).foreach(x => buf.append(s"${FormatUtils.format(x,"", FormatUtils.ShortFormat)}\n"))
+    data.drop(1).zip(delta).foreach(x => buf.append(s"${FormatUtils.format(x,"", FormatUtils.ShortFormat)}\n"))
     buf.toString.substring(0, buf.length-1)
   }
 }

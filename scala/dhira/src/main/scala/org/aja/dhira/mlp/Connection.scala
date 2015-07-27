@@ -50,7 +50,7 @@ final protected class Connection(
     // Iterates over all the synapsed except the first or bian selement
     val _output = synapses.drop(1).map(x => {
       // Compute the dot product
-      val sum = x.zip(src.output).foldLeft(0.0)((s, xy) => s + xy._1._1 * xy._2)
+      val sum = x.zip(src.data).foldLeft(0.0)((s, xy) => s + xy._1._1 * xy._2)
 
       // Applies the activation function if this is a hidden layer (not output)
       if(!isOutLayer) config.activation(sum) else sum
@@ -58,7 +58,7 @@ final protected class Connection(
 
     // Apply the objective function (SoftMax,...) to the output layer
     val out = if(isOutLayer) mlpObjective(_output) else _output
-    out.copyToArray(dst.output, 1)
+    out.copyToArray(dst.data, 1)
   }
 
   /**
@@ -83,7 +83,7 @@ final protected class Connection(
 
       // The delta value is computed as the derivative of the
       // output value adjusted for the back-propagated error, err
-      src.delta(i) =  src.output(i)* (1.0- src.output(i))*err
+      src.delta(i) =  src.data(i)* (1.0- src.data(i))*err
     })
 
 
@@ -99,7 +99,7 @@ final protected class Connection(
       // Compute all the synapses (weight, gradient weight) between
       // the destination elements (index i) and the source elements (index j)
       Range(0, src.length).foreach(j => {
-        val _output = src.output(j)
+        val _output = src.data(j)
         val oldSynapse = synapses(i)(j)
         // Compute the gradient with the delta
         val grad = config.eta*delta*_output

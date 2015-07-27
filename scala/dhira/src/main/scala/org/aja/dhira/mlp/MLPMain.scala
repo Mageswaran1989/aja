@@ -37,9 +37,14 @@ import LabeledPoint._
  * @note Scala for Machine Learning Chapter 9 Artificial Neural Network /
  * Multilayer perceptron/Training cycle/epoch
  */
-final protected class MLPMain[T]( config: Config,
-                              xt: LabeledPoint[Array[T]],
-                              labels: DblMatrix)(implicit ev1: T => Double, Objective: MLPMain.Objective) /*extends PipeOperator[Array[T], DoubleList]*/ {
+//final protected class MLPMain[T]( config: Config,
+//                              xt: LabeledPoint[Array[T]],
+//                              labels: DblMatrix)(implicit ev1: T => Double, Objective: MLPMain.Objective) /*extends PipeOperator[Array[T], DoubleList]*/ {
+final protected class MLPMain[T <% Double](
+                                        config: Config,
+                                        xt: LabeledPoint[Array[T]],
+                                        labels: DblMatrix)
+                                      (implicit mlpObjective: MLPMain.Objective) {
   import MLPMain._
 
   check(xt, labels)
@@ -55,8 +60,8 @@ final protected class MLPMain[T]( config: Config,
    * evaluating the value of the state variable converge and perform a validation run
    */
   val model: Option[Model] = train match {
-    case Success(_model) => Some(_model)
-    case Failure(e) => None // DisplayUtils.none("MLPMain.model ", logger, e)
+    case Success(_model) => { println("TRaining success!"); Some(_model) }
+    case Failure(e) => { println("TRaining failed!"); None } // DisplayUtils.none("MLPMain.model ", logger, e)
   }
 
 
@@ -97,50 +102,55 @@ final protected class MLPMain[T]( config: Config,
    * validate the data point
    * @return accuracy value [0, 1] if model exits, None otherwise
    */
-//  final def accuracy(threshold: Double): Option[Double] = model.map(m =>  {
-//
-//    // counts the number of data points for were correctly classified
-//    val nCorrects = xt.toArray.zip(labels)
-//      .foldLeft(0)((s, xtl) =>  {
-//
-//      // Get the output layer for this input xt.
-//      val output = model.get.getOutput(xtl._1)
-//
-//      // Compute the sum of squared error while excluding bias element
-//      val _sse = xtl._2.zip(output.drop(1))
-//        .foldLeft(0.0)((err,tp) => {
-//        val diff= tp._1 - tp._2
-//        err + diff*diff
-//      })*0.5
-//
-//      // Compute the least square error and adjusts it for the number of output variables.
-//      val error = Math.sqrt(_sse)/(output.size -1)
-//      if( error < threshold) s + 1 else s
-//    })
-//
-//    // returns the percentage of observations correctly classified
-//    nCorrects.toDouble/xt.size
-//  })
+  final def accuracy(threshold: Double): Option[Double] = model.map(m =>  {
+
+    // counts the number of data points for were correctly classified
+    val nCorrects = xt.toArray.zip(labels)
+      .foldLeft(0)((s, xtl) =>  {
+
+      // Get the output layer for this input xt.
+      val output = model.get.getOutput(xtl._2) //should be ._1
+
+      // Compute the sum of squared error while excluding bias element
+      val _sse = xtl._2.zip(output.drop(1))
+        .foldLeft(0.0)((err,tp) => {
+        val diff= tp._1 - tp._2
+        err + diff*diff
+      })*0.5
+
+      // Compute the least square error and adjusts it for the number of output variables.
+      val error = Math.sqrt(_sse)/(output.size -1)
+      if( error < threshold) s + 1 else s
+    })
+
+    // returns the percentage of observations correctly classified
+    nCorrects.toDouble/xt.size
+  })
 
   /*
    * Training method for the Multi-layer perceptron
    */
   private def train: Try[Model] = {
     Try {
-      val _model = new Model(config, xt(0).size, labels(0).size)(Objective)
-//
-//      // Scaling or normalization factor for the sum of the squared error
-//      val errScale = 1.0/(labels(0).size*xt.size)
-//
-//      // Apply the exit condition for this online training strategy
-//      // The convergence criteria selected is the reconstruction error
-//      // generated during an epoch adjusted to the scaling factor and compare
-//      // to the predefined criteria config.eps
-//      converged = Range(0, config.numEpochs).find( _ => {
-//        xt.toArray.zip(labels).foldLeft(0.0)( (s, xtlbl) =>
-//          s + _model.trainEpoch(xtlbl._1, xtlbl._2)
-//        )*errScale < config.eps
-//      }) != None
+      val _model = new Model(config, xt(0).size, labels(0).size)(mlpObjective)
+
+      // Scaling or normalization factor for the sum of the squared error
+      val errScale = 1.0/(labels(0).size*xt.size)
+
+      // Apply the exit condition for this online training strategy
+      // The convergence criteria selected is the reconstruction error
+      // generated during an epoch adjusted to the scaling factor and compare
+      // to the predefined criteria config.eps
+      println("Testing train method\n")
+      val v = xt.toArray
+      v.foreach(println)
+      converged = Range(0, config.numEpochs).find( _ =>
+        {
+
+          xt.toArray.zip(labels).foldLeft(0.0)(
+              (s, xtlbl) =>  s + _model.trainEpoch(xtlbl._2, xtlbl._2)
+            )*errScale < config.eps
+      }) != None
       _model
     }
   }

@@ -12,8 +12,9 @@ object Types {
   type Synapses = (Double, Double)
 
   //List of data of type double for each neuron
-  type DoubleList = Array[Double]
   type DVector[T] = Array[T]
+  type DoubleList = Array[Double]
+  type DblVector = Array[Double]
 
   type DMatrix[T] = Array[Array[T]]
   type DblMatrix = DMatrix[Double]

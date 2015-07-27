@@ -1,6 +1,6 @@
 package org.aja.dhira.core
 
-import org.aja.dhira.core.Types.{DoubleList,DblMatrix}
+import org.aja.dhira.core.Types.{DVector, DoubleList, DblMatrix, DblVector}
 import org.aja.dhira.statistics.Statistics
 
 import scala.annotation.implicitNotFound
@@ -8,31 +8,61 @@ import scala.language.implicitConversions
 import scala.reflect.ClassTag
 import scala.util.{Try, Success, Failure}
 
+///**
+// * <p> Inspired by Apache Spark LabeledPoint with some extra cheese</p>
+// */
+//class LabeledPoint[T](val label: String, array:Array[T]) {
+//  require(array.nonEmpty, "LabeledPoint cannot be created with undefined values")
+
+
 /**
- * <p> Inspired by Apache Spark LabeledPoint with some extra cheese</p>
+ * <p>Generic class for time series. Any type from different libraries are converted into
+ * this generic type to avoid multiple conversion between numerous types.
+ * The class is parameterized so it can take primitive types to create vector for single
+ * variable time series or arrays/list to create matrix for multiple variables time series.</p>		 *
+ * @constructor Create a new parameterized time series XTSeries[T] with a label(id) and
+ * an array of values:
+ * @throws IllegalArgumentException If the array of values, arr is undefined
+ * @param label Name for the time series (optional)
+ * @param arr Array of values of the parameterized T
+ *
+ * @author Patrick Nicolas
+ * @since January, 22, 2014
+ * @note Scala for Machine Learning Chapter 3 Data pre-processing / Time series
  */
-class LabeledPoint[T](val label: String, array:Array[T]) {
-  require(array.nonEmpty, "LabeledPoint cannot be created with undefined values")
+class LabeledPoint[T](val label: String, arr: Array[T]) {
+  import LabeledPoint._
+  require( !arr.isEmpty, "XTSeries Cannot create a times series with undefined values")
 
-  final def toArray: Array[T] = array
-  final def toList: List[T] = array.toList
+  final def toArray: Array[T] = arr
+  final def toList: List[T] = arr.toList
 
-  final def head: T = array.head
-  final def last: T = array.last
+  final def head: T = arr.head
+  final def last: T = arr.last
 
-  final val size: Int = array.size
-
-//  @inline
-//  final def isEmpty: Boolean = array.isEmpty
-
+  /**
+   * Test if a time series is identical to this time series. The label is not included
+   * in the comparison.
+   * @param that other series  this series is compared to
+   * @throws IllegalArgumenException if the other time series is undefined
+   * @return true if the series are identical, false if the other time series, 'that' is null
+   * or is different from this time series
+   */
   def == (that: LabeledPoint[T]): Boolean = {
-    require(!that.isEmpty, "LabeledPoint.== cannot comapare with unidentified labelpoint series")
-    size == that.size && array.equals(that.toArray)
+    require( !that.isEmpty,
+      "XTSeries.== Cannot compare this time series with undefined time series")
+    size == that.size && arr.equals(that.toArray)
   }
 
 
-  @implicitNotFound("Conversion from type T to DoubleList is undefined")
-  def toDoubleList(implicit f: T => Double): DoubleList = array.map(f(_))
+  /**
+   * <p>Convert a this time series into a vector of Double floating point values.</p>
+   * @param f  implicit conversion of type T to Double
+   * @return Vector of double values (DblVector)
+   * @throws implicitNotFound if the implicit conversion is undefined
+   */
+  @implicitNotFound("Conversion from type T to DblVector undefined")
+  def toDblVector(implicit f: T => Double): DblVector = arr.map( f( _ ) )
 
   /**
    * <p>Convert a this time series into a matrix of Double floating point values.</p>
@@ -41,122 +71,156 @@ class LabeledPoint[T](val label: String, array:Array[T]) {
    * @throws implicitNotFound if the implicit conversion is undefined
    */
   @implicitNotFound("Conversion from type T to DblMatrix undefined")
-  def toDblMatrix(implicit fv: T => DoubleList): DblMatrix = array.map( fv( _ ) )
+  def toDblMatrix(implicit fv: T => DblVector): DblMatrix = arr.map( fv( _ ) )
 
-
-  def + (n: Int, t: T)(implicit f: (T, T)=> T) = f(array(n), t)
+  def + (n: Int, t: T)(implicit f: (T,T) => T): T = f(arr(n), t)
 
   @inline
-  def tail: LabeledPoint[T] = new LabeledPoint[T](label, array.tail)
+  def tail: LabeledPoint[T] = new LabeledPoint(label, arr.tail)
 
-  def take(n: Int): LabeledPoint[T] = new LabeledPoint[T](label, array.take(n))
-  def takeRight(n: Int): LabeledPoint[T] = new  LabeledPoint[T](label, array.takeRight(n))
+  def take(n: Int): LabeledPoint[T] = new LabeledPoint(label, arr.take(n))
+  def takeRight(n: Int): LabeledPoint[T] = new LabeledPoint(label, arr.takeRight(n))
 
-  def drop(n: Int): LabeledPoint[T] = new LabeledPoint[T](label, array.drop(n))
-  def dropRight(n: Int): LabeledPoint[T] = new LabeledPoint[T](label, array.dropRight(n))
+  def drop(n: Int): LabeledPoint[T] = new LabeledPoint(label, arr.drop(n))
 
-  def map[U: ClassTag](f: T => U): LabeledPoint[U] = new LabeledPoint[U](label, array.map(f(_)))
+  def dropRight(n: Int): LabeledPoint[T] = new LabeledPoint(label, arr.dropRight(n))
 
-  def apply(n: Int): T = array.apply(n)
+  def map[U: ClassTag](f: T => U): LabeledPoint[U] = new LabeledPoint[U](label, arr.map(f(_)))
 
-  def zip[U](that: LabeledPoint[U]): LabeledPoint[(T, U)] = LabeledPoint[(T,U)](array.zip(that.toArray))
+  def apply(n: Int): T = arr.apply(n)
+
+
+  def zip[U](that: LabeledPoint[U]): LabeledPoint[(T, U)] = LabeledPoint[(T,U)](arr.zip(that.toArray))
 
   def slice(start: Int, end: Int): LabeledPoint[T] = {
-    require(start < array.size && end <= array.size && start < end,
-      s"LabeledPoint.slice starting $start or ending $end index incorrect")
-    new LabeledPoint[T](label, array.slice(start, end))
+    require(start < arr.size && end <= arr.size && start < end,
+      s"XTSeries.slice starting $start or ending $end index incorrect")
+    new LabeledPoint[T](label, arr.slice(start, end))
   }
 
   @inline
   final def isEmpty: Boolean = size == 0
 
-  final def max(implicit cmp: Ordering[T]): T = array.max
+  final def max(implicit cmp: Ordering[T]): T = arr.max
 
 
-  final def min(implicit cmp: Ordering[T]): T = array.min
+  final def min(implicit cmp: Ordering[T]): T = arr.min
 
 
-  override def toString: String =  array.mkString("\n")
+  override def toString: String =  arr.mkString("\n")
 
-  def foreach( f: T => Unit) = array.foreach(f)
+  final val size: Int = arr.size
 
-  def sortWith(lt: (T,T)=>Boolean): LabeledPoint[T] = LabeledPoint[T](label, array.sortWith(lt))
+  def foreach( f: T => Unit) = arr.foreach(f)
 
-  def zipWithIndex: LabeledPoint[(T, Int)] = LabeledPoint[(T, Int)](label, array.zipWithIndex)
+  def sortWith(lt: (T,T)=>Boolean): LabeledPoint[T] = LabeledPoint[T](label, arr.sortWith(lt))
 
-  def foldLeft[U](z: U)(op: (U, T)=> U): U = array.foldLeft(z)(op)
+  def zipWithIndex: LabeledPoint[(T, Int)] = LabeledPoint[(T, Int)](label, arr.zipWithIndex)
 
+  def foldLeft[U](z: U)(op: (U, T)=> U): U = arr.foldLeft(z)(op)
+}
+
+
+/**
+ * <p>Class that defines a time series for multi-dimensional variables. The class is created
+ * for the purpose to encapsulate the normalization of the multi-dimensional time series.</p>
+ * @param label Name for the time series (optional)
+ * @param arr Array of values of the parameterized T
+ * @constructor Create a multidimensional time series
+ * @throws IllegalArgumentException If the array of values, arr is undefined
+ * @author Patrick Nicolas
+ * @since January, 22, 2014
+ * @note Scala for Machine Learning
+ */
+@implicitNotFound("Conversion from type T to Double undefined")
+final class VTSeries[T](
+                         label: String,
+                         arr: Array[DVector[T]])
+                       (implicit f: T => Double) extends LabeledPoint[Array[T]](label, arr) {
+
+  /**
+   * <p>Normalize this multi-dimensional time series
+   * @return Normalized values as an array or vectors (DblMatrix)
+   */
+  def normalize(implicit ordering: Ordering[T]): DblMatrix = {
+    val minMax  = toArray.map(x => (x.min, x.max))
+
+    toArray.zip(minMax).map(z => {
+      val range = z._2._2 - z._2._1
+      z._1.map(y => (y -z._2._1)/range)
+    })
+  }
 }
 
 
 /**
  * <p>Companion object for time series, that define constructors and most
  * common implicit conversions.</p>
- * @author Mageswaran
+ * @author Patrick Nicolas
  * @since January, 22, 2014
  * @note Scala for Machine Learning Chapter 3 Data pre-processing / Time series
  */
 object LabeledPoint {
-//  private val logger = Logger.getLogger("LabeledPoint")
+  //private val logger = Logger.getLogger("XTSeries")
 
   type DblSeries = LabeledPoint[Double]
-  type DblVecSeries = LabeledPoint[DoubleList]
+  type DblVecSeries = LabeledPoint[DblVector]
 
   final val EPS = 1-20
 
   /**
-   * Constructor for LabeledPoint with a predefined label and array of elements (or data points)
+   * Constructor for XTSeries with a predefined label and array of elements (or data points)
    * @param label Name for the time series (optional)
    * @param arr Array of values of the parameterized T
    */
   def apply[T](label: String, arr: Array[T]): LabeledPoint[T] = new LabeledPoint[T](label, arr)
 
-
   /**
-   * Constructor for LabeledPoint with a predefined list of elements (or data points)
+   * Constructor for XTSeries with a predefined array of elements (or data points)
    * @param arr Array of values of the parameterized T
    */
   def apply[T](arr: Array[T]): LabeledPoint[T] = new LabeledPoint[T]("", arr)
 
   /**
-   * Constructor for LabeledPoint with a predefined array of elements (or data points)
-   * @param xs Array of values of the parameterized T
+   * Constructor for XTSeries with a predefined list of elements (or data points)
+   * @param label Name for the time series (optional)
+   * @param arr Array of values of the parameterized T
    */
   def apply[T: ClassTag](xs: List[T]): LabeledPoint[T] = new LabeledPoint[T]("", xs.toArray)
 
   /**
-   * Implicit conversion of a vector and label to a LabeledPoint
+   * Implicit conversion of a vector and label to a XTSeries
    * @param label label for the time series
    * @param v vector to convert
    */
-  implicit def LabeledPoint[T: ClassTag](label: String, v: Vector[T]) =
+  implicit def labeledPoint[T: ClassTag](label: String, v: Vector[T]) =
     new LabeledPoint[T](label, v.toArray)
 
   /**
-   * Implicit conversion of a list to LabeledPoint
+   * Implicit conversion of a list to XTSeries
    * @param xs List to convert
    */
-  implicit def LabeledPoint[T: ClassTag](xs: List[T]): LabeledPoint[T] =
+  implicit def labeledPoint[T: ClassTag](xs: List[T]): LabeledPoint[T] =
     new LabeledPoint[T]("", xs.toArray)
 
   /**
    * Implicit conversion (deep copy) of this time series
    * @param xt Time series to duplicate
    */
-  implicit def LabeledPoint[T](xt: LabeledPoint[T]) = new LabeledPoint[T]("", xt.toArray)
+  implicit def labeledPoint[T](xt: LabeledPoint[T]) = new LabeledPoint[T]("", xt.toArray)
 
   /**
    * Implicit conversion of a time series to a vector
    * @param xt time series to convert
    */
-  implicit def series2DblVector[T](xt: LabeledPoint[T])(implicit f: T => Double): DoubleList =
-    xt.toDoubleList(f)
+  implicit def series2DblVector[T](xt: LabeledPoint[T])(implicit f: T => Double): DblVector =
+    xt.toDblVector(f)
 
   /**
    * Implicit conversion of a time series to Matrix of type Double
    *  @param xt time series to convert
    */
-  implicit def series2DblMatrix[T](xt: LabeledPoint[T])(implicit fv: T => DoubleList): DblMatrix =
+  implicit def series2DblMatrix[T](xt: LabeledPoint[T])(implicit fv: T => DblVector): DblMatrix =
     xt.toDblMatrix(fv)
 
   /**
@@ -167,15 +231,15 @@ object LabeledPoint {
   def dimension[T](xt: LabeledPoint[Array[T]]): Int = xt.toArray(0).size
 
   /**
-   * Define an empty time series of type LabeledPoint
+   * Define an empty time series of type XTSeries
    */
   def empty[T: ClassTag]: LabeledPoint[T] = new LabeledPoint[T]("", Array.empty[T])
 
-//  /**
-//   * Convert a list of observations (vector) to a list of time series of these observations
-//   * @param xs List of observations to convert
-//   */
-//  def |>[T] (xs: List[Array[T]]): List[LabeledPoint[T]] = xs map{ LabeledPoint[T](_) }
+  /**
+   * Convert a list of observations (vector) to a list of time series of these observations
+   * @param xt List of observations to convert
+   */
+  def |>[T] (xs: List[Array[T]]): List[LabeledPoint[T]] = xs map{ LabeledPoint[T](_) }
 
   /**
    * Implements the normalization of a parameterized time series
@@ -186,7 +250,7 @@ object LabeledPoint {
    */
   @implicitNotFound("Ordering for normalization is undefined")
   def normalize[T <% Double](xt: LabeledPoint[T])(implicit ordering: Ordering[T]): Option[DblSeries] = {
-    require( !xt.isEmpty, "LabeledPoint.normalize Cannot normalize an undefined time series")
+    require( !xt.isEmpty, "XTSeries.normalize Cannot normalize an undefined time series")
 
     val mn = xt.min
     val range = xt.max - mn
@@ -201,8 +265,8 @@ object LabeledPoint {
    * @return normalized time series as double elements if max > min, None otherwise
    */
   @implicitNotFound("Ordering for normalization is undefined")
-  def normalize[T <% Double](x: Array[T])(implicit ordering: Ordering[T]): Option[DoubleList] = {
-    require( !x.isEmpty, "LabeledPoint.normalize  Cannot normalize an undefined time vector")
+  def normalize[T <% Double](x: Array[T])(implicit ordering: Ordering[T]): Option[DblVector] = {
+    require( !x.isEmpty, "XTSeries.normalize  Cannot normalize an undefined time vector")
 
     val mn = x.min
     val range = x.max - mn
@@ -215,14 +279,14 @@ object LabeledPoint {
    * @throws IllegalArgumentException if the time series is undefined
    * @return normalized time series as double elements if max > min, None otherwise
    */
-  @implicitNotFound("LabeledPoint.normalize Ordering for normalization is undefined")
+  @implicitNotFound("XTSeries.normalize Ordering for normalization is undefined")
   def normalize[T <% Double](
                               xt: LabeledPoint[Array[T]])
                             (implicit order: Ordering[T], m: Manifest[T]): Option[DblVecSeries] = {
     require( !xt.isEmpty,
-      "LabeledPoint.normalize Cannot normalize an undefined time series of elements")
-//    require( LabeledPoint.dimension(xt) > 0,
-//      "LabeledPoint.normalize Incorrect function to normalize a single dimension time series")
+      "XTSeries.normalize Cannot normalize an undefined time series of elements")
+    require( LabeledPoint.dimension(xt) > 0,
+      "XTSeries.normalize Incorrect function to normalize a single dimension time series")
 
     var k = 0;
     val res = new Array[Array[T]](xt.size)
@@ -256,11 +320,11 @@ object LabeledPoint {
         }
         k += 1
       }
-      new LabeledPoint[DoubleList](xt.label, arr)
+      new LabeledPoint[DblVector](xt.label, arr)
     }
     match {
       case Success(xt) => Some(xt)
-      case Failure(e) => None // DisplayUtils.none("LabeledPoint.normalize", logger, e)
+      case Failure(e) => None //DisplayUtils.none("XTSeries.normalize", logger, e)
     }
   }
 
@@ -271,14 +335,14 @@ object LabeledPoint {
    * @throws IllegalArgumentException if the time series is undefined
    * @return Time series of double array if the function succeeds, None otherwise
    */
-  def zScoring[T <% Double](xt: LabeledPoint[Array[T]]): Option[LabeledPoint[DoubleList]] = {
-    require( !xt.isEmpty, "LabeledPoint.zScoring Cannot zScore an undefined time series")
+  def zScoring[T <% Double](xt: LabeledPoint[Array[T]]): Option[LabeledPoint[DblVector]] = {
+    require( !xt.isEmpty, "XTSeries.zScoring Cannot zScore an undefined time series")
 
     val stats = statistics(xt)
     var k = 0;
     val dimension = xt(0).size
 
-    val arr = new Array[DoubleList](xt.size)
+    val arr = new Array[DblVector](xt.size)
     Try {
       while( k < xt.size) {
         var j = 0
@@ -289,11 +353,11 @@ object LabeledPoint {
         }
         k += 1
       }
-      new LabeledPoint[DoubleList](xt.label, arr)
+      new LabeledPoint[DblVector](xt.label, arr)
     }
     match {
       case Success(xt) => Some(xt)
-      case Failure(e) => None //DisplayUtils.none("LabeledPoint.zScoring", logger, e)
+      case Failure(e) => None //DisplayUtils.none("XTSeries.zScoring", logger, e)
     }
   }
 
@@ -322,7 +386,7 @@ object LabeledPoint {
    * @return Array of statistics for each dimension
    */
   def statistics[T <% Double](xt: LabeledPoint[Array[T]]): Array[Statistics[T]] = {
-    require( !xt.isEmpty, "LabeledPoint.statistics input time series undefined")
+    require( !xt.isEmpty, "XTSeries.statistics input time series undefined")
 
     import Statistics._
     val transposed = xt.toArray.transpose
@@ -330,3 +394,5 @@ object LabeledPoint {
     results
   }
 }
+
+// ---------------------------------  EOF --------------------------------------------------------

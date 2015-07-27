@@ -42,7 +42,7 @@ final class Config( val alpha: Double,
    * <p>Return the number of hidden layers in this Neural network.</p>
    * @return 0 if there is no hidden layer, the size of the hidLayer array or sequence otherwise
    */
-  final def nHiddens: Int = if(hidLayers.isEmpty) 0 else hidLayers.size
+  final def nHiddenLayers: Int = if(hidLayers.isEmpty) 0 else hidLayers.size
 }
 
 
