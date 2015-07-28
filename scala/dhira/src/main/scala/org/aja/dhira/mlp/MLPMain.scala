@@ -5,6 +5,7 @@ import org.aja.dhira.core.Types.{DblMatrix,DoubleList}
 import org.aja.dhira.core.LabeledPoint
 import scala.util.{Try, Success, Failure}
 import LabeledPoint._
+import org.aja.dhira.core.Types._
 
 /**
  * <p>Implementation of the Multi-layer Perceptron as a Feed-foward
@@ -109,7 +110,7 @@ final protected class MLPMain[T <% Double](
       .foldLeft(0)((s, xtl) =>  {
 
       // Get the output layer for this input xt.
-      val output = model.get.getOutput(xtl._2) //should be ._1
+      val output = model.get.getOutput(xtl._1) //should be ._1
 
       // Compute the sum of squared error while excluding bias element
       val _sse = xtl._2.zip(output.drop(1))
@@ -141,14 +142,15 @@ final protected class MLPMain[T <% Double](
       // The convergence criteria selected is the reconstruction error
       // generated during an epoch adjusted to the scaling factor and compare
       // to the predefined criteria config.eps
-      println("Testing train method\n")
-      val v = xt.toArray
-      v.foreach(println)
+
+      println("\n\nMageswaran in train method: \n\n")
+      xt.toArray.zip(labels).map(_._1.mkString("\t")).foreach(println)
+
       converged = Range(0, config.numEpochs).find( _ =>
         {
 
           xt.toArray.zip(labels).foldLeft(0.0)(
-              (s, xtlbl) =>  s + _model.trainEpoch(xtlbl._2, xtlbl._2)
+              (s, xtlbl) =>  s + _model.trainEpoch(xtlbl._1, xtlbl._2)
             )*errScale < config.eps
       }) != None
       _model

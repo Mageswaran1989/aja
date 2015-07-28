@@ -37,15 +37,14 @@ object XOR {
     val x = LabeledPoint[DoubleList](Array.tabulate(TEST_SIZE)(vec1(_)))
     val y = LabeledPoint[DoubleList](Array.tabulate(TEST_SIZE)(vec2(_) ))
 
-    val x_string = x.toString
-    println(s"x LabelPoint $x_string")
-    println(s"y LabelPoint ${y.toArray.toString}")
-
     val features: LabeledPoint[DoubleList] = LabeledPoint.normalize(x).get
     val labels = LabeledPoint.normalize(y).get.toArray
 
-    println(s"features  $features")
-    println(s"labels  $labels")
+    println(s"features :")
+    features.toArray.map(_.mkString("\t")).foreach(println)
+
+    println(s"labels")
+    labels.toArray.map(_.mkString("\t")).foreach(println)
 
     eval(-1.0, ETA, features, labels)
 
@@ -64,6 +63,14 @@ object XOR {
     implicit val mlpObjective = new MLPMain.MLPBinClassifier
 
     Try {
+      println(s"Mageswaran: ")
+      println(features.size)
+//      val arr = features.toArray
+//      println(arr.map(_.mkString(" ")).mkString("\n"))
+//
+//      val array = features.toArray
+//      println(array.map(_.mkString(" ")).mkString("\n"))
+
       (0.001 until 0.01 by 0.002).foreach( x =>  {
         val _alpha = if(alpha < 0.0)  x else ALPHA
         val _eta = if(eta < 0.0) x else ETA

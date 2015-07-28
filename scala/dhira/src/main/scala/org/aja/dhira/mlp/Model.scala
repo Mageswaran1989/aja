@@ -2,6 +2,7 @@ package org.aja.dhira.mlp
 
 import org.aja.dhira.core.Types.DoubleList
 import org.aja.dhira.utils.FileUtils
+import org.aja.dhira.core.Types._
 
 /**
  * <p>Define the model trait for classification and optimization algorithms.</p>
