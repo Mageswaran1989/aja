@@ -3,6 +3,8 @@ package org.aja.dhira.mlp
 import org.aja.dhira.core.LabeledPoint
 import org.aja.dhira.core.Types.{DblMatrix,DoubleList}
 import org.aja.dhira.core.LabeledPoint
+import org.aja.dhira.utils.DisplayUtils
+import org.apache.log4j.Logger
 import scala.util.{Try, Success, Failure}
 import LabeledPoint._
 import org.aja.dhira.core.Types._
@@ -49,7 +51,7 @@ final protected class MLPMain[T <% Double](
   import MLPMain._
 
   check(xt, labels)
-//  private val logger = Logger.getLogger("MLP")
+  private val logger = Logger.getLogger("MLP")
 
   // Flag that indicates that the training converged toward a definite modle
   private[this] var converged = false
@@ -62,7 +64,7 @@ final protected class MLPMain[T <% Double](
    */
   val model: Option[Model] = train match {
     case Success(_model) => { println("TRaining success!"); Some(_model) }
-    case Failure(e) => { println("TRaining failed!"); None } // DisplayUtils.none("MLPMain.model ", logger, e)
+    case Failure(e) => DisplayUtils.none("MLPMain.model ", logger, e)
   }
 
 
@@ -143,12 +145,11 @@ final protected class MLPMain[T <% Double](
       // generated during an epoch adjusted to the scaling factor and compare
       // to the predefined criteria config.eps
 
-      println("\n\nMageswaran in train method: \n\n")
-      xt.toArray.zip(labels).map(_._1.mkString("\t")).foreach(println)
+//      println("\n\nMageswaran in train method: \n\n")
+//      xt.toArray.zip(labels).map(_._1.mkString("\t")).foreach(println)
 
       converged = Range(0, config.numEpochs).find( _ =>
         {
-
           xt.toArray.zip(labels).foldLeft(0.0)(
               (s, xtlbl) =>  s + _model.trainEpoch(xtlbl._1, xtlbl._2)
             )*errScale < config.eps

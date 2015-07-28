@@ -40,11 +40,11 @@ object XOR {
     val features: LabeledPoint[DoubleList] = LabeledPoint.normalize(x).get
     val labels = LabeledPoint.normalize(y).get.toArray
 
-    println(s"features :")
-    features.toArray.map(_.mkString("\t")).foreach(println)
-
-    println(s"labels")
-    labels.toArray.map(_.mkString("\t")).foreach(println)
+//    println(s"features :")
+//    features.toArray.map(_.mkString("\t")).foreach(println)
+//
+//    println(s"labels")
+//    labels.toArray.map(_.mkString("\t")).foreach(println)
 
     eval(-1.0, ETA, features, labels)
 
@@ -63,8 +63,8 @@ object XOR {
     implicit val mlpObjective = new MLPMain.MLPBinClassifier
 
     Try {
-      println(s"Mageswaran: ")
-      println(features.size)
+      println(s"labels size: ")
+      println(labels.size)
 //      val arr = features.toArray
 //      println(arr.map(_.mkString(" ")).mkString("\n"))
 //
@@ -86,7 +86,7 @@ object XOR {
       1
     } match {
       case Success(n) => n
-      case Failure(e) => 4 //DisplayUtils.error(s"$name run", logger, e)
+      case Failure(e) => DisplayUtils.error(s"$name run", logger, e)
     }
   }
 }
