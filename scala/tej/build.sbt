@@ -15,6 +15,7 @@ libraryDependencies += "commons-cli" % "commons-cli" % "1.2"
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "1.4.1",
   "org.apache.spark" %% "spark-mllib" % "1.4.1",
+  "org.apache.spark" %% "spark-graphx" % "1.4.1",
   "org.apache.spark" %% "spark-sql" % "1.4.1",
   "org.apache.spark" %% "spark-hive" % "1.4.1",
   "org.apache.spark" %% "spark-streaming" % "1.4.1",

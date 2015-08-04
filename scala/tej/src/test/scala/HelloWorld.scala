@@ -5,6 +5,25 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
  * Created by mageswaran on 26/7/15.
  */
+
+/** Excursus:
+  *
+  * Spark Cluster -> Worker Node 1 (Slave Machines) -> Runs Executor 1 with n slots/cores -> Runs application task/slot
+  *                                                                                         send from SparkContext
+  *                                                -> Runs Executor 2 with n slots/cores
+  *                                                -> Runs Executor ...
+  *               -> Worker Node 2 (Slave Machines)
+  *               -> Worker Node ...(Slave Machines)
+  *
+  *                       ----------------------------------------------------
+  *                       \                                                  \
+  *                       \                                      <----->  Spark Cluster(s)
+  * Driver Program (SparkContext)    <----->   Cluster Manager   <----->  Spark Cluster(s)
+  *                       \                                       <-----> Spark Cluster(s)
+  *                       \                                                  \
+  *                       ----------------------------------------------------
+  *
+  */
 object HelloWorld extends App {
   //def main(args: Array[String]) {
   val logFile = "/opt/spark/README.md" // Should be some file on your system
