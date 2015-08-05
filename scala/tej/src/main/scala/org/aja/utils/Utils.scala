@@ -1,4 +1,4 @@
-package org.aja
+package org.aja.utils
 
 /**
  * Created by mageswaran on 26/7/15.
