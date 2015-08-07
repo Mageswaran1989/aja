@@ -1,9 +1,9 @@
 package org.aja.tej.test.usecases.stumbleupon.classification
 
-import org.apache.spark.mllib.classification.NaiveBayes
 import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.distributed.RowMatrix
 import org.apache.spark.mllib.regression.LabeledPoint
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by mdhandapani on 5/8/15.
@@ -49,6 +49,16 @@ object StumbleuponUtils {
     new SparkContext(conf)
   }
 
+  val numIterations = 10
+  val maxTreeDepth = 5
+
+  val getFirstData = {
+    getLabeledPoint.first()
+  }
+
+  val getFirstDataLabel = {
+    getFirstData.label
+  }
   val getRawData = {
     val rawData = getSparkContext.textFile("data/stumbleupon/train_noheader.tsv")
     rawData.map(line => line.split("\t"))
@@ -78,4 +88,20 @@ object StumbleuponUtils {
       LabeledPoint(label, Vectors.dense(features))
     } . cache
   }
+
+  val featureVectors = getLabeledPoint.map(lp => lp.features)
+  val featureMatrix = new RowMatrix(featureVectors)
+
+  def printMatrixSummary = {
+    val matrixSummary = featureMatrix.computeColumnSummaryStatistics()
+
+    println(matrixSummary.mean)
+    println(matrixSummary.min)
+    println(matrixSummary.max)
+    println(matrixSummary.variance)
+    println(matrixSummary.numNonzeros)
+    matrixSummary.mean.toArray.foreach(println)
+    matrixSummary.variance.toArray.foreach(println)
+  }
+
 }
