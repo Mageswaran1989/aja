@@ -8,31 +8,6 @@
 - Unconquerable
 - To drive
 
-##Platform Targeted
-- Android
-- Ubuntu
-
-##Architecture Targeted
-- Intel 64bit
-- ARM
-- GPGPU
-
-##Dependent Libraries
-- OpenCL
-- Boost Compute
-- vexCL
-- Qt for GUI
-- Spark
-
-##Sensors
-- As on demand
-
-##Tools
-- CMake
-- Latex 
-- R
-- Latex
-
 ##Build Environment
 Linux Ubuntu 12.04+
 
