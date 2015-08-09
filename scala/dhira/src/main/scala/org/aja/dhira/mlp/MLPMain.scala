@@ -63,7 +63,7 @@ final protected class MLPMain[T <% Double](
    * evaluating the value of the state variable converge and perform a validation run
    */
   val model: Option[Model] = train match {
-    case Success(_model) => { println("TRaining success!"); Some(_model) }
+    case Success(_model) => { println("Training success!"); Some(_model) }
     case Failure(e) => DisplayUtils.none("MLPMain.model ", logger, e)
   }
 

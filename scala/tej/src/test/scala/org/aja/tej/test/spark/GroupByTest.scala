@@ -13,28 +13,62 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object GroupByTest {
   def main(args: Array[String]) {
+    //Initializing the SparCong to run on local machine
     val sparkConf = new SparkConf().setAppName("GroupBy Test").setMaster("local[4]")
+
+    /**
+     *  Set the parameters
+     *  Number of mappers as 100, number of KeyValue paris as 10000, value size as 1000 and number of reducers as 36.
+     */
     var numMappers = 100
+    /**
+     * Key -> Int, Values -> Array[Byte]
+     * Number of Array[(Int, Array[Byte]]
+     */
     var numKVPairs = 10000
+    //Array[Byte] size
     var valSize = 1000
     var numReducers = 36
 
     val sc = new SparkContext(sparkConf)
 
-    val pairs1 = sc.parallelize(0 until numMappers, numMappers).flatMap { p =>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    /**
+     * Size(pairs):
+     *   numMappers * Size(mapperArray)
+     *   100 * 9.57MB = 957MB ~ 1000MB
+     */
+    val pairs = sc.parallelize(0 until numMappers, numMappers).flatMap { p =>
       val ranGen = new Random
-      var arr1 = new Array[(Int, Array[Byte])](numKVPairs)
+      /**
+       * Size(mapperArray):
+       *   numKVPairs * (4 + valSize)
+       *   10000 * (1004) = 10040000 Bytes = 9804.6875 KB = 9.57MB ~ 10MB
+       */
+      var mapperArray = new Array[(Int, Array[Byte])](numKVPairs)
+
       for (i <- 0 until numKVPairs) {
         val byteArr = new Array[Byte](valSize)
         ranGen.nextBytes(byteArr)
-        arr1(i) = (ranGen.nextInt(Int.MaxValue), byteArr)
+        mapperArray(i) = (ranGen.nextInt(Int.MaxValue), byteArr)
       }
-      arr1
-    }.cache
-    // Enforce that everything has been calculated and in cache
-    pairs1.count
+      mapperArray
+    }.cache //cache the mapperArray in each Mapper
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    println(pairs1.groupByKey(numReducers).count)
+    println(s"Logical plan: ${pairs.toDebugString}")
+
+    println(s"Totsl number of pairs: ${pairs.count}")
+
+    /**
+     * Number of pairs/Reducers:
+     *   (numMappers * numKVPairs) / numReducers
+     *   (100 * 10000) / 36 = 1000000 / 36 = 27777.7 ~ 27777 pairs
+     * Size of each reducer:
+     *   Size(pairs) / numReducers
+     *   1000MB / 36 = 27.77 MB
+     */
+    println(s"Number of pairs with unique key: ${pairs.groupByKey(numReducers).count}")
 
     sc.stop()
   }
