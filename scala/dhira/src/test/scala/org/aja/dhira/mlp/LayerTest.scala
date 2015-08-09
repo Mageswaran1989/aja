@@ -1,7 +1,5 @@
 package org.aja.dhira.mlp
 
-import org.scalatest.FeatureSpec
-
 /**
  * Created by mageswaran on 19/7/15.
  */
@@ -14,7 +12,7 @@ object LayerTest {
 
 
   def main(args: Array[String]) {
-    layer.setInput(dataOut)
+    layer.setData(dataOut)
     println(layer.isOutputLayer(0))
 
     layer.sse(labels)

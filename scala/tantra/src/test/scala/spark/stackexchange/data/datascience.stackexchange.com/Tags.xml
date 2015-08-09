@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="1" TagName="definitions" Count="9" ExcerptPostId="105" WikiPostId="104" />
+  <row Id="2" TagName="machine-learning" Count="233" ExcerptPostId="4909" WikiPostId="4908" />
+  <row Id="3" TagName="bigdata" Count="82" ExcerptPostId="66" WikiPostId="65" />
+  <row Id="5" TagName="data-mining" Count="94" ExcerptPostId="80" WikiPostId="79" />
+  <row Id="6" TagName="databases" Count="13" />
+  <row Id="8" TagName="libsvm" Count="2" ExcerptPostId="18" WikiPostId="17" />
+  <row Id="10" TagName="scalability" Count="15" />
+  <row Id="11" TagName="efficiency" Count="18" ExcerptPostId="142" WikiPostId="141" />
+  <row Id="12" TagName="performance" Count="12" />
+  <row Id="13" TagName="nosql" Count="11" ExcerptPostId="119" WikiPostId="118" />
+  <row Id="14" TagName="relational-dbms" Count="3" />
+  <row Id="15" TagName="clustering" Count="40" ExcerptPostId="145" WikiPostId="144" />
+  <row Id="16" TagName="octave" Count="2" ExcerptPostId="68" WikiPostId="67" />
+  <row Id="17" TagName="k-means" Count="8" />
+  <row Id="19" TagName="algorithms" Count="36" />
+  <row Id="21" TagName="tools" Count="19" />
+  <row Id="22" TagName="processing" Count="5" />
+  <row Id="23" TagName="hadoop" Count="40" />
+  <row Id="24" TagName="r" Count="75" ExcerptPostId="49" WikiPostId="48" />
+  <row Id="26" TagName="data-cleaning" Count="16" />
+  <row Id="27" TagName="statistics" Count="58" ExcerptPostId="3790" WikiPostId="3789" />
+  <row Id="28" TagName="parallelism" Count="2" />
+  <row Id="29" TagName="distributed" Count="9" />
+  <row Id="31" TagName="neo4j" Count="3" ExcerptPostId="181" WikiPostId="180" />
+  <row Id="32" TagName="recommendation" Count="34" ExcerptPostId="4907" WikiPostId="4906" />
+  <row Id="35" TagName="information-retrieval" Count="8" />
+  <row Id="36" TagName="google" Count="3" />
+  <row Id="37" TagName="search" Count="9" />
+  <row Id="39" TagName="education" Count="11" />
+  <row Id="40" TagName="open-source" Count="7" />
+  <row Id="42" TagName="similarity" Count="13" />
+  <row Id="43" TagName="data-stream-mining" Count="2" ExcerptPostId="109" WikiPostId="108" />
+  <row Id="45" TagName="dimensionality-reduction" Count="8" />
+  <row Id="46" TagName="python" Count="53" />
+  <row Id="47" TagName="nlp" Count="47" ExcerptPostId="147" WikiPostId="146" />
+  <row Id="48" TagName="language-model" Count="2" />
+  <row Id="50" TagName="topic-model" Count="7" />
+  <row Id="51" TagName="lda" Count="5" />
+  <row Id="54" TagName="feature-selection" Count="22" />
+  <row Id="55" TagName="map-reduce" Count="11" ExcerptPostId="137" WikiPostId="136" />
+  <row Id="56" TagName="mongodb" Count="3" ExcerptPostId="178" WikiPostId="177" />
+  <row Id="59" TagName="indexing" Count="1" ExcerptPostId="152" WikiPostId="151" />
+  <row Id="60" TagName="data-indexing-techniques" Count="2" ExcerptPostId="149" WikiPostId="148" />
+  <row Id="61" TagName="dataset" Count="56" />
+  <row Id="62" TagName=".net" Count="1" ExcerptPostId="168" WikiPostId="167" />
+  <row Id="64" TagName="pandas" Count="9" />
+  <row Id="65" TagName="parallel" Count="3" />
+  <row Id="66" TagName="metadata" Count="2" />
+  <row Id="67" TagName="parsing" Count="6" />
+  <row Id="71" TagName="social-network-analysis" Count="13" />
+  <row Id="72" TagName="time-series" Count="28" />
+  <row Id="73" TagName="javascript" Count="4" />
+  <row Id="74" TagName="visualization" Count="24" />
+  <row Id="76" TagName="svm" Count="21" />
+  <row Id="77" TagName="classification" Count="86" ExcerptPostId="4911" WikiPostId="4910" />
+  <row Id="78" TagName="binary" Count="4" />
+  <row Id="80" TagName="optimization" Count="11" />
+  <row Id="81" TagName="neuralnetwork" Count="36" />
+  <row Id="82" TagName="usecase" Count="3" />
+  <row Id="83" TagName="consumerweb" Count="2" />
+  <row Id="84" TagName="parameter" Count="3" />
+  <row Id="86" TagName="clusters" Count="2" />
+  <row Id="87" TagName="aws" Count="5" />
+  <row Id="88" TagName="sklearn" Count="10" />
+  <row Id="90" TagName="text-mining" Count="40" />
+  <row Id="94" TagName="freebase" Count="3" />
+  <row Id="95" TagName="knowledge-base" Count="7" />
+  <row Id="100" TagName="confusion-matrix" Count="3" />
+  <row Id="101" TagName="accuracy" Count="10" />
+  <row Id="102" TagName="categorical-data" Count="9" />
+  <row Id="104" TagName="data-formats" Count="2" />
+  <row Id="105" TagName="hierarchical-data-format" Count="3" />
+  <row Id="108" TagName="sql" Count="3" />
+  <row Id="109" TagName="research" Count="3" />
+  <row Id="110" TagName="experiments" Count="4" />
+  <row Id="113" TagName="random-forest" Count="12" />
+  <row Id="114" TagName="logistic-regression" Count="16" />
+  <row Id="115" TagName="evaluation" Count="2" />
+  <row Id="116" TagName="crawling" Count="3" />
+  <row Id="119" TagName="anonymization" Count="2" />
+  <row Id="120" TagName="beginner" Count="15" />
+  <row Id="123" TagName="graphs" Count="21" />
+  <row Id="124" TagName="cross-validation" Count="6" />
+  <row Id="126" TagName="sampling" Count="6" />
+  <row Id="128" TagName="scikit" Count="10" />
+  <row Id="129" TagName="kaggle" Count="2" />
+  <row Id="135" TagName="gradient-descent" Count="5" />
+  <row Id="136" TagName="feature-extraction" Count="11" />
+  <row Id="138" TagName="state-of-the-art" Count="2" />
+  <row Id="139" TagName="career" Count="8" />
+  <row Id="143" TagName="genetic" Count="2" />
+  <row Id="144" TagName="correlation" Count="8" />
+  <row Id="146" TagName="error-handling" Count="2" />
+  <row Id="147" TagName="apache-pig" Count="3" />
+  <row Id="148" TagName="pig" Count="5" />
+  <row Id="156" TagName="glm" Count="2" />
+  <row Id="157" TagName="regression" Count="22" />
+  <row Id="158" TagName="scala" Count="4" />
+  <row Id="159" TagName="csv" Count="2" />
+  <row Id="160" TagName="online-learning" Count="4" />
+  <row Id="161" TagName="ruby" Count="1" />
+  <row Id="162" TagName="unbalanced-classes" Count="5" />
+  <row Id="163" TagName="caret" Count="1" />
+  <row Id="164" TagName="gbm" Count="2" />
+  <row Id="165" TagName="kappa" Count="1" />
+  <row Id="167" TagName="marketing" Count="3" />
+  <row Id="168" TagName="predictive-modeling" Count="28" />
+  <row Id="169" TagName="e-commerce" Count="1" />
+  <row Id="170" TagName="data-binning" Count="1" />
+  <row Id="171" TagName="data-partition" Count="1" />
+  <row Id="172" TagName="long-tail" Count="1" />
+  <row Id="174" TagName="c#" Count="1" />
+  <row Id="175" TagName="library" Count="3" />
+  <row Id="176" TagName="rfm-scoring" Count="1" />
+  <row Id="178" TagName="bigtable" Count="1" />
+  <row Id="179" TagName="java" Count="7" />
+  <row Id="180" TagName="energy" Count="2" />
+  <row Id="181" TagName="treebank" Count="1" />
+  <row Id="182" TagName="tagging" Count="1" />
+  <row Id="183" TagName="annotation" Count="1" />
+  <row Id="184" TagName="anomaly-detection" Count="1" />
+  <row Id="185" TagName="forecast" Count="3" />
+  <row Id="186" TagName="sequence" Count="1" />
+  <row Id="187" TagName="sequential" Count="1" />
+  <row Id="188" TagName="dna" Count="1" />
+  <row Id="189" TagName="pmml" Count="1" />
+  <row Id="190" TagName="jpmml" Count="1" />
+  <row Id="191" TagName="hbase" Count="2" />
+  <row Id="193" TagName="tableau" Count="4" />
+  <row Id="194" TagName="deep-learning" Count="4" />
+  <row Id="195" TagName="ensemble-modeling" Count="2" />
+  <row Id="196" TagName="software-develpment" Count="3" />
+  <row Id="197" TagName="infographics" Count="1" />
+  <row Id="198" TagName="data-visualization" Count="5" />
+  <row Id="199" TagName="reporting" Count="1" />
+  <row Id="200" TagName="feature-scaling" Count="2" />
+  <row Id="201" TagName="apache-mahout" Count="3" />
+  <row Id="202" TagName="hive" Count="2" />
+  <row Id="205" TagName="object-recognition" Count="3" />
+  <row Id="206" TagName="hog" Count="1" />
+  <row Id="207" TagName="computer-vision" Count="1" />
+  <row Id="211" TagName="methods" Count="2" />
+  <row Id="212" TagName="scoring" Count="2" />
+  <row Id="213" TagName="ranking" Count="1" />
+  <row Id="214" TagName="sports" Count="2" />
+  <row Id="215" TagName="markov-process" Count="1" />
+  <row Id="216" TagName="matlab" Count="2" />
+  <row Id="217" TagName="simulation" Count="1" />
+  <row Id="218" TagName="finance" Count="1" />
+  <row Id="219" TagName="spark" Count="1" />
+  <row Id="220" TagName="linear-regression" Count="1" />
+  <row Id="222" TagName="version-control" Count="1" />
+  <row Id="223" TagName="convnet" Count="1" />
+  <row Id="224" TagName="image-classification" Count="1" />
+  <row Id="225" TagName="untagged" Count="2" />
+</tags>

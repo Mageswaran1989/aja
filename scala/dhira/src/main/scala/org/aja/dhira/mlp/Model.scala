@@ -2,6 +2,7 @@ package org.aja.dhira.mlp
 
 import org.aja.dhira.core.Types.DoubleList
 import org.aja.dhira.utils.FileUtils
+import org.aja.dhira.core.Types._
 
 /**
  * <p>Define the model trait for classification and optimization algorithms.</p>
@@ -78,7 +79,7 @@ final protected class Model(
    * Create the topology of this Multi-layer preceptron using the configuration
    * parameters and the number of hidden layers (and number of elements per hidden layer)
    */
-  private[this] val topology =	if(config.nHiddens == 0) Array[Int](nInputs, nOutputs)
+  private[this] val topology =	if(config.nHiddenLayers == 0) Array[Int](nInputs, nOutputs)
   else Array[Int](nInputs) ++ config.hidLayers ++ Array[Int](nOutputs)
 
   /*
@@ -118,7 +119,7 @@ final protected class Model(
    */
   def trainEpoch(x: DoubleList, y: DoubleList): Double = {
     // Initialize the input layer
-    inLayer.setInput(x)
+    inLayer.setData(x)
     // Apply the forward progapation of input to all the connections
     // starting with the input layer
     connections.foreach( _.connectionForwardPropagation)
@@ -159,13 +160,13 @@ final protected class Model(
    */
   def getOutput(x: DoubleList): DoubleList = {
     require( !x.isEmpty, "Model.getOutput Input values undefined")
-    inLayer.setInput(x)
+    inLayer.setData(x)
 
     // Apply the forward propagation with an input vector ...
     connections.foreach( _.connectionForwardPropagation)
 
     // .. and return the output of the MLP.
-    outLayer.output
+    outLayer.data
   }
 
   /**
@@ -174,7 +175,7 @@ final protected class Model(
    */
   override def >> : Boolean = {
     val content = new StringBuilder(s"$nInputs,")
-    if( config.nHiddens != 0)
+    if( config.nHiddenLayers != 0)
       content.append(config.hidLayers.mkString(","))
 
     content.append(s"$nOutputs\n")

@@ -1,0 +1,7 @@
+Get the dataset from : http://www.kaggle.com/c/stumbleupon/data
+Download test.tsv and trian.tsv
+
+On linux run :
+$ sed 1d train.tsv > train_noheader.tsv
+To remove the headers
+
