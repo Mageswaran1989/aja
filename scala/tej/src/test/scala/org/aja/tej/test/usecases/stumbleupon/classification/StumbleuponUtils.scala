@@ -52,13 +52,6 @@ object StumbleuponUtils {
   val numIterations = 10
   val maxTreeDepth = 5
 
-  val getFirstData = {
-    getLabeledPoint.first()
-  }
-
-  val getFirstDataLabel = {
-    getFirstData.label
-  }
   val getRawData = {
     val rawData = getSparkContext.textFile("data/stumbleupon/train_noheader.tsv")
     rawData.map(line => line.split("\t"))
@@ -102,6 +95,14 @@ object StumbleuponUtils {
     println(matrixSummary.numNonzeros)
     matrixSummary.mean.toArray.foreach(println)
     matrixSummary.variance.toArray.foreach(println)
+  }
+
+  val getFirstData = {
+    getLabeledPoint.first
+  }
+
+  val getFirstDataLabel = {
+    getFirstData.label
   }
 
 }
