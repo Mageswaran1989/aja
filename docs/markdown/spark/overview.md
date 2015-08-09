@@ -25,6 +25,4 @@ Each application has one Driver and multiple Executors. The tasks within the sam
    
 
 #### Sample code:  
-```scala  
-../../../scala/tej/src/test/scala/org/aja/tej/test/spark/GroupByTest.scala  
-```  
+[GroupByTest.scala](../../../scala/tej/src/test/scala/org/aja/tej/test/spark/GroupByTest.scala)  
