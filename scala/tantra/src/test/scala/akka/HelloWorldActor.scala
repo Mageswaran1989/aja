@@ -10,7 +10,7 @@ act.start()
 
 import scala.actors.Actor._
 
-val actor1 = actor( 
+val actor1 = actor(
   println("Mageswaran in second actor")
 )
 
@@ -20,7 +20,7 @@ val lizza = actor{
   var count: Int = 0
   loop {
     receive {
-      case "Hi" => { 
+      case "Hi" => {
         count = count + 1
         println("Hi there...")
       }
