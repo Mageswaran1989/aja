@@ -12,38 +12,46 @@
 ################################################################
 #
 #   Preconditions:
-#   Logs should start with : BOOT-TIME| .....
+#   Logs should start with :
+#   BOOT-TIME| .....
 #
+#   Two patterns are looked for:
+#   BOOT-TIME| SystemServer startOtherServices : started at|9603
+#   ("at", "|" before the process name and before the timing)
+#   BOOT-TIME| DomainServiceController : com.gm.server.erasedataservice.GMEraseDataService : phase : 4 : took |14
+#   ("DomainServiceController")
 ###############################################################
 
 from sys import argv
-from pandas import Series, DataFrame
-import pandas as pd
-import time as SystemTime #To avoid name space collision
-import copy
-import datetime
+from pandas import DataFrame
 import glob, os, os.path
 import transposer
 
-scripName = argv
+#scripName = argv
 
+#Directory names
 beforeDir = "before"
 afterDir = "after"
 
+#Flag to inser line number / process number for ordering while using Excel
 processOrderInsertFlag = True
 
+#Outfile name
 parsedFile = "GMInfo3BootTime"
 
+#Maps to hold the individual boot data
 processTimeMap = dict()
+#Map to store the process name and line number/process number from 0 to n
 processOrder = dict()
 
+#Delete the old file if found
 if os.path.isfile(parsedFile+"Transposed"+'.csv'):
    os.remove(parsedFile+"Transposed"+'.csv')
+   processOrderInsertFlag = False
 
+#Create or append the each boot entry to the file
 def toCSV(dictData, fileName, logFileName):
-    #ts = SystemTime.time()
-    #timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%m-%d %H:%M')
-    entry = DataFrame(dictData.values(), index=dictData.keys(), columns=[logFileName]) # + ":" + timeStamp])
+    entry = DataFrame(dictData.values(), index=dictData.keys(), columns=[logFileName])
     fileExists = os.path.isfile(fileName+".csv")     
     with open(fileName+".csv", 'a') as file:
         if fileExists:
@@ -53,7 +61,7 @@ def toCSV(dictData, fileName, logFileName):
            entry.T.to_csv(file, header=True)
            print "Creating "+fileName+".csv... inserting the entry..."
 
-
+#Look for .txt file in the diretory and filter out the process nae and timing
 def processFile(dirName):
  global processOrderInsertFlag
  for logFileName in glob.glob(dirName+"/*.txt"):
@@ -62,6 +70,7 @@ def processFile(dirName):
     i = 1
     for line in logFile:
         #print line
+        #For pattern : BOOT-TIME| SystemServer startOtherServices : started at|9603
         startupInfo = line.split("at") # changed started -> at to handle "PowerModing HMIReady"
         if len(startupInfo) > 1:
            processInfo = startupInfo[0]
@@ -73,6 +82,7 @@ def processFile(dirName):
            processTimeMap[name] = time      
            processOrder[name] = i 
            #print name, time
+        #Patern: BOOT-TIME| DomainServiceController : com.gm.server.erasedataservice.GMEraseDataService : phase : 4 : took |14
         domainServiceInfo = line.split("DomainServiceController")
         if len(domainServiceInfo) > 1:
            ds = domainServiceInfo[1]
@@ -89,9 +99,9 @@ def processFile(dirName):
     toCSV(processTimeMap, parsedFile, logFileName)
     logFile.close()
 
-print "Processing folder <before>..."
+print "Processing the folder <before>..."
 processFile(beforeDir)
-print "Processing folder <after>..."
+print "Processing the folder <after>..."
 processFile(afterDir)
 
 if os.path.isfile(parsedFile+".csv"):
