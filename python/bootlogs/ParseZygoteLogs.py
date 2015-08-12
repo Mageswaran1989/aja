@@ -9,6 +9,13 @@
 #        (utility to transpose CSV file)
 #################################################################
 
+################################################################
+#
+#   Preconditions:
+#   Logs should start with : BOOT-TIME| .....
+#
+###############################################################
+
 from sys import argv
 from pandas import Series, DataFrame
 import pandas as pd
@@ -18,21 +25,20 @@ import datetime
 import glob, os, os.path
 import transposer
 
-scripName, logFilesDir = argv
+scripName = argv
 
-#print logFileName
+beforeDir = "before"
+afterDir = "after"
+
+processOrderInsertFlag = True
 
 parsedFile = "GMInfo3BootTime"
 
 processTimeMap = dict()
+processOrder = dict()
 
-if os.path.isfile("GMInfo3BootTimeFinal.csv"):
-   os.remove("GMInfo3BootTimeFinal.csv")
-
-#if os.path.isfile(parsedFile+".csv"):
-  #transposer.transpose(i=parsedFile+'.csv', o=parsedFile+'.csv')
-  #print "Found GMInfo3BootTime.csv, transposing for inserting data"
-
+if os.path.isfile(parsedFile+"Transposed"+'.csv'):
+   os.remove(parsedFile+"Transposed"+'.csv')
 
 def toCSV(dictData, fileName, logFileName):
     #ts = SystemTime.time()
@@ -48,12 +54,15 @@ def toCSV(dictData, fileName, logFileName):
            print "Creating "+fileName+".csv... inserting the entry..."
 
 
-for logFileName in glob.glob("*.txt"):
+def processFile(dirName):
+ global processOrderInsertFlag
+ for logFileName in glob.glob(dirName+"/*.txt"):
     print("Processing..." + logFileName)
     logFile = open(logFileName, 'r')
+    i = 1
     for line in logFile:
         #print line
-        startupInfo = line.split("at") # cahnged started -> at to handle "PowerModing HMIReady"
+        startupInfo = line.split("at") # changed started -> at to handle "PowerModing HMIReady"
         if len(startupInfo) > 1:
            processInfo = startupInfo[0]
            timeInfo = startupInfo[1]
@@ -62,6 +71,7 @@ for logFileName in glob.glob("*.txt"):
            name = processInfo.split('|')[1].strip().replace(':', '')
            time = timeInfo.split('|')[1].strip()
            processTimeMap[name] = time      
+           processOrder[name] = i 
            #print name, time
         domainServiceInfo = line.split("DomainServiceController")
         if len(domainServiceInfo) > 1:
@@ -69,10 +79,20 @@ for logFileName in glob.glob("*.txt"):
            name = ds.split(':')[1].strip()
            time = ds.split('|')[-1].strip()
            processTimeMap[name] = time
+           processOrder[name] = i
            #print name, time
+        i = i + 1
     #print processTimeMap
+    if processOrderInsertFlag == True: #To insert the number for ease of sorting in excel
+       toCSV(processOrder, parsedFile, "ProcessOrder")
+       processOrderInsertFlag = False
     toCSV(processTimeMap, parsedFile, logFileName)
     logFile.close()
+
+print "Processing folder <before>..."
+processFile(beforeDir)
+print "Processing folder <after>..."
+processFile(afterDir)
 
 if os.path.isfile(parsedFile+".csv"):
   transposer.transpose(i=parsedFile+'.csv', o=parsedFile+"Transposed"+'.csv')
