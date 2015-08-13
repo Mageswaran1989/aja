@@ -1,4 +1,4 @@
-package org.aja.utils
+package org.aja.tej.utils
 
 /**
  * Created by mdhandapani on 4/8/15.

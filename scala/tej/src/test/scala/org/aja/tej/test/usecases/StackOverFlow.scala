@@ -1,4 +1,4 @@
-package org.aja.tej.blogs
+package org.aja.tej.tej.test.usecases
 
 /**
  * Created by mdhandapani on 29/7/15.

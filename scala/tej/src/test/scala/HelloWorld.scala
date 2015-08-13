@@ -26,8 +26,8 @@ import org.apache.spark.{SparkConf, SparkContext}
   */
 object HelloWorld extends App {
   //def main(args: Array[String]) {
-  val logFile = "/opt/spark/README.md" // Should be some file on your system
-  val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]" /*"spark://myhost:7077"*/)
+  val logFile = "data/datascience.stackexchange.com/Posts.xml" // Should be some file on your system
+  val conf = new SparkConf().setAppName("Simple Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
   val sc = new SparkContext(conf)
   val logData = sc.textFile(logFile, 2).cache()
   val numAs = logData.filter(line => line.contains("a")).count()
@@ -38,7 +38,7 @@ object HelloWorld extends App {
     .flatMap(_.split(" "))
     .map((_, 1))
     .reduceByKey(_ + _)
-    .saveAsTextFile("data/wordcount.txt")
+    .saveAsTextFile("data/hw_wordcount_output/")
 
   //}
 }

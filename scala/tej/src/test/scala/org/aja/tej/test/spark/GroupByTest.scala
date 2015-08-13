@@ -1,4 +1,4 @@
-package org.aja.tej.test.spark
+package org.aja.tej.tej.test.spark
 
 /**
  * Created by mageswaran on 9/8/15.

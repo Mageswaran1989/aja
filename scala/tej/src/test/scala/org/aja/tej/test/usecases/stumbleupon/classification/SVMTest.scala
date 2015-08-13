@@ -1,4 +1,5 @@
-package org.aja.tej.test.usecases.stumbleupon.classification
+package org.aja.tej.tej.test.usecases.stumbleupon.classification
+
 import StumbleuponUtils._
 import org.apache.spark.mllib.classification.SVMWithSGD
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics

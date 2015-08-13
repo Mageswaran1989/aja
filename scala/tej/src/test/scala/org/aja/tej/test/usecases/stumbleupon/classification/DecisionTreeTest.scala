@@ -1,4 +1,4 @@
-package org.aja.tej.test.usecases.stumbleupon.classification
+package org.aja.tej.tej.test.usecases.stumbleupon.classification
 
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.tree.DecisionTree

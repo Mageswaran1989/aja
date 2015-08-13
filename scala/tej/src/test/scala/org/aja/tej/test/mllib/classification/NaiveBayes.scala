@@ -1,5 +1,4 @@
-package org.aja.tej.test.mllib.classification
-
+package org.aja.tej.tej.test.mllib.classification
 
 import org.apache.spark.mllib.classification.NaiveBayes
 

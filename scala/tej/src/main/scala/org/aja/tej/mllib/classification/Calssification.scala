@@ -1,4 +1,4 @@
-package org.aja.mllib.classification
+package org.aja.tej.mllib.classification
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.regression.LabeledPoint

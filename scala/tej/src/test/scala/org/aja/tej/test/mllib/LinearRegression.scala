@@ -1,4 +1,4 @@
-package org.aja.tej.mllib.test
+package org.aja.tej.tej.test.mllib
 
 /**
  * Created by mdhandapani on 29/7/15.

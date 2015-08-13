@@ -1,4 +1,4 @@
-package org.aja.tej.test.sparksql
+package org.aja.tej.tej.test.sparksql
 
 import org.apache.spark.{SparkContext, SparkConf}
 

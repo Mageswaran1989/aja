@@ -1,4 +1,4 @@
-package org.aja.mllib.classification
+package org.aja.tej.mllib.classification
 
 /**
  * Created by mdhandapani on 5/8/15.
