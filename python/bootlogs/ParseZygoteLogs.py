@@ -3,10 +3,14 @@
 #################################################################
 # Pandas: 
 #        http://pandas.pydata.org/pandas-docs/stable/install.html
+#        sudo apt-get install python-pip
+#        sudo pip install numpy
+#        sudo pip install pandas
 # Transposer : 
 #        Download : https://pypi.python.org/pypi/transposer/
 #        $ sudo python setup.py install 
 #        (utility to transpose CSV file)
+#        sudo pip install transposer
 #################################################################
 
 ################################################################
@@ -47,6 +51,8 @@ processOrder = dict()
 #Delete the old file if found
 if os.path.isfile(parsedFile+"Transposed"+'.csv'):
    os.remove(parsedFile+"Transposed"+'.csv')
+
+if os.path.isfile(parsedFile+".csv"):
    processOrderInsertFlag = False
 
 #Create or append the each boot entry to the file
@@ -71,7 +77,7 @@ def processFile(dirName):
     for line in logFile:
         #print line
         #For pattern : BOOT-TIME| SystemServer startOtherServices : started at|9603
-        startupInfo = line.split("at") # changed started -> at to handle "PowerModing HMIReady"
+        startupInfo = line.split("started") # changed started -> at to handle "PowerModing HMIReady"
         if len(startupInfo) > 1:
            processInfo = startupInfo[0]
            timeInfo = startupInfo[1]
@@ -92,6 +98,9 @@ def processFile(dirName):
            processOrder[name] = i
            #print name, time
         i = i + 1
+        if line.find("HMIReady") != -1: #work around for HMIReady which is out of pattern
+           processTimeMap["HMIReady"] = line.split('|')[-1].strip()
+           processOrder["HMIReady"] = 99
     #print processTimeMap
     if processOrderInsertFlag == True: #To insert the number for ease of sorting in excel
        toCSV(processOrder, parsedFile, "ProcessOrder")
