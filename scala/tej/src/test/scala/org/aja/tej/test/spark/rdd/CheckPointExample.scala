@@ -13,16 +13,37 @@ until an action is invoked.)
 Important note: the directory ”my directory name” should exist in all slaves. As an
 alternative you could use an HDFS directory URL as well.
 
+ getCheckpointFile
+Returns the path to the checkpoint file or null if RDD has not yet been checkpointed.
+
  */
 object CheckPointExample {
 
   def useCases(sc: SparkContext) = {
     sc.setCheckpointDir("data/CheckPointExampleDir")
     //Check tej/data/
-    val a = sc.parallelize (1 to 4)
+    val a = sc . parallelize (1 to 500 , 5)
+    val b = a ++ a ++ a ++ a ++ a
+    a.isCheckpointed
+
     a.checkpoint
     a.count
-    }
+
+    a.isCheckpointed
+
+    b . getCheckpointFile
+    b . checkpoint
+    b . getCheckpointFile
+
+    b.isCheckpointed
+
+
+    b . collect
+    b . getCheckpointFile
+
+    b.isCheckpointed
+
+  }
 
 
 }
