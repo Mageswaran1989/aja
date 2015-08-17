@@ -18,5 +18,5 @@ Return type is...
 - A function that takes type B and return C
 
 */
-def partial1[A,B,C](a: A, f: (A,B) => C): B => C
+//def partial1[A,B,C](a: A, f: (A,B) => C): B => C
 
