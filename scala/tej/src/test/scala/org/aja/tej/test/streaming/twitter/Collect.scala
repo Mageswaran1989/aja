@@ -1,8 +1,11 @@
-package org.aja.tej.tej.test.streaming.twitter
+package org.aja.tej.test.streaming.twitter
 
 /**
  * Created by mageswaran on 29/7/15.
  */
+
+//https://github.com/databricks/reference-apps
+
 import java.io.File
 
 import com.google.gson.Gson
@@ -25,6 +28,10 @@ import org.apache.spark.{SparkConf, SparkContext}
      --accessToken ${YOUR_TWITTER_ACCESS_TOKEN}  \
      --accessTokenSecret ${YOUR_TWITTER_ACCESS_SECRET}
 
+ data/tweets
+ 10000
+ 10
+ 1
 --consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw
 --consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3
 --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
@@ -49,7 +56,7 @@ object Collect {
       System.err.println("Found - %s already exists: deleting...".format(
         outputDirectory))
       outputDir.delete()
-      System.exit(1)
+      //System.exit(1)
     }
     outputDir.mkdirs()
 
