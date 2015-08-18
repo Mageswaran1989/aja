@@ -1,0 +1,3 @@
+[0m[[0mdebug[0m] [0mFiltering compile:dependency-classpath from: List(Attributed(/home/mdhandapani/AndroidStudioProjects/myappforScala/bin/classes), Attributed(/home/mdhandapani/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.2.jar))[0m
+[0m[[0mdebug[0m] [0mclasses => None: None[0m
+[0m[[0mdebug[0m] [0mscala-library-2.11.2.jar => Some(compile-internal): Some(org.scala-lang:scala-library:2.11.2 ())[0m

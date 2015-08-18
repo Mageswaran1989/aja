@@ -1,0 +1,5 @@
+[0m[[0minfo[0m] [0mGenerating dex, incremental=true, multidex=false[0m
+[0m[[0mdebug[0m] [0mDex inputs: List(/home/mdhandapani/AndroidStudioProjects/myappforScala/target/streams/android/proguardInputs/$global/streams/proguard_cache/proguard-cache-acb2b6b2101ac3b16cdc7d5599b7af20490aacf2.jar, /home/mdhandapani/AndroidStudioProjects/myappforScala/bin/classes.jar)[0m
+[0m[[0mdebug[0m] [0mDEX IN: List(/home/mdhandapani/AndroidStudioProjects/myappforScala/target/streams/android/proguardInputs/$global/streams/proguard_cache/proguard-cache-acb2b6b2101ac3b16cdc7d5599b7af20490aacf2.jar, /home/mdhandapani/AndroidStudioProjects/myappforScala/bin/classes.jar)[0m
+[0m[[0mdebug[0m] [0mPRE-DEXED: List()[0m
+[0m[[0minfo[0m] [0mdex method count: 135[0m
