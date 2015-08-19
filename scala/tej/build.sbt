@@ -9,11 +9,11 @@ ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 (unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "src/examples/scala")
 (unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "spark_example")
 
-scalaSource in Compile += file(baseDirectory.value + "src/examples/scala")
-scalaSource in Compile += file(baseDirectory.value + "spark_examples")
-
-unmanagedSourceDirectories in Compile <<= (scalaSource in  Compile)( base => base / "spark_example" :: Nil)
-unmanagedSourceDirectories in Compile <<= (scalaSource in  Compile)( base => base /  "src/examples/scala" :: Nil)
+//scalaSource in Compile += file(baseDirectory.value + "src/examples/scala")
+//scalaSource in Compile += file(baseDirectory.value + "spark_examples")
+//
+//unmanagedSourceDirectories in Compile <<= (scalaSource in  Compile)( base => base / "spark_example" :: Nil)
+//unmanagedSourceDirectories in Compile <<= (scalaSource in  Compile)( base => base /  "src/examples/scala" :: Nil)
 
 //unmanagedSourceDirectories in Compile <++= baseDirectory { base => base / "src/examples"
 ////  Seq(

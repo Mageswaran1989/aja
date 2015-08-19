@@ -1,4 +1,4 @@
-package org.aja.tantra.test.fp
+package org.aja.tantra.examples.fp
 
 /**
  * Created by mdhandapani on 10/8/15.

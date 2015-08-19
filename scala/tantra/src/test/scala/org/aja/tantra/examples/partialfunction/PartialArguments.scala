@@ -1,4 +1,4 @@
-package org.aja.tantra.test.partialfunction
+package org.aja.tantra.examples.partialfunction
 
 /**
  * Created by mdhandapani on 10/8/15.

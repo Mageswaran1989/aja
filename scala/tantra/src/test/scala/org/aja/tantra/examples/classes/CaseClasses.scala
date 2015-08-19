@@ -1,4 +1,4 @@
-package org.aja.tantra.test.classes
+package org.aja.tantra.examples.classes
 
 /**
  * Created by mdhandapani on 10/8/15.

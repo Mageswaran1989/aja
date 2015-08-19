@@ -1,4 +1,4 @@
-package org.aja.tantra.test.monoids
+package org.aja.tantra.examples.monoids
 
 /**
  * Created by mdhandapani on 10/8/15.

@@ -1,4 +1,4 @@
-package org.aja.tantra.test.exception
+package org.aja.tantra.examples.exception
 
 import java.io.FileReader
 import java.io.FileNotFoundException
