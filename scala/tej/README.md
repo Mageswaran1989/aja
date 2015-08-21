@@ -1,3 +1,3 @@
 Tej - Light, Lustrous, Radiant
 
-Spark exploration!
+Apache Spark examples and utilities!

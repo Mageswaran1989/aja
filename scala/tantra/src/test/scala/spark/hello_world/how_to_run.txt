@@ -1,3 +1,0 @@
-mvn package
-/opt/spark/bin/spark-submit --class "src.main.java.SimpleApp" --master local[4] target/simple-project-1.0.jar 
-
