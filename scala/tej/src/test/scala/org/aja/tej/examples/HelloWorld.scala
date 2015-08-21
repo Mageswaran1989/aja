@@ -1,3 +1,5 @@
+package org.aja.tej.examples
+
 
 import org.apache.spark.{SparkConf, SparkContext}
 

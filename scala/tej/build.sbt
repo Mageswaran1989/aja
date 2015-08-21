@@ -6,8 +6,8 @@ scalaVersion := "2.11.7"
 
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
-(unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "src/examples/scala")
-(unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "spark_example")
+//(unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "src/examples/scala")
+//(unmanagedSourceDirectories in Compile) += (baseDirectory.value /  "spark_example")
 
 //scalaSource in Compile += file(baseDirectory.value + "src/examples/scala")
 //scalaSource in Compile += file(baseDirectory.value + "spark_examples")
@@ -30,14 +30,14 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-graphx" % "1.4.1",
   "org.apache.spark" %% "spark-sql" % "1.4.1",
   "org.apache.spark" %% "spark-hive" % "1.4.1",
-  "org.apache.spark" % "spark-streaming_2.10" % "1.4.1",
+  "org.apache.spark" %% "spark-streaming" % "1.4.1",
   "org.apache.spark" %% "spark-streaming-kafka" % "1.4.1",
   "org.apache.spark" %% "spark-streaming-flume" % "1.4.1",
-  "org.apache.spark" % "spark-streaming-twitter_2.10" % "1.4.1",
-  "org.twitter4j" % "twitter4j-core" % "3.0.3",
-  "org.twitter4j" % "twitter4j-stream" % "3.0.3",
-  "com.google.code.gson" % "gson" % "2.3",
-  "commons-cli" % "commons-cli" % "1.2"
+  "org.apache.spark" %% "spark-streaming-twitter" % "1.4.1",
+  "org.twitter4j" %% "twitter4j-core" % "3.0.3",
+  "org.twitter4j" %% "twitter4j-stream" % "3.0.3",
+  "com.google.code.gson" %% "gson" % "2.3",
+  "commons-cli" %% "commons-cli" % "1.2"
 )
 
 

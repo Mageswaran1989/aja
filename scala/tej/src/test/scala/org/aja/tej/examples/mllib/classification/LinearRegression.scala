@@ -1,4 +1,4 @@
-package org.aja.tej.tej.test.mllib
+package org.aja.tej.examples.mllib.classification
 
 /**
  * Created by mdhandapani on 29/7/15.
@@ -7,11 +7,9 @@ package org.aja.tej.tej.test.mllib
  * Created by mdhandapani on 16/7/15.
  */
 
-import org.apache.spark.{SparkContext, SparkConf}
-import org.apache.spark.mllib.regression.LabeledPoint
-import org.apache.spark.mllib.regression.LinearRegressionModel
-import org.apache.spark.mllib.regression.LinearRegressionWithSGD
 import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionModel, LinearRegressionWithSGD}
+import org.apache.spark.{SparkConf, SparkContext}
 
 object LinearRegression {
 

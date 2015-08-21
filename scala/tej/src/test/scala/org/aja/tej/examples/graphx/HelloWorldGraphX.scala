@@ -1,4 +1,4 @@
-package org.aja.tej.tej.test.graphx
+package org.aja.tej.examples.graphx
 
 import org.apache.spark._
 import org.apache.spark.graphx._
