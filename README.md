@@ -9,6 +9,7 @@
 - To drive
 
 #Project Structure
+- [Android](https://github.com/Mageswaran1989/aja/tree/master/android) : Android + Scala integration!
 - [dhira](https://github.com/Mageswaran1989/aja/tree/master/dhira) : Scala based Artificial Neural Network exploration at its infancy!
 - [tantra](https://github.com/Mageswaran1989/aja/tree/master/tantra) : Scala language exploration examples and utilities!
 - [tej](https://github.com/Mageswaran1989/aja/tree/master/tej) : Apache Spark examples and utilities!
