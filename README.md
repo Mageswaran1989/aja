@@ -8,11 +8,15 @@
 - Unconquerable
 - To drive
 
-#[Projects under the hood](https://github.com/Mageswaran1989/aja/tree/master/scala)
-- [dhira](https://github.com/Mageswaran1989/aja/tree/master/scala/dhira) : Scala based Artificial Neural Network exploration at its infancy!
-- [tantra](https://github.com/Mageswaran1989/aja/tree/master/scala/tantra) : Scala language exploration examples and utilities!
-- [tej](https://github.com/Mageswaran1989/aja/tree/master/scala/tej) : Apache Spark examples and utilities!
-
+#Project Structure
+- [Android](https://github.com/Mageswaran1989/aja/tree/master/android) : Android + Scala integration!
+- [dhira](https://github.com/Mageswaran1989/aja/tree/master/dhira) : Scala based Artificial Neural Network exploration at its infancy!
+- [tantra](https://github.com/Mageswaran1989/aja/tree/master/tantra) : Scala language exploration examples and utilities!
+- [tej](https://github.com/Mageswaran1989/aja/tree/master/tej) : Apache Spark examples and utilities!
+- [docs](https://github.com/Mageswaran1989/aja/tree/master/docs) : All reference materials
+- [data](https://github.com/Mageswaran1989/aja/tree/master/data) : Datasets used in the implementation
+- [tools](https://github.com/Mageswaran1989/aja/tree/master/tools) : Custom GUI tools if any need arises
+- [utils](https://github.com/Mageswaran1989/aja/tree/master/utils) : Language Specific utils wrappers
 
 ##Build Environment
 Linux Ubuntu 12.04+
