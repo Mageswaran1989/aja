@@ -8,9 +8,6 @@ import scala.util.{Try, Success, Failure}
 
 /**
  * Basic utility singleton to read and write content from and to a file
- * @author Patrick Nicolas
- * @since December 2, 2013
- * @note Scala for Machine Learning
  */
 object FileUtils {
   //private val logger = Logger.getLogger("FileUtils")

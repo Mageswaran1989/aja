@@ -17,9 +17,6 @@ object Types {
 
   /**
    * <p>Singleton that define the Scala types and their conversion to native Scala types</p>
-   *  @author Patrick Nicolas
-   *  @since February 23, 2014
-   *  @note Scala for Machine Learning Chapter 3 Data pre-processing/Time series
    */
     type XY = (Double, Double)
     type XYTSeries = Array[(Double, Double)]

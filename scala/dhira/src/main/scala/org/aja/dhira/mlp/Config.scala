@@ -17,9 +17,6 @@ package org.aja.dhira.mlp
  *
  * @throws IllegalArgumentException if one of the class parameters is either out of bounds or
  * undefined *
- * @author Mageswaran
- * @since MaJuly 20, 2015
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network/Multilayer perceptron
  */
 final class Config( val alpha: Double,
                        val eta: Double,
@@ -50,10 +47,6 @@ final class Config( val alpha: Double,
 /**
  * <p>Companion object for the MLConfig class. This singleton defines the boundary
  * values for the parameters of the class and the different variation of constructors.</p
- *
- * @author Mageswaran
- * @since May 4, 2014
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network/Multilayer perceptron
  */
 object Config {
   private val EPS: Double = 1e-17

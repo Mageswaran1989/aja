@@ -11,9 +11,6 @@ import Statistics._
  *  @constructor Create an immutable statistics instance for a vector of type T 
  *  @param values vector or array of elements of type T
  *  @throws IllegalArgumentException if values is either undefined or have no elements
- *  @author Patrick Nicolas
- *  @since Jan 24, 2014
- *  @note Scala for Machine Learning Chapter 2 Hello World!
  */
 class Statistics[T <% Double](values: DVector[T]) {
   require( !values.isEmpty, "Statistics: Cannot initialize Statistics with undefined values")
@@ -137,9 +134,6 @@ class Statistics[T <% Double](values: DVector[T]) {
 /**
  * Companion object to the Statistics class that define the main constructor
  * apply and the Gaussian distributions
- * @author Patrick Nicolas
- * @since January 24, 2014
- * @note Scala for Machine Learning Chapter 2 Hello World!
  */
 object Statistics {
   final val ZERO_EPS = 1e-12

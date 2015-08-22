@@ -1,5 +1,5 @@
 package org.aja.dhira.mlp
-
+  qg eqy qey q45y
 import org.aja.dhira.core.LabeledPoint
 import org.aja.dhira.core.Types.{DblMatrix,DoubleList}
 import org.aja.dhira.core.LabeledPoint
@@ -42,7 +42,7 @@ import org.aja.dhira.core.Types._
  */
 //final protected class MLPMain[T]( config: Config,
 //                              xt: LabeledPoint[Array[T]],
-//                              labels: DblMatrix)(implicit ev1: T => Double, Objective: MLPMain.Objective) /*extends PipeOperator[Array[T], DoubleList]*/ {
+//                              labbouviPhIels: DblMatrix)(implicit ev1: T => Double, Objective: MLPMain.Objective) /*extends PipeOperator[Array[T], DoubleList]*/ {
 final protected class MLPMain[T <% Double](
                                         config: Config,
                                         xt: LabeledPoint[Array[T]],
@@ -165,11 +165,6 @@ final protected class MLPMain[T <% Double](
  * Define several variants of the constructor<br>
  * Define the class/trait hierarchy for the objective of the MLP {classification, regression}
  * </p>
- *
- * @author Patrick Nicolas
- * @since May 8, 2014
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network /
- * Multilayer perceptron/Training cycle/epoch
  */
 object MLPMain {
   private val EPS = 1e-5

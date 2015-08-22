@@ -8,12 +8,9 @@ import scala.language.implicitConversions
 import scala.reflect.ClassTag
 import scala.util.{Try, Success, Failure}
 
-///**
-// * <p> Inspired by Apache Spark LabeledPoint with some extra cheese</p>
-// */
-//class LabeledPoint[T](val label: String, array:Array[T]) {
-//  require(array.nonEmpty, "LabeledPoint cannot be created with undefined values")
-
+/**
+ * <p> Inspired by Apache Spark LabeledPoint with some extra cheese</p>
+ */
 
 /**
  * <p>Generic class for time series. Any type from different libraries are converted into
@@ -25,10 +22,6 @@ import scala.util.{Try, Success, Failure}
  * @throws IllegalArgumentException If the array of values, arr is undefined
  * @param label Name for the time series (optional)
  * @param arr Array of values of the parameterized T
- *
- * @author Patrick Nicolas
- * @since January, 22, 2014
- * @note Scala for Machine Learning Chapter 3 Data pre-processing / Time series
  */
 class LabeledPoint[T](val label: String, arr: Array[T]) {
   import LabeledPoint._
@@ -128,9 +121,6 @@ class LabeledPoint[T](val label: String, arr: Array[T]) {
  * @param arr Array of values of the parameterized T
  * @constructor Create a multidimensional time series
  * @throws IllegalArgumentException If the array of values, arr is undefined
- * @author Patrick Nicolas
- * @since January, 22, 2014
- * @note Scala for Machine Learning
  */
 @implicitNotFound("Conversion from type T to Double undefined")
 final class VTSeries[T](
@@ -156,9 +146,6 @@ final class VTSeries[T](
 /**
  * <p>Companion object for time series, that define constructors and most
  * common implicit conversions.</p>
- * @author Patrick Nicolas
- * @since January, 22, 2014
- * @note Scala for Machine Learning Chapter 3 Data pre-processing / Time series
  */
 object LabeledPoint {
   //private val logger = Logger.getLogger("XTSeries")

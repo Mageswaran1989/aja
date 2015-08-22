@@ -6,9 +6,6 @@ import org.aja.dhira.core.Types._
 
 /**
  * <p>Define the model trait for classification and optimization algorithms.</p>
- * @author Patrick Nicolas
- * @since March 4, 2014
- * @note Scala for Machine Learning Chapter 2 Hello World!
  */
 trait ModelTrait {
   /**
@@ -202,11 +199,6 @@ final protected class Model(
 /**
  * Companion object for a Multi-layer perceptron model. This singleton is used
  * to validate the class parameters and define its constructors
- *
- * @author Patrick Nicolas
- * @since May 8, 2014
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network / Multilayer perceptron
- * / Model definition
  */
 object Model {
   private val MAX_MLP_NUM_INPUTS = 4096

@@ -14,10 +14,6 @@ import org.aja.dhira.utils.FormatUtils
  * @throws IllegalArgumentException if the class parameters are incorrect
  * @param id Identifier or rank of the MLP layer in the network.
  * @param length Number of elements or neuron in the MLP layer.
- *
- * @author Mageswaran.D
- * @since July 19, 2015
- * @note Aja dhira project
  */
 class Layer(val id: Int, val length: Int) {
 

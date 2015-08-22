@@ -14,10 +14,6 @@ import scala.util.Random
  * @param src  Source (or input or upstream) neural layer to this connection
  * @param dst  Destination (or output or downstream) neural layer for this connection.
  * @param  mlpObjective Objective of the Neural Network (binary classification, regression...)
- * @author Mageswaran
- * @since July 20, 2015
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network / Multilayer perceptron
- * / Model definition
  */
 final protected class Connection(
                                      config: Config,
@@ -146,10 +142,6 @@ final protected class Connection(
 
 /**
  * Companion object for the connection of Multi-layer perceptron.
- * @author Patrick Nicolas
- * @since July 20, 2015
- * @note Scala for Machine Learning Chapter 9 Artificial Neural Network / Multilayer perceptron
- * / Model definition
  */
 object Connection {
   private val BETA = 0.1

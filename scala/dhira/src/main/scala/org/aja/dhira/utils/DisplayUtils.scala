@@ -7,9 +7,6 @@ import org.apache.log4j.Logger
  */
 /**
  * <p>Singleton wrapper for information or debugging information.</p>
- *  @author Patrick Nicolas
- *  @since December 3, 2013
- *  @note Scala for Machine Learning
  */
 object DisplayUtils {
   private val DEFAULT_SHOW_RETURN = 0			// Default return value after info display
