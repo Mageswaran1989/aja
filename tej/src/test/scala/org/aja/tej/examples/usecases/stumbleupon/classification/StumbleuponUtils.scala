@@ -45,7 +45,7 @@ label	                  integer (0 or 1)	User-determined label. Either evergreen
 object StumbleuponUtils {
 
   def getSparkContext = {
-    val conf = new SparkConf().setAppName("MLLib Application").setMaster("local[2]" /*"spark://myhost:7077"*/)
+    val conf = new SparkConf().setAppName("MLLib Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
     new SparkContext(conf)
   }
 

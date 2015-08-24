@@ -1,0 +1,35 @@
+\textbf{The Alternating Least Squares Recommender Algorithm}
+
+- When the dataset has not more than names and likes as the features
+- ALS is an algorithm that learns without access to user or artist attributes. These are
+  typically called collaborative filtering algorithms
+- For example, deciding that two users
+  may share similar tastes because they are the same age is not an example of collaborative
+  filtering. Deciding that two users may like the same song since they play many of the
+  same other songs is an example.
+
+
+\textbf{Models}
+- Later-factor models
+- Matrix factorization
+
+ Mathematically, these algorithms treat the user and product data as if it were a large, sparse
+matrix A, where the entry at row i and column j exists if user i has played artist j. They
+factor A as the matrix product of two smaller matrices, X and Y. They are very skinny
+— both have many rows because A has many rows and columns, but both have just a
+few columns (k). The k columns correspond to the latent factors that are being used to
+explain the interaction data.
+
+
+Papers:
+Collaborative Filtering for Implicit
+Feedback Datasets and Large-scale Parallel Collaborative Filtering
+
+Mathematic Formula:
+$$A_iY(Y^TY)^-1 = X_i
+
+The goal is to find the least square error, as finding the exact solution is not possible.
+$$|A_iY(Y^TY)^-1 - X_i|
+
+Furthermore, in practice this is never solved by actually computing inverses, but via faster and more direct methods involving meth‐
+ods like the QR decomposition.

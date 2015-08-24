@@ -26,7 +26,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   *                       ----------------------------------------------------
   *
   */
-object HelloWorld extends App {
+object HelloWorldSpark extends App {
   //def main(args: Array[String]) {
   val logFile = "data/datascience.stackexchange.com/Posts.xml" // Should be some file on your system
   val conf = new SparkConf().setAppName("Simple Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
