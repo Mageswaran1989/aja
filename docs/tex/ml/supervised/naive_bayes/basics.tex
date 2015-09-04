@@ -1,0 +1,126 @@
+Probability:
+
+Sample Space:
+The set of all possible outcomes of a statistical experiment is called the sample
+space and is represented by the symbol S.
+
+Event:
+An event is a subset of a sample space.
+
+Compliment:
+The complement of an event A with respect to S is the subset of all elements
+of S that are not in A. We denote the complement of A by the symbol A .
+
+Intersection:
+The intersection of two events A and B, denoted by the symbol A ∩ B, is the
+event containing all elements that are common to A and B.
+
+Mutually Exclusive:
+Two events A and B are mutually exclusive, or disjoint, if A ∩ B = φ, that
+is, if A and B have no elements in com
+
+Union:
+The union of the two events A and B, denoted by the symbol A ∪ B, is the event
+containing all the elements that belong to A or B or both.
+
+Multiplication rule:
+ If an operation can be performed in n1 ways, and if for each of these ways a second
+operation can be performed in n2 ways, then the two operations can be performed
+together in n1 n2 ways.
+
+Generalized multiplication rule:
+ If an operation can be performed in n1 ways, and if for each of these a second
+operation can be performed in n2 ways, and for each of the first two a third
+operation can be performed in n3 ways, and so forth, then the sequence of k
+operations can be performed in n1 n2 · · · nk ways.
+
+Permutation:
+A permutation is an arrangement of all or part of a set of objects.
+
+The number of permutations of n objects is n!.
+
+The number of permutations of n distinct objects taken r at a time is
+$nP_r = \fract{n!}{(n-r)!}$
+
+The number of permutations of n objects arranged in a circle is (n − 1)!.
+
+The number of distinct permutations of n things of which n1 are of one kind, n2
+of a second kind, . . . , nk of a kth kind is
+
+$\fract{n!}{n_1!n_2!...n_k!}$
+
+
+The number of ways of partitioning a set of n objects into r cells with n1 elements
+in the first cell, n2 elements in the second, and so forth, is
+(n)
+(n_1, n_2, n_3,..., n_r) = n!/n1!n2!....nr!
+where n_1+n_2+n_3+...+n_r = n
+
+Combination:
+ The number of combinations of n distinct objects taken r at a time is
+(n)  =  \fract(n!)(r!(n-r)!)
+(r)
+
+Probability:
+The probability of an event A is the sum of the weights of all sample points in
+A. Therefore,
+0 ≤ P (A) ≤ 1,
+ P (φ) = 0,
+ and
+ P (S) = 1.
+Furthermore, if A1, A2 , A3 , . . . is a sequence of mutually exclusive events, then
+P (A1 ∪ A2 ∪ A3 ∪ · · · ) = P (A1) + P (A2 ) + P (A3 ) + · · · .
+
+ If an experiment can result in any one of N different equally likely outcomes, and
+if exactly n of these outcomes correspond to event A, then the probability of event
+A is
+
+P (A) = n/N
+
+Additive Rules
+If A and B are two events, then
+P (A ∪ B) = P (A) + P (B) − P (A ∩ B).
+
+If A and A are complementary events, then
+P (A) + P (A^1 ) = 1
+
+Conditional Probability, Independence, and the Product Rule
+The probability of an event B occurring when it is known that some event A
+has occurred is called a conditional probability and is denoted by P (B|A). The
+symbol P (B|A) is usually read “the probability that B occurs given that A occurs”
+or simply “the probability of B, given A.”
+
+It is like given A-B = 9 and A = 5 and asking to find B. Simple isn't?
+
+For example
+P(A∩B) = 2/9
+P(A) = 5/9
+Find P(B) = ?
+          = P(A∩B) - P(A)
+          = P(A∩B)/P(A)
+          = 2/5
+
+The conditional probability of B, given A, denoted by P (B|A), is defined by
+P (B|A) = P (A ∩ B) / P(A), provided  P (A) > 0.
+
+Independent:
+Two events A and B are independent if and only if
+P (B|A) = P (B)
+ or
+ P (A|B) = P (A),
+assuming the existences of the conditional probabilities. Otherwise, A and B are
+dependent.
+
+
+The Product Rule, or the Multiplicative Rule:
+If in an experiment the events A and B can both occur, then
+P (A ∩ B) = P (A) P(B|A), provided P (A) > 0.
+
+ Two events A and B are independent if and only if
+P (A ∩ B) = P(A) P(B).
+Therefore, to obtain the probability that two independent events will both occur,
+we simply find the product of their individual probabilities.
+
+A collection of events A = {A1 , . . . , An } are mutually independent if for any
+subset of A, A_i_1 , . . . , A_i_k , for k ≤ n, we have
+P (A_i_1 ∩ · · · ∩ A_i_k ) = P (A_i_1 ) · · · P (A_i_k ).
