@@ -15,8 +15,8 @@ https://github.com/pfn/android-sdk-plugin
 ###In summary:
 
 In your ~/.bashrc, add paths to   
-`ANDROID_HOME=   `
-`ANDROID_NDK_HOME=`   
+`ANDROID_HOME=   `  
+`ANDROID_NDK_HOME=`     
 
 In your global SBT plugin file:  
 ~/.sbt/0.13/plugins/android.sbt:  
@@ -28,8 +28,8 @@ File -> Project -> Android and follow steps
 After the project is created:  
 Create a file called build.sbt and paste the following lines  
 
-`
-import android.Keys._  
+`  
+import android.Keys._   
 android.Plugin.androidBuild  
 platformTarget in Android := "android-22"  
 scalaVersion := "2.11.2"  
