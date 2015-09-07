@@ -15,6 +15,11 @@ range partitioner to partition the data in ranges within the shuffled RDD. Then 
 these ranges individually with mapPartitions using standard sort mechanisms.
 
  */
+
+/**
+ * Refere org.aja.tej.examples.usecases.wordcount.BibleWordCount for usage
+ */
+
 object SortExample {
 
   def useCases(sc: SparkContext) = {

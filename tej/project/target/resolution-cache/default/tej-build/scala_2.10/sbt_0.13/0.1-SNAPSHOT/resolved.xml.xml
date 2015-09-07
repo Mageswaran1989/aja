@@ -4,7 +4,7 @@
 		module="tej-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20150809132802"
+		publication="20150904092718"
 		e:scalaVersion="2.10" e:sbtVersion="0.13"
 	>
 		<description>

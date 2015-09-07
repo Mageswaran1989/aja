@@ -3,13 +3,10 @@ package org.aja.tej.examples.usecases
 /**
  * Created by mdhandapani on 29/7/15.
  */
-import scala.xml.{ NodeSeq, MetaData }
 import java.io.File
-import scala.io.{ BufferedSource, Source }
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
-import org.apache.log4j.{ LogManager, Level }
 
 //Update the case class with repect to the readme.txt of stackoverflow dataset
 case class Post(
@@ -66,7 +63,6 @@ abstract class StackTable[T] {
 
 object Post extends StackTable[Post] {
 
-  //  val file = new File("data/Posts.xml")
   val file = new File("data/datascience.stackexchange.com/Posts.xml")
   assert(file.exists)
   //Update the get methods with repect to the readme.txt of stackoverflow dataset

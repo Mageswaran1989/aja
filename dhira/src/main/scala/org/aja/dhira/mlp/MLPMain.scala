@@ -1,5 +1,4 @@
 package org.aja.dhira.mlp
-  qg eqy qey q45y
 import org.aja.dhira.core.LabeledPoint
 import org.aja.dhira.core.Types.{DblMatrix,DoubleList}
 import org.aja.dhira.core.LabeledPoint
