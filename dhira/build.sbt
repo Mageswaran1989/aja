@@ -12,13 +12,15 @@ libraryDependencies +=
     ExclusionRule(organization = "javax.jms")
     )
 
-//libraryDependencies  ++= Seq(
+libraryDependencies  ++= Seq(
+  "org.deeplearning4j" % "deeplearning4j-ui" % "0.4-rc1.1",
+  "org.deeplearning4j" % "deeplearning4j-nlp" % "0.4-rc1.1"
 //"org.scalatest" % "scalatest_2.11" % "2.2.4" % "test",
 //"org.scalanlp" %% "breeze" % "0.11.2",
 //"org.scalanlp" %% "breeze-natives" % "0.11.2",
 //"org.scalanlp" %% "breeze-viz" % "0.11.2",
 //  "log4j" %% "log4j" % "2.3"
-//)
+)
 
 resolvers ++= Seq(
   "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/",

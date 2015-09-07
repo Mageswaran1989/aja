@@ -14,7 +14,7 @@ object XOR {
   private val ALPHA = 0.85
   private val ETA = 0.01
     val SIZE_HIDDEN_LAYER = 2
-    val TEST_SIZE = 30
+    val TEST_SIZE = 4
     val NUM_EPOCHS = 25000
     val NOISE_RATIO = 0.7
     val EPS = 1e-4
