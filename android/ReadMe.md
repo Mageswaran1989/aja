@@ -28,14 +28,13 @@ File -> Project -> Android and follow steps
 After the project is created:  
 Create a file called build.sbt and paste the following lines  
 
-`  
 import android.Keys._   
 android.Plugin.androidBuild  
 platformTarget in Android := "android-22"  
 scalaVersion := "2.11.2"  
 name := "your-app-name"  
 javacOptions in Compile ++= Seq("-source", "1.6", "-target", "1.6")  
-`
+
 
 To build Android from IntelliJ:  
 Goto Run -> Edit Configuration -> Create SBT- Task called "Android-SBT" and add `"android:package-debug"` in Tasks text box.  
