@@ -1,0 +1,2 @@
+http://databricks.gitbooks.io/databricks-spark-reference-applications/content/timeseries/index.html
+https://github.com/databricks/reference-apps/tree/master/timeseries/scala/timeseries-weather/src/main/scala/com/databricks/apps

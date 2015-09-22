@@ -1,0 +1,8 @@
+Create k points for starting centroids (often randomly)
+While any point has changed cluster assignment
+      for every point in our dataset:
+          for every centroid
+              calculate the distance between the centroid and point
+          assign the point to the cluster with the lowest distance
+      for every cluster calculate the mean of the points in that cluster
+          assign the centroid to the mean

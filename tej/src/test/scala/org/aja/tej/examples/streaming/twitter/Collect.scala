@@ -4,18 +4,18 @@ package org.aja.tej.examples.streaming.twitter
  * Created by mageswaran on 29/7/15.
  */
 
-//https://github.com/databricks/reference-apps
-
-import java.io.File
-
-import com.google.gson.Gson
-import org.apache.spark.streaming.twitter.TwitterUtils
-import org.apache.spark.streaming.{Seconds, StreamingContext}
-import org.apache.spark.{SparkConf, SparkContext}
-
 /**
- * Collect at least the specified number of tweets into json text files.
- *  %  ${YOUR_SPARK_HOME}/bin/spark-submit \
+Spark Streaming is used to collect tweets as the dataset.
+The tweets are written out in JSON format, one tweet per line.
+A file of tweets is written every time interval until at least the desired number of tweets is collected.
+
+outputDirectory - the output directory for writing the tweets. The files will be named 'part-%05d'
+numTweetsToCollect - this is the minimum number of tweets to collect before the program exits.
+intervalInSeconds - write out a new set of tweets every interval.
+partitionsEachInterval - this is used to control the number of output files written for each interval
+
+  * Collect at least the specified number of tweets into json text files.
+  *  %  ${YOUR_SPARK_HOME}/bin/spark-submit \
      --class "com.databricks.apps.twitter_classifier.Collect" \
      --master ${YOUR_SPARK_MASTER:-local[4]} \
      target/scala-2.10/spark-twitter-lang-classifier-assembly-1.0.jar \
@@ -36,7 +36,15 @@ import org.apache.spark.{SparkConf, SparkContext}
 --consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3
 --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
 --accessTokenSecret GOWRqKf1EDjxjPSoOAuazefweKdJgidvNQBvTpri7TEd5
- */
+  */
+
+import java.io.File
+
+import com.google.gson.Gson
+import org.apache.spark.streaming.twitter.TwitterUtils
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.{SparkConf, SparkContext}
+
 object Collect {
   private var numTweetsCollected = 0L
   private var partNum = 0

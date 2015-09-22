@@ -24,6 +24,15 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 //--accessToken ${YOUR_TWITTER_ACCESS_TOKEN}  \
 //--accessTokenSecret ${YOUR_TWITTER_ACCESS_SECRET}
 
+/*
+ data/tweets/model
+21
+--consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw
+--consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3
+--accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
+--accessTokenSecret GOWRqKf1EDjxjPSoOAuazefweKdJgidvNQBvTpri7TEd5
+ */
+
 
 object Predict {
   def main(args: Array[String]) {
@@ -36,7 +45,7 @@ object Predict {
       Utils.parseCommandLineWithTwitterCredentials(args)
 
     println("Initializing Streaming Spark Context...")
-    val conf = new SparkConf().setAppName(this.getClass.getSimpleName)
+    val conf = new SparkConf().setAppName(this.getClass.getSimpleName).setMaster("local[4]")
     val ssc = new StreamingContext(conf, Seconds(5))
 
     println("Initializing Twitter stream...")
