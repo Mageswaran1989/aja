@@ -10,7 +10,10 @@ import org.apache.spark.SparkContext
  groupByKey[Pair]
 Very similar to groupBy, but instead of supplying a function, the key-component of each
 pair will automatically be presented to the partitioner.
-
+ * Avoid groupByKey when performing an associative reductive operation.
+ * For example, rdd.groupByKey().mapValues(_.sum) will produce the same results as rdd.reduceByKey(_ + _).
+ * However, the former will transfer the entire dataset across the network, while the latter will compute
+ * local sums for each key in each partition and combine those local sums into larger sums after shuffling
  */
 object GroupByExample {
 
@@ -67,8 +70,6 @@ object GroupByExample {
     val a4 = sc . parallelize ( List (" dog " , " tiger " , " lion " , " cat " , " spider " ,"eagle ") , 2)
     val b4 = a4 . keyBy ( _ . length )
     b4 . groupByKey . collect
-
-
 
   }
 

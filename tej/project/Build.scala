@@ -3,7 +3,7 @@ import sbt._
 
 object BuildSettings {
 
-  val Name = "tej"
+  val Name = "aja-tej"
   val Version = "0.0.1"
   // You can use either version of Scala. We default to 2.11.7:
   val ScalaVersion = "2.11.7"

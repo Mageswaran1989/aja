@@ -22,9 +22,11 @@ deterministic, make sure that your code will yield the same result regardless of
 number or size of partitions.
 • Do not assume any execution order for either partition computations or combining
 partitions.
+
 • The neutral zeroValue is applied at the beginning of each sequence of reduces
 within the individual partitions and again when the output of separate partitions
 is combined.
+
 • Why have two separate combine functions? The first functions maps the input
 values into the result space. Note that the aggregation data type (1st input and
 output) can be different (U != T ). The second function reduces these mapped

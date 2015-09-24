@@ -46,6 +46,7 @@ final protected class Connection(
     // Iterates over all the synapsed except the first or bian selement
     val _output = synapses.drop(1).map(x => {
       // Compute the dot product
+      //xy => x(weights,gradient)y(array)
       val sum = x.zip(src.data).foldLeft(0.0)((s, xy) => s + xy._1._1 * xy._2)
 
       // Applies the activation function if this is a hidden layer (not output)
