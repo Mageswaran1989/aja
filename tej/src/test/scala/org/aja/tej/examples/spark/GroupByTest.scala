@@ -10,6 +10,11 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Usage: GroupByTest [numMappers] [numKVPairs] [valSize] [numReducers]
+ *
+ * Avoid groupByKey when performing an associative reductive operation.
+ * For example, rdd.groupByKey().mapValues(_.sum) will produce the same results as rdd.reduceByKey(_ + _).
+ * However, the former will transfer the entire dataset across the network, while the latter will compute
+ * local sums for each key in each partition and combine those local sums into larger sums after shuffling.
  */
 object GroupByTest {
   def main(args: Array[String]) {

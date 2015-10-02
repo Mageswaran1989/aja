@@ -9,6 +9,10 @@ Linear Algebra:
 
 OpenCL for GPU integration:
 - [ScalaCL](https://github.com/nativelibs4java/ScalaCL)i
+- [JOCL](http://www.jocl.org/)
+
+Native Interfaces:
+- https://github.com/java-native-access/jna
 
 We shall explore Neural Network libraries:
 - [PyBrain](http://pybrain.org/)

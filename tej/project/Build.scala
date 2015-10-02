@@ -3,7 +3,7 @@ import sbt._
 
 object BuildSettings {
 
-  val Name = "tej"
+  val Name = "aja-tej"
   val Version = "0.0.1"
   // You can use either version of Scala. We default to 2.11.7:
   val ScalaVersion = "2.11.7"
@@ -44,7 +44,7 @@ object Resolvers {
 //Dont use %% for thir party libraries for which appending Scala version might not help in fetching
 object Dependency {
   object Version {
-    val Spark        = "1.4.1"
+    val Spark        = "1.5.0"
     val ScalaTest    = "2.2.4"
     val ScalaCheck   = "1.12.2"
     val Twitter      = "4.0.4"
@@ -89,7 +89,7 @@ object TejSparkBuild extends Build {
 
   val excludeSigFilesRE = """META-INF/.*\.(SF|DSA|RSA)""".r
   lazy val activatorspark = Project(
-    id = "tej-shell",
+    id = "tej",
     base = file("."),
     settings = buildSettings ++ Seq(
       shellPrompt := { state => "(%s)> ".format(Project.extract(state).currentProject.id) },
