@@ -1,6 +1,6 @@
 package org.aja.tej.examples.usecases.wordcount
 
-import org.aja.tej.utils.Utils._
+import org.aja.tej.utils.TejUtils._
 
 /**
  * Created by mageswaran on 30/8/15.

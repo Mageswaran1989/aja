@@ -1,6 +1,6 @@
 package org.aja.tej.examples.mllib.regression
 
-import org.aja.tej.utils.Utils
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionModel, LinearRegressionWithSGD}
 
@@ -11,7 +11,7 @@ import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionModel, L
 
 object LinearReg extends App{
 
-  val sc = Utils.getSparkContext("Simple LR")
+  val sc = TejUtils.getSparkContext("Simple LR")
   // Load and parse the data
   val data = sc.textFile("data/lpsa.data")
 

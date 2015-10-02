@@ -1,6 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
-import org.aja.tej.utils.Utils._
+import org.aja.tej.utils.TejUtils._
 /**
  * Created by mageswaran on 12/8/15.
  */

@@ -1,6 +1,6 @@
 package org.aja.tej.examples.mllib.regression
 
-import org.aja.tej.utils.Utils
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.mllib.classification.{LogisticRegressionModel, LogisticRegressionWithLBFGS}
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.mllib.regression.LabeledPoint
@@ -11,7 +11,7 @@ import org.apache.spark.mllib.util.MLUtils
  */
 object LogReg extends App {
 
-  val sc = Utils.getSparkContext("Simple LogReg")
+  val sc = TejUtils.getSparkContext("Simple LogReg")
 
   // Load training data in LIBSVM format.
   val data = MLUtils.loadLibSVMFile(sc, "data/sample_libsvm_data.txt")
