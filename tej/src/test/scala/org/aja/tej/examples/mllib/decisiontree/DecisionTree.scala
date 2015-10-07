@@ -1,6 +1,6 @@
 package org.aja.tej.examples.mllib.decisiontree
 
-import org.aja.tej.utils.Utils
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.mllib.tree.DecisionTree
 import org.apache.spark.mllib.tree.model.DecisionTreeModel
 import org.apache.spark.mllib.util.MLUtils
@@ -9,7 +9,7 @@ import org.apache.spark.mllib.util.MLUtils
  */
 object DecisionTreeExample extends App {
 
-  val sc = Utils.getSparkContext("DecisionTree")
+  val sc = TejUtils.getSparkContext("DecisionTree")
 
   // Load and parse the data file.
   val data = MLUtils.loadLibSVMFile(sc, "data/sample_libsvm_data.txt")

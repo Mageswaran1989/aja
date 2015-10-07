@@ -5,7 +5,7 @@ import org.apache.spark.{SparkContext, SparkConf}
 /**
  * Created by mageswaran on 26/7/15.
  */
-object Utils {
+object TejUtils {
 
   def getSparkContext(applicationName: String, master: String = "local[4]") = {
     val conf = new SparkConf().setAppName(applicationName).setMaster(master /*"spark://myhost:7077"*/)
