@@ -12,6 +12,9 @@
 *.pyc
 *.cache
 *.*~
+.idea/*
+target/*
+project/target/*
 tej/.idea/*
 tej/target/*
 tej/project/target/*

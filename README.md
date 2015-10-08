@@ -10,9 +10,9 @@
 
 #Project Structure
 - [Android](https://github.com/Mageswaran1989/aja/tree/master/android) : Android + Scala integration!
-- [dhira](https://github.com/Mageswaran1989/aja/tree/master/dhira) : Scala based Artificial Neural Network exploration at its infancy!
-- [tantra](https://github.com/Mageswaran1989/aja/tree/master/tantra) : Scala language exploration examples and utilities!
-- [tej](https://github.com/Mageswaran1989/aja/tree/master/tej) : Apache Spark examples and utilities!
+- [org.aja.dhira Pacakage]()  : Scala based Artificial Neural Network exploration at its infancy!
+- [org.aja.tantra]() : Scala language exploration examples and utilities!
+- [org.aja.tej]()    : Apache Spark examples and utilities!
 - [docs](https://github.com/Mageswaran1989/aja/tree/master/docs) : All reference materials
 - [data](https://github.com/Mageswaran1989/aja/tree/master/data) : Datasets used in the implementation
 - [tools](https://github.com/Mageswaran1989/aja/tree/master/tools) : Custom GUI tools if any need arises
