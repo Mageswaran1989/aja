@@ -46,7 +46,7 @@ private:
 //        int n1 = (int) (2.0 * rand() / double(RAND_MAX));
 //        int n2 = (int) (2.0 * rand() / double(RAND_MAX));
 
-//        int t = n1 * n2; //should be one or zero
+//        int t = n1 ^ n2; //should be one or zero
 
 //        cout << "in: " << n1 << ".0 " << n2 << ".0" << endl;
 //        cout << "out: " << t << ".0" << endl;
