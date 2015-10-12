@@ -1,0 +1,10 @@
+%Ref: http://www.texample.net/tikz/examples/tree/
+\begin{tikzpicture}[sibling distance=10em,
+  every node/.style = {shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=blue!20}]]
+  \node {Gradient Descent}
+    child { node {Logistic Gradient} }
+    child { node {LeastSquares Gradient} }
+    child { node {Hinge Gradient} };
+\end{tikzpicture}
