@@ -1,6 +1,7 @@
 package org.aja.tej.examples.spark.rdd
 
 import org.apache.spark.SparkContext
+import org.aja.tej.utils.TejUtils._
 
 /**
  * Created by mageswaran on 15/8/15.
@@ -53,21 +54,6 @@ object MapExample {
     val b = a . map ( _ . length )
     val c = a . zip ( b )
     c . collect
-
-    val a1 = sc.parallelize (1 to 9 , 3)
-    def myfunc[T](iter: Iterator[T]) : Iterator[(T,T)] = {
-      var res = List [(T,T)]()
-      var pre = iter.next
-      while(iter.hasNext)
-      {
-        val cur = iter.next ;
-        res.::=(pre, cur)
-        pre = cur;
-      }
-      res.iterator
-    }
-    a1.mapPartitions(myfunc).collect
-    // Array [( Int , Int ) ] = Array ((2 ,3) ,(1 ,2) , (5 ,6) ,(4 ,5) , (8 ,9) ,(7 ,8) )
 
     val x = sc . parallelize ( List ("1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" ,
       "10") , 3)
@@ -125,6 +111,73 @@ object MapExample {
     val b4 = a4 . mapWith (" Index :" + _ ) (( a , b ) => (" Value :" + a , b ) )
     b4 . collect
 
+  }
+
+  def mapPartition(sc: SparkContext) = {
+
+    println("/*****************mapPartition - UseCase 1********************/")
+    val x = sc.parallelize(Array(1,2,3), 2)
+
+    def f(i: Iterator[Int]) = {(i.sum, 42).productIterator}
+
+    val y = x.mapPartitions(f)
+    //Output
+    //    x: Array(Array(1), Array(2, 3))
+    //    y: Array(Array(1, 42), Array(5, 42))
+
+    val xOut = x.glom().collect()
+    val yOut = y.glom().collect()
+
+    //glom flatten elements on the same partition
+    xOut.foreach(_.foreach(println)) //TODO: Array to set and print
+    println("Output")
+    yOut.foreach(_.foreach(println))
+
+    println("/*****************mapPartition - UseCase 2********************/")
+    val a1 = sc.parallelize (1 to 9 , 3)
+    def myfunc[T](iter: Iterator[T]) : Iterator[(T,T)] = {
+      var res = List [(T,T)]()
+      var pre = iter.next
+      while(iter.hasNext)
+      {
+        val cur = iter.next ;
+        res.::=(pre, cur)
+        pre = cur;
+      }
+      res.iterator
+    }
+    a1.mapPartitions(myfunc).collect
+    // Array [( Int , Int ) ] = Array ((2 ,3) ,(1 ,2) , (5 ,6) ,(4 ,5) , (8 ,9) ,(7 ,8) )
+
+    a1.foreach(println)
+  }
+
+  def mapPartitionWithIndex(sc: SparkContext) = {
+    println("/*****************mapPartitionWithIndex - UseCase 1********************/")
+    val x = sc.parallelize(Array(1,2,3), 2)
+
+    def f (partitionIndex: Int, iter: Iterator[Int]) = { (partitionIndex, iter.sum).productIterator}
+
+    val y = x.mapPartitionsWithIndex(f)
+
+    val xOut = x.glom().collect()
+    val yOut = y.glom().collect()
+
+    //glom flatten elements on the same partition
+    xOut.foreach(_.foreach(println)) //TODO: Array to set and print
+    println("Output")
+    yOut.foreach(_.foreach(println))
+
+//    x: Array(Array(1), Array(2, 3))
+//    y: Array(Array(0, 1), Array(1, 5))
+
+  }
+
+  def main(args: Array[String]) {
+    val sc = getSparkContext("MapExample")
+
+    mapPartition(sc)
+    mapPartitionWithIndex(sc)
 
   }
 
