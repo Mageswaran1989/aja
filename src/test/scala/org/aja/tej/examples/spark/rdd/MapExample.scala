@@ -50,20 +50,20 @@ Finally the function has to return a transformed data item of type U .
 object MapExample {
   def useCases(sc: SparkContext) = {
 
-    val a = sc . parallelize ( List (" dog " , " salmon " , " salmon " , " rat " , " elephant ") , 3)
-    val b = a . map ( _ . length )
-    val c = a . zip ( b )
-    c . collect
+    val a = sc.parallelize(List("dog","salmon","salmon","rat","elephant"),3)
+    val b = a.map(_.length)
+    val c = a.zip(b)
+    c.collect
 
-    val x = sc . parallelize ( List ("1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" ,
-      "10") , 3)
-    def myfunc1 ( iter : Iterator [ Int ]) : Iterator [ Int ] = {
-      var res = List [ Int ]()
-      while ( iter . hasNext ) {
-        val cur = iter . next ;
-        res = res ::: List . fill ( scala . util . Random . nextInt (10) ) ( cur )
+    val x = sc.parallelize(List("1","2","3","4","5","6","7","8","9","10"), 3)
+
+    def myfunc1(iter: Iterator [Int]): Iterator [Int] = {
+      var res = List [Int]()
+      while(iter.hasNext) {
+        val cur = iter.next
+        res = res:::List.fill(scala.util.Random.nextInt(10))(cur)
       }
-      res . iterator
+      res.iterator
     }
     //x . mapPartitions ( myfunc1 ) . collect
     // some of the number are not outputted at all . This is because the
@@ -72,8 +72,8 @@ object MapExample {
      // 4 , 4 , 4 , 4 , 4 , 4 , 5 , 7 , 7 , 7 , 9 , 9 , 10)
 
     //The above program can also be written using flatMap as follows:
-    val x1 = sc . parallelize (1 to 10 , 3)
-    x1 . flatMap ( List . fill ( scala . util . Random . nextInt (10) ) ( _ ) ) . collect
+    val x1 = sc.parallelize (1 to 10 , 3)
+    x1.flatMap(List.fill(scala.util.Random.nextInt(10))(_)).collect
 
 
     val a2 = sc.parallelize (1 to 9,3)
