@@ -1,6 +1,7 @@
 **This folder contains all data sets that are been used in Aja library**
 
 
+
 Dataset : data/sample_multiclass_classification_data.txt
 Code    : ml/ANNnet.scala
 
@@ -36,3 +37,7 @@ Code    : StackOverFlow.scala
 
 Dataset : data/northwind (https://northwinddatabase.codeplex.com/releases/view/71634)
 Code    : NorthWindDataset.scala
+
+LibSVM format:
+class/output index1:non_zero_value1 index2:non_zero_value2 ...
+

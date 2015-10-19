@@ -9,6 +9,10 @@ import org.apache.spark.SparkContext
 Coalesces the associated data into a given number of partitions. repartition(numPartitions)
 is simply an abbreviation for coalesce(numPartitions, shuffle = true).
 
+The coalesce method is a good method to pack and rebalance your RDDs (for example, after a filter operation where you
+have less data after the action).
+New Partition > Old partition : shuffle=True
+New Partition < Old partition : shuffle=False
  */
 object CoalesceRepartitionExample{
 

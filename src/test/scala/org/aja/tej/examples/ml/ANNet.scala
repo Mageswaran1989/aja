@@ -18,6 +18,10 @@ object ANNet extends App {
 
   // Load training data
   val data = MLUtils.loadLibSVMFile(sc, "data/sample_multiclass_classification_data.txt").toDF()
+
+  data.printSchema()
+  data.show()
+
   // Split the data into train and test
   val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
   val train = splits(0)
