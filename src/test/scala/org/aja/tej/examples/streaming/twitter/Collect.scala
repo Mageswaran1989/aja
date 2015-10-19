@@ -29,7 +29,7 @@ partitionsEachInterval - this is used to control the number of output files writ
      --accessTokenSecret ${YOUR_TWITTER_ACCESS_SECRET}
 
  data/tweets
- 10000
+ 1000
  10
  1
 --consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw
@@ -41,6 +41,7 @@ partitionsEachInterval - this is used to control the number of output files writ
 import java.io.File
 
 import com.google.gson.Gson
+import org.aja.tej.utils.TejTwitterUtils
 import org.apache.spark.streaming.twitter.TwitterUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
@@ -57,8 +58,10 @@ object Collect {
         "<outputDirectory> <numTweetsToCollect> <intervalInSeconds> <partitionsEachInterval>")
       System.exit(1)
     }
-    val Array(outputDirectory, Utils.IntParam(numTweetsToCollect),  Utils.IntParam(intervalSecs), Utils.IntParam(partitionsEachInterval)) =
-      Utils.parseCommandLineWithTwitterCredentials(args)
+    val Array(outputDirectory, TejTwitterUtils.IntParam(numTweetsToCollect),  TejTwitterUtils.IntParam(intervalSecs),
+                TejTwitterUtils.IntParam(partitionsEachInterval)) =
+      TejTwitterUtils.parseCommandLineWithTwitterCredentials(args)
+
     val outputDir = new File(outputDirectory.toString)
     if (outputDir.exists()) {
       System.err.println("Found - %s already exists: deleting...".format(
@@ -73,7 +76,7 @@ object Collect {
     val sc = new SparkContext(conf)
     val ssc = new StreamingContext(sc, Seconds(intervalSecs))
 
-    val tweetStream = TwitterUtils.createStream(ssc, Utils.getAuth)
+    val tweetStream = TwitterUtils.createStream(ssc, TejTwitterUtils.getAuth)
       .map(gson.toJson(_))
 
     tweetStream.foreachRDD((rdd, time) => {

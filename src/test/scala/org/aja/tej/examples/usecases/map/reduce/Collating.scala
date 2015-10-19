@@ -7,21 +7,21 @@ import org.aja.tej.utils.TejUtils
  */
 
 /**
-  Collating
-  =========
+Collating
+=========
     Problem Statement: There is a set of items and some function of one item. It is required to save all items that have
-    the same value of function into one file or perform some other computation that requires all such items to be
-    processed as a group. The most typical example is building of inverted indexes.
+the same value of function into one file or perform some other computation that requires all such items to be
+processed as a group. The most typical example is building of inverted indexes.
 
-   Solution:
-   --------
-      The solution is straightforward. Mapper computes a given function for each item and emits value of the function as a
-   key and item itself as a value. Reducer obtains all items grouped by function value and process or save them. In case of
-   inverted indexes, items are terms (words) and function is a document ID where the term was found.
+Solution:
+--------
+  The solution is straightforward. Mapper computes a given function for each item and emits value of the function as a
+key and item itself as a value. Reducer obtains all items grouped by function value and process or save them. In case of
+inverted indexes, items are terms (words) and function is a document ID where the term was found.
 
-   Applications:
-   --------------
-    Inverted Indexes, ETL
+Applications:
+--------------
+  Inverted Indexes, ETL
 
    Document 1                                        ID  Term     Doc_ID
    Document 2   ===> Stoping Word List Filter ===>   1   obtains    1

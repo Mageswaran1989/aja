@@ -3,6 +3,8 @@ package org.aja.tej.examples.streaming.twitter
 /**
  * Created by mageswaran on 30/7/15.
  */
+
+import org.aja.tej.utils.TejTwitterUtils
 import org.apache.spark.SparkConf
 import org.apache.spark.mllib.clustering.KMeansModel
 import org.apache.spark.mllib.linalg.Vector
@@ -41,22 +43,22 @@ object Predict {
       System.exit(1)
     }
 
-    val Array(modelFile, Utils.IntParam(clusterNumber)) =
-      Utils.parseCommandLineWithTwitterCredentials(args)
+    val Array(modelFile, TejTwitterUtils.IntParam(clusterNumber)) =
+      TejTwitterUtils.parseCommandLineWithTwitterCredentials(args)
 
     println("Initializing Streaming Spark Context...")
     val conf = new SparkConf().setAppName(this.getClass.getSimpleName).setMaster("local[4]")
     val ssc = new StreamingContext(conf, Seconds(5))
 
     println("Initializing Twitter stream...")
-    val tweets = TwitterUtils.createStream(ssc, Utils.getAuth)
+    val tweets = TwitterUtils.createStream(ssc, TejTwitterUtils.getAuth)
     val statuses = tweets.map(_.getText)
 
     println("Initalizaing the the KMeans model...")
     val model = new KMeansModel(ssc.sparkContext.objectFile[Vector](modelFile.toString).collect())
 
     val filteredTweets = statuses
-      .filter(t => model.predict(Utils.featurize(t)) == clusterNumber)
+      .filter(t => model.predict(TejTwitterUtils.featurize(t)) == clusterNumber)
     filteredTweets.print()
 
     // Start the streaming computation

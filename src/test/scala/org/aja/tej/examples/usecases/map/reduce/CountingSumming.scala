@@ -7,20 +7,20 @@ import org.aja.tej.utils.TejUtils
  */
 
 /**
-  Counting and Summing
-  ====================
+Counting and Summing
+====================
 
-  Problem Statement:
-  ------------------
-    There is a number of documents where each document is a set of terms. It is required to calculate a total number of
-  occurrences of each term in all documents. Alternatively, it can be an arbitrary function of the terms. For
-  instance, there is a log file where each record contains a response time and it is required to calculate an average
-  response time.
+Problem Statement:
+------------------
+  There is a number of documents where each document is a set of terms. It is required to calculate a total number of
+occurrences of each term in all documents. Alternatively, it can be an arbitrary function of the terms. For
+instance, there is a log file where each record contains a response time and it is required to calculate an average
+response time.
 
-  Applications:
-  -------------
+Applications:
+-------------
   Log Analysis, Data Querying
-  */
+*/
 object CountingSumming extends App {
 
   val sc = TejUtils.getSparkContext("MapReducePattern - CountingSumming")

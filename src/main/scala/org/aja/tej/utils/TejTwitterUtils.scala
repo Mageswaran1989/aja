@@ -1,16 +1,16 @@
-package org.aja.tej.examples.streaming.twitter
+package org.aja.tej.utils
 
 /**
  * Created by mageswaran on 29/7/15.
  * Reference: https://github.com/databricks/reference-apps/tree/master/twitter_classifier
  */
 import org.apache.commons.cli.{Options, ParseException, PosixParser}
-import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.mllib.feature.HashingTF
+import org.apache.spark.mllib.linalg.Vector
 import twitter4j.auth.OAuthAuthorization
 import twitter4j.conf.ConfigurationBuilder
 
-object Utils {
+object TejTwitterUtils {
 
   val numFeatures = 1000
   val tf = new HashingTF(numFeatures)

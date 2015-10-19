@@ -27,6 +27,7 @@ After training the model, some sample tweets from the different clusters are sho
 // data/tweets/tweets*/part-* data/tweets/model 25 20
 
 import com.google.gson.{GsonBuilder, JsonParser}
+import org.aja.tej.utils.TejTwitterUtils
 import org.apache.spark.mllib.clustering.KMeans
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
@@ -42,7 +43,7 @@ object ExamineAndTrain {
         " <tweetInput> <outputModelDir> <numClusters> <numIterations>")
       System.exit(1)
     }
-    val Array(tweetInput, outputModelDir, Utils.IntParam(numClusters), Utils.IntParam(numIterations)) = args
+    val Array(tweetInput, outputModelDir, TejTwitterUtils.IntParam(numClusters), TejTwitterUtils.IntParam(numIterations)) = args
 
     val conf = new SparkConf().setAppName(this.getClass.getSimpleName).setMaster("local[4]")
     val sc = new SparkContext(conf)
@@ -83,7 +84,7 @@ object ExamineAndTrain {
 
     // Cache the vectors RDD since it will be used for all the KMeans iterations.
     //First, we need to featurize the Tweet text. MLLib has a HashingTF class that does that:
-    val vectors = texts.map(Utils.featurize).cache()
+    val vectors = texts.map(TejTwitterUtils.featurize).cache()
 
     vectors.count()  // Calls an action on the RDD to populate the vectors cache.
 
@@ -95,7 +96,7 @@ object ExamineAndTrain {
     for (i <- 0 until numClusters) {
       println(s"\nCLUSTER $i:")
       some_tweets.foreach { t =>
-        if (model.predict(Utils.featurize(t)) == i) {
+        if (model.predict(TejTwitterUtils.featurize(t)) == i) {
           println(t)
         }
       }

@@ -48,7 +48,8 @@ object Dependency {
     val ScalaTest    = "2.2.4"
     val ScalaCheck   = "1.12.2"
     val Twitter      = "3.0.3"
-    val Breeze       = "0.10"
+    val Breeze       = "0.11.2"
+    val Akka         = "2.4.0"
   }
 
   val sparkCore      = "org.apache.spark"  %% "spark-core"      % Version.Spark  withSources()
@@ -69,6 +70,7 @@ object Dependency {
   val cli            = "commons-cli"          % "commons-cli"    % "1.2" withSources()
   val breeze         = "org.scalanlp"         %% "breeze"         % Version.Breeze withSources()
   val breezeNatives  = "org.scalanlp"         %% "breeze-natives" % Version.Breeze withSources()
+  val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
 }
 
 //
