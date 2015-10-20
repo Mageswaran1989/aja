@@ -92,12 +92,16 @@ object Dependencies {
 object TejSparkBuild extends Build {
   import BuildSettings._
 
+
+
   val excludeSigFilesRE = """META-INF/.*\.(SF|DSA|RSA)""".r
   lazy val activatorspark = Project(
     id = "aja-workspace",
     base = file("."),
     settings = buildSettings ++ Seq(
       shellPrompt := { state => "(%s)> ".format(Project.extract(state).currentProject.id) },
+      unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "examples",
+        unmanagedSourceDirectories in Compile += baseDirectory.value / "examples",
       maxErrors          := 5,
       triggeredMessage   := Watched.clearWhenTriggered,
       // runScriptSetting,
@@ -115,5 +119,6 @@ object TejSparkBuild extends Build {
       // fork := true,
       // Must run Spark tests sequentially because they compete for port 4040!
       parallelExecution in Test := false))
+
 }
 

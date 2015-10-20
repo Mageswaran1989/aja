@@ -15,6 +15,10 @@ cleanupCommands += """
 addCommandAlias("WordCountMain",  "test:runMain org.aja.tej.examples.usecases.wordcount.WordCountMain")
 
 fork in run := true
+
+unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "examples"
+unmanagedSourceDirectories in Compile += baseDirectory.value / "examples"
+
 /*
  * Plain old model. Currently using project/Build.scala for better approach
  */
