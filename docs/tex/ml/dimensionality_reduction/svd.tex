@@ -1,0 +1,72 @@
+\chapter{Singular value decomposition (SVD)}
+
+Singular value decomposition (SVD) factorizes a matrix into three matrices: U, \Sigma and V such.
+For example Singular value decomposition takes a rectangular matrix of gene expression data (defined as A, where A is
+a n x p matrix) in which the n rows represents the genes, and the p columns represents the experimental conditions.
+The SVD theorem states:
+
+A_{nxp} = U{nxn} \Sigma_{nxp} V^T{pxp},
+
+where
+U^TU = I_{nxn}
+V^TV = I_{pxp}
+
+- U is an orthonormal matrix, whose columns are called left singular vectors(gene coefficient vectors),
+- \Sigma is a diagonal matrix with non-negative diagonals in descending order, whose diagonals are
+   called singular values(mode amplitudes),
+- V is an orthonormal matrix, whose columns are called right singular vectors (expression level vectors).
+
+The SVD represents an expansion of the original data in a coordinate system where the covariance matrix is diagonal.
+For large matrices, usually we don’t need the complete factorization but only the top singular values and its associated
+singular vectors. This can save storage, de-noise and recover the low-rank structure of the matrix.
+
+If we keep the top k singular values, then the dimensions of the resulting low-rank matrix will be:
+
+U: m×k,
+Σ: k×k,
+V: n×k.
+
+
+Calculating the SVD:
+ Consists of finding the eigenvalues and eigenvectors of AA^T and A^TA.
+ The eigenvectors of A^TA make up the columns of V.
+ The eigenvectors of AA^T  make up the columns of U.
+ Also, the singular values in S are square roots of eigenvalues from AA^T or A^TA.
+
+ The singular values are the diagonal entries of the S matrix and are arranged in descending order.
+ The singular values are always real numbers. If the matrix A is a real matrix, then U and V are also
+real.
+
+\section{Excercise}
+Find SVD of A
+A_{4,2} =
+ \begin{bmatrix}
+ 2 & 4 \\
+ 1 & 3 \\
+ 0 & 0 \\
+ 0 & 00
+ \end{bmatrix}
+
+
+\subsection{Python}
+import numpy as np
+X = np.matrix("2,4; 1,3; 0,0; 0,0")
+U, S, V = np.linalg.svd(X, full_matrices=False)
+X_a = np.dot(np.dot(U, np.diag(S)), V)
+print(X)
+print(U)
+print(S)
+print(V)
+print(X_a)
+print(np.std(X), np.std(X_a), np.std(X - X_a))
+
+\subsection{Scala}
+Insert this
+import breeze.linalg._
+import breeze.numerics._
+val a = new DenseMatrix(4,2, Array(2.0,1.0,0.0,0.0,4.0,3.0,0.0,0.0))
+val svd.SVD(u,s,v) = svd(a)
+
+\section{For more refer:}
+- https://spark.apache.org/docs/latest/mllib-dimensionality-reduction.html
+- http://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm

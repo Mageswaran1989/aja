@@ -1,0 +1,17 @@
+LWLR (Locally weighted Linear Regression)
+To reduce the mean square error
+
+$$
+W(cap) = (X^TWX)^-1X^TWy
+$$
+
+$$
+w(i,i) = \exp{\frac{x^i - x}{-2k^2}}
+$$
+x^i -> Test point
+
+Cons: Lot of computation
+
+
+What if we have more features than data points?
+(X^TX)^-1 -> will give an error, so X is not full rank, hence difficult to compute inverse!

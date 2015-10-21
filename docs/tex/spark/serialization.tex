@@ -1,0 +1,14 @@
+Found the the right thing to tradeoff between Speed vs space vs full support of Java objects?
+Default: Java's deafual serialization
+Optional: KyroSerializer (https://github.com/EsotericSoftware/kryo)
+
+The KyroSerializer is much faster and generally uses about one tenth of the memory as the default serializer. You can
+switch the serializer by setting spark.serializer to spark.KryoSerializer. If you want to use KyroSerializer, you need
+to make sure that the classes are serializable by KyroSerializer. Spark provides a trait KryoRegistrator, which you can
+extend to register your classes with Kyro, as shown in the following code:
+
+class Reigstrer extends spark.KyroRegistrator {
+  override def registerClasses(kyro: Kyro) {
+  kyro.register(classOf[MyClass])
+  }
+}

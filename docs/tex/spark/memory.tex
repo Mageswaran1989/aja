@@ -1,0 +1,10 @@
+http://spark.apache.org/docs/latest/programming-guide.html#rdd-persistence
+
+In short:
+rdd.persist(x)
+x can be:
+MEMORY_ONLY
+MEMORY_AND_DISK
+DISK_ONLY
+
+Add x_SER to serialize the data to be stored, which normally saves som space and adds exectution time

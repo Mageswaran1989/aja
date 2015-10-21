@@ -1,0 +1,36 @@
+\section{RDD Core}
+The basic RDD API considers each data item as a single value. However, users often
+want to work with key-value pairs. Therefore Spark extended the interface of RDD
+to provide additional functions (PairRDDFunctions) which explicitly work on key-value
+pairs. Currently, there are four extensions to the RDD API available in spark. They are
+as follows:
+
+\bDoubleRDDFunctions This extension contains many useful methods for aggregating
+numeric values. They become available if the data items of an RDD are implicitly
+convertible to the Scala data-type \textbf{double}.
+
+\bPairRDDFunctions Methods defined in this interface extension become available when
+the data items have a two component \textbf{tuple structure [K,V]}. Spark will interpret the first
+tuple item (i.e. tuplename. 1) as the key and the second item (i.e. tuplename. 2)
+as the associated value.
+
+\bOrderedRDDFunctions Methods defined in this interface extension become available if
+the data items are two component tuples where the key is implicitly \textbf{sortable}.
+
+\bSequenceFileRDDFunctions This extension contains several methods that allow users
+to create \textbf{Hadoop sequence-files from RDDs}. The data items must be two compo-
+nent key-value tuples as required by the PairRDDFunctions. However, there are
+additional requirements considering the convertibility of the tuple components to
+Writable types.
+
+Since Spark will make methods with extended functionality automatically available
+to users when the data items fulfill the above described requirements, we decided to list
+all possible available functions in strictly alphabetical order. We will append either of
+the following flags [Double] , [Ordered], [Pair] or [SeqFile] to the function-name to indicate it
+belongs to an extension that requires the data items to conform to a certain format or
+type.
+
+Learn by example usage:
+Care is taken to make sure individual example can be directly tested on Spark shell...Enjoy!
+\bRefer: org.aja.tej.test.spark.rdd for example and explanations!
+Ctrl + B on the method to see its definition!
