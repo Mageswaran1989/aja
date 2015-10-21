@@ -100,8 +100,8 @@ object TejSparkBuild extends Build {
     base = file("."),
     settings = buildSettings ++ Seq(
       shellPrompt := { state => "(%s)> ".format(Project.extract(state).currentProject.id) },
-      unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "examples",
-        unmanagedSourceDirectories in Compile += baseDirectory.value / "examples",
+      unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "examples" / "scala",
+      unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "examples" / "java",
       maxErrors          := 5,
       triggeredMessage   := Watched.clearWhenTriggered,
       // runScriptSetting,

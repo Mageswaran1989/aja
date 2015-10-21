@@ -12,3 +12,6 @@ val svd.SVD(u,s,v) = svd(a)
 println("u => \n" + u)
 println("s => \n" + diag(s))
 println("v => \n" + v)
+
+
+val vale =  "123".toInt
