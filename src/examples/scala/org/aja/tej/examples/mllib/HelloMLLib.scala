@@ -1,10 +1,9 @@
 package org.aja.tej.examples.mllib
 
 import org.aja.tej.utils.TejUtils
-import org.apache.spark.mllib.linalg.{DenseVector, Vectors}
-import org.apache.spark.mllib.regression.{LinearRegressionWithSGD, LabeledPoint}
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionWithSGD}
 import org.apache.spark.mllib.stat.Statistics
-import org.apache.spark.rdd.RDD
 
 /**
  * Created by mdhandapani on 19/10/15.
@@ -13,7 +12,7 @@ object HelloMLLib {
 
   //Convert each line of dataset to Array[Double] values
   //18.9,350,165,260,8,2.56,4,3,200.3,69.9,3910,1
-  def parseData(line : String) : Array[Double] = {
+  def parseDataToArray(line : String) : Array[Double] = {
     val values = line.split(",")
 
     val mpg = values(0).toDouble
@@ -74,7 +73,7 @@ object HelloMLLib {
     val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
     println("Spark version : " + sc.version)
 
-    val carRDD = sc.textFile("data/car-milage-no-hdr.csv").map(parseData(_))
+    val carRDD = sc.textFile("data/car-milage-no-hdr.csv").map(parseDataToArray(_))
 
     //Summary Statictics
     println("\n**********************************************************************\n")

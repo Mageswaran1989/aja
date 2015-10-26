@@ -8,6 +8,8 @@ import org.apache.spark.sql.SQLContext
 
 /**
  * Created by mageswaran on 25/9/15.
+ *
+ * Link: http://www.cakesolutions.net/teamblogs/apache-spark-machine-learning-pipelines
  */
 object ANNet extends App {
 
@@ -17,6 +19,9 @@ object ANNet extends App {
   import sqlContext.implicits._
 
   // Load training data
+  // 1 1:-0.222222 2:0.5 3:-0.762712 4:-0.833333 => (1, Vector(-0.222222, 0.5, -0.762712, -0.833333))
+  // 0 1:0.166667 2:-0.416667 3:0.457627 4:0.5 => (0, Vector(0.166667, -0.416667, 0.457627, 0.5))
+  // 2 1:-0.222222 2:-0.333333 3:0.0508474 4:-4.03573e-08 => (2, Vector(-0.222222, -0.333333, 0.0508474, -4.03573e-08))
   val data = MLUtils.loadLibSVMFile(sc, "data/sample_multiclass_classification_data.txt").toDF()
 
   data.printSchema()
@@ -37,9 +42,15 @@ object ANNet extends App {
     .setMaxIter(100)
 
   // train the model
+  //This becomes Estimator
+  // DataFrame -> fit() -> Model(Transformer)
+  //Prepare the data -> Set the parameters -> Create the Topology -> FeedForwardTrainer
+  //                                                -> train -> MultilayerPerceptronClassificationModel
   val model = trainer.fit(train)
 
   // compute precision on the test set
+  //This becomes Transformer
+  // Feature DataFrame ->  transformer() -> Predicted Data
   val result = model.transform(test)
 
   val predictionAndLabels = result.select("prediction", "label")
