@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -11,7 +12,7 @@ function (i.e. f = T ⇒ U ) it will be applied before inserting the values into
 array.
 
  */
-object CollectToArrayExample {
+object CollectToArrayExample extends App{
 
   def useCases(sc: SparkContext) = {
     val c = sc . parallelize ( List (" Gnu " , " Cat " , " Rat " , " Dog " , " Gnu " , " Rat ") ,
@@ -19,4 +20,7 @@ object CollectToArrayExample {
     c . collect
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -37,7 +38,7 @@ counting methods. The parameter relativeSD controls the accuracy of the computat
 
 
  */
-object Count {
+object Count extends App {
   def useCases(sc: SparkContext) = {
     val c = sc.parallelize(List(" Gnu ", " Cat ", " Rat ", " Dog "), 2)
     c.count
@@ -64,7 +65,8 @@ object Count {
     d1.countApproxDistinctByKey(0.1).collect
     d1.countApproxDistinctByKey(0.01).collect
     d1.countApproxDistinctByKey(0.001).collect
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }

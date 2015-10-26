@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -21,7 +22,7 @@ index from within the flatMap-function.
 
 
  */
-object FlatMapExample {
+object FlatMapExample extends App{
 
   def useCases(sc: SparkContext) = {
 
@@ -42,8 +43,7 @@ object FlatMapExample {
     val a2 = sc . parallelize ( List (1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9) , 3)
     //use mapPartitionsWithIndex and flatMap
     a2 . flatMapWith ( x => x , true ) (( x , y ) => List (y , x ) ) . collect
-
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

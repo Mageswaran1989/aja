@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -12,7 +13,7 @@ Allows setting a string that is attached to the end of the RDD’s name when pri
 dependency graph.
 
  */
-object GeneratorExample {
+object GeneratorExample  extends App {
 
   def useCases(sc: SparkContext) = {
 //    @transient var generator
@@ -20,4 +21,5 @@ object GeneratorExample {
 
   }
 
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

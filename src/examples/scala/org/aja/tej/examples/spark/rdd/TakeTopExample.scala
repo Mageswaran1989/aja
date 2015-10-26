@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -27,7 +28,7 @@ Utilizes the implicit ordering of T to determine the top k values and returns th
 array.
 
  */
-object TakeTopExample {
+object TakeTopExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val b = sc.parallelize(List(" dog ", " cat ", " ape ", " salmon ", " gnu "), 2)
@@ -43,4 +44,6 @@ object TakeTopExample {
     c . top (2)
 
   }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }

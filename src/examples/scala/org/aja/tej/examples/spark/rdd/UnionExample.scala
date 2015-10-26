@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -11,7 +12,7 @@ import org.apache.spark.SparkContext
 Performs the standard set operation: A ∪ B
 
  */
-object UnionExample {
+object UnionExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize (1 to 3 , 1)
@@ -19,4 +20,6 @@ object UnionExample {
     ( a ++ b ) . collect
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

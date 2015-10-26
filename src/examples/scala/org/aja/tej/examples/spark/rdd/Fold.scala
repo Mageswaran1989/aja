@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -17,7 +18,7 @@ function is only available if the RDD consists of two-component tuples.
 
 
  */
-object Fold {
+object Fold extends App{
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize ( List (1 ,2 ,3) , 3)
@@ -31,5 +32,7 @@ object Fold {
     val b2 = a2 . map ( x => ( x . length , x ) )
     b2 . foldByKey ("") ( _ + _ ) . collect
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 
 }

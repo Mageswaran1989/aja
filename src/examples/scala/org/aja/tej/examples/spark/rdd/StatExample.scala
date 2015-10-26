@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -12,10 +13,12 @@ Simultaneously computes the mean, variance and the standard deviation of all val
 the RDD.
 
  */
-object StatExample {
+object StatExample  extends App {
 
   def useCases(sc: SparkContext) = {
   val x = sc.parallelize ( List (1.0 , 2.0 , 3.0 , 5.0 , 20.0 ,19.02 , 19.29 ,11.09 , 21.0) , 2)
   x.stats
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

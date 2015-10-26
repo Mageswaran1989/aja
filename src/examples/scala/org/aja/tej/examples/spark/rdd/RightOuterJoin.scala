@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -11,7 +12,7 @@ Performs an right outer join using two key-value RDDs. Please note that the keys
 be generally comparable to make this work correctly.
 
  */
-object RightOuterJoin {
+object RightOuterJoin  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize ( List (" dog " , " salmon " , " salmon " , " rat " , " elephant") , 3)
@@ -20,4 +21,6 @@ object RightOuterJoin {
     val d = c . keyBy ( _ . length )
     b . rightOuterJoin ( d ) . collect
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -16,7 +17,7 @@ the methods provided by the PairRDDFunctions extension.
 Similar to zip. But provides more control over the zipping process.
 
  */
-object ZipExample {
+object ZipExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize (1 to 100 , 3)
@@ -44,4 +45,6 @@ object ZipExample {
     a1 . zipPartitions (b1 , c1 ) ( myfunc ) . collect
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

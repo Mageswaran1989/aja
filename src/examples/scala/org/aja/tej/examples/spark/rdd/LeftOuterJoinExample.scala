@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -16,7 +17,7 @@ Scans the RDD for all keys that match the provided value and returns their value
 Scala sequence.
 
  */
-object LeftOuterJoinExample {
+object LeftOuterJoinExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize ( List (" dog " , " salmon " , " salmon " , " rat " , " elephant ") , 3)
@@ -29,7 +30,8 @@ object LeftOuterJoinExample {
     val a1 = sc . parallelize ( List (" dog " , " tiger " , " lion " , " cat " , " panther " , " eagle ") , 2)
     val b1 = a1 . map ( x => ( x . length , x ) )
     b1 . lookup (5)
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -31,7 +32,7 @@ One way would be to use map to transform each element into a Set and then combin
     (set, v) => set += v,
     (set1, set2) => set1 ++= set2)
  */
-object ReduceExample {
+object ReduceExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc.parallelize (1 to 100 , 3)
@@ -45,8 +46,8 @@ object ReduceExample {
     val b2 = a2 . map ( x => ( x . length , x ) )
     b2 . reduceByKey ( _ + _ ) . collect
 
-
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }

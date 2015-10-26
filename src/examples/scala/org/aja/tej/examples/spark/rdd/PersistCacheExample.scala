@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -19,7 +20,7 @@ ever, the RDD object remains. If it is referenced in a computation, Spark will r
 it automatically using the stored dependency graph.
 
  */
-object PersistCacheExample {
+object PersistCacheExample  extends App {
 def useCases(sc: SparkContext) = {
   val c = sc . parallelize ( List (" Gnu " , " Cat " , " Rat " , " Dog " , " Gnu " , " Rat ") ,
     2)
@@ -31,4 +32,5 @@ def useCases(sc: SparkContext) = {
   c.getStorageLevel
 
 }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -11,7 +12,7 @@ import org.apache.spark.SparkContext
 Assembles an array that contains all elements of the partition and embeds it in an RDD.
 
  */
-object GlomExample {
+object GlomExample  extends App {
 
   def useCases(sc: SparkContext) = {
 
@@ -19,4 +20,6 @@ object GlomExample {
     a . glom . collect // Array [ Array [ Int ]]
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

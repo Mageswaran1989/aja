@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -11,7 +12,7 @@ A very powerful set of functions that allow grouping up to 3 key-value RDDs toge
 using their keys.
 [Pair]
  */
-object CogroupGroupwithExample {
+object CogroupGroupwithExample extends App {
 
   def useCases(sc: SparkContext) = {
 
@@ -30,4 +31,6 @@ object CogroupGroupwithExample {
 
     println(x . cogroup ( y ) . collect)
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -8,7 +9,7 @@ import org.apache.spark.SparkContext
 /*
 Allows a RDD to be tagged with a custom name.
  */
-object NameExample {
+object NameExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val y = sc . parallelize (1 to 10 , 10)
@@ -18,4 +19,5 @@ object NameExample {
     println(y . name)
 
   }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

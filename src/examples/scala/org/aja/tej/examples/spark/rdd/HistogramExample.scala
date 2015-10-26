@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -16,7 +17,7 @@ array contains the corresponding count of values (i.e. the histogram). The secon
 of the function will just return the histogram as an array of integers.
 
  */
-object HistogramExample {
+object HistogramExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize ( List (1.1 , 1.2 , 1.3 , 2.0 , 2.1 , 7.4 , 7.5 , 7.6 ,
@@ -38,4 +39,6 @@ object HistogramExample {
 
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

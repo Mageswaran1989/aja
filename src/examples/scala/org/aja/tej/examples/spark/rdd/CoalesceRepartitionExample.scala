@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -14,12 +15,14 @@ have less data after the action).
 New Partition > Old partition : shuffle=True
 New Partition < Old partition : shuffle=False
  */
-object CoalesceRepartitionExample{
+object CoalesceRepartitionExample extends App{
 
   def useCases(sc: SparkContext): Unit = {
     val y = sc.parallelize (1 to 10 , 10)
     val z = y.coalesce(2, false )
     println("CoalesceRepartitionExample: " + z.partitions.length)
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 
 }

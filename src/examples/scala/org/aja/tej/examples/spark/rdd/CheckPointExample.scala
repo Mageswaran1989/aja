@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -17,7 +18,7 @@ alternative you could use an HDFS directory URL as well.
 Returns the path to the checkpoint file or null if RDD has not yet been checkpointed.
 
  */
-object CheckPointExample {
+object CheckPointExample extends App{
 
   def useCases(sc: SparkContext) = {
     sc.setCheckpointDir("data/CheckPointExampleDir")
@@ -46,4 +47,5 @@ object CheckPointExample {
   }
 
 
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

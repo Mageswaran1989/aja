@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -12,7 +13,7 @@ Performs an inner join using two key-value RDDs. Please note that the keys must 
 generally comparable to make this work.
 
  */
-object JoinExample {
+object JoinExample  extends App {
 
   def useCases(sc: SparkContext) = {
 
@@ -24,4 +25,6 @@ object JoinExample {
 
     b . join ( d ) . collect
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -19,7 +20,7 @@ function can finish somewhat faster in some scenarios. However, it trades accura
 speed.
 
  */
-object SubractSumExample {
+object SubractSumExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize (1 to 9 , 3)
@@ -39,6 +40,8 @@ object SubractSumExample {
       11.09 , 21.0) , 2)
     x . sum
 
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
 }
