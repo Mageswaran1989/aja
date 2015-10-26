@@ -47,7 +47,7 @@ Finally the function has to return a transformed data item of type U .
 
 
  */
-object MapExample  extends App {
+object MapExample {
   def useCases(sc: SparkContext) = {
 
     val a = sc.parallelize(List("dog","salmon","salmon","rat","elephant"),3)
