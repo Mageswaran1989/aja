@@ -62,7 +62,9 @@ Inspired by https://github.com/prnicolas/ScalaMl
 
 -------------------------------------------------------------------------------------
 
-# tantra - Scala language exploration examples and utilities!
+# tantra 
+
+Scala language exploration examples and utilities!
 
 -------------------------------------------------------------------------------------
 
@@ -73,10 +75,9 @@ Linux Ubuntu 12.04+
 - [aja](https://github.com/Mageswaran1989/aja)
 
 ##Wiki
-https://github.com/Mageswaran1989/aja/wiki
 - [How to start?](https://github.com/Mageswaran1989/aja/wiki/How-to-start%3F)
 	
-## Contribution
+## Contribution  
 - [How to set up GIT](https://github.com/Mageswaran1989/aja/wiki/Setting-up-the-GIT)
 
 **Let us begin our jouney from here!**
