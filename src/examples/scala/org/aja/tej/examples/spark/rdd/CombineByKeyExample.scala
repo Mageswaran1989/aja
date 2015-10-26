@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.aja.tej.utils.TejUtils._
 import org.apache.spark.SparkContext
 
@@ -15,7 +16,7 @@ component tuples by applying multiple aggregators one after another.
 Turns an RDD[(K, V)] into a result of type RDD[(K, C)]
 RDD[(K, V)] -> RDD[(K, C)]
  */
-object CombineByKeyExample {
+object CombineByKeyExample extends App{
 
   def useCases(sc:SparkContext) = {
     val a = sc . parallelize ( List (" dog " ," cat " ," gnu " ," salmon " ," rabbit " ," turkey " ," wolf " ," bear " ," bee ") , 3)
@@ -37,9 +38,7 @@ object CombineByKeyExample {
     d.foreach(println)
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }
 
-object CombineByKeyMain extends App {
-  val sc = getSparkContext("CombineByKeyMain")
-  CombineByKeyExample.useCases(sc)
-}

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -19,7 +20,7 @@ sampleStdDev = sqrt((1/N-1) * sum(xi -mean)(i=1 to N)
 Calls stats and extracts either variance-component or corrected sampleVariance-component.
 
  */
-object MeanExample {
+object MeanExample  extends App {
 def useCases(sc:SparkContext) = {
   val a = sc . parallelize ( List (9.1 , 1.0 , 1.2 , 2.1 , 1.3 , 5.0 , 2.0 , 2.1 ,
     7.4 , 7.5 , 7.6 , 8.8 , 10.0 , 8.9 , 5.5) , 3)
@@ -38,6 +39,6 @@ def useCases(sc:SparkContext) = {
   x . variance
   x . sampleVariance
 
-
 }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

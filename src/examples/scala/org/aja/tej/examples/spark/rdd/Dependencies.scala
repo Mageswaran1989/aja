@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -10,7 +11,7 @@ import org.apache.spark.SparkContext
 Returns the RDD on which this RDD depends.
 
  */
-object Dependencies {
+object Dependencies extends App{
 
   def useCases(sc: SparkContext) = {
 
@@ -21,7 +22,7 @@ object Dependencies {
     b . map (a =>a ) . dependencies . length
     b . cartesian (a) . dependencies . length
     b . cartesian (a) . dependencies
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

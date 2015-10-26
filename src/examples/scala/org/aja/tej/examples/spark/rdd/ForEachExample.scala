@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -18,7 +19,7 @@ Similar to foreach, but allows accessing the partition index or a derivative of 
 index from within the function.
 
  */
-object ForEachExample {
+object ForEachExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val c = sc . parallelize ( List (" cat " , " dog " , " tiger " , " lion " , " gnu " , " crocodile " , " ant " , " whale " , " dolphin " , " spider ") , 3)
@@ -33,5 +34,7 @@ object ForEachExample {
     a . foreachWith ( i => i ) (( x , i ) => if ( x % 2 == 1 && i % 2 == 0) println ( x ))
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 
 }

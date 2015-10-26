@@ -26,6 +26,16 @@
 
 Apache Spark examples and utilities!
 
+##How to compile and test?
+
+Assuming you are in aja project folder,
+To compile:
+`$ sbt`
+`$ sbt compile`
+To run examples under Tej: type "run-main org.aja.tej.examples." and TAB to select the example you are interested
+`$ run-main org.aja.tej.examples.ml.ANNet`
+
+
 -----------------------------------------------------------------------------------
 
 #dhīra — a very learned and gentle scholar
@@ -58,15 +68,6 @@ Inspired by https://github.com/prnicolas/ScalaMl
 
 ##Build Environment
 Linux Ubuntu 12.04+
-
-##How to compile and test?
-
-Assuming you are in aja project folder,  
-To compile:  
-$ sbt  
-$ sbt compile  
-To run examples under Tej: \n type "run-main org.aja.tej.examples." and TAB to select the example you are interested  
-$ run-main org.aja.tej.examples.ml.ANNet
 
 ## Git Links
 - [aja](https://github.com/Mageswaran1989/aja)

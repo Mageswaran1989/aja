@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -15,7 +16,7 @@ pair will automatically be presented to the partitioner.
  * However, the former will transfer the entire dataset across the network, while the latter will compute
  * local sums for each key in each partition and combine those local sums into larger sums after shuffling
  */
-object GroupByExample {
+object GroupByExample  extends App {
 
   def useCases(sc: SparkContext) = {
 
@@ -72,5 +73,7 @@ object GroupByExample {
     b4 . groupByKey . collect
 
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 
 }

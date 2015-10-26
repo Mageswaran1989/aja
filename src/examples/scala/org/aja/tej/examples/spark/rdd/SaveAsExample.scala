@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -22,7 +23,7 @@ Saves the RDD as a Hadoop sequence file.
 Saves the RDD as text files. One line at a time.
 
  */
-object SaveAsExample {
+object SaveAsExample extends App  {
   def useCases(sc: SparkContext) = {
     val x = sc.parallelize (1 to 100 , 3)
     x.saveAsObjectFile(" objFile ")
@@ -51,9 +52,6 @@ object SaveAsExample {
     val sp = sc . textFile ("hdfs://localhost:8020/user/cloudera/sp_data")
     sp . flatMap ( _.split(" ")).saveAsTextFile("hdfs://localhost:8020/user/cloudera/sp_x")
 
-
-
-
-
   }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

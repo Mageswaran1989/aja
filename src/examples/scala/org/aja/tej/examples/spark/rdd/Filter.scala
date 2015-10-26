@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -27,7 +28,7 @@ function has to return either true or false (i.e. Apply the filter).
 
 
  */
-object Filter {
+object Filter extends App{
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize (1 to 10 , 3)
@@ -63,8 +64,7 @@ object Filter {
 
     //val myfunc2 : PartialFunction [ Any , Any ] = { case x if ( x < 4) => " x "} //error
     val myfunc3 : PartialFunction [ Int , Any ] = { case x if ( x < 4) => " x "}
-
-
-
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -46,6 +46,6 @@ package org.aja.tej.examples.spark.rdd
  * Note that treeAggregate takes an additional parameter depth which is declared with a default value depth = 2, thus, as
  * it's not provided in this particular call, it will take that default value.
  */
-object TreeAgreegate {
+object TreeAgreegate  extends App {
 
 }

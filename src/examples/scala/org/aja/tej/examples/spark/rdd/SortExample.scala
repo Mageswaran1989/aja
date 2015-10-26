@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -20,7 +21,7 @@ these ranges individually with mapPartitions using standard sort mechanisms.
  * Refere org.aja.tej.examples.usecases.wordcount.BibleWordCount for usage
  */
 
-object SortExample {
+object SortExample  extends App {
 
   def useCases(sc: SparkContext) = {
 
@@ -36,4 +37,5 @@ object SortExample {
     val d1 = c1 . sortByKey ( false )
 
   }
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

@@ -18,6 +18,6 @@ Returns an array of the partition objects associated with this RDD.
 
 
  */
-object PartitionExample {
+object PartitionExample  extends App {
 
 }

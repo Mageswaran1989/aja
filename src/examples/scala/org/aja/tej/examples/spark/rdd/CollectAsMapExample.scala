@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
 /**
@@ -10,11 +11,13 @@ Similar to collect, but works on key-value RDDs and converts them into Scala map
 preserve their key-value structure.
 [Pair]
  */
-object CollectAsMapExample {
+object CollectAsMapExample extends  App{
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize ( List (1 , 2 , 1 , 3) , 1)
     val b = a . zip ( a )
     b . collectAsMap
   }
+
+  useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }
