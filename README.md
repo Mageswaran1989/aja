@@ -28,13 +28,14 @@ Apache Spark examples and utilities!
 
 ##How to compile and test?
 
-Assuming you are in aja project folder: 
-To compile:  
+Using SBT in aja root folder:  
 `$ sbt`  
 `$ sbt compile`  
 To run examples under Tej: type "run-main org.aja.tej.examples." and TAB to select the example you are interested  
 `$ run-main org.aja.tej.examples.ml.ANNet`  
 
+Using IntelliJ editor:  
+File -> open -> point to aja folder
 
 -----------------------------------------------------------------------------------
 
