@@ -6,6 +6,8 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
  * Created by mageswaran on 17/10/15.
+ *
+ * Collects the Tweets and does a small map-reduce job on stream tweet tags to find the top tweets
  */
 
 /*

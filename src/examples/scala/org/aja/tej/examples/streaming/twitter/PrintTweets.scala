@@ -44,7 +44,7 @@ object PrintTweets {
     if (count > numbeOfTweetsToPrint.toString.toLong)
       System.exit(0)
       rdd.foreach(println)
-      println("**********************************************************************")
+      println("*********************************--->" + count + "<---*************************************")
     })
 
     ssc.start()
