@@ -1,11 +1,11 @@
-package org.aja.tantra.examples.breeze
+
 
 import breeze.linalg.{Transpose, SparseVector, DenseVector}
 
 /**
  * Created by mdhandapani on 18/8/15.
  */
-object AllAboutVectors extends App{
+
 
   //Column Vector
   val x = DenseVector.zeros[Double](5) //Allocates memory for zero
@@ -31,4 +31,4 @@ object AllAboutVectors extends App{
   //Slicing
   println("tabulatedVals(2 to 4) is: " + tabulatedVals(2 to 4))
 
-}
+

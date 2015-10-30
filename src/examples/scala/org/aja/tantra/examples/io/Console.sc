@@ -1,0 +1,2 @@
+val line = Console.readLine
+

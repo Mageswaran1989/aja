@@ -1,10 +1,7 @@
-package org.aja.tantra.examples.fp
-
 /**
  * Created by mdhandapani on 10/8/15.
  */
 
-object Fibonacci {
   /*
   // 0 1 1 2 3 5
   // F_n = F_(n-2) + F_(n-1)
@@ -39,25 +36,23 @@ object Fibonacci {
     if (0 == n || 1 == n)
       n
     else
-      fibonacci(n-1) + fibonacci(n-2)
+      fibonacci(n - 1) + fibonacci(n - 2)
   }
 
   //with TCO - Tail Call Optimization
   //@anotation.tailrec
   def fibonacciTco(n: Int): Int = {
     //@annotation.tailrec
-    def go(n: Int, sum: Int) : Int = {
+    def go(n: Int, sum: Int): Int = {
       if (0 == n || 1 == n)
         n
       else
-        go(n-1, go(n-2, sum))
+        go(n - 1, go(n - 2, sum))
     }
     go(n, 1)
   }
 
-  def main(args: Array[String]) {
-    val fibonacciOf5 = fibonacci(7)
-    println("Value of 5th fibonacci number is %d".format(fibonacciOf5))
-  }
+val fibonacciOf5 = fibonacci(7)
 
-}
+
+

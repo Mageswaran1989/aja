@@ -51,6 +51,23 @@ p3
 //p3.age = 25 //no setter created
 p3
 
+/////////////////////////////////////////////////////////////////////////////////
+//Here the constructor is made private
+class Model private (x: Int, y: Int) {
+  def this() = this(0,0)
+  def this(y: Int) = this(0,y)
+  def run = x + y
+}
+object Model {
+  def train() = new Model().run
+  def train(y: Int) = new Model(y).run
+  def train(x: Int, y: Int) = new Model(x,y).run
+}
+
+var result = new Model().run
+var addResult = Model.train()
+addResult = Model.train(1)
+addResult = Model.train(1,1)
 
 
 
