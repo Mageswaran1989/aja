@@ -62,14 +62,13 @@ def factorial2(n: BigInt): BigInt = {
 }
 val fact2 = factorial2(30)
 
-def main(args: Array[String]) {
-  // A new String is constructed from "...",
-  //hence formedString.format()
-  println("Values of fact is %d".format(fact))
 
-  println("Values of fact1 is %d".format(fact1))
+// A new String is constructed from "...",
+//hence formedString.format()
+println("Values of fact is %d".format(fact))
 
-  println("Values of 30! is %d".format(fact2))
+println("Values of fact1 is %d".format(fact1))
 
-}
+println("Values of 30! is %d".format(fact2))
+
 

@@ -24,7 +24,6 @@ You can of course run this locally, but all those phases (apart from shipping ov
 occur. [This lets you catch any bugs even before deploying to production]
 
 Links: http://stackoverflow.com/questions/22592811/task-not-serializable-java-io-notserializableexception-when-calling-function-ou
-http://erikerlandson.github.io/blog/2015/03/31/hygienic-closures-for-scala-function-serialization/
  */
 
 //You know I am going to take your application down :)
@@ -95,6 +94,7 @@ object AllAboutSerialization extends App {
 
   ClassRDDManupulation_Ver4.listIncrement(sc)
 
+  //So why did this made the crash? Neither the class or the function is serializable
   val classRDDManupulation_Ver1 = new ClassRDDManupulation_Ver1
   classRDDManupulation_Ver1.listIncrement(sc)
 }

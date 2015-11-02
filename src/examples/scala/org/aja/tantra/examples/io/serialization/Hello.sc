@@ -1,6 +1,6 @@
+//Sorry guys Scala Worksheet has some problem with using Serialization
 import java.io._
 
-@SerialVersionUID(123L)
 class Person(name: String, age: Int) extends Serializable{
   override def toString = s"Person($name,$age)"
 }

@@ -29,6 +29,21 @@ object TejUtils {
     (numFiles, features)
   }
 
+  /*
+      val sum = (1 to 10) sum
+      val sum = getExecutionTime { (1 to 10) sum }
+
+      In REPL:
+      :power
+      :wrap time
+   */
+  def getExecutionTime[A] (block: => A) : A = {
+    val t0 = System.nanoTime()
+    val result = block
+    val t1 = System.nanoTime()
+    println("Elapsed time is " + (t1 - t0) + "ns" )
+    result
+  }
   //def printClassLinearization(className: Any)
   //To print class Linearization
   //import scala.reflect.runtime.universe._
