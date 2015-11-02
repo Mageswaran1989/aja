@@ -50,4 +50,8 @@ for {
   char <- word if char.isUpper
 } yield char
 
+val list = List(1,2,3,4,5,6,7,8,9,10)
+
+for(element <- list if element%2 == 0; if element > 5)  yield element
+
 //TODO : Retreive XML elements using for comprehension

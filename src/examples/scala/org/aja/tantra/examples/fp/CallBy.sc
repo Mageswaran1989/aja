@@ -9,6 +9,8 @@ def CallByValue() {
     println("Getting time in nano seconds")
     System.nanoTime
   }
+
+  //Execute the passed code and get the result
   def delayed(t: Long) {
     println("In delayed method")
     println("Param: " + t)
@@ -25,6 +27,9 @@ def CallByName() = {
     println("Getting time in nano seconds")
     System.nanoTime
   }
+
+  //Reference to the passed block is called when actually been used
+  //Lazy Evaluation
   def delayed2(t: => Long) {
     println("In delayed method")
     println("Param: " + t)

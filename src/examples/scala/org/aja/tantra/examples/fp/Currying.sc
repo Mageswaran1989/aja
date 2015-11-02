@@ -59,3 +59,20 @@ modNCurried _
 //Whereas that information is available for functions written using multiple parameter list notation:
 modNCurried(5) _
 
+
+println("/////////////////////////////////////////////////////////////////////////")
+
+def adder(m: Int)(n: Int)(p: Int) = m + n + p
+// The above definition does not return a curried function yet
+// (adder: (m: Int)(n: Int)(p: Int)Int)
+// To obtain a curried version we still need to transform the method.
+// into a function value.
+
+val currAdder = adder _
+val add2 = currAdder(2)
+val add5 = add2(3)
+add5(5)
+
+
+
+
