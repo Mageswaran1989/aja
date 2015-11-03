@@ -49,3 +49,12 @@ ajaJavaFile.canWrite
 ajaJavaFile.getCanonicalPath
 val buffereReader = new BufferedReader(new FileReader(ajaJavaFile))
 buffereReader.readLine()
+
+
+println("//////////////////////////////////////////////////////////////////")
+
+val fileBuffer = Source.fromFile("/opt/aja/data/testSet.txt")
+
+fileBuffer.getLines().toList.map(_.split("\t")).foreach(x => println(x(0) + x(1) +" " + x(2)))
+
+
