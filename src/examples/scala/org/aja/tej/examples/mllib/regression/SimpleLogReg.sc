@@ -1,5 +1,3 @@
-package org.aja.tej.examples.mllib.regression
-
 import breeze.linalg.DenseVector
 
 import scala.io.Source
@@ -44,20 +42,28 @@ import scala.io.Source
 
  */
 
-case class LabelPt(label: Double, features: DenseVector[Double])
 
-object SimpleLogReg {
 
-  def sigmoid(n: Double) = (1 / Math.exp(n))
+def sigmoid(n: Double) = (1 / Math.exp(n))
 
-  def loadDataset(filePath: String) = {
-    val fileBuffer = Source.fromFile(filePath)
+def loadDataset(filePath: String): List[(DenseVector[Double], DenseVector[Double])] = {
+  val fileBuffer = Source.fromFile(filePath)
 
-    val featureLabelTuple = fileBuffer.getLines()
-      .toList.map(_.split("\t"))
-      .map(x => (DenseVector(x(0).toDouble, x(1).toDouble), DenseVector(x(2).toDouble)))
+  val featureLabelTuple = fileBuffer.getLines()
+    .toList.map(_.split("\t"))
+    .map(x => (DenseVector(x(2).toDouble, DenseVector(x(0).toDouble, x(1).toDouble))))
 
-    featureLabelTuple
+  featureLabelTuple
+}
+
+  def gradientAscent(labelsAndFeatures: List[(DenseVector[Double], DenseVector[Double])]) {
+
+    val numIterations = 100
+
+    //extract label & data
+    val label = labelsAndFeatures.map(_._1)
+    val data = labelsAndFeatures.map(_._2)
+
   }
 
-}
+
