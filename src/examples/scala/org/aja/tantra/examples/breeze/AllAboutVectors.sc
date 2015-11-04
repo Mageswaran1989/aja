@@ -14,6 +14,8 @@ import breeze.linalg.{Transpose, SparseVector, DenseVector}
   val tabulatedVals = DenseVector.tabulate(5)(x => x * 2)
   val filledValues = DenseVector.fill(5)(6)
 
+z.length
+
   println(x)
   println(y)
   println(z)

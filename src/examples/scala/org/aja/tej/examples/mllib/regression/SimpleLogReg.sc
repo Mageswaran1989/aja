@@ -1,4 +1,4 @@
-import breeze.linalg.DenseVector
+import breeze.linalg.DenseMatrix
 
 import scala.io.Source
 
@@ -42,28 +42,69 @@ import scala.io.Source
 
  */
 
-
-
 def sigmoid(n: Double) = (1 / Math.exp(n))
 
-def loadDataset(filePath: String): List[(DenseVector[Double], DenseVector[Double])] = {
-  val fileBuffer = Source.fromFile(filePath)
+val filePath : String = "/opt/aja/data/testSet.txt"
+val fileBuffer = Source.fromFile(filePath)
 
-  val featureLabelTuple = fileBuffer.getLines()
-    .toList.map(_.split("\t"))
-    .map(x => (DenseVector(x(2).toDouble, DenseVector(x(0).toDouble, x(1).toDouble))))
+//val labelsAndFeatures = fileBuffer.getLines()
+//  .toList.map(_.split("\t"))
+//  .map(x => (DenseVector(x(2).toDouble), Array(1.0, x(0).toDouble, x(1).toDouble)))
+//
+//labelsAndFeatures.toArray
+//
+//
+////extract label & data
+//val label = labelsAndFeatures.map(_._1).toArray //1 X 100
+//val data = labelsAndFeatures.flatMap(_._2).toArray //3 X 100
+//data.getClass
+//data
 
-  featureLabelTuple
+val labelsAndFeatures = fileBuffer.getLines()
+  .toList.map(_.split("\t"))
+  .map(x => (List(x(2).toDouble), List(1.0, x(0).toDouble, x(1).toDouble)))
+
+labelsAndFeatures.toArray
+
+
+//extract label & data
+val label = labelsAndFeatures.map(_._1) //100 X 1
+val data = labelsAndFeatures.map(_._2) //100 X 3
+data.getClass
+//data
+val dataMatrix = DenseMatrix(data: _*) //100 X 3
+val rows = dataMatrix.rows
+val cols = dataMatrix.cols
+//dataMatrix
+val labelMatrix = DenseMatrix(label: _*) //100 x 1
+val rows1 = labelMatrix.rows
+val cols1 = labelMatrix.cols
+//labelMatrix
+val numIterations = 100
+val alpha = 0.001
+var weigths = DenseMatrix.zeros[Double](3,1) // 3 X 1
+val h = dataMatrix * weigths
+
+for ( r <- 0 to numIterations) {
+  val h = (dataMatrix * weigths) // 100 x 3 * 3 x 1 = 100 x 1
+  h.map(sigmoid(_))
+  val error = (labelMatrix - h) //100 x 1
+  weigths = weigths + alpha * dataMatrix.t * error
+  // 3 x 1 = 3 x 1 + 3 x 100 * 100 * 3
+
+  println(error)
 }
+weigths
 
-  def gradientAscent(labelsAndFeatures: List[(DenseVector[Double], DenseVector[Double])]) {
+import breeze.linalg._
+import breeze.plot._
 
-    val numIterations = 100
-
-    //extract label & data
-    val label = labelsAndFeatures.map(_._1)
-    val data = labelsAndFeatures.map(_._2)
-
-  }
-
+val f = Figure()
+val p = f.subplot(0)
+val x = linspace(0.0,1.0)
+p += plot(x, x :^ 2.0)
+p += plot(x, x :^ 3.0, '.')
+p.xlabel = "x axis"
+p.ylabel = "y axis"
+f.saveas("lines.png")
 

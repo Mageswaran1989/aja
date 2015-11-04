@@ -44,12 +44,13 @@ object Resolvers {
 //Dont use %% for thir party libraries for which appending Scala version might not help in fetching
 object Dependency {
   object Version {
-    val Spark        = "1.5.0"
+    val Spark        = "1.5.1"
     val ScalaTest    = "2.2.4"
     val ScalaCheck   = "1.12.2"
     val Twitter      = "3.0.3"
     val Breeze       = "0.11.2"
     val Akka         = "2.4.0"
+    val BreezeViz    = "0.11.2"
   }
 
   val sparkCore      = "org.apache.spark"  %% "spark-core"      % Version.Spark  withSources()
@@ -71,6 +72,7 @@ object Dependency {
   val breeze         = "org.scalanlp"         %% "breeze"         % Version.Breeze withSources()
   val breezeNatives  = "org.scalanlp"         %% "breeze-natives" % Version.Breeze withSources()
   val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
+  val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
 }
 
 //

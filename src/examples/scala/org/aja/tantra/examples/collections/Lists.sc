@@ -9,3 +9,5 @@ val l1 = List(1,2,3)
 val l2 = l ::: l1
 
 l2 :+ 5
+
+val l3 = List((1,2,3),(4,5,6)).toArray
