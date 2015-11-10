@@ -19,6 +19,7 @@ try {
   case ex: IOException => {
     println("IO Exception")
   }
+  case unknown => println("Unknown exception " + unknown); System.exit(-1)
 } finally {
   println("Exiting finally...")
 }

@@ -5,6 +5,7 @@ import scala.io.Source
 object Control {
   //A can be anything with with a method close()
   //Uing curring, first provide the resources, second the function literal that operated on the object
+  //{def ... } structural type
   def using[A <: {def close(): Unit},B](resource: A)(f: A => B): B = {
     try {
       f(resource)

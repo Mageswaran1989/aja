@@ -15,8 +15,6 @@ bufferedSource.close
 
 val readmeFile = Source.fromFile("/opt/aja/README.md").getLines().toList
 
-
-
 //////////////////////////////////////////////////////
 def listDir(path: String): List[File] = {
   val dir = new File(path)
@@ -42,7 +40,6 @@ testWrite.write("Aja Aja Aja")
 testWrite.close()
 val ajaFile = Source.fromFile("Aja.txt")
 ajaFile.getLines().foreach(println)
-
 val ajaJavaFile = new File("Aja.txt")
 ajaJavaFile.canExecute
 ajaJavaFile.canWrite
@@ -50,11 +47,22 @@ ajaJavaFile.getCanonicalPath
 val buffereReader = new BufferedReader(new FileReader(ajaJavaFile))
 buffereReader.readLine()
 
-
 println("//////////////////////////////////////////////////////////////////")
 
 val fileBuffer = Source.fromFile("/opt/aja/data/testSet.txt")
-
 fileBuffer.getLines().toList.map(_.split("\t")).foreach(x => println(x(0) + x(1) +" " + x(2)))
 
+println("////////////////////////////////////////////////////////////////////////////")
+
+val f = new java.io.File("/tmp/.Aja")
+if (f.exists()) f.delete()
+
+val configFilePath = new java.io.File("/tmp/.Aja")
+if (configFilePath.exists()) {
+  configFilePath.getAbsolutePath
+} else {
+  println("In else!")
+  configFilePath.createNewFile()
+  configFilePath.getAbsolutePath
+}
 

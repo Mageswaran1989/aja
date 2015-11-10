@@ -1,10 +1,11 @@
 
 
-class GrandParent
-class Parent extends GrandParent
-class Child extends Parent 
+class GrandParent //Super type
+class Parent extends GrandParent  //Type
+class Child extends Parent //Sub Type
+
 class InvariantClass[A] //I am an orphan, always single man army
-class CovariantClass[+A] //Let my childrens enjoy my property
+class CovariantClass[+A] //Let my children enjoy my property
 class ContraVariantClass[-A] //I dont want any of child to bare my burden
 
 def invariantMethod(obj: InvariantClass[Parent]) {}
@@ -15,22 +16,13 @@ def contravariantClass(obj: ContraVariantClass[Parent]) {}
 invariantMethod(new InvariantClass[Parent])
 //invariantMethod(new InvariantClass[GrandParent]) No parent class
 
-covariantClass(new CovariantClass[Child])
-covariantClass(new CovariantClass[Parent])
 //covariantClass(new CovariantClass[GrandParent]) //No parent class
+covariantClass(new CovariantClass[Parent])
+covariantClass(new CovariantClass[Child])
 
-//contravariantClass(new ContraVariantClass[Child]) //No Inherited Class
-contravariantClass(new ContraVariantClass[Parent])
 contravariantClass(new ContraVariantClass[GrandParent])
-
-
-
-
-
-
-
-
-
+contravariantClass(new ContraVariantClass[Parent])
+//contravariantClass(new ContraVariantClass[Child]) //No Inherited Class
 
 
 println("//////////////////////////TODO: traits////////////////////////////")

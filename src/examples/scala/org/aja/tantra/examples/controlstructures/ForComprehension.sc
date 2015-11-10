@@ -15,6 +15,12 @@ someConditions
 for clause yield body
 
  */
+
+//10 included
+0 to 10
+//10 excluded
+0 until 10
+
 for (
   i <- 0 to 9
 ) yield i
@@ -40,9 +46,9 @@ for {
   element <- List(1,2,3,4,5)
 } yield "T"+element
 
-for {
-  word <- Array("Hello", "Scala")
-  char <- word
+val c = for {
+  word <- Array("Hello", "Scala") //temp variable
+  char <- word //new varaible declaration
 } yield char.toUpper
 
 for {

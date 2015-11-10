@@ -26,14 +26,15 @@ class Person2(var name: String, var age: Int) {
 
   override def toString(): String   = this.getClass.getSimpleName + "(" + name + "," + age + ")"
 }
-val p2 = new Person2("Aja", 27)
+val p2 = new Person2("Aja", 28)
 //p2.someData //not accessible
 p2.name
-p2.age //not accessible
+p2.age
 p2
 p2.name = "aja"
 p2.age = 25
 p2
+
 /////////////////////////////////////////////////////////////////////////////////
 class Person3(val name: String, val age: Int) {
   protected val someData: String = ""
@@ -72,4 +73,9 @@ addResult = Model.train(1,1)
 
 
 //Cannnot override mutable variables
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+val obj = new Object
 

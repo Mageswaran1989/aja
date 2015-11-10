@@ -41,3 +41,13 @@ CallByValue()
 println()
 CallByName()
 
+object StringUtil1 {
+  def joiner(strings: List[String], seprator: String = " "): String =
+  strings.mkString(seprator)
+}
+import StringUtil1._
+joiner(List("Mageswaran", "Aja"))
+joiner(List("Mageswaran", "Aja"), "|")
+joiner(List("Mageswaran", "Aja"), seprator = "*")
+joiner(strings = List("Mageswaran", "Aja"), "}")
+
