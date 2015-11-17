@@ -34,9 +34,13 @@ off the trampoline, then you can be sure the stack won't grow too big.
  */
 
 
+//sealed trait is used to make the match...case exhaustive i.e
 sealed trait Bounce[A]
 case class Call[A](thunk: () => Bounce[A]) extends Bounce[A]
 case class Result[A](result: A) extends Bounce[A]
+/*
+case class: Remember apply() & unapply() methods are implicitly helpful here
+ */
 def even1(n: Int) : Bounce[Boolean] = {
   if (n == 0)
     Result(true)
@@ -52,6 +56,7 @@ def odd1(n: Int): Bounce[Boolean] = {
 }
 
 def trampolines[A](bounce: Bounce[A]): A = bounce match {
+  //unapply() is implicitly called here
   case Call(thunk) => trampolines(thunk())
   case Result(x) => x
 }

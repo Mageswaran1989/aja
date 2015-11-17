@@ -2,6 +2,7 @@
 //Immutable
 //Lists represent a linked list
 
+//Mutable List : ListBuffer, Linked List
 val l = 1::2::3::Nil
 
 val l1 = List(1,2,3)
@@ -70,6 +71,31 @@ for (person <- List(alice, bob, charlie)) {
       println("Who are you, " + age + " year-old person named " + name + "?")
   }
 }
+
+//////////////////////////////////////////////////////////////////////////////
+
+val list = List(1, 2.2, "three", 'four) //=> with help of apply
+list match {
+  case List(x, y, _*) => println("x = "+ x +", y = " + y) //=> with help of unapplySeq
+  case _ => throw new Exception("No match! " + list)
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+//Huray! here goes Map-Reduce
+val list1 = List(0,1,2,3,4,5)
+list1.map(_ * 2).reduce(_ + _)
+
+///////////////////////////////////////////////////////////////////////
+
+val list2 = List("Programming", "Scala")
+val list3 = "People" :: "should" :: "read" :: list2
+
+// :: operator binds to the right
+val list4 = ("People" :: ("should" :: ("read" :: list2)))
+val list5 = list2.::("read").::("should").::("People")
+//In terms of performance, prepending is O(1).
+//Consider last item as first and start prepending the items in to the lost
 
 
 
