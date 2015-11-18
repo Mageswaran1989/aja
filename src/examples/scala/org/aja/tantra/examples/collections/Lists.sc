@@ -4,11 +4,8 @@
 
 //Mutable List : ListBuffer, Linked List
 val l = 1::2::3::Nil
-
 val l1 = List(1,2,3)
-
 val l2 = l ::: l1
-
 l2 :+ 5
 
 val l3 = List((1,2,3),(4,5,6)).toArray
@@ -97,6 +94,35 @@ val list5 = list2.::("read").::("should").::("People")
 //In terms of performance, prepending is O(1).
 //Consider last item as first and start prepending the items in to the lost
 
+//////////////////////////////////////////////////////////////////////////
 
+val list6 = List(1,2,3,4,5,6)
 
+//acc is supplied 10 intitally and keeps accumulating the value
+//currentElement is current element in the list
+val prod = list6.foldLeft(10)((suppliedAccmulator, currElement) => (suppliedAccmulator * currElement))
 
+//((((((10 * 1) * 2) * 3) * 4) * 5) * 6)
+//((((((10) * 2) * 3) * 4) * 5) * 6)
+//(((((20) * 3) * 4) * 5) * 6)
+//((((60) * 4) * 5) * 6)
+//(((240) * 5) * 6)
+//((1200) * 6)
+//(7200)
+
+//It turns out that foldLeft and reduceLeft have one very important advantage over their
+//“right-handed” brethren: they are tail-call recursive, and as such they can benefit from
+//tail-call optimization
+
+val prod1 = list6.foldRight(10)((suppliedAccmulator, currElement) => (suppliedAccmulator * currElement))
+
+//(1 * (2 * (3 * (4 * (5 * (6 * 10))))))
+//(1 * (2 * (3 * (4 * (5 * (60))))))
+//(1 * (2 * (3 * (4 * (300)))))
+//(1 * (2 * (3 * (1200))))
+//(1 * (2 * (3600)))
+//(1 * (7200))
+//(7200)
+
+println((1 to 1000000) reduceLeft(_ + _))
+println((1 to 1000000) reduceRight(_ + _))

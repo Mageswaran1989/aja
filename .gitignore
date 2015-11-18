@@ -11,6 +11,7 @@
 *.class
 *.pyc
 *.cache
+*.swp 
 *.*~
 .idea/*
 target/*

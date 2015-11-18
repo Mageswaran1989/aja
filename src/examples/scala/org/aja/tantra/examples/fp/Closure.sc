@@ -18,7 +18,6 @@ outSideVariable = outSideVariable + 9
 someFunction(1)
 //print
 outSideVariable
-
 ///////////////////////////////////////////////////////////////////////
 
 var factor = 3

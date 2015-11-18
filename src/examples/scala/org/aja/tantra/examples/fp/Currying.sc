@@ -61,7 +61,6 @@ modNCurried(5) _
 
 
 println("/////////////////////////////////////////////////////////////////////////")
-
 def adder(m: Int)(n: Int)(p: Int) = m + n + p
 // The above definition does not return a curried function yet
 // (adder: (m: Int)(n: Int)(p: Int)Int)
@@ -72,6 +71,30 @@ val currAdder = adder _
 val add2 = currAdder(2)
 val add5 = add2(3)
 add5(5)
+
+println("/////////////////////////////////////////////////////////////////////////")
+def cat(s1: String)(s2: String) = s1 + s2
+
+def cat1(s1: String) = (s2: String) => s1 + s2
+
+def cat2(s1: String, s2: String) = s1+ s2
+
+val c = cat("Aja")_
+c(" tandra")
+
+//val c1 = cat2("Aja")
+//c1( "tantra")
+
+
+def multiplier(i: Int)(factor: Int) = i * factor
+val byFive = multiplier(5) _
+val byTen = multiplier(10) _
+
+byFive(5)
+byTen(5)
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-package org.aja.tantra.examples.akka
+package org.aja.tantra.examples.concurrency.akka
 
 import akka.actor.{Props, ActorSystem, Actor}
 

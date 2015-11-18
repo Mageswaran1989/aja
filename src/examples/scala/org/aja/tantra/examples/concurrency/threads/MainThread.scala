@@ -1,4 +1,4 @@
-package org.aja.tantra.examples.threads
+package org.aja.tantra.examples.concurrency.akka.threads
 
 /**
  * Created by mageswaran on 17/11/15.

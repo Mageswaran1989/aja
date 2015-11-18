@@ -1,5 +1,4 @@
-package org.aja.tantra.examples.traits
-
+package org.aja.tantra.examples.classes
 
 /**
  * Created by mageswaran on 10/11/15.

@@ -12,3 +12,8 @@ val s4 = s3 - 1
 
 s4.contains(1)
 
+val s5 = Set(9,7,6)
+
+s ++ s5
+
+

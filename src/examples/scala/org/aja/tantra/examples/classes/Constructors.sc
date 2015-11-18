@@ -24,3 +24,14 @@ object Constructors extends App{
 
   val c1 = new Child(0)
 }
+
+println("/////////////////////////////////////////////////////////////")
+trait Test {
+  println("In Test trait Constructor")
+}
+
+class TestTrait extends Test {
+  println("In TestTrait class")
+}
+
+val t = new TestTrait()

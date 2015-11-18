@@ -1,4 +1,4 @@
-package org.aja.tantra.examples.akka
+package org.aja.tantra.examples.concurrency.akka
 
 /**
  * Created by mdhandapani on 29/10/15.
