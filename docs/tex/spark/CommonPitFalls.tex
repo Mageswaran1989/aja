@@ -1,0 +1,27 @@
+java.lang.OutOfMemoryError when running parquet examples in the shell	Restart the shell with the following parameter: --driver-memory 1G
+
+Can't open ./bin/spark-shell even if in that dir	Rename "NO NAME" to something without a space -- this affects certain terminal settings
+
+Can't run commands in general	Make sure there are no spaces in the path you put Spark in
+
+Can't run ./bin/spark-shell under windows	go to spark/bin and double click spark-shell.cmd
+
+All kinds of "File not found" exception	Use System.setProperty("user.dir", "xxx") to set the current working directory to the data file directory
+
+Can't run pyspark in cygwin	run in cmd instead
+
+Mac OS X - "com.apple.quarantine" errors when running sbt	Remove all files beginning with '._' using find . -name '._*' -print0 | xargs -0 rm (see http://wordpress.org/support/topic/plugin-contact-form-7-error-on-every-page-header-when-activated)
+
+simple-app - cannot connect to localhost:9000	?
+
+Stack overflow when running SQL query	bin/spark-shell --driver-java-options -Xss4m
+
+classpath issues on Windows	check your environment (run the 'set' command) and you'll find a 'classpath' environment variable. clear that out
+
+mac invalid character during sbt/sbt assembly	copy USB contents to disk, delete all files that start with `_` in the directory where you ran the command, rerun the command
+
+twitter stream does not work if computer in vpn	turn off vpn
+
+twitter stream does not work if local clock is ahead	set local clock correctly
+
+Java streaming tutorial program: can't find .transform	the program is slightly incorrect - use mapToPair

@@ -94,3 +94,6 @@ url: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/Sin
 %spark.yarn.historyServer.address property in /etc/spark/conf/spark-defaults.conf:
 
 spark.yarn.historyServer.address=http://HISTORY_HOST:HISTORY_PORT
+
+\section{Submitting Jobs}
+../spark/bin/spark-submit --class "SimpleApp" --master local[*] target/scala-2.10/simple-project_2.10-1.0.jar
