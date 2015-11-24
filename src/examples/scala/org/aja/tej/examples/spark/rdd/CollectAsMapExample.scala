@@ -14,9 +14,10 @@ preserve their key-value structure.
 object CollectAsMapExample extends  App{
 
   def useCases(sc: SparkContext) = {
-    val a = sc . parallelize ( List (1 , 2 , 1 , 3) , 1)
-    val b = a . zip ( a )
-    b . collectAsMap
+    println(this.getClass.getSimpleName)
+    val a = sc.parallelize(List(1,2,1,3), 1)
+    val b = a.zip(a)
+    println("b.collectAsMap : " + b.collectAsMap) //b.collectAsMap : Map(2 -> 2, 1 -> 1, 3 -> 3)
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

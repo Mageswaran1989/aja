@@ -21,31 +21,27 @@ Returns the path to the checkpoint file or null if RDD has not yet been checkpoi
 object CheckPointExample extends App{
 
   def useCases(sc: SparkContext) = {
+    println(this.getClass.getSimpleName)
     sc.setCheckpointDir("data/CheckPointExampleDir")
-    //Check tej/data/
-    val a = sc . parallelize (1 to 500 , 5)
+    //Check in tej/data/
+    val a = sc.parallelize(1 to 500 , 5)
     val b = a ++ a ++ a ++ a ++ a
-    a.isCheckpointed
 
-    a.checkpoint
-    a.count
+    println("a.isCheckpointed : " + a.isCheckpointed) //  a.isCheckpointed : false
+    //enable checkpoin ton this rdd
+    println("a.checkpoint : " + a.checkpoint) //  a.checkpoint : ()
+    println("a.count : " + a.count) //  a.count : 500
+    println("a.isCheckpointed : " + a.isCheckpointed) //  a.isCheckpointed : true
+    println("a.getCheckpointFile : " + a.getCheckpointFile) //  a.getCheckpointFile : Some(file:/opt/aja/data/CheckPointExampleDir/ee7a927e-3a48-412f-adcd-8e79c20e860c/rdd-0)
+    println("----------------------------------------------------------")
 
-    a.isCheckpointed
+    println("b.isCheckpointed : " + b.isCheckpointed) //  b.isCheckpointed : false
+    println("b.collect : " + b.collect) //  b.collect : [I@2dad7733
+    println("b.isCheckpointed : " + b.isCheckpointed) //  b.isCheckpointed : false
+    println("b.getCheckpointFile : " + b.getCheckpointFile) //    b.getCheckpointFile : None
 
-    b . getCheckpointFile
-    b . checkpoint
-    b . getCheckpointFile
-
-    b.isCheckpointed
-
-
-    b . collect
-    b . getCheckpointFile
-
-    b.isCheckpointed
 
   }
-
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

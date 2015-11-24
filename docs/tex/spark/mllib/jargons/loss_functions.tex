@@ -1,0 +1,35 @@
+\heading{Loss Function}
+
+\subheading{Reference Links}
+http://spark.apache.org/docs/latest/mllib-linear-methods.html
+http://www.mathsisfun.com/gradient.html
+
+\subheading{Jargons}
+- Gradient : an increase or decrease in the magnitude of a property (e.g. temperature, pressure, or concentration)
+             observed in passing from one point or moment to another.
+             Eg: For a straight line gradient is given by
+             Gradient m = (y_2 - y_1) / (x_2 - x_1)
+             |
+             |     .(x2,y2)
+             |    .
+             |   .(x1,y1)
+             |_____________
+
+
+
+\subheading{Developer Notes}
+- Find the error of current weights for given input vector and its target/output
+- Two sets of formaula are there for each type actual loss function and its gradient
+
+\subsubheading{Types}
+- Hinge Loss
+- Logistic Loss
+- Squared Loss - LeastSquaresGradient
+
+\subheading{Spark Notes}
+- As for the gradient is concerned Spark has a abstract class that defines a overloaded methods called "compute"
+  with deafult implementation in it which returns a tuple (the gradient i.e how much the weights should be moved/adjusted,
+  loss/error)
+- File : org.apache.spark.mllib.optimization.Gradient
+- With squared loss being calculated in the class LeastSquaresGradient is straight forward
+

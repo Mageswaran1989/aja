@@ -18,8 +18,9 @@ New Partition < Old partition : shuffle=False
 object CoalesceRepartitionExample extends App{
 
   def useCases(sc: SparkContext): Unit = {
+    println(this.getClass.getSimpleName)
     val y = sc.parallelize (1 to 10 , 10)
-    val z = y.coalesce(2, false )
+    val z = y.coalesce(2, false ) //see also HashPartitionerExample
     println("CoalesceRepartitionExample: " + z.partitions.length)
   }
 

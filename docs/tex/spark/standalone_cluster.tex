@@ -35,11 +35,11 @@ $ ./sbin/start-slave.sh spark://localhost:7077
 
 
 vim  /opt/spark/conf/spark-env.sh
-#export STANDALONE_SPARK_MASTER_HOST=`Aja`
-#export SPARK_MASTER_PORT spark://localhost:7077
+export STANDALONE_SPARK_MASTER_HOST=`Aja`
+export SPARK_MASTER_PORT spark://localhost:7077
 #/ SPARK_MASTER_WEBUI_PORT and SPARK_WORKER_PORT / SPARK_WORKER_WEBUI_PORT, to use non-default ports
 export SPARK_WORKER_CORES=6 #, to set the number of cores to use on this machine
-#export SPARK_WORKER_MEMORY=2 GB #, to set how much memory to use (for example: 1000 MB, 2 GB)
+export SPARK_WORKER_MEMORY=2 GB #, to set how much memory to use (for example: 1000 MB, 2 GB)
 export SPARK_WORKER_INSTANCES=4 #, to set the number of worker processes per node
 #export SPARK_WORKER_DIR, to set the working directory of worker processes
 

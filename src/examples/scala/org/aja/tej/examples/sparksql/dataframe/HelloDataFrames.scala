@@ -1,4 +1,4 @@
-package org.aja.tej.examples.sparksql
+package org.aja.tej.examples.sparksql.dataframe
 
 /**
  * Created by mdhandapani on 26/10/15.

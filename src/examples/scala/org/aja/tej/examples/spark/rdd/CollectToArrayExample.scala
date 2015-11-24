@@ -15,12 +15,18 @@ array.
 object CollectToArrayExample extends App{
 
   def useCases(sc: SparkContext) = {
-    val c = sc . parallelize ( List (" Gnu " , " Cat " , " Rat " , " Dog " , " Gnu " , " Rat ") ,
-      2)
-    c . collect
-
+    println(this.getClass.getSimpleName)
+    val c = sc.parallelize (List ("Gnu","Cat","Rat","Dog","Gnu","Rat") ,2)
+    println("c.collect return type : " + c.collect().getClass)
+    //c.collect return type : class [Ljava.lang.String;
+    c.collect.foreach(println)
+    //    Gnu
+    //    Cat
+    //    Rat
+    //    Dog
+    //    Gnu
+    //    Rat
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
-
 }

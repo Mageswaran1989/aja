@@ -32,3 +32,4 @@ new FunctionN {
 +/- : Operators for adding/removing elements
 ++/-- : Operators for adding/removing elements defined in the iterators (which could be other sets, lists, etc.).
 
+![testimage](../../docs/img/measurement.png)

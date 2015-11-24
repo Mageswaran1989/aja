@@ -73,6 +73,7 @@ object HelloMLLib {
     val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
     println("Spark version : " + sc.version)
 
+    try {
     val carRDD = sc.textFile("data/car-milage-no-hdr.csv").map(parseDataToArray(_))
 
     //Summary Statictics
@@ -133,5 +134,8 @@ object HelloMLLib {
     println("Classification")
 
 
+  } finally {
+      TejUtils.waitForSparkUI(sc)
+    }
   }
 }
