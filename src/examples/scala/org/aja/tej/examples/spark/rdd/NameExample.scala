@@ -12,11 +12,12 @@ Allows a RDD to be tagged with a custom name.
 object NameExample  extends App {
 
   def useCases(sc: SparkContext) = {
-    val y = sc . parallelize (1 to 10 , 10)
-    println(y . name)
+    println(this.getClass.getSimpleName)
+    val y = sc.parallelize(1 to 10, 10)
+    println(y.name)
 
-    y . setName (" Fancy RDD Name ")
-    println(y . name)
+    y.setName("Fancy RDD Name")
+    println(y.name) // Fancy RDD Name
 
   }
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

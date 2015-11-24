@@ -11,12 +11,12 @@ import org.apache.spark.SparkContext
 Looks for the very first data item of the RDD and returns it.
 
  */
-object First extends App{
+object FirstExample extends App{
 
   def useCases(sc: SparkContext) = {
-    val c = sc . parallelize ( List (" Gnu " , " Cat " , " Rat " , " Dog ") , 2)
-    c . first
-
+    println(this.getClass.getSimpleName)
+    val c = sc.parallelize(List("Gnu","Cat","Rat","Dog"), 2)
+    println(c.first)//Gnu
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

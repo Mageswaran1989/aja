@@ -30,31 +30,6 @@ import org.apache.spark.{SparkConf, SparkContext}
   *
   */
 
-/**
-Job:- A piece of code which reads some input  from HDFS or local, performs some computation on the data and writes
-some output data.
-
-Stages:-Jobs are divided into stages. Stages are classified as a Map or reduce stages(Its easier to understand if you
-have worked on Hadoop and want to correlate). Stages are divided based on computational boundaries, all computations
-(operators) cannot be Updated in a single Stage. It happens over many stages.
-
-Tasks:- Each stage has some tasks, one task per partition. One task is executed on one partition of data on one
-executor(machine).
-
-DAG - DAG stands for Directed Acyclic Graph, in the present context its a DAG of operators.
-
-Executor - The process responsible for executing a task.
-
-Driver - The program/process responsible for running the Job over the Spark Engine
-
-Master - The machine on which the Driver program runs
-
-Slave - The machine on which the Executor program runs
-
- All jobs in spark comprise a series of operators and  run on a set of data. All the operators in a job are used to
-construct a DAG (Directed Acyclic Graph). The DAG is optimized by rearranging and combining operators where possible.
- */
-
 /*
 Four stages
 RDD Objects          \    DAGScheduler         \      TaskScheduler         \    Worker
@@ -84,13 +59,16 @@ object HelloWorldSpark {
     val outputPath = "output/hw_wordcount_output/"
     val logFile = "data/datascience.stackexchange.com/Posts.xml" // Should be some file on your system
     val conf = new SparkConf().setAppName("Simple Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
+
     val sc = new SparkContext(conf)
 
     try {
 
-      val logData = sc.textFile(logFile, 2).cache()
-      val numAs = logData.filter(line => line.contains("a")).count()
-      val numBs = logData.filter(line => line.contains("b")).count()
+      val logData = sc.textFile(logFile, 10).cache()
+      println(" Number of lines : " + logData.count()) //Job 0
+      //10 partitions which mean 10 tasks can do this work parallelly, wow!
+      val numAs = logData.filter(line => line.contains("a")).count() //Job 1
+      val numBs = logData.filter(line => line.contains("b")).count() //Job 2
       println("$$$$$$$$$Lines with a: %s, Lines with b: %s".format(numAs, numBs))
 
       val dir = new File(outputPath)
@@ -108,12 +86,12 @@ object HelloWorldSpark {
       //20090505-000000 af.b Tuisblad 1 36236
       val pagecount = sc.textFile("data/pagecounts/")
       sc.setLogLevel("INFO")
-      pagecount.take(10).foreach(println)
+      pagecount.take(10).foreach(println) //Job 3
 
-      println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + pagecount.count())
+      println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + pagecount.count()) //Job 4
 
       //Lets count the
-      val engPages = pagecount.filter(_.split(" ")(1) == "en").count
+      val engPages = pagecount.filter(_.split(" ")(1) == "en").count // Job 5
 
       println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + engPages)
     }
@@ -129,4 +107,43 @@ Datasets:
 https://dumps.wikimedia.org/other/pagecounts-raw/
 https://wikitech.wikimedia.org/wiki/Analytics/Data/Pagecounts-raw
 
+ */
+
+/*
+Quick Reference:
+
+Application:- User program built on Spark. Consists of a driver program and executors on the cluster.
+
+Application jar:-  A jar containing the user's Spark application. In some cases users will want to create an "uber jar"
+                   containing their application along with its dependencies. The user's jar should never include Hadoop
+                   or Spark libraries, however, these will be added at runtime.
+
+Driver Program: - The process running the main() function of the application and creating the SparkContext or
+                  The program/process responsible for running the Job over the Spark Engine
+
+Cluster manager:-  An external service for acquiring resources on the cluster (e.g. standalone manager, Mesos, YARN)
+
+Deploy mode:-  Distinguishes where the driver process runs. In "cluster" mode, the framework launches the driver inside
+               of the cluster. In "client" mode, the submitter launches the driver outside of the cluster.
+
+Worker Node:- Any node that can run application code in the cluster
+
+Executor :- The process responsible for executing a task or A process launched for an application on a worker node,
+            that runs tasks and keeps data in memory or disk storage across them. Each application has its own executors.
+
+Tasks:- Each stage has some tasks, one task per partition. One task is executed on one partition of data on one executor(machine).
+
+Job:-  A piece of code which reads some input  from HDFS or local, performs some computation on the data and writes some
+       output data or A parallel computation consisting of multiple tasks that gets spawned in response to a Spark action
+       (e.g. save, collect); you'll see this term used in the driver's logs.
+
+Stages:- Jobs are divided into stages. Stages are classified as a Map or reduce stages(Its easier to understand if you
+         have worked on Hadoop and want to correlate). Stages are divided based on computational boundaries, all
+         computations(operators) cannot be Updated in a single Stage. It happens over many stages.
+
+DAG: - DAG stands for Directed Acyclic Graph, in the present context its a DAG of operators.
+
+Master: - The machine on which the Driver program runs
+
+Slave: - The machine on which the Executor program runs
  */
