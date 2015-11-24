@@ -9,7 +9,11 @@ import org.apache.spark.{SparkContext, SparkConf}
 object TejUtils {
 
   def getSparkContext(applicationName: String, master: String = "local[4]") = {
-    val conf = new SparkConf().setAppName(applicationName).setMaster(master /*"spark://myhost:7077"*/)
+    val conf = new SparkConf()
+      .setAppName(applicationName)
+      .setMaster(master /*"spark://myhost:7077"*/)
+//      .set("spark.ui.port","7077")
+//    .set("spark.driver.host","localhost")
     new SparkContext(conf)
   }
 
