@@ -71,4 +71,29 @@ object TejUtils {
   //val tpe = typeOf[LinearRegressionModel]
   //  val tpe = typeOf[className]
   //  tpe.baseClasses foreach { s => println(s.fullName) }
+
+//  sys.ShutdownHookThread {
+//    logInfo("Gracefully stopping StreamingApp")
+//    scc.stop(true, true)
+//    logInfo("StreamingApp stopped")
+//
+//  val shutdownHook = scala.sys.addShutdownHook {
+//    try {
+//
+//      sparkContext.stop()
+//      //Make sure to kill any other threads or thread pool you may be running
+//    }
+//    catch {
+//      case e: Exception =>
+//      {
+//        ...
+//
+//      }
+//    }
+//
+//  }
+
+}
+
+
 }
