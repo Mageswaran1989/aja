@@ -10,7 +10,7 @@ import org.apache.spark.SparkContext
 /*
  reduce
 This function provides the well-known reduce functionality in Spark. Please note that
-any function f you provide, should be commutative in order to generate reproducible
+any function f you provide, should be commutative(2 + 3 = 3 + 2) in order to generate reproducible
 results.
 
  reduceByKey[Pair] , reduceByKeyLocally[Pair] ,

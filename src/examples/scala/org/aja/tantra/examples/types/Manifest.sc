@@ -10,6 +10,8 @@ object WhichList {
 WhichList(List(1, 2, 3))
 WhichList(List(1.1, 2.2, 3.3))
 WhichList(List("one", "two", "three"))
+
+// does not work when a previously  constructed list is passed to WhichList.apply.
 List(List(1, 2, 3), List(1.1, 2.2, 3.3), List("one", "two", "three")) foreach {
   WhichList(_)
 }

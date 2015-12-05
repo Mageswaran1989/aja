@@ -1,5 +1,3 @@
-package org.aja.tantra.examples.classes
-
 /**
  * Created by mageswaran on 10/11/15.
  */
@@ -18,19 +16,21 @@ class Child(val childVal:Int, var childVar: Int) extends Parent(childVal, childV
 
   def this(childVal: Int) = this(childVal, 1)
 }
-object Constructors extends App{
+object Constructors extends App {
 
   val c = new Child(2)
 
   val c1 = new Child(0)
 }
 
-println("/////////////////////////////////////////////////////////////")
+val c = new Child(2, 1)
+
+//println("/////////////////////////////////////////////////////////////")
 trait Test {
   println("In Test trait Constructor")
 }
 
-class TestTrait extends Test {
+class TestTrait() extends Test {
   println("In TestTrait class")
 }
 

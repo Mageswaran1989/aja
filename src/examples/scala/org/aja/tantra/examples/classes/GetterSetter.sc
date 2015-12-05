@@ -1,5 +1,3 @@
-package org.aja.tantra.examples.classes
-
 /**
  * Created by mageswaran on 23/9/15.
  */
