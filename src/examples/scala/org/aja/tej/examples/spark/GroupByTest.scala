@@ -78,3 +78,5 @@ object GroupByTest {
     sc.stop()
   }
 }
+
+//Gist: https://gist.github.com/Mageswaran1989/97c07b884cb569f16006

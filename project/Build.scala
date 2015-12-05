@@ -9,6 +9,7 @@ object BuildSettings {
   val ScalaVersion = "2.11.7"
   val ScalaVersions = Seq("2.11.7", "2.10.5")
 
+
   lazy val buildSettings = Defaults.coreDefaultSettings ++ Seq (
     name          := Name,
     version       := Version,
@@ -52,6 +53,7 @@ object Dependency {
     val Akka         = "2.4.0"
     val BreezeViz    = "0.11.2"
 //    val scalaActors  = "2.11"
+    val sparkCSV = "1.3.0"
   }
 
   //                                       %% means use scala version
@@ -76,6 +78,7 @@ object Dependency {
   val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
   val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
+  val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
 }
 
 //

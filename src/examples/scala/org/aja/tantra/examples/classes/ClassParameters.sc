@@ -1,5 +1,6 @@
 //Lets explore how parameters are handled in Scala class
 
+//constructor parameters won't have setter/getters by default!
 class Person(name: String, age: Int) {
 
   val someData : String = ""
@@ -10,15 +11,18 @@ val p = new Person("Aja", 27)
 p.someData
 
 /////////////////////////////////////////////////////////////////////////////////
+//In case classes constructor parameters are by default val i.e you will get getters
 case class Person1(name: String, age: Int) {
    private val someData: String =""
 }
 val p1 = Person1("Aja", 27)
 p1.name
 p1.age
+//p1.age = 28 //Reassiment to val error
 //p1.someData //not accesible
 
 /////////////////////////////////////////////////////////////////////////////////
+//For getter/setter explicitly mark the variables as "var"
 class Person2(var name: String, var age: Int) {
   protected val someData: String = ""
 
@@ -55,8 +59,8 @@ p3
 /////////////////////////////////////////////////////////////////////////////////
 //Here the constructor is made private
 class Model private (x: Int, y: Int) {
-  def this() = this(0,0)
-  def this(y: Int) = this(0,y)
+  def this() = this(0,0) //overloaded constructor
+  def this(y: Int) = this(0,y) //overloaded constructor
   def run = x + y
 }
 object Model {

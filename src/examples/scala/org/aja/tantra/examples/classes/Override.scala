@@ -19,6 +19,8 @@ abstract class AbstractClass {
 //                                      "knowledge of ConcreteClass by the developer")
   final def finalMethod: Unit = println("AbstractClass: finalMethod")
   val concreteVal = 1
+
+  val VariableSpecificToBaseClass = 5
 }
 
 class ConcreteClass extends AbstractClass {
@@ -31,6 +33,8 @@ class ConcreteClass extends AbstractClass {
   }
   //override def finalMethod: Unit = println("AbstractClass: finalMethod in ConcreteClass") //Error
   override val concreteVal = 5 //override -> to say special operation
+
+  //val VariableSpecificToBaseClass = 6 //Error: needs override
 }
 
 final class FinalClass

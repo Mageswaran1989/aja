@@ -63,3 +63,6 @@ object ANNet extends App {
     TejUtils.waitForSparkUI(sc)
   }
 }
+
+
+//Gist: https://gist.github.com/Mageswaran1989/312a9751fcba5d335abe

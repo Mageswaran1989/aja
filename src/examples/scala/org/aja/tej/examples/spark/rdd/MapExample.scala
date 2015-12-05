@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 import org.aja.tej.utils.TejUtils._
 
@@ -47,7 +48,7 @@ Finally the function has to return a transformed data item of type U .
 
 
  */
-object MapExample {
+object MapExample  extends App {
   def useCases(sc: SparkContext) = {
 
     val a = sc.parallelize(List("dog","salmon","salmon","rat","elephant"),3)
@@ -111,6 +112,9 @@ object MapExample {
     val b4 = a4 . mapWith (" Index :" + _ ) (( a , b ) => (" Value :" + a , b ) )
     b4 . collect
 
+    mapPartition(sc)
+    mapPartitionWithIndex(sc)
+
   }
 
   def mapPartition(sc: SparkContext) = {
@@ -173,12 +177,15 @@ object MapExample {
 
   }
 
-  def main(args: Array[String]) {
-    val sc = getSparkContext("MapExample")
 
-    mapPartition(sc)
-    mapPartitionWithIndex(sc)
-
+  def mapToPair(): Unit = {
+    //TODO
   }
+
+    useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
+
+
+
 
 }

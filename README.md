@@ -45,6 +45,9 @@ To run examples under Tej: type "run-main org.aja.tej.examples." and TAB to sele
 Using IntelliJ editor:  
 File -> open -> point to aja folder
 
+Here are few links that gives glimse of data  
+- https://www.worldpayzinc.com/tech-wealth/#sources  
+
 -----------------------------------------------------------------------------------
 
 #dhīra — a very learned and gentle scholar

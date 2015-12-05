@@ -21,6 +21,8 @@ object Student {
 
 class Person(var name: String, var age: Int) {
   override def toString = "Person(" + name + "," + age + ")"
+
+  val canThisAccessedFromCO = 7
 }
 
 //object -> Not Singleton, rather it is Companion object
@@ -37,10 +39,13 @@ object Person {
 
   def unapply(p: Person) = Some(p.name, p.age) //Extractors
 //Don't forget the "Some" part!
+
+  //println(canThisAccessedFromCO) //can access directly
+  println("canThisAccessedFromCO :" + new Person("Aja", 1).canThisAccessedFromCO)
 }
 
 val p = Person("Mageswaran", 26)
-p match {
+p match { //works with the help of "unapply"
   case Person(name, age) => println("Person is " + name + " of age " + age)
   case _ => println("No match")
 }

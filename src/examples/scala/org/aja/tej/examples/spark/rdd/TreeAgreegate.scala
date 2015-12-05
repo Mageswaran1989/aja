@@ -1,7 +1,15 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.utils.TejUtils
+import org.apache.spark.SparkContext
+
 /**
  * Created by mageswaran on 24/9/15.
+ */
+
+/*
+Aggregates the elements of a RDD in a multi-level tree pattern.
+Git history: https://github.com/apache/spark/pull/1110
  */
 
 /**
@@ -46,6 +54,36 @@ package org.aja.tej.examples.spark.rdd
  * Note that treeAggregate takes an additional parameter depth which is declared with a default value depth = 2, thus, as
  * it's not provided in this particular call, it will take that default value.
  */
-object TreeAgreegate  extends App {
+object TreeAgreegateExample  extends App {
 
+  def usecases(sc: SparkContext) = {
+    try {
+      println(this.getClass.getSimpleName)
+
+      val l = sc.parallelize(List(1, 2, 3, 4, 5, 6, 7, 8, 9), 3)
+      //1+2+3+4+5+6+7+8+9 = 45
+
+      println("TreeAgreegateExample result: " + l.treeAggregate(0)(_ + _, _ + _)) //45
+      println("AgreegateExample result: " + l.aggregate(0)(_ + _  , _ + _ )) //45
+      println("------------------------------------------------------------")
+
+      println("TreeAgreegateExample result: " +  l.treeAggregate(10)(_ + _, _ + _)) //45 + 3(partition) * 10
+      println("AgreegateExample result: " + l.aggregate(10)(_ + _  , _ + _ ))
+      //45 + 3(partition) * 10 + 10 (added by the driver or in main program)
+      println("------------------------------------------------------------")
+
+
+      val strList = sc.parallelize(List('a','b','c','d','e','f','g','h','i'), 3)
+      println("TreeAgreegateExample result: " +  strList.treeAggregate("x")(_ + _, _ + _)) //xghixdefxabc
+      println("AgreegateExample result: " + strList.aggregate("x")(_ + _  , _ + _ )) //xxghixdefxabc
+
+
+
+    }
+    finally {
+      TejUtils.waitForSparkUI(sc)
+    }
+  }
+
+  usecases(TejUtils.getSparkContext(this.getClass.getSimpleName))
 }

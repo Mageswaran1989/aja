@@ -5,8 +5,8 @@ class Parent extends GrandParent  //Type
 class Child extends Parent //Sub Type
 
 class InvariantClass[A] //I am an orphan, always single man army
-class CovariantClass[+A] //Let my children enjoy my property
-class ContraVariantClass[-A] //I dont want any of child to bare my burden
+class CovariantClass[+A] //Let my children enjoy my property or Downwards types allowed
+class ContraVariantClass[-A] //I dont want any of child to bare my loans or upwards types are allowed
 
 def invariantMethod(obj: InvariantClass[Parent]) {}
 def covariantClass(obj: CovariantClass[Parent]) {}
@@ -24,6 +24,7 @@ contravariantClass(new ContraVariantClass[GrandParent])
 contravariantClass(new ContraVariantClass[Parent])
 //contravariantClass(new ContraVariantClass[Child]) //No Inherited Class
 
+// types of the function arguments are contravariant (i.e., -T1) and the return type is covariant (i.e., +R)
 
 println("//////////////////////////TODO: traits////////////////////////////")
 trait Vehicle {
