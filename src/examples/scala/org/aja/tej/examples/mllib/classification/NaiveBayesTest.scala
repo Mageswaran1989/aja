@@ -1,12 +1,12 @@
-package org.aja.tej.examples.usecases.stumbleupon.classification
+package org.aja.tej.examples.mllib.classification
 
 import org.apache.spark.mllib.classification.NaiveBayes
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 
 // Calculate PrecisionRecall and ROC curve (receiver operating characteristic )
+import org.aja.tej.examples.mllib.classification.StumbleuponUtils._
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
-import StumbleuponUtils._
 
 /**
  * Created by mdhandapani on 6/8/15.

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.usecases.stumbleupon.classification
 
+import org.aja.tej.examples.mllib.classification.StumbleuponUtils
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.tree.DecisionTree
 import org.apache.spark.mllib.tree.configuration.Algo

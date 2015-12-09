@@ -1,10 +1,10 @@
-package org.aja.tej.examples.usecases.stumbleupon.classification
+package org.aja.tej.examples.mllib.classification
 
+import org.aja.tej.examples.mllib.classification.StumbleuponUtils._
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.tree.DecisionTree
 import org.apache.spark.mllib.tree.configuration.Algo
 import org.apache.spark.mllib.tree.impurity.Entropy
-import StumbleuponUtils._
 
 /**
  * Created by mageswaran on 7/8/15.

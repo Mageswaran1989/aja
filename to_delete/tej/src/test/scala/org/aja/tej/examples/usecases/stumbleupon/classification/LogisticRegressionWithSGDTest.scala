@@ -1,5 +1,6 @@
 package org.aja.tej.examples.usecases.stumbleupon.classification
 
+import org.aja.tej.examples.mllib.classification.StumbleuponUtils
 import StumbleuponUtils._
 import org.apache.spark.mllib.classification.LogisticRegressionWithSGD
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics

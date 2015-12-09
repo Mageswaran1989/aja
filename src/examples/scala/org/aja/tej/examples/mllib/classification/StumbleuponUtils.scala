@@ -1,4 +1,4 @@
-package org.aja.tej.examples.usecases.stumbleupon.classification
+package org.aja.tej.examples.mllib.classification
 
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
