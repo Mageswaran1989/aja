@@ -148,4 +148,11 @@ Master: - The machine on which the Driver program runs
 Slave: - The machine on which the Executor program runs
  */
 
+/*
+ - RDDs - a low level API for expressing DAGs that will be executed in parallel by Spark workers
+ - Catalyst - an internal library for expressing trees that we use to build relational algebra and expression evaluation.  There's also an optimizer and query planner than turns these into logical concepts into RDD actions.
+ - Tungsten - an internal optimized execution engine that can compile catalyst expressions into efficient java bytecode that operates directly on serialized binary data.  It also has nice low level data structures / algorithms like hash tables and sorting that operate directly on serialized data.  These are used by the physical nodes that are produced by the query planner (and run inside of RDD operation on workers).
+ - DataFrames - a user facing API that is similar to SQL/LINQ for constructing dataflows that are backed by catalyst logical plans
+ - Datasets - a user facing API that is similar to the RDD API for constructing dataflows that are backed by catalyst logical plans
+ */
 //Gist: https://gist.github.com/Mageswaran1989/9b49ad1707c46bc7f3a3
