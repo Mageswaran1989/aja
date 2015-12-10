@@ -20,12 +20,10 @@ def validate(p: Person1) = p match {
 validate(p)
 validate(p1)
 println("///////////////////////////////////////////////////////////////")
-
 val randNumber = new Random().nextInt(10)
 randNumber match {
 case 7 => println("Wow we are lucky!")
 case otherNumber => otherNumber}
-
 println("///////////////////////////////////////////////////////////////")
 
 val willWork = List(1, 3, 23, 90)
@@ -38,7 +36,6 @@ for (l <- List(willWork, willNotWork, empty)) {
   }
 }
 println("///////////////////////////////////////////////////////////////")
-
 val BookExtractorRE = """Book: title=([^,]+),\s+authors=(.+)""".r
 val MagazineExtractorRE = """Magazine: title=([^,]+),\s+issue=(.+)""".r
 val catalog = List(
@@ -65,7 +62,6 @@ case class Person(name: String, age: Int, role: Role)
 val alice = new Person("Alice", 25, Developer)
 val bob = new Person("Bob", 32, Manager)
 val charlie = new Person("Charlie", 32, Developer)
-
 //@ to delcare variable in pattern
 for (item <- Map(1 -> alice, 2 -> bob, 3 -> charlie)) {
   item match {

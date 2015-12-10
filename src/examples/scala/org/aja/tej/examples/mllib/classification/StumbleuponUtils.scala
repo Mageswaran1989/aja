@@ -1,4 +1,4 @@
-package org.aja.tej.examples.usecases.stumbleupon.classification
+package org.aja.tej.examples.mllib.classification
 
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
@@ -45,7 +45,7 @@ label	                  integer (0 or 1)	User-determined label. Either evergreen
 object StumbleuponUtils {
 
   def getSparkContext = {
-    val conf = new SparkConf().setAppName("MLLib Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
+    val conf = new SparkConf().setAppName("Stumbleupon Dataset").setMaster("local[4]" /*"spark://myhost:7077"*/)
     new SparkContext(conf)
   }
 

@@ -1,7 +1,5 @@
-package org.aja.tantra.examples.classes
-
-import org.aja.tantra.examples.classes.scopeA.PublicClass1
-import org.aja.tantra.examples.classes.scopeB.DoesSomething
+import scopeA.PublicClass1
+import scopeB.DoesSomething
 
 /**
  * Created by mageswaran on 10/11/15.

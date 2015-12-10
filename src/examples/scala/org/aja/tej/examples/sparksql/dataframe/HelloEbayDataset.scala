@@ -1,4 +1,4 @@
-package org.aja.tej.examples.sparksql
+package org.aja.tej.examples.sparksql.dataframe
 
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.sql.SQLContext
@@ -25,7 +25,7 @@ openbid - the opening bid set by the seller
 price - the closing price that the item sold for (equivalent to the second highest bid + an increment)
 
  */
-object EbayDataset {
+object HelloEbayDataset {
 
   //define the schema using a case class
   case class Auction(auctionid: String, bid: Float, bidtime: Float, bidder: String, bidderrate: Integer, openbid: Float,

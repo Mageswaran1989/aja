@@ -24,6 +24,7 @@ contravariantClass(new ContraVariantClass[GrandParent])
 contravariantClass(new ContraVariantClass[Parent])
 //contravariantClass(new ContraVariantClass[Child]) //No Inherited Class
 
+// types of the function arguments are contravariant (i.e., -T1) and the return type is covariant (i.e., +R)
 
 println("//////////////////////////TODO: traits////////////////////////////")
 trait Vehicle {

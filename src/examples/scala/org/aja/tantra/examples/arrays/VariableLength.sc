@@ -4,7 +4,7 @@ def printArgs(args: String*) = {
     println("Please provide args for the program")
 
   for(arg <- args) {
-    println("Passed arg num: [" + i + "] : " + arg)
+    println(" \n Passed arg num: [" + i + "] : " + arg)
     i = i + 1
   }
 }

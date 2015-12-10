@@ -1,7 +1,4 @@
-package org.aja.tej.examples.usecases.audioscrobbler.recommendations
-
-import org.apache.spark.mllib.recommendation._
-import org.apache.spark.{SparkConf, SparkContext}
+package org.aja.tej.examples.mllib.recomendations;
 
 /**
  * Created by mageswaran on 22/8/15.
@@ -127,4 +124,3 @@ object ALSExample extends App{
   }.values.collect().foreach(println)
 
 }
-

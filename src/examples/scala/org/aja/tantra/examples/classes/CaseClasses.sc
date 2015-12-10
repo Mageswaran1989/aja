@@ -1,8 +1,98 @@
 /**
  * Created by mdhandapani on 10/8/15.
  */
-/*
-In Java, a tree would be represented using an abstract super-class for the trees,
+
+//Sealed Class Hierarchies
+//Basically to avoid default case in the match and cover all possible cases
+//Avoid sealed case class hierarchies if the hierarchy changes frequently
+//  (for an appropriate definition of “frequently”).
+
+//sealed abstract class HttpMethod()
+sealed trait HttpMethod //triat can't take constructor parameters
+case class Connect(body: String) extends HttpMethod
+case class Delete (body: String) extends HttpMethod
+case class Get    (body: String) extends HttpMethod
+case class Head   (body: String) extends HttpMethod
+case class Options(body: String) extends HttpMethod
+case class Post   (body: String) extends HttpMethod
+case class Put    (body: String) extends HttpMethod
+case class Trace  (body: String) extends HttpMethod
+
+//No default case is necessary, since we cover all the possibilities.
+def handle (method: HttpMethod) = method match {
+  case Connect (body) => println("connect: " + body)
+  case Delete  (body) => println("delete: "  + body)
+  case Get     (body) => println("get: "     + body)
+  case Head    (body) => println("head: "    + body)
+  case Options (body) => println("options: " + body)
+  case Post    (body) => println("post: "    + body)
+  case Put     (body) => println("put: "     + body)
+  case Trace   (body) => println("trace: "   + body)
+  //If you comment above line. you will get ----->
+  //    Warning:(125, 36) match may not be exhaustive.
+  //It would fail on the following input: Trace(_)
+  //def handle (method: HttpMethod) = method match {
+}
+val methods = List(
+  Connect("connect body..."),
+  Delete ("delete body..."),
+  Get    ("get body..."),
+  Head   ("head body..."),
+  Options("options body..."),
+  Post   ("post body..."),
+  Put    ("put body..."),
+  Trace  ("trace body..."))
+
+methods.foreach { method => handle(method) }
+
+//Cons: Caseclassses are not suited for inheritance
+//Below code demonstrates the case with
+
+//
+//sealed abstract class HttpMethod() {
+//  def body: String
+//  def bodyLength = body.length
+//}
+//
+//case class Connect(body: String) extends HttpMethod
+//case class Delete (body: String) extends HttpMethod
+//case class Get    (body: String) extends HttpMethod
+//case class Head   (body: String) extends HttpMethod
+//case class Options(body: String) extends HttpMethod
+//case class Post   (body: String) extends HttpMethod
+//case class Put    (body: String) extends HttpMethod
+//case class Trace  (body: String) extends HttpMethod
+//
+//def handle (method: HttpMethod) = method match {
+//  case Connect (body) => println("connect: " + body)
+//  case Delete  (body) => println("delete: "  + body)
+//  case Get     (body) => println("get: "     + body)
+//  case Head    (body) => println("head: "    + body)
+//  case Options (body) => println("options: " + body)
+//  case Post    (body) => println("post: "    + body)
+//  case Put     (body) => println("put: "     + body)
+//  case Trace   (body) => println("trace: "   + body)
+//}
+//
+//val methods = List(
+//  Connect("connect body..."),
+//  Delete ("delete body..."),
+//  Get    ("get body..."),
+//  Head   ("head body..."),
+//  Options("options body..."),
+//  Post   ("post body..."),
+//  Put    ("put body..."),
+//  Trace  ("trace body..."))
+//
+//methods.foreach { method =>
+//  handle(method)
+//  println("body length? " + method.bodyLength)
+//}
+
+
+////////////////////////////////////////////////////////////////////////
+//
+ /*In Java, a tree would be represented using an abstract super-class for the trees,
 and one concrete sub-class per node or leaf. In a functional programming language,
 one would use an algebraic data-type for the same purpose. Scala provides the concept
 of case classes which is somewhat in between the two. Here is how they can be
@@ -109,7 +199,7 @@ val circle2 = circle1 copy (radius = 4.0)
 println(circle1)
 println(circle2)
 ///////////////////////////////////////////////////////////////////
-//Inheritance in case classes
+//Inheritance in case classes -> Not possible
 case class Point1(x: Double, y: Double)
 abstract case class Shape1(id: String) {
   def draw(): Unit
@@ -123,88 +213,3 @@ abstract case class Shape1(id: String) {
 //  def draw() = println("Circle.draw: " + this)
 //}
 ////////////////////////////////////////////////////////////////////
-//Sealed Class Hierarchies
-//Basically to avoid default case in the match and cover all possible cases
-//Avoid sealed case class hierarchies if the hierarchy changes frequently
-//  (for an appropriate definition of “frequently”).
-sealed abstract class HttpMethod()
-case class Connect(body: String) extends HttpMethod
-case class Delete (body: String) extends HttpMethod
-case class Get    (body: String) extends HttpMethod
-case class Head   (body: String) extends HttpMethod
-case class Options(body: String) extends HttpMethod
-case class Post   (body: String) extends HttpMethod
-case class Put    (body: String) extends HttpMethod
-case class Trace  (body: String) extends HttpMethod
-
-//No default case is necessary, since we cover all the possibilities.
-def handle (method: HttpMethod) = method match {
-  case Connect (body) => println("connect: " + body)
-  case Delete  (body) => println("delete: "  + body)
-  case Get     (body) => println("get: "     + body)
-  case Head    (body) => println("head: "    + body)
-  case Options (body) => println("options: " + body)
-  case Post    (body) => println("post: "    + body)
-  case Put     (body) => println("put: "     + body)
-  case Trace   (body) => println("trace: "   + body)
-//If you comment above line. you will get ----->
-//    Warning:(125, 36) match may not be exhaustive.
-//It would fail on the following input: Trace(_)
-//def handle (method: HttpMethod) = method match {
-}
-val methods = List(
-  Connect("connect body..."),
-  Delete ("delete body..."),
-  Get    ("get body..."),
-  Head   ("head body..."),
-  Options("options body..."),
-  Post   ("post body..."),
-  Put    ("put body..."),
-  Trace  ("trace body..."))
-
-methods.foreach { method => handle(method) }
-
-//Cons: Caseclassses are not suited for inheritance
-//Below code demonstrates the case with
-
-//
-//sealed abstract class HttpMethod() {
-//  def body: String
-//  def bodyLength = body.length
-//}
-//
-//case class Connect(body: String) extends HttpMethod
-//case class Delete (body: String) extends HttpMethod
-//case class Get    (body: String) extends HttpMethod
-//case class Head   (body: String) extends HttpMethod
-//case class Options(body: String) extends HttpMethod
-//case class Post   (body: String) extends HttpMethod
-//case class Put    (body: String) extends HttpMethod
-//case class Trace  (body: String) extends HttpMethod
-//
-//def handle (method: HttpMethod) = method match {
-//  case Connect (body) => println("connect: " + body)
-//  case Delete  (body) => println("delete: "  + body)
-//  case Get     (body) => println("get: "     + body)
-//  case Head    (body) => println("head: "    + body)
-//  case Options (body) => println("options: " + body)
-//  case Post    (body) => println("post: "    + body)
-//  case Put     (body) => println("put: "     + body)
-//  case Trace   (body) => println("trace: "   + body)
-//}
-//
-//val methods = List(
-//  Connect("connect body..."),
-//  Delete ("delete body..."),
-//  Get    ("get body..."),
-//  Head   ("head body..."),
-//  Options("options body..."),
-//  Post   ("post body..."),
-//  Put    ("put body..."),
-//  Trace  ("trace body..."))
-//
-//methods.foreach { method =>
-//  handle(method)
-//  println("body length? " + method.bodyLength)
-//}
-
