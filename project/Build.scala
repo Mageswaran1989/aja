@@ -37,8 +37,8 @@ object Resolvers {
   val typesafe = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
   val sonatype = "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
   val mvnrepository = "MVN Repo" at "http://mvnrepository.com/artifact"
-
-  val allResolvers = Seq(typesafe, sonatype, mvnrepository)
+  val cloudera = "Cloudera Repos" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
+  val allResolvers = Seq(typesafe, sonatype, mvnrepository, cloudera)
 
 }
 
@@ -54,6 +54,7 @@ object Dependency {
     val BreezeViz    = "0.11.2"
 //    val scalaActors  = "2.11"
     val sparkCSV = "1.3.0"
+    val sparkts  = "0.1.0"
   }
 
   //                                       %% means use scala version
@@ -79,6 +80,7 @@ object Dependency {
   val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
   val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
+  val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
 }
 
 //

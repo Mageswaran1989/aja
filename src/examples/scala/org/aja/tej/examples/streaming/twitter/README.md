@@ -1,5 +1,40 @@
 Source: https://github.com/databricks/reference-apps
 
+Streaming Types:
+1. Receive each record and process it ASAP
+2. Combine the records based on time or number of records caled mini-batches
+* Spark uses mini-batches with time base(batch interval) slicing called discretized stream or DStream
+
+
+
+Input Sources -> Transformation -> 
+
+
+##Input Sources:
+1. Folder based
+2. TCP Socket based
+3. Twitter
+4. AKKA actors
+5. Flume
+6. Kafta
+7. Amazon Kinesis
+
+##Transformation
+Spark Streaming also provides operators such as reduce and count. These operators
+return a DStream made up of a single element (for example, the count value for each
+batch). Unlike the equivalent operators on RDDs, these do not trigger computation
+on DStreams directly. That is, they are not actions, but they are still transformations,
+as they return another DStream.
+
+updateStateByKey ~ Broadcast variables + Accumulators
+
+##Windowing
+A window is defined by the length of the window and the sliding interval. For
+example, with a 10-second window and a 5-second sliding interval, we will compute
+results every 5 seconds, based on the latest 10 seconds of data in the DStream. For
+example, we might wish to calculate the top websites by page view numbers over the
+last 10 seconds and recompute this metric every 5 seconds using a sliding window.
+
 Here are 5 typical stages for creating a production-ready classifier. 
 Often, each stage is done with a different set of tools and even by different engineering teams:
 
