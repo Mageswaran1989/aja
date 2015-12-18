@@ -2,7 +2,7 @@ package org.aja.tej.examples.mllib.recomendations
 
 import org.apache.spark.mllib.recommendation.{Rating, ALS}
 import org.apache.spark.{SparkContext, SparkConf}
-;
+
 
 /**
  * Created by mageswaran on 22/8/15.
