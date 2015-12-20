@@ -126,3 +126,8 @@ val prod1 = list6.foldRight(10)((suppliedAccmulator, currElement) => (suppliedAc
 
 println((1 to 1000000) reduceLeft(_ + _))
 println((1 to 1000000) reduceRight(_ + _))
+
+
+val path = "/opt/aja/data/20_newsgroups/alt.atheism/49960"
+
+val dir = path.split("/").takeRight(2).head

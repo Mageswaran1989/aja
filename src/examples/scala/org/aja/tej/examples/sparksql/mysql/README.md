@@ -4,4 +4,4 @@
 $sudo dpkg-reconfigure mysql-server-5.5
 
 #To enter into mysql
-#mysql -u root -p 
+mysql -u root -p 
