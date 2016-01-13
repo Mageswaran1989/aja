@@ -17,3 +17,7 @@ sudo apt-get install docker.io
 #Neo4j + Spark = MazeRunner
 http://www.kennybastani.com/2014/11/using-apache-spark-and-neo4j-for-big.html
 https://github.com/kbastani/neo4j-mazerunner
+
+
+Cyper on Scala => https://github.com/AnormCypher/AnormCypher
+Neo4j on Scala => https://github.com/FaKod/neo4j-scala/

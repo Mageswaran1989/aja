@@ -212,6 +212,10 @@ object RBM {
         printf("%.5f ", reconstructed_X(i)(j))
       }
       println()
+      for(j <- 0 until n_visible) {
+        printf("%d ", if(reconstructed_X(i)(j) > 0.5) 1 else 0)
+      }
+      println()
     }
 
   }
