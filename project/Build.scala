@@ -38,7 +38,8 @@ object Resolvers {
   val sonatype = "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
   val mvnrepository = "MVN Repo" at "http://mvnrepository.com/artifact"
   val cloudera = "Cloudera Repos" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
-  val allResolvers = Seq(typesafe, sonatype, mvnrepository, cloudera)
+  val neo4Cyper = "anormcypher" at "http://repo.anormcypher.org/"
+  val allResolvers = Seq(neo4Cyper, typesafe, sonatype, mvnrepository, cloudera)
 
 }
 
@@ -55,6 +56,7 @@ object Dependency {
 //    val scalaActors  = "2.11"
     val sparkCSV = "1.3.0"
     val sparkts  = "0.1.0"
+    val neo4JScalaCypher = "0.7.1"
   }
 
   //                                       %% means use scala version
@@ -81,6 +83,8 @@ object Dependency {
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
   val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
   val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
+  val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
+
 }
 
 //
@@ -96,7 +100,8 @@ object Dependencies {
   val tej =
     Seq(sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
-      scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli)
+      scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
+      breezeNatives, akka, sparkCSV, neo4jScalaCypher)
 }
 
 object TejSparkBuild extends Build {
@@ -115,7 +120,7 @@ object TejSparkBuild extends Build {
       maxErrors          := 5,
       triggeredMessage   := Watched.clearWhenTriggered,
       // runScriptSetting,
-      //resolvers := allResolvers,
+      resolvers := Resolvers.allResolvers,
       exportJars := true,
       // For the Hadoop variants to work, we must rebuild the package before
       // running, so we make it a dependency of run.
