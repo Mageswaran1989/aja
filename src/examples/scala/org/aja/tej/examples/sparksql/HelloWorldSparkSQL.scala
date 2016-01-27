@@ -13,7 +13,7 @@ case class Person(name: String, age: Int)
 // Two methods of creating the DataFrame
 // 1. Allowing the Spark to manage itself by using SQL Context
 // 2. Creating schema using case class and registering it with the sql context
-object HelloWorld {
+object HelloWorldSparkSQL {
   def main (args: Array[String]) {
     val conf = new SparkConf().setAppName("Simple SparkSQL Application").setMaster("local[2]" /*"spark://myhost:7077"*/)
     val sc = new SparkContext(conf)
