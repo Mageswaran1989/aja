@@ -83,16 +83,9 @@ object Dependency {
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
   val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
   val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
-  val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
-
+  //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
+  val scalaChart     = "com.github.wookietreiber" %% "scala-chart" % "latest.integration" withSources()
 }
-
-//
-//  [warn]   https://repo1.maven.org/maven2/com/google/code/gson/gson_2.11/2.3/gson_2.11-2.3.pom
-//
-//http://mvnrepository.com/artifact/commons-cli/commons-cli/1.2
-//  [warn]   https://repo1.maven.org/maven2/commons-cli/commons-cli_2.11/1.2/commons-cli_2.11-1.2.pom
-
 
 object Dependencies {
   import Dependency._
@@ -101,7 +94,7 @@ object Dependencies {
     Seq(sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
       scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
-      breezeNatives, akka, sparkCSV, neo4jScalaCypher)
+      breezeNatives, akka, sparkCSV, scalaChart)
 }
 
 object TejSparkBuild extends Build {
@@ -120,12 +113,15 @@ object TejSparkBuild extends Build {
       maxErrors          := 5,
       triggeredMessage   := Watched.clearWhenTriggered,
       // runScriptSetting,
-      resolvers := Resolvers.allResolvers,
+      //resolvers := Resolvers.allResolvers,
       exportJars := true,
       // For the Hadoop variants to work, we must rebuild the package before
       // running, so we make it a dependency of run.
       (run in Compile) <<= (run in Compile) dependsOn (packageBin in Compile),
       libraryDependencies ++= Dependencies.tej,
+      dependencyOverrides ++= Set(
+        "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.4"
+      ),
       excludeFilter in unmanagedSources := (HiddenFileFilter || "*-script.scala"),
       // unmanagedResourceDirectories in Compile += baseDirectory.value / "conf",
       mainClass := Some("run"),
