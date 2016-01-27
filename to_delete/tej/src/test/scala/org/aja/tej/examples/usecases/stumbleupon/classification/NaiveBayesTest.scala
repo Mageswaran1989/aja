@@ -1,5 +1,6 @@
 package org.aja.tej.examples.usecases.stumbleupon.classification
 
+import org.aja.tej.examples.mllib.classification.StumbleuponUtils
 import org.apache.spark.mllib.classification.NaiveBayes
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint

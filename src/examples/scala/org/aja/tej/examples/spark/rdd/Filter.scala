@@ -64,7 +64,19 @@ object Filter extends App{
 
     //val myfunc2 : PartialFunction [ Any , Any ] = { case x if ( x < 4) => " x "} //error
     val myfunc3 : PartialFunction [ Int , Any ] = { case x if ( x < 4) => " x "}
+
+
+    //============================================================================
+    val rdd = sc.parallelize(List("A","B","C","D"))
+    val str1 = "A"
+
+    val rslt1 = rdd.filter(x => {x != "A"}).count
+    val rslt2 = rdd.filter(x => { str1 != null && x != str1}).count
+
+    println("Demo closure: rslt1: " + rslt1 + "rslt2 : " + rslt2)
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
+
+
 }

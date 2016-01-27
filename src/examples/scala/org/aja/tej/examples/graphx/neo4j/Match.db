@@ -1,0 +1,72 @@
+MATCH
+(theater:Venue {name:'Theatre Royal'}),
+(newcastle:City {name:'Newcastle'}),
+(bard:Author {lastname:'Shakespeare'}),
+(newcastle)<-[:STREET|CITY*1..2]-(theater)<-[:VENUE]-()-[:PERFORMANCE_OF]->()-[:PRODUCTION_OF]->(play)<-[:WROTE_PLAY]-(bard)
+RETURN DISTINCT play.title AS play
+
+--• The identifiers newcastle, theater, and bard are anchored to real nodes in the
+--  graph based on the specified label and property values.
+
+--•  If there are several Theatre Royals in our database (the British cities of Plymouth,
+--  Bath, Winchester, and Norwich all have a Theatre Royal, for example), then thea
+--  ter will be bound to all these nodes. To restrict our pattern to the Theatre Royal
+--  in Newcastle, we use the syntax <-[:STREET|CITY*1..2]-, which means the thea
+--  ter node can be no more than two outgoing STREET and/or CITY relationships
+--  away from the node representing the city of Newcastle-upon-Tyne. By providing
+--  a variable depth path, we allow for relatively fine-grained address hierarchies
+--  (comprising, for example, street, district or borough, and city).
+
+--• The syntax (theater)<-[:VENUE]-() uses the anonymous node, hence the empty
+--  parentheses. Knowing the data as we do, we expect the anonymous node to
+--  match performances, but because we’re not interested in using the details of individual
+--  performances elsewhere in the query or in the results, we don’t name the
+--  node or bind it to an identifier.
+
+--• We use the anonymous node again to link the performance to the production
+--  (()-[:PERFORMANCE_OF]->()). If we were interested in returning details of per‐
+--  formances and productions, we would replace these occurrences of the anony‐
+--  mous node with identifiers: (performance)-[:PERFORMANCE_OF]->(production).
+
+--•  The remainder of the MATCH is a straightforward (play)<-[:WROTE_PLAY]-
+--  (bard) node-to-relationship-to-node pattern match. This pattern ensures that we
+--  only return plays written by Shakespeare. Because (play) is joined to the anony‐
+--  mous production node, and by way of that to the performance node, we can
+--  safely infer that it has been performed in Newcastle’s Theatre Royal. In naming
+--  the play node we bring it into scope so that we can use it later in the query.
+
+--Constraining Matches
+--• That certain paths must be present (or absent) in the matched subgraphs.
+--• That nodes must have certain labels or relationships with certain names.
+--• That specific properties on matched nodes and relationships must be present (or
+--absent), irrespective of their values.
+--• That certain properties on matched nodes and relationships must have specific
+--values.
+--• That other predicates must be satisfied (e.g., that performances must have occur‐
+--red on or before a certain date).
+
+MATCH
+(theater:Venue {name:'Theatre Royal'}),
+(newcastle:City {name:'Newcastle'}),
+(bard:Author {lastname:'Shakespeare'}),
+(newcastle)<-[:STREET|CITY*1..2]-(theater)<-[:VENUE]-()-[:PERFORMANCE_OF]->
+()-[:PRODUCTION_OF]->(play)<-[w:WROTE_PLAY]-(bard)
+WHERE w.year > 1608
+RETURN DISTINCT play.title AS play
+
+
+MATCH (theater:Venue {name:'Theatre Royal'}),
+(newcastle:City {name:'Newcastle'}),
+(bard:Author {lastname:'Shakespeare'}),
+(newcastle)<-[:STREET|CITY*1..2]-(theater)
+<-[:VENUE]-()-[p:PERFORMANCE_OF]->()
+-[:PRODUCTION_OF]->(play)<-[:WROTE_PLAY]-(bard)
+RETURN play.title AS play, count(p) AS performance_count
+ORDER BY performance_count DESC
+
+MATCH (bard:Author {lastname:'Shakespeare'})-[w:WROTE_PLAY]->(play)
+WITH play
+ORDER BY w.year DESC
+RETURN collect(play.title) AS plays
+
+

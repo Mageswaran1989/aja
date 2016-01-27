@@ -34,9 +34,9 @@ import org.apache.spark.{SparkConf, SparkContext}
 Four stages
 RDD Objects          \    DAGScheduler         \      TaskScheduler         \    Worker
 -----------------------------------------------------------------------------------------
-Build operator DAG   \ Split graph into stages \ Launch tasks via ckuster   \ Execute tasks
+Build operator DAG   \ Split graph into stages \ Launch tasks via cluster   \ Execute tasks
                      \ of tasks                \ manager                    \ Store and serve blocks
-                     \ Submit eacg stage as    \ Retry failed or straggling \
+                     \ Submit each stage as    \ Retry failed or straggling \
                      \ ready                   \ tasks                      \l
                      \ Agnostics to operators  \ Doesn't know about stages
 
@@ -139,7 +139,8 @@ Job:-  A piece of code which reads some input  from HDFS or local, performs some
 
 Stages:- Jobs are divided into stages. Stages are classified as a Map or reduce stages(Its easier to understand if you
          have worked on Hadoop and want to correlate). Stages are divided based on computational boundaries, all
-         computations(operators) cannot be Updated in a single Stage. It happens over many stages.
+         computations(operators) cannot be Updated in a single Stage, especially if there is shuffle operation involved.
+         It happens over many stages.
 
 DAG: - DAG stands for Directed Acyclic Graph, in the present context its a DAG of operators.
 
@@ -148,4 +149,11 @@ Master: - The machine on which the Driver program runs
 Slave: - The machine on which the Executor program runs
  */
 
+/*
+ - RDDs - a low level API for expressing DAGs that will be executed in parallel by Spark workers
+ - Catalyst - an internal library for expressing trees that we use to build relational algebra and expression evaluation.  There's also an optimizer and query planner than turns these into logical concepts into RDD actions.
+ - Tungsten - an internal optimized execution engine that can compile catalyst expressions into efficient java bytecode that operates directly on serialized binary data.  It also has nice low level data structures / algorithms like hash tables and sorting that operate directly on serialized data.  These are used by the physical nodes that are produced by the query planner (and run inside of RDD operation on workers).
+ - DataFrames - a user facing API that is similar to SQL/LINQ for constructing dataflows that are backed by catalyst logical plans
+ - Datasets - a user facing API that is similar to the RDD API for constructing dataflows that are backed by catalyst logical plans
+ */
 //Gist: https://gist.github.com/Mageswaran1989/9b49ad1707c46bc7f3a3

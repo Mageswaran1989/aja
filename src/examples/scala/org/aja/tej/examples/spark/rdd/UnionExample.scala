@@ -15,10 +15,9 @@ Performs the standard set operation: A ∪ B
 object UnionExample  extends App {
 
   def useCases(sc: SparkContext) = {
-    val a = sc . parallelize (1 to 3 , 1)
-    val b = sc . parallelize (5 to 7 , 1)
-    ( a ++ b ) . collect
-
+    val a = sc.parallelize (1 to 3 , 1)
+    val b = sc.parallelize (5 to 7 , 1)
+    ( a ++ b ).collect
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

@@ -24,10 +24,8 @@ inc2().getClass
 
 def inc2_1 = inc2()
 inc2_1(1)
-
 val inc2_2 = inc2()
 inc2_2(1)
-
 println("///////////////////////////////////////////////////////////////////")
 //callback is something similar to void function pointer
 //with no args and no return type
@@ -41,7 +39,6 @@ object WhileLoop {
       i = i - 1
     }
   }
-
 }
 //oncePerSecond(timeFlies)
 WhileLoop.oncePerSecond(() => println("Time flies like an arrow ----->"))

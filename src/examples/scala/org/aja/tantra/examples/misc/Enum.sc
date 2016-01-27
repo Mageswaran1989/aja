@@ -25,3 +25,5 @@ object WeekDay extends Enumeration {
 //import WeekDay._
 //def isWorkingDay(d: WeekDay) = ! (d == Sat || d == Sun)
 //WeekDay filter isWorkingDay foreach println
+
+

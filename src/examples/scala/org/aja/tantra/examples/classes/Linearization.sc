@@ -49,3 +49,6 @@ class C3 extends C3A with T1 with T2 with T3 {
 
 new C3().m
 //List(C3, T3, T1, C3A, T2, C1)
+
+
+//No need of override keyword when implementing abstract methods

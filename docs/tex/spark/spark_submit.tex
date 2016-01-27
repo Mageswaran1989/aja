@@ -1,0 +1,9 @@
+spark-submit -v --conf "spark.serializer=org.apache.spark.serializer.KryoSerializer" \
+ --executor-memory 512M \
+ --total-executor-cores 3 \
+ --deploy-mode "cluster" \
+ --master spark://$MASTER:7077 \
+ --jars=$JARS \
+ --supervise \
+ --class "com.testclass" $APP_JAR  input.json \
+ --files "/home/test/input.json"

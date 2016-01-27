@@ -36,7 +36,7 @@ object HelloWorldGraphX {
 
     val conf = new SparkConf().setAppName("Simple GraphX Application").setMaster("local[4]" /*"spark://myhost:7077"*/)
     val sc = new SparkContext(conf)
-    val baseURI = "http://snee.com/xpropgraph#"
+    val baseURI = "http://aja.com/xpropgraph#"
 
     // Create an RDD for the vertices
     val users: RDD[(VertexId, (String, String))] =
@@ -67,6 +67,12 @@ object HelloWorldGraphX {
       ))
     // Build the initial Graph
     val graph = Graph(users, relationships)
+
+    graph.triplets.foreach( t =>
+    println(t.srcAttr + " is the " + t.attr + " of " + t.dstAttr))
+
+    graph.triplets.foreach( t =>
+      println(t.srcAttr._1 + " is the " + t.attr + " of " + t.dstAttr._1))
 
     // Output object property triples
     graph.triplets.foreach( t => println(

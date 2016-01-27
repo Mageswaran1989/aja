@@ -8,7 +8,7 @@ import java.io.IOException
  * Created by mdhandapani on 10/8/15.
  */
 
-
+//Scala doesn't support checked exceptions
 
 try {
   val f = new FileReader("input.txt")

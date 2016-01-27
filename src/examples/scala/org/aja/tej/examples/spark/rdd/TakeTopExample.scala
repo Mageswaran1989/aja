@@ -31,17 +31,17 @@ array.
 object TakeTopExample  extends App {
 
   def useCases(sc: SparkContext) = {
-    val b = sc.parallelize(List(" dog ", " cat ", " ape ", " salmon ", " gnu "), 2)
+    val b = sc.parallelize(List("dog", "cat", "ape", "salmon", "gnu"), 2)
     b.take(2)
 
-    val b1 = sc . parallelize ( List (" dog " , " cat " , " ape " , " salmon " , " gnu ") , 2)
-    b1. takeOrdered (2)
+    val b1 = sc.parallelize(List("dog", "cat", "ape", "salmon", "gnu"),2)
+    b1.takeOrdered(2)
 
-    val x = sc . parallelize (1 to 1000 , 3)
-    x . takeSample ( true , 100 , 1)
+    val x = sc.parallelize(1 to 1000,3)
+    x.takeSample(true,100,1)
 
-    val c = sc . parallelize ( Array (6 , 9 , 4 , 7 , 5 , 8) , 2)
-    c . top (2)
+    val c = sc.parallelize(Array(6, 9, 4, 7, 5, 8) ,2)
+    c.top(2)
 
   }
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

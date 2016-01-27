@@ -37,8 +37,9 @@ object Resolvers {
   val typesafe = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
   val sonatype = "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
   val mvnrepository = "MVN Repo" at "http://mvnrepository.com/artifact"
-
-  val allResolvers = Seq(typesafe, sonatype, mvnrepository)
+  val cloudera = "Cloudera Repos" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
+  val neo4Cyper = "anormcypher" at "http://repo.anormcypher.org/"
+  val allResolvers = Seq(neo4Cyper, typesafe, sonatype, mvnrepository, cloudera)
 
 }
 
@@ -54,6 +55,8 @@ object Dependency {
     val BreezeViz    = "0.11.2"
 //    val scalaActors  = "2.11"
     val sparkCSV = "1.3.0"
+    val sparkts  = "0.1.0"
+    val neo4JScalaCypher = "0.7.1"
   }
 
   //                                       %% means use scala version
@@ -79,14 +82,10 @@ object Dependency {
   val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
   val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
+  val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
+  //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
+  val scalaChart     = "com.github.wookietreiber" %% "scala-chart" % "latest.integration" withSources()
 }
-
-//
-//  [warn]   https://repo1.maven.org/maven2/com/google/code/gson/gson_2.11/2.3/gson_2.11-2.3.pom
-//
-//http://mvnrepository.com/artifact/commons-cli/commons-cli/1.2
-//  [warn]   https://repo1.maven.org/maven2/commons-cli/commons-cli_2.11/1.2/commons-cli_2.11-1.2.pom
-
 
 object Dependencies {
   import Dependency._
@@ -94,7 +93,8 @@ object Dependencies {
   val tej =
     Seq(sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
-      scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli)
+      scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
+      breezeNatives, akka, sparkCSV, scalaChart)
 }
 
 object TejSparkBuild extends Build {
@@ -113,12 +113,15 @@ object TejSparkBuild extends Build {
       maxErrors          := 5,
       triggeredMessage   := Watched.clearWhenTriggered,
       // runScriptSetting,
-      //resolvers := allResolvers,
+      //resolvers := Resolvers.allResolvers,
       exportJars := true,
       // For the Hadoop variants to work, we must rebuild the package before
       // running, so we make it a dependency of run.
       (run in Compile) <<= (run in Compile) dependsOn (packageBin in Compile),
       libraryDependencies ++= Dependencies.tej,
+      dependencyOverrides ++= Set(
+        "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.4"
+      ),
       excludeFilter in unmanagedSources := (HiddenFileFilter || "*-script.scala"),
       // unmanagedResourceDirectories in Compile += baseDirectory.value / "conf",
       mainClass := Some("run"),
