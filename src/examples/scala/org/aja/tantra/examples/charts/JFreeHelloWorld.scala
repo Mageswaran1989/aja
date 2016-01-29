@@ -10,6 +10,7 @@ import org.jfree.data.xy._
  */
 object JFreeHelloWorld extends App{
 
+  val xy1 = Array(Array(1.0,1.1), Array(1.0, 1.0), Array(0.0, 0.0), Array(0.0,0.01))
   val x = Array[Double](1,2,3,4,5,6,7,8,9,10)
   val y = x.map(_*2)
   val dataset = new DefaultXYDataset
@@ -48,4 +49,9 @@ object JFreeHelloWorld extends App{
     }
     Thread.sleep(50)
   }
+
+
+
+
+
 }
