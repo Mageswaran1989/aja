@@ -16,3 +16,11 @@ for (option <- List(noneNumber, someNumber)) {
 }
 
 //since noneNumber is empty, None is returned
+
+def getTemperoryDirectory(tempPath: Option[String]): java.io.File = {
+  tempPath.map(name => new java.io.File(name))
+         .filter(_.isDirectory)
+         .getOrElse(new java.io.File(System.getProperty("java.io.tempDir")))
+}
+
+val t = getTemperoryDirectory(Some("/tmp/"))

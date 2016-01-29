@@ -92,3 +92,6 @@ object Override extends App {
   println("Value of T2.value = " + testTraitVar1.value)
 
 }
+
+
+////No need of override keyword when implementing abstract methods i.e trait methods if so
