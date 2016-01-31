@@ -85,6 +85,7 @@ object Dependency {
   val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
   //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
   val scalaChart     = "com.github.wookietreiber" %% "scala-chart" % "latest.integration" withSources()
+  val scalaPlot      = "org.sameersingh.scalaplot" % "scalaplot" % "0.0.4" withSources()
 }
 
 object Dependencies {
@@ -94,7 +95,7 @@ object Dependencies {
     Seq(sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
       scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
-      breezeNatives, akka, sparkCSV, scalaChart)
+      breezeNatives, akka, sparkCSV, scalaChart, scalaPlot)
 }
 
 object TejSparkBuild extends Build {
