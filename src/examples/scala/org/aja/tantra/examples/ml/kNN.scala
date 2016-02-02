@@ -31,8 +31,8 @@ object kNN {
       val featuresColDim = features(0).size
       if(DEBUG) println("featuresDim :" + featuresColDim)
 
-      val maxColValues = Array.ofDim[Double](featuresColDim)
-      val minColValues = Array.fill[Double](featuresColDim)(999999999.9)
+      val maxColValues = Array.ofDim[Double](featuresColDim) //By default intialized to 0.0
+      val minColValues = Array.fill[Double](featuresColDim)(999999999.9) //Let us fill with some max values
 
       for ( i <- 0 until featuresColDim)
         features.foreach{
@@ -212,9 +212,6 @@ object kNN {
     }
 
     println("Errorcount : " + errorCount)
-
     println("the total error rate is : " + (errorCount/(10).toDouble))
-
-
   }
 }

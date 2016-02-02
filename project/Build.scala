@@ -95,7 +95,7 @@ object Dependencies {
     Seq(sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
       scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
-      breezeNatives, akka, sparkCSV, scalaChart, scalaPlot)
+      breezeNatives, breeezeViz, akka, sparkCSV, scalaChart, scalaPlot)
 }
 
 object TejSparkBuild extends Build {
