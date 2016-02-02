@@ -1,7 +1,13 @@
 package org.aja.tantra.examples.ml
 
 import breeze.linalg._
-import breeze.numerics._ //For inbuilt sigmoid function
+import breeze.numerics._
+import com.google.common.cache.Weigher
+import org.jfree.chart.{ChartFrame, ChartFactory}
+import org.jfree.chart.plot.PlotOrientation
+import org.jfree.data.xy.{XYSeriesCollection, XYSeries}
+
+//For inbuilt sigmoid function
 /**
  * Created by mageswaran on 31/1/16.
  */
@@ -84,7 +90,7 @@ object LogisticsRegression {
     val dmLabels = dataSet.toDenseMatrixLabels
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
-    val alpha = 0.01
+    val alpha = 0.001
     val maxCycles = 500
     var weights = DenseMatrix.fill(cols,1){1.0} //2 X 1
     for (i <- 0 until maxCycles) {
@@ -96,21 +102,54 @@ object LogisticsRegression {
   }
 
 
-  def plot(dataSetLR: DataSet) = {
+  def plotLRDataSet(dataSet: DataSet, weightsLR: Array[Double]) = {
+    val features = dataSet.features
+    val labels = dataSet.label
+    val positiveSeries = new XYSeries("Positive Features")
+    val negativeSeries = new XYSeries("Negative Features")
+    val weightsSeries = new XYSeries("Weights")
 
-    import org.sameersingh.scalaplot.Implicits._
+    features.zip(labels).foreach{feature =>
+      if(feature._2 == 1)
+        positiveSeries.add(feature._1(1), feature._1(2))
+      else
+        negativeSeries.add(feature._1(1), feature._1(2))
+    }
 
-    val x = 0.0 until 2.0 * math.Pi by 0.1
-    output(GUI, xyChart(x ->(math.sin(_), math.cos(_))))
+    val weightsForX = -3.0 to +3.0 by 0.1 toArray
+    val weightsForY = weightsForX.map(x => (-weightsLR(0)-weightsLR(1)*x)/weightsLR(2))
+    weightsForX.zip(weightsForY).foreach(xy => weightsSeries.add(xy._1, xy._2))
 
+    val linePlotDataSet : XYSeriesCollection = new XYSeriesCollection()
 
+    val scatterPlotDataSet : XYSeriesCollection = new XYSeriesCollection()
+    scatterPlotDataSet.addSeries(positiveSeries)
+    scatterPlotDataSet.addSeries(negativeSeries)
+    scatterPlotDataSet.addSeries(weightsSeries)
+
+    val scaterChart = ChartFactory.createScatterPlot(
+      "Scatter Plot",
+      "X",
+      "Y",
+      scatterPlotDataSet,
+      PlotOrientation.VERTICAL,
+      true, //include legent
+      true, //tooltips
+      false //urls
+    )
+
+    val scatterFrame = new ChartFrame(
+      "Scatter Frame",
+      scaterChart
+    )
+    scatterFrame.pack()
+    scatterFrame.setVisible(true)
   }
+
   def main(args: Array[String]) {
 
     val dataSet = loadDataSet()
 
-    val dm = dataSet.toDenseMatrixFeatures
-    println()
     //printDataSet(dataSet)
     //Small improvement
     //println(dataSet)
@@ -119,7 +158,7 @@ object LogisticsRegression {
 
     println(weights)
 
-    plot(dataSet)
+    plotLRDataSet(dataSet, weights.toArray)
 
   }
 }
