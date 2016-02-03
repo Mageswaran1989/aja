@@ -3,9 +3,11 @@ package org.aja.tantra.examples.ml
 import breeze.linalg._
 import breeze.numerics._
 import com.google.common.cache.Weigher
-import org.jfree.chart.{ChartFrame, ChartFactory}
-import org.jfree.chart.plot.PlotOrientation
-import org.jfree.data.xy.{XYSeriesCollection, XYSeries}
+import org.jfree.chart.axis.{NumberAxis, ValueAxis}
+import org.jfree.chart.renderer.xy.{XYLineAndShapeRenderer, XYItemRenderer}
+import org.jfree.chart.{JFreeChart, ChartFrame, ChartFactory}
+import org.jfree.chart.plot.{XYPlot, PlotOrientation}
+import org.jfree.data.xy.{XYDataset, XYSeriesCollection, XYSeries}
 
 //For inbuilt sigmoid function
 /**
@@ -121,6 +123,7 @@ object LogisticsRegression {
     weightsForX.zip(weightsForY).foreach(xy => weightsSeries.add(xy._1, xy._2))
 
     val linePlotDataSet : XYSeriesCollection = new XYSeriesCollection()
+    linePlotDataSet.addSeries(weightsSeries)
 
     val scatterPlotDataSet : XYSeriesCollection = new XYSeriesCollection()
     scatterPlotDataSet.addSeries(positiveSeries)
@@ -144,6 +147,65 @@ object LogisticsRegression {
     )
     scatterFrame.pack()
     scatterFrame.setVisible(true)
+
+
+
+    ////////////////////////////////////
+    // Create a single plot containing both the scatter and line
+    val plot: XYPlot = new XYPlot();
+
+    /* SETUP SCATTER */
+
+    // Create the scatter data, renderer, and axis
+    val collection1: XYDataset = scatterPlotDataSet
+    val renderer1: XYItemRenderer = new XYLineAndShapeRenderer(false, true);   // Shapes only
+    val domain1: ValueAxis = new NumberAxis("Domain1");
+    val range1: ValueAxis = new NumberAxis("Range1");
+
+    // Set the scatter data, renderer, and axis into plot
+    plot.setDataset(0, collection1);
+    plot.setRenderer(0, renderer1);
+    plot.setDomainAxis(0, domain1);
+    plot.setRangeAxis(0, range1);
+
+    // Map the scatter to the first Domain and first Range
+    plot.mapDatasetToDomainAxis(0, 0);
+    plot.mapDatasetToRangeAxis(0, 0);
+
+    /* SETUP LINE */
+
+    // Create the line data, renderer, and axis
+    val collection2: XYDataset = linePlotDataSet
+    val renderer2: XYItemRenderer = new XYLineAndShapeRenderer(true, false);   // Lines only
+    val domain2: ValueAxis = new NumberAxis("Domain2");
+    val range2: ValueAxis = new NumberAxis("Range2");
+
+    // Set the line data, renderer, and axis into plot
+    plot.setDataset(1, collection2);
+    plot.setRenderer(1, renderer2);
+    plot.setDomainAxis(1, domain2);
+    plot.setRangeAxis(1, range2);
+
+    // Map the line to the second Domain and second Range
+    plot.mapDatasetToDomainAxis(1, 1);
+    plot.mapDatasetToRangeAxis(1, 1);
+
+    // Create the chart with the plot and a legend
+    val chart1: JFreeChart = new JFreeChart("Multi Dataset Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+
+    // Map the line to the FIRST Domain and second Range
+    plot.mapDatasetToDomainAxis(1, 0);
+    plot.mapDatasetToRangeAxis(1, 1);
+
+    val scatterFrame1 = new ChartFrame(
+      "Scatter Frame",
+      chart1
+    )
+    scatterFrame1.pack()
+    scatterFrame1.setVisible(true)
+
+    //////////////////////////////////////
+
   }
 
   def main(args: Array[String]) {
