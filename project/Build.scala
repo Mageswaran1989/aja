@@ -81,7 +81,7 @@ object Dependency {
   val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
   val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
 //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
-  val sparkCSV       = "com.databricks"      %% "spark-csv" % Version.sparkCSV withSources()
+  val sparkCSV       = "com.databricks"      % "spark-csv_2.11" % Version.sparkCSV withSources()
   val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
   //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
   val scalaChart     = "com.github.wookietreiber" %% "scala-chart" % "latest.integration" withSources()
