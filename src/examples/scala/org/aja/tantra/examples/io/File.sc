@@ -66,3 +66,24 @@ if (configFilePath.exists()) {
   configFilePath.getAbsolutePath
 }
 
+///////////////////////////////////////////////////////////////////////
+
+import scala.io._
+
+val file = Source.fromFile("/opt/aja/data/datingTestSet.txt")
+val numberOfSamples = file.getLines().size
+file.reset()
+val featureSize = file.getLines().take(10).toList
+//val array = Array.ofDim(numberOfLines)(Vector[Double][V]())
+try {
+  for (line <- file.getLines()) {
+    println(line)
+    val features = line.split("\t")
+    //array += Array(Vector(features(0).toDouble, features(1).toDouble, features(2).toDouble))
+  }
+}
+catch {
+  case e: FileNotFoundException => println("FileNotFoundException")
+  case e: IOException => println("IOException")
+}
+file.close

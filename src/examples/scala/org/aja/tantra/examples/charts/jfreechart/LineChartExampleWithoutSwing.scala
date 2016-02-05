@@ -134,7 +134,7 @@ object LineChartWithoutSwing {
     frame.setVisible(true)
 
     val scaterChart = ChartFactory.createScatterPlot(
-    "Scatter Plat",
+    "Scatter Plot",
     "X",
     "Y",
     dataset,
