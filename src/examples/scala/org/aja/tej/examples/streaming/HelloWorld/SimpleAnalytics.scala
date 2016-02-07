@@ -28,15 +28,16 @@ object SimpleAnalytics {
       //(user, product, price)
     }
 
-    /*
-We compute and print out stats for each batch.
-Since each batch is an RDD, we call forEeachRDD on the
-DStream, and apply the usual RDD functions
-we used in Chapter 1.
-*/
+
+    //We compute and print out stats for each batch.
+    //Since each batch is an RDD, we call forEeachRDD on the
+    //DStream, and apply the usual RDD functions
+    //we normally use
+
     events.foreachRDD { (rdd, time) =>
       val numPurchases = rdd.count()
-      val uniqueUsers = rdd.map { case (user, _, _) => user
+      val uniqueUsers = rdd.map {
+        case (user, _, _) => user
       }.distinct().count()
 
       val totalRevenue = rdd.map { case (_, _, price) =>

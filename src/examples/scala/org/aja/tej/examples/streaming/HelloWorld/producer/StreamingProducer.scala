@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.HelloWorld
+package org.aja.tej.examples.streaming.HelloWorld.producer
 
 import java.io.PrintWriter
 import java.net.ServerSocket
@@ -24,6 +24,8 @@ object StreamingProducer {
     val MaxEvents = 6
 
     // Read the list of possible names
+//    Miguel,Eric,James,Juan,Shawn,James,Doug,Gary,Frank,Janet,Michael,
+//    James,Malinda,Mike,Elaine,Kevin,Janet,Richard,Saul,Manuela
     val names = scala.io.Source.fromFile("data/names.csv")
       .getLines()
       .toList

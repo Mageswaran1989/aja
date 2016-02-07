@@ -2,7 +2,6 @@ package org.aja.tantra.examples.ml
 
 import breeze.linalg._
 import breeze.numerics._
-import com.google.common.cache.Weigher
 import org.jfree.chart.axis.{NumberAxis, ValueAxis}
 import org.jfree.chart.renderer.xy.{XYLineAndShapeRenderer, XYItemRenderer}
 import org.jfree.chart.{JFreeChart, ChartFrame, ChartFactory}
@@ -25,7 +24,8 @@ case class DataSet(features: Array[Array[Double]], label: Array[Double]) {
 
   override def toString() = "" + features.zip(label).foreach(println)
 
-  def toDenseMatrixFeatures = new DenseMatrix[Double](rows,cols, features.flatten)
+  //Breeze does column major filling, hence transpose
+  def toDenseMatrixFeatures = new DenseMatrix[Double](cols,rows, features.flatten).t
   def toDenseMatrixLabels = new DenseMatrix[Double](rows,1, label)
 }
 
@@ -55,15 +55,22 @@ object LogisticsRegression {
     if(DEBUG) println
   }
 
+  /**
+   * Test DataSet used to validate the algorithm.
+   * 100 rows 3 columns (2 features each and 1 result).
+   * This is used to validate all Linear Algebra calculations
+   * @return DataSet(...)
+   */
   def loadDataSet() = {
     import scala.io._
 
     var file = Source.fromFile("/opt/aja/data/LRTestSet.txt")
-    val numberOfSamples = file.getLines().size
+    val numberOfSamples = file.getLines().size //Number of rows/samples
 
-    //Reset the buffer
+    //Reset the buffer, seems scala has bug! :)
     file = Source.fromFile("/opt/aja/data/LRTestSet.txt")
 
+    //Create an array for input dataset sample size
     val featuresArray = Array.ofDim[Array[Double]](numberOfSamples)
     val labelArray = Array.ofDim[Double](numberOfSamples)
 
@@ -72,7 +79,9 @@ object LogisticsRegression {
     {
       val features = line.split("\t")
       //if(DEBUG) println("*** " +  features(0) + "," + features(1) + "," + features(2))
+      //Now create the column data!
       featuresArray(index) = Array(1.0, features(0).toDouble, features(1).toDouble)
+      //Label data
       labelArray(index)  = features(2).toDouble
       index += 1
     }
@@ -83,28 +92,30 @@ object LogisticsRegression {
   /**
    * Start with the weights all set to 1
    * Repeat R number of times:
-   *   Calculate the gradient of the entire dataset
+   *   Calculate the gradient of the "entire" dataset. What if dataset has billions of entries!?
    *   Update the weights vector by alpha*gradient
    *   Return the weights vector
+   * @param dataSet of type DataSet()
+   * @return Returns a weight Matrix of dimension (1 + number of features x 1)
    */
   def LR(dataSet: DataSet) = {
-    val dmFeatures = dataSet.toDenseMatrixFeatures //100x2 2X1
+    val dmFeatures = dataSet.toDenseMatrixFeatures //100x3 3X1 fo for testdata
     val dmLabels = dataSet.toDenseMatrixLabels
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
     val alpha = 0.001
     val maxCycles = 500
-    var weights = DenseMatrix.fill(cols,1){1.0} //2 X 1
+    var weights = DenseMatrix.fill(cols,1){1.0} //3 X 1
     for (i <- 0 until maxCycles) {
-      val predictedOutputH = sigmoid(dmFeatures * weights)
+      val predictedOutputH = sigmoid(dmFeatures * weights) // 100 x 3 * 3 x 1 => 100 x 1
       val error = (dmLabels - predictedOutputH) //Gradient
-      weights = weights + alpha * dmFeatures.t * error
+      weights = weights + (alpha * dmFeatures.t * error)
     }
     weights
   }
 
 
-  def plotLRDataSet(dataSet: DataSet, weightsLR: Array[Double]) = {
+  def plotLRDataSet(dataSet: DataSet, weightsLR: Array[Double], title: String = "Scatter Plot") = {
     val features = dataSet.features
     val labels = dataSet.label
     val positiveSeries = new XYSeries("Positive Features")
@@ -131,7 +142,7 @@ object LogisticsRegression {
     scatterPlotDataSet.addSeries(weightsSeries)
 
     val scaterChart = ChartFactory.createScatterPlot(
-      "Scatter Plot",
+      title + " Plot",
       "X",
       "Y",
       scatterPlotDataSet,
@@ -142,7 +153,7 @@ object LogisticsRegression {
     )
 
     val scatterFrame = new ChartFrame(
-      "Scatter Frame",
+      title + " - Chart Method 1",
       scaterChart
     )
     scatterFrame.pack()
@@ -159,8 +170,8 @@ object LogisticsRegression {
     // Create the scatter data, renderer, and axis
     val collection1: XYDataset = scatterPlotDataSet
     val renderer1: XYItemRenderer = new XYLineAndShapeRenderer(false, true);   // Shapes only
-    val domain1: ValueAxis = new NumberAxis("Domain1");
-    val range1: ValueAxis = new NumberAxis("Range1");
+    val domain1: ValueAxis = new NumberAxis("X");
+    val range1: ValueAxis = new NumberAxis("Y");
 
     // Set the scatter data, renderer, and axis into plot
     plot.setDataset(0, collection1);
@@ -177,8 +188,8 @@ object LogisticsRegression {
     // Create the line data, renderer, and axis
     val collection2: XYDataset = linePlotDataSet
     val renderer2: XYItemRenderer = new XYLineAndShapeRenderer(true, false);   // Lines only
-    val domain2: ValueAxis = new NumberAxis("Domain2");
-    val range2: ValueAxis = new NumberAxis("Range2");
+    val domain2: ValueAxis = new NumberAxis("X1");
+    val range2: ValueAxis = new NumberAxis("Y1");
 
     // Set the line data, renderer, and axis into plot
     plot.setDataset(1, collection2);
@@ -191,36 +202,98 @@ object LogisticsRegression {
     plot.mapDatasetToRangeAxis(1, 1);
 
     // Create the chart with the plot and a legend
-    val chart1: JFreeChart = new JFreeChart("Multi Dataset Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+    val chart1: JFreeChart = new JFreeChart(title + " Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 
     // Map the line to the FIRST Domain and second Range
     plot.mapDatasetToDomainAxis(1, 0);
     plot.mapDatasetToRangeAxis(1, 1);
 
     val scatterFrame1 = new ChartFrame(
-      "Scatter Frame",
+      "LR Best Fit Line",
       chart1
     )
     scatterFrame1.pack()
     scatterFrame1.setVisible(true)
+  }
 
-    //////////////////////////////////////
+  /**
+   * Start with the weights all set to 1
+   * For each piece of data in the dataset:
+   * Calculate the gradient of one piece of data
+   *   Update the weights vector by alpha*gradient
+   *   Return the weights vector
+   * @param dataSet
+   */
+  def lrSGA(dataSet: DataSet) = {
+    val dmFeatures = dataSet.toDenseMatrixFeatures
+    val fmLabels = dataSet.toDenseMatrixLabels
+    val rows = dmFeatures.rows
+    val cols = dmFeatures.cols
+    val alpha = 0.01
 
+    var weights = DenseMatrix.fill[Double](cols,1)(1)
+
+    for ( i <- 0 until rows) {
+      //Gradients of one piece of data
+      // 1 x 3 * 3 x 1 => 1 x 1
+      //(i,::) => extract each row
+      val h = sigmoid(dmFeatures(i,::) * weights)
+      val error = fmLabels(i, ::) - h //TODO: Optimize?
+      weights = weights + (alpha * error *  dmFeatures(i,::))
+    }
+    weights
+  }
+
+  /**
+   * Start with the weights all set to 1
+   * For number of iterations given
+   *     For each piece of data in the dataset:
+   *        Calculate the gradient of one piece of data
+   *        Update the weights vector by alpha*gradient
+   * Return the weights vector
+   * @param dataSet of type DataSet
+   * @param numberOfIterations Nu,ber of iterations over the given dataset
+   * @return
+   */
+  def lrSGA(dataSet: DataSet, numberOfIterations: Int) = {
+    val dmFeatures = dataSet.toDenseMatrixFeatures
+    val fmLabels = dataSet.toDenseMatrixLabels
+    val rows = dmFeatures.rows
+    val cols = dmFeatures.cols
+    var alpha = 0.0
+
+    var weights = DenseMatrix.fill[Double](cols,1)(1)
+
+    for ( j <- 0 until numberOfIterations) {
+      for ( i <- 0 until rows) {
+        alpha = 4/(1.0+j+i)+0.01
+
+        //Gradients of one piece of data
+        // 1 x 3 * 3 x 1 => 1 x 1
+        //(i,::) => extract each row
+        val h = sigmoid(dmFeatures(i,::) * weights)
+        val error = fmLabels(i, ::) - h //TODO: Optimize?
+        weights = weights + (alpha * error *  dmFeatures(i,::))
+      }
+    }
+    weights
   }
 
   def main(args: Array[String]) {
 
     val dataSet = loadDataSet()
-
-    //printDataSet(dataSet)
-    //Small improvement
-    //println(dataSet)
-
     val weights = LR(dataSet)
 
-    println(weights)
+    println("Normal LR weights: " + weights)
+    plotLRDataSet(dataSet, weights.toArray, "First")
 
-    plotLRDataSet(dataSet, weights.toArray)
+    val weights1 = lrSGA(dataSet)
+    println("Stochastic Gradient LR weights: " + weights1)
+    plotLRDataSet(dataSet, weights1.toArray, "Second")
+
+    val weights2 = lrSGA(dataSet, 200)
+    println("Stochastic Gradient LR weights: " + weights2)
+    plotLRDataSet(dataSet, weights1.toArray, "Third")
 
   }
 }

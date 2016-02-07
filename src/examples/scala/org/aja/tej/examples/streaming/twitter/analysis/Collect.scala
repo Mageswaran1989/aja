@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.twitter
+package org.aja.tej.examples.streaming.twitter.analysis
 
 /**
  * Created by mageswaran on 29/7/15.
