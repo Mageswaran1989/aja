@@ -2,11 +2,14 @@ package org.aja.tantra.examples.ml
 
 import breeze.linalg._
 import breeze.numerics._
+import breeze.stats.distributions.Uniform
 import org.jfree.chart.axis.{NumberAxis, ValueAxis}
 import org.jfree.chart.renderer.xy.{XYLineAndShapeRenderer, XYItemRenderer}
 import org.jfree.chart.{JFreeChart, ChartFrame, ChartFactory}
 import org.jfree.chart.plot.{XYPlot, PlotOrientation}
 import org.jfree.data.xy.{XYDataset, XYSeriesCollection, XYSeries}
+
+import scala.util.Random
 
 //For inbuilt sigmoid function
 /**
@@ -24,7 +27,7 @@ case class DataSet(features: Array[Array[Double]], label: Array[Double]) {
 
   override def toString() = "" + features.zip(label).foreach(println)
 
-  //Breeze does column major filling, hence transpose
+  //Breeze does column major filling, hence transpose cols x rows -> rows x cols
   def toDenseMatrixFeatures = new DenseMatrix[Double](cols,rows, features.flatten).t
   def toDenseMatrixLabels = new DenseMatrix[Double](rows,1, label)
 }
@@ -89,32 +92,6 @@ object LogisticsRegression {
     DataSet(featuresArray, labelArray)
   }
 
-  /**
-   * Start with the weights all set to 1
-   * Repeat R number of times:
-   *   Calculate the gradient of the "entire" dataset. What if dataset has billions of entries!?
-   *   Update the weights vector by alpha*gradient
-   *   Return the weights vector
-   * @param dataSet of type DataSet()
-   * @return Returns a weight Matrix of dimension (1 + number of features x 1)
-   */
-  def LR(dataSet: DataSet) = {
-    val dmFeatures = dataSet.toDenseMatrixFeatures //100x3 3X1 fo for testdata
-    val dmLabels = dataSet.toDenseMatrixLabels
-    val rows = dmFeatures.rows
-    val cols = dmFeatures.cols
-    val alpha = 0.001
-    val maxCycles = 500
-    var weights = DenseMatrix.fill(cols,1){1.0} //3 X 1
-    for (i <- 0 until maxCycles) {
-      val predictedOutputH = sigmoid(dmFeatures * weights) // 100 x 3 * 3 x 1 => 100 x 1
-      val error = (dmLabels - predictedOutputH) //Gradient
-      weights = weights + (alpha * dmFeatures.t * error)
-    }
-    weights
-  }
-
-
   def plotLRDataSet(dataSet: DataSet, weightsLR: Array[Double], title: String = "Scatter Plot") = {
     val features = dataSet.features
     val labels = dataSet.label
@@ -167,6 +144,7 @@ object LogisticsRegression {
 
     /* SETUP SCATTER */
 
+    /*
     // Create the scatter data, renderer, and axis
     val collection1: XYDataset = scatterPlotDataSet
     val renderer1: XYItemRenderer = new XYLineAndShapeRenderer(false, true);   // Shapes only
@@ -213,7 +191,32 @@ object LogisticsRegression {
       chart1
     )
     scatterFrame1.pack()
-    scatterFrame1.setVisible(true)
+    scatterFrame1.setVisible(true) */
+  }
+
+  /**
+   * Start with the weights all set to 1
+   * Repeat R number of times:
+   *   Calculate the gradient of the "entire" dataset. What if dataset has billions of entries!?
+   *   Update the weights vector by alpha*gradient
+   *   Return the weights vector
+   * @param dataSet of type DataSet()
+   * @return Returns a weight Matrix of dimension (1 + number of features x 1)
+   */
+  def LR(dataSet: DataSet) = {
+    val dmFeatures = dataSet.toDenseMatrixFeatures //100x3 3X1 fo for testdata
+    val dmLabels = dataSet.toDenseMatrixLabels
+    val rows = dmFeatures.rows
+    val cols = dmFeatures.cols
+    val alpha = 0.001
+    val maxCycles = 500
+    var weights = DenseMatrix.fill(cols,1){1.0} //3 X 1
+    for (i <- 0 until maxCycles) {
+      val predictedOutputH = sigmoid(dmFeatures * weights) // 100 x 3 * 3 x 1 => 100 x 1
+      val error = (dmLabels - predictedOutputH) //Gradient
+      weights = weights + (alpha * dmFeatures.t * error)
+    }
+    weights
   }
 
   /**
@@ -226,20 +229,22 @@ object LogisticsRegression {
    */
   def lrSGA(dataSet: DataSet) = {
     val dmFeatures = dataSet.toDenseMatrixFeatures
-    val fmLabels = dataSet.toDenseMatrixLabels
+    val dmLabels = dataSet.toDenseMatrixLabels
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
     val alpha = 0.01
 
-    var weights = DenseMatrix.fill[Double](cols,1)(1)
+    var weights = DenseMatrix.fill[Double](1,cols)(1.0)
+    //var weights = DenseVector.fill[Double](cols)(1.0)
 
     for ( i <- 0 until rows) {
       //Gradients of one piece of data
       // 1 x 3 * 3 x 1 => 1 x 1
       //(i,::) => extract each row
-      val h = sigmoid(dmFeatures(i,::) * weights)
-      val error = fmLabels(i, ::) - h //TODO: Optimize?
-      weights = weights + (alpha * error *  dmFeatures(i,::))
+
+      val h = sigmoid(dmFeatures(i,::) * weights.t)
+      val error = dmLabels(i, ::) - h //TODO: Optimize?
+      weights = weights + alpha * error *  dmFeatures(i,::)
     }
     weights
   }
@@ -257,23 +262,27 @@ object LogisticsRegression {
    */
   def lrSGA(dataSet: DataSet, numberOfIterations: Int) = {
     val dmFeatures = dataSet.toDenseMatrixFeatures
-    val fmLabels = dataSet.toDenseMatrixLabels
+    val dmLabels = dataSet.toDenseMatrixLabels
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
-    var alpha = 0.0
+    var alpha = 0.001
 
-    var weights = DenseMatrix.fill[Double](cols,1)(1)
+    var weights = DenseMatrix.fill[Double](1,cols)(1) //1 x 3
+    val rand = Random
 
     for ( j <- 0 until numberOfIterations) {
+      var length = rows
       for ( i <- 0 until rows) {
-        alpha = 4/(1.0+j+i)+0.01
-
+        alpha = 4/(1.0+j+i)+0.0001
+        val uniformDist = Uniform(0,length)
+        val randomIndex = uniformDist.sample().toInt //rand.nextInt(length)
         //Gradients of one piece of data
         // 1 x 3 * 3 x 1 => 1 x 1
         //(i,::) => extract each row
-        val h = sigmoid(dmFeatures(i,::) * weights)
-        val error = fmLabels(i, ::) - h //TODO: Optimize?
+        val h = sigmoid(dmFeatures(randomIndex,::) * weights.t)
+        val error = dmLabels(randomIndex, ::) - h //TODO: Optimize?
         weights = weights + (alpha * error *  dmFeatures(i,::))
+        length = length - 1
       }
     }
     weights
@@ -282,16 +291,16 @@ object LogisticsRegression {
   def main(args: Array[String]) {
 
     val dataSet = loadDataSet()
-    val weights = LR(dataSet)
+    val weights = LR(dataSet)  //y = w^Tx + b  i.e (1 x 3 * 3 x 1) + scalar
 
-    println("Normal LR weights: " + weights)
+    println("Normal LR weights: " + weights + "of size : " + weights.rows + " x " + weights.cols)
     plotLRDataSet(dataSet, weights.toArray, "First")
 
     val weights1 = lrSGA(dataSet)
     println("Stochastic Gradient LR weights: " + weights1)
     plotLRDataSet(dataSet, weights1.toArray, "Second")
 
-    val weights2 = lrSGA(dataSet, 200)
+    val weights2 = lrSGA(dataSet, 500)
     println("Stochastic Gradient LR weights: " + weights2)
     plotLRDataSet(dataSet, weights1.toArray, "Third")
 

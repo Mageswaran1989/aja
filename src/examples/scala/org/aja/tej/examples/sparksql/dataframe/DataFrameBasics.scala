@@ -126,7 +126,7 @@ object DataFrameBasics  extends App {
 
   customerDF.select("id", "discountAmt").show()
 
-  println("*** use apply() on DataFrame to create column objects, and select though them")
+  println("*** use apply() on DataFrame to create column objects, and select through them")
 //  +---+-----------+
 //  | id|discountAmt|
 //  +---+-----------+
@@ -183,7 +183,7 @@ object DataFrameBasics  extends App {
 
 //  +--------------+
 //  |After Discount|
-//    +--------------+
+//  +--------------+
 //  |       14850.0|
 //  |       23700.0|
 //  |        9950.0|

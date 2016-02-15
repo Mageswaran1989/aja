@@ -52,8 +52,8 @@ object Dependency {
     val Twitter      = "3.0.3"
     val Breeze       = "0.11.2"
     val Akka         = "2.4.0"
-    val BreezeViz    = "0.11.2"
-//    val scalaActors  = "2.11"
+    val BreezeViz    = "0.12"
+    //    val scalaActors  = "2.11"
     val sparkCSV = "1.3.0"
     val sparkts  = "0.1.0"
     val neo4JScalaCypher = "0.7.1"
@@ -77,10 +77,11 @@ object Dependency {
   val gsonLib        = "com.google.code.gson" % "gson"           % "2.3" withSources()
   val cli            = "commons-cli"          % "commons-cli"    % "1.2" withSources()
   val breeze         = "org.scalanlp"         %% "breeze"         % Version.Breeze withSources()
+  //Breeze native uses OpenBlass and ATLAS
   val breezeNatives  = "org.scalanlp"         %% "breeze-natives" % Version.Breeze withSources()
   val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
   val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
-//  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
+  //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
   val sparkCSV       = "com.databricks"      % "spark-csv_2.11" % Version.sparkCSV withSources()
   val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
   //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
