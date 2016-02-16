@@ -5,8 +5,8 @@ import org.apache.spark.sql.SQLContext
 import java.sql.Date
 
 /**
- * Created by mageswaran on 24/1/16.
- */
+  * Created by mageswaran on 24/1/16.
+  */
 object ComplexTypes extends App {
 
   val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
@@ -22,9 +22,10 @@ object ComplexTypes extends App {
   // create a sequence of case class objects
   // (we defined the case class above)
   val custs = Seq(
-    Cust(1, "Widget Co", Seq(Transaction(1, Date.valueOf("2012-01-01"), 100.0)), Address("AZ"), Address("CA")),
-    Cust(2, "Acme Widgets", Seq(Transaction(2, Date.valueOf("2014-06-15"), 200.0), Transaction(3, Date.valueOf("2014-07-01"), 50.0)), Address("CA"), null),
-    Cust(3, "Widgetry", Seq(Transaction(4, Date.valueOf("2014-01-01"), 150.0)),  Address("CA"), Address("CA"))
+    Cust(1, "Widget Co",    Seq(Transaction(1, Date.valueOf("2012-01-01"), 100.0)), Address("AZ"), Address("CA")),
+    Cust(2, "Acme Widgets", Seq(Transaction(2, Date.valueOf("2014-06-15"), 200.0),
+                                Transaction(3, Date.valueOf("2014-07-01"), 50.0)),  Address("CA"), null),
+    Cust(3, "Widgetry",     Seq(Transaction(4, Date.valueOf("2014-01-01"), 150.0)), Address("CA"), Address("CA"))
   )
   // make it an RDD and convert to a DataFrame
   val customerDF = sc.parallelize(custs, 4).toDF()
@@ -38,6 +39,13 @@ object ComplexTypes extends App {
   println("*** Query results reflect complex structure")
   val allCust = sqlContext.sql("SELECT * FROM customer")
   allCust.show()
+  //  +---+------------+--------------------+-------+--------+
+  //  | id|        name|               trans|billing|shipping|
+  //  +---+------------+--------------------+-------+--------+
+  //  |  1|   Widget Co|[[1,2012-01-01,10...|   [AZ]|    [CA]|
+  //  |  2|Acme Widgets|[[2,2014-06-15,20...|   [CA]|    null|
+  //  |  3|    Widgetry|[[4,2014-01-01,15...|   [CA]|    [CA]|
+  //  +---+------------+--------------------+-------+--------+
 
   //
   // notice how the following query refers to shipping.date and
@@ -53,6 +61,13 @@ object ComplexTypes extends App {
         | FROM customer
       """.stripMargin)
   projectedCust.show()
+  //  +---+------------+-----+-----------+
+  //  | id|        name|state|secondTrans|
+  //  +---+------------+-----+-----------+
+  //  |  1|   Widget Co|   CA|       null|
+  //  |  2|Acme Widgets| null| 2014-07-01|
+  //  |  3|    Widgetry|   CA|       null|
+  //  +---+------------+-----+-----------+
   projectedCust.printSchema()
 
   //
@@ -64,6 +79,13 @@ object ComplexTypes extends App {
   val arrayOfStruct =
     sqlContext.sql("SELECT id, trans.date AS transDates FROM customer")
   arrayOfStruct.show()
+  //  +---+--------------------+
+  //  | id|          transDates|
+  //  +---+--------------------+
+  //  |  1|        [2012-01-01]|
+  //  |  2|[2014-06-15, 2014...|
+  //  |  3|        [2014-01-01]|
+  //  +---+--------------------+
   arrayOfStruct.printSchema()
 
   println("*** Group by a nested field")
@@ -74,6 +96,12 @@ object ComplexTypes extends App {
         | GROUP BY shipping.state
       """.stripMargin)
   groupByNested.show()
+  //  +-----+---------+
+  //  |state|customers|
+  //  +-----+---------+
+  //  |   CA|        2|
+  //  | null|        1|
+  //  +-----+---------+
 
   println("*** Order by a nested field")
   val orderByNested =
@@ -84,5 +112,12 @@ object ComplexTypes extends App {
         | ORDER BY shipping.state
       """.stripMargin)
   orderByNested.show()
+  //  +---+-----+
+  //  | id|state|
+  //  +---+-----+
+  //  |  2| null|
+  //  |  1|   CA|
+  //  |  3|   CA|
+  //  +---+-----+
 
 }

@@ -112,7 +112,7 @@ object LinearAlgebraWithBreeze {
 
   val eigenOfMatA = eig(matA)
   val eigenValues = eigenOfMatA.eigenvalues
-  eigenOfMatA.eigenvaluesComplex
+//  val dummy = eigenOfMatA.eigenvaluesComplex
   val eigenVector = eigenOfMatA.eigenvectors
 
   val eigenProperty1 = trace(matA) == floor(sum(eigenValues))

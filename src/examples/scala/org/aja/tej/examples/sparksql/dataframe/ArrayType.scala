@@ -5,8 +5,8 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.types._
 
 /**
- * Created by mageswaran on 6/2/16.
- */
+  * Created by mageswaran on 6/2/16.
+  */
 object ArrayTypeExample extends App {
 
 
@@ -24,8 +24,8 @@ object ArrayTypeExample extends App {
   val df = sqlContext.createDataFrame(sqlContext.emptyDataFrame.rdd, schema)
 
   //df.select($"users.element")
-//  Exception in thread "main" org.apache.spark.sql.AnalysisException: cannot resolve 'users[element]'
-//  due to data type mismatch: argument 2 requires integral type, however, 'element' is of string type.;
+  //  Exception in thread "main" org.apache.spark.sql.AnalysisException: cannot resolve 'users[element]'
+  //  due to data type mismatch: argument 2 requires integral type, however, 'element' is of string type.;
 
   case class User(name: String)
   df.explode($"users"){ case Row(arr: Array[String]) =>  arr.map(User(_)) }

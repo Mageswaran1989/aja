@@ -1,4 +1,4 @@
-package org.aja.tej.examples.sparksql.dataframe
+package org.aja.tej.examples.sparksql.datasets
 
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
@@ -28,7 +28,6 @@ trait EbaySparkContexts {
   println("Trait is used from : " + this.getClass.getSimpleName)
   val sc: SparkContext = TejUtils.getSparkContext(this.getClass.getSimpleName)
   val sqlContext = new SQLContext(sc)
-  import sqlContext.implicits._
 
   val worldBank = "data/world_bank.json"
 
@@ -62,7 +61,6 @@ trait DataFrameEnv {
   println("Trait is used from : " + this.getClass.getSimpleName)
   val sc: SparkContext = TejUtils.getSparkContext(this.getClass.getSimpleName)
   val sqlContext = new SQLContext(sc)
-  import sqlContext.implicits._
   val worldBank = "data/world_bank.json"
 
   val getRawEbayAuctionDataRDD = sc.textFile("data/ebay/ebay.csv", 10)

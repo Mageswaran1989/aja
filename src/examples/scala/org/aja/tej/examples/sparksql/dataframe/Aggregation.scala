@@ -1,6 +1,5 @@
 package org.aja.tej.examples.sparksql.dataframe
 
-import org.aja.tej.examples.sparksql.dataframe.DataFrameBasics.CustomerDetails
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.sql.{SQLContext,Column}
 import org.apache.spark.sql.GroupedData
@@ -151,66 +150,3 @@ object Aggregation  extends App {
 
 
 }
-
-
-/*
-set.
-[Stage 1:==================>                                     (67 + 4) / 200][day2,user1,session4,1,90.0]
-[Stage 1:========================>                               (89 + 5) / 200][day1,user1,session1,1,100.0]
-[day1,user1,session2,1,200.0]
-[day1,user1,session3,1,300.0]
-[day1,user1,session4,1,400.0]
-*** basic form of aggregation
-+-----+----------------+
-|state|max(discountAmt)|
-+-----+----------------+
-|   TN|          3000.0|
-|ANDRA|             0.0|
-|   JR|           300.0|
-+-----+----------------+
-
-*** this time without grouping columns
-[Stage 9:=====================================================> (194 + 4) / 199]+----------------+
-|max(discountAmt)|
-+----------------+
-|          3000.0|
-|             0.0|
-|           300.0|
-+----------------+
-
-*** Column based aggregation
-[Stage 13:==============================================>       (173 + 4) / 199]+----------------+
-|max(discountAmt)|
-+----------------+
-|          3000.0|
-|             0.0|
-|           300.0|
-+----------------+
-
-*** Column based aggregation plus grouping columns
-+-----+----------------+
-|state|max(discountAmt)|
-+-----+----------------+
-|   TN|          3000.0|
-|ANDRA|             0.0|
-|   JR|           300.0|
-+-----+----------------+
-
-*** Sort-of a user-defined aggregation function
-+-----+--------------------------------------------------------------------------------+
-|state|SQRT((avg((discountAmt * discountAmt)) - (avg(discountAmt) * avg(discountAmt))))|
-+-----+--------------------------------------------------------------------------------+
-|   TN|                                                              1257.6838831757366|
-|ANDRA|                                                                             0.0|
-|   JR|                                                                             0.0|
-+-----+--------------------------------------------------------------------------------+
-
-*** Aggregation short cuts
-+-----+
-|count|
-+-----+
-|    4|
-|    1|
-|    1|
-+-----+
- */

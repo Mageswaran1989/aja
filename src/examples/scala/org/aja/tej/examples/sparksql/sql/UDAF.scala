@@ -1,6 +1,5 @@
 package org.aja.tej.examples.sparksql.sql
 
-import org.aja.tej.examples.sparksql.sql.SparkSQLBasics.CustomerDetails
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.sql._
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}

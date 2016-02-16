@@ -1,4 +1,4 @@
-package org.aja.tej.examples.sparksql
+package org.aja.tej.examples.sparksql.datasets
 
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.sql.SQLContext
