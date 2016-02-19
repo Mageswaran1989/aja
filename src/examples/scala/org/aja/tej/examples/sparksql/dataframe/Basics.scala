@@ -1,6 +1,7 @@
 package org.aja.tej.examples.sparksql.dataframe
 
 
+import org.aja.tej.examples.sparksql.datasets.NorthWindUtility
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions._
@@ -8,242 +9,153 @@ import org.apache.spark.sql.functions._
 /**
   * Created by mdhandapani on 3/2/16.
   */
-object Basics  extends App {
+object Basics  extends App with NorthWindUtility {
 
-
-  val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
-
-  val sqlContext = new SQLContext(sc)
   import sqlContext.implicits._
 
-  //Lets us defice the scehme for table using case classes
-  //Let us skip the units for purchase
-  case class CustomerDetails(id: Long, name: String, state: String, purchaseAmt: Double, discountAmt: Double)
+  /**
+    * Schema & Data Display API's
+    * */
 
-  val customers = Seq(
-    CustomerDetails(1, "Mageswaran", "TN", 15000.00, 150),
-    CustomerDetails(2, "Michael", "JR", 24000.00, 300),
-    CustomerDetails(3, "Antony Leo", "TN", 10000.00, 50),
-    CustomerDetails(4, "Arun", "TN", 18000.00, 90),
-    CustomerDetails(5, "Venkat", "ANDRA", 5000.00, 0),
-    CustomerDetails(6, "Sathis", null, 150000.00, 3000)
-  )
+  println(employeesDF.toString()) //just gives you the schema
+  //    [EmployeeID: int, LastName: string, FirstName: string, Title: string, BirthDate: string, HireDate: string, City: string, State: string, Zip: string, Country: string, ReportsTo: string]
 
-  val customerDF = sc.parallelize(customers, 4).toDF()
-
-  println("*** toString() just gives you the schema")
-  //[id: bigint, name: string, state: string, purchaseAmt: double, discountAmt: double]
-  println(customerDF.toString())
-
-  println("*** It's better to use printSchema()")
+  employeesDF.printSchema() //formatted schema layout
   //  root
-  //  |-- id: long (nullable = false)
-  //  |-- name: string (nullable = true)
-  //  |-- state: string (nullable = true)
-  //  |-- purchaseAmt: double (nullable = false)
-  //  |-- discountAmt: double (nullable = false)
-  customerDF.printSchema()
+  //  |-- EmployeeID: integer (nullable = true)
+  //  |-- LastName: string (nullable = true)
+  //  |-- FirstName: string (nullable = true)
+  //  |-- Title: string (nullable = true)
+  //  |-- BirthDate: string (nullable = true)
+  //  |-- HireDate: string (nullable = true)
+  //  |-- City: string (nullable = true)
+  //  |-- State: string (nullable = true)
+  //  |-- Zip: string (nullable = true)
+  //  |-- Country: string (nullable = true)
+  //  |-- ReportsTo: string (nullable = true)
 
-  println("*** show() gives you neatly formatted data")
-  //  +---+----------+-----+-----------+-----------+
-  //  | id|      name|state|purchaseAmt|discountAmt|
-  //  +---+----------+-----+-----------+-----------+
-  //  |  1|Mageswaran|   TN|    15000.0|      150.0|
-  //  |  2|   Michael|   JR|    24000.0|      300.0|
-  //  |  3|Antony Leo|   TN|    10000.0|       50.0|
-  //  |  4|      Arun|   TN|    18000.0|       90.0|
-  //  |  5|    Venkat|ANDRA|     5000.0|        0.0|
-  //  |  6|    Sathis|   TN|   150000.0|     3000.0|
-  //  +---+----------+-----+-----------+-----------+
-  customerDF.show()
+  employeesDF.show(5) //formatted data in tabular form
+  //  +----------+---------+---------+--------------------+---------+--------+--------+-----+-------+-------+---------+
+  //  |EmployeeID| LastName|FirstName|               Title|BirthDate|HireDate|    City|State|    Zip|Country|ReportsTo|
+  //  +----------+---------+---------+--------------------+---------+--------+--------+-----+-------+-------+---------+
+  //  |         1|   Fuller|   Andrew|Sales Representative|  12/6/48| 4/29/92| Seattle|   WA|  98122|    USA|        2|
+  //  |         2|  Davolio|    Nancy|Vice President, S...|  2/17/52| 8/12/92|  Tacoma|   WA|  98401|    USA|        0|
+  //  |         3|Leverling|    Janet|Sales Representative|  8/28/63| 3/30/92|Kirkland|   WA|  98033|    USA|        2|
+  //  |         4|  Peacock| Margaret|Sales Representative|  9/17/37|  5/1/93| Redmond|   WA|  98052|    USA|        2|
+  //  |         5|Dodsworth|     Anne|       Sales Manager|   3/2/55|10/15/93|  London|     |SW1 8JR|     UK|        2|
+  //  +----------+---------+---------+--------------------+---------+--------+--------+-----+-------+-------+---------+
 
-  println("*** use select() to choose one column")
+  /**
+    * Selection
+    * Column Name options : "col1 name", col2 name" or "*" or df("col name) or $"col name"
+    */
+  employeesDF.select("FirstName", "LastName", "BirthDate").show(5)
+  //  +---------+---------+---------+
+  //  |FirstName| LastName|BirthDate|
+  //  +---------+---------+---------+
+  //  |   Andrew|   Fuller|  12/6/48|
+  //  |    Nancy|  Davolio|  2/17/52|
+  //  |    Janet|Leverling|  8/28/63|
+  //  | Margaret|  Peacock|  9/17/37|
+  //  |     Anne|Dodsworth|   3/2/55|
+  //  +---------+---------+---------+
+
+  employeesDF.select(employeesDF("EmployeeID"), employeesDF("FirstName").as("Name")).show(5)
+  //  +----------+--------+
+  //  |EmployeeID|    Name|
+  //  +----------+--------+
+  //  |         1|  Andrew|
+  //  |         2|   Nancy|
+  //  |         3|   Janet|
+  //  |         4|Margaret|
+  //  |         5|    Anne|
+  //  +----------+--------+
+
+  employeesDF.select(employeesDF("EmployeeID"), array($"FirstName", $"LastName").as("Name")).show(5)
+  //  +----------+-------------------+
+  //  |EmployeeID|               Name|
+  //  +----------+-------------------+
+  //  |         1|   [Andrew, Fuller]|
+  //  |         2|   [Nancy, Davolio]|
+  //  |         3| [Janet, Leverling]|
+  //  |         4|[Margaret, Peacock]|
+  //  |         5|  [Anne, Dodsworth]|
+  //  +----------+-------------------+
+
+
+  employeesDF.select($"EmployeeID".as("ID")).show(5)
   //  +---+
-  //  | id|
+  //  | ID|
   //  +---+
   //  |  1|
   //  |  2|
   //  |  3|
   //  |  4|
   //  |  5|
-  //  |  6|
   //  +---+
-  customerDF.select("id").show()
 
-  println("*** use select() for multiple columns")
-  //  +-----------+-----+
-  //  |purchaseAmt|state|
-  //  +-----------+-----+
-  //  |    15000.0|   TN|
-  //  |    24000.0|   JR|
-  //  |    10000.0|   TN|
-  //  |    18000.0|   TN|
-  //  |     5000.0|ANDRA|
-  //  |   150000.0|   TN|
-  //  +-----------+-----+
+  /**
+    * Filter
+    */
+  employeesDF.filter($"Country".equalTo("UK")).show(5)
+  //  +----------+---------+---------+--------------------+---------+--------+------+-----+-------+-------+---------+
+  //  |EmployeeID| LastName|FirstName|               Title|BirthDate|HireDate|  City|State|    Zip|Country|ReportsTo|
+  //  +----------+---------+---------+--------------------+---------+--------+------+-----+-------+-------+---------+
+  //  |         5|Dodsworth|     Anne|       Sales Manager|   3/2/55|10/15/93|London|     |SW1 8JR|     UK|        2|
+  //  |         6|   Suyama|  Michael|Sales Representative|  6/30/63|10/15/93|London|     |EC2 7JR|     UK|        5|
+  //  |         7|     King|   Robert|Sales Representative|  5/27/60|12/31/93|London|     |RG1 9SP|     UK|        5|
+  //  |         9| Buchanan|   Steven|Sales Representative|  1/25/66|11/13/94|London|     |WG2 7LT|     UK|        5|
+  //  +----------+---------+---------+--------------------+---------+--------+------+-----+-------+-------+---------+
 
-  customerDF.select("purchaseAmt", "state").show()
+  /**
+    * Data Manipulation using DSL
+    */
 
-  println("*** use filter() to choose rows")
-  //  +---+----------+-----+-----------+-----------+
-  //  | id|      name|state|purchaseAmt|discountAmt|
-  //  +---+----------+-----+-----------+-----------+
-  //  |  1|Mageswaran|   TN|    15000.0|      150.0|
-  //  |  3|Antony Leo|   TN|    10000.0|       50.0|
-  //  |  4|      Arun|   TN|    18000.0|       90.0|
-  //  |  6|    Sathis|   TN|   150000.0|     3000.0|
-  //  +---+----------+-----+-----------+-----------+
+  orderDetailsDF.show(5)
+  //  +-------+---------+---------+---+--------+
+  //  |OrderID|ProductID|UnitPrice|Qty|Discount|
+  //  +-------+---------+---------+---+--------+
+  //  |  10248|       11|     14.0| 12|     0.0|
+  //  |  10248|       42|      9.8| 10|     0.0|
+  //  |  10248|       72|     34.8|  5|     0.0|
+  //  |  10249|       14|     18.6|  9|     0.0|
+  //  |  10249|       51|     42.4| 40|     0.0|
+  //  +-------+---------+---------+---+--------+
 
-  customerDF.filter($"state".equalTo("TN")).show()
+  orderDetailsDF.select($"UnitPrice" * $"Qty").as("TotalPrice").show(5)
+  //  +-----------------+
+  //  |(UnitPrice * Qty)|
+  //  +-----------------+
+  //  |            168.0|
+  //  |             98.0|
+  //  |            174.0|
+  //  |            167.4|
+  //  |           1696.0|
+  //  +-----------------+
+
+  //Lets add this TotalPRice to orderDetails
+
+  orderDetailsDF.select(orderDetailsDF("*"), $"UnitPrice" * $"Qty".as("TotalPrice")).show(5)
+  //  +-------+---------+---------+---+--------+----------------------------------+
+  //  |OrderID|ProductID|UnitPrice|Qty|Discount|(UnitPrice * Qty AS TotalPrice#31)|
+  //  +-------+---------+---------+---+--------+----------------------------------+
+  //  |  10248|       11|     14.0| 12|     0.0|                             168.0|
+  //  |  10248|       42|      9.8| 10|     0.0|                              98.0|
+  //  |  10248|       72|     34.8|  5|     0.0|                             174.0|
+  //  |  10249|       14|     18.6|  9|     0.0|                             167.4|
+  //  |  10249|       51|     42.4| 40|     0.0|                            1696.0|
+  //  +-------+---------+---------+---+--------+----------------------------------+
 
 
-  //DataFrame APIs in Action for select
-
-  println("*** use * to select() all columns")
-  //  +---+----------+-----+-----------+-----------+
-  //  | id|      name|state|purchaseAmt|discountAmt|
-  //  +---+----------+-----+-----------+-----------+
-  //  |  1|Mageswaran|   TN|    15000.0|      150.0|
-  //  |  2|   Michael|   JR|    24000.0|      300.0|
-  //  |  3|Antony Leo|   TN|    10000.0|       50.0|
-  //  |  4|      Arun|   TN|    18000.0|       90.0|
-  //  |  5|    Venkat|ANDRA|     5000.0|        0.0|
-  //  |  6|    Sathis|   TN|   150000.0|     3000.0|
-  //  +---+----------+-----+-----------+-----------+
-  customerDF.select("*").show()
-
-  println("*** select multiple columns")
-  //  +---+-----------+
-  //  | id|discountAmt|
-  //  +---+-----------+
-  //  |  1|      150.0|
-  //  |  2|      300.0|
-  //  |  3|       50.0|
-  //  |  4|       90.0|
-  //  |  5|        0.0|
-  //  |  6|     3000.0|
-  //  +---+-----------+
-
-  customerDF.select("id", "discountAmt").show()
-
-  println("*** use apply() on DataFrame to create column objects, and select through them")
-  //  +---+-----------+
-  //  | id|discountAmt|
-  //  +---+-----------+
-  //  |  1|      150.0|
-  //  |  2|      300.0|
-  //  |  3|       50.0|
-  //  |  4|       90.0|
-  //  |  5|        0.0|
-  //  |  6|     3000.0|
-  //  +---+-----------+
-  customerDF.select(customerDF("id"), customerDF("discountAmt")).show()
-
-  println("*** use as() on Column to rename")
-  //  +-----------+--------------+
-  //  |Customer ID|Total Discount|
-  //  +-----------+--------------+
-  //  |          1|         150.0|
-  //  |          2|         300.0|
-  //  |          3|          50.0|
-  //  |          4|          90.0|
-  //  |          5|           0.0|
-  //  |          6|        3000.0|
-  //  +-----------+--------------+
-  customerDF.select(customerDF("id").as("Customer ID"),
-    customerDF("discountAmt").as("Total Discount")).show()
-
-  println("*** $ as shorthand to obtain Column")
-  //  +-----------+--------------+
-  //  |Customer ID|Total Discount|
-  //  +-----------+--------------+
-  //  |          1|         150.0|
-  //  |          2|         300.0|
-  //  |          3|          50.0|
-  //  |          4|          90.0|
-  //  |          5|           0.0|
-  //  |          6|        3000.0|
-  //  +-----------+--------------+
-
-  customerDF.select($"id".as("Customer ID"), $"discountAmt".as("Total Discount")).show()
-
-  println("*** use DSL to manipulate values")
-
-  //  +---------------+
-  //  |Double Discount|
-  //    +---------------+
-  //  |          300.0|
-  //  |          600.0|
-  //  |          100.0|
-  //  |          180.0|
-  //  |            0.0|
-  //  |         6000.0|
-  //  +---------------+
-  customerDF.select(($"discountAmt" * 2).as("Double Discount")).show()
-
-  //  +--------------+
-  //  |After Discount|
-  //  +--------------+
-  //  |       14850.0|
-  //  |       23700.0|
-  //  |        9950.0|
-  //  |       17910.0|
-  //  |        5000.0|
-  //  |      147000.0|
-  //  +--------------+
-  customerDF.select(
-    ($"purchaseAmt" - $"discountAmt").as("After Discount")).show()
-
-  println("*** use * to select() all columns and add more")
-  //  +---+----------+-----+-----------+-----------+-----+
-  //  | id|      name|state|purchaseAmt|discountAmt|newID|
-  //  +---+----------+-----+-----------+-----------+-----+
-  //  |  1|Mageswaran|   TN|    15000.0|      150.0|    1|
-  //  |  2|   Michael|   JR|    24000.0|      300.0|    2|
-  //  |  3|Antony Leo|   TN|    10000.0|       50.0|    3|
-  //  |  4|      Arun|   TN|    18000.0|       90.0|    4|
-  //  |  5|    Venkat|ANDRA|     5000.0|        0.0|    5|
-  //  |  6|    Sathis|   TN|   150000.0|     3000.0|    6|
-  //  +---+----------+-----+-----------+-----------+-----+
-  customerDF.select(customerDF("*"), $"id".as("newID")).show()
-
-  println("*** use lit() to add a literal column")
-  //  +---+----------+--------+
-  //  | id|      name|FortyTwo|
-  //  +---+----------+--------+
-  //  |  1|Mageswaran|      42|
-  //  |  2|   Michael|      42|
-  //  |  3|Antony Leo|      42|
-  //  |  4|      Arun|      42|
-  //  |  5|    Venkat|      42|
-  //  |  6|    Sathis|      42|
-  //  +---+----------+--------+
-  customerDF.select($"id", $"name", lit(42).as("FortyTwo")).show()
-
-  println("*** use array() to combine multiple results into a single array column")
-  //  +---+--------------------+
-  //  | id|               Stuff|
-  //  +---+--------------------+
-  //  |  1|[Mageswaran, TN, ...|
-  //  |  2|[Michael, JR, hello]|
-  //  |  3|[Antony Leo, TN, ...|
-  //  |  4|   [Arun, TN, hello]|
-  //  |  5|[Venkat, ANDRA, h...|
-  //  |  6| [Sathis, TN, hello]|
-  //    +---+--------------------+
-  customerDF.select($"id", array($"name", $"state", lit("hello")).as("Stuff")).show()
-
-  println("*** use rand() to add random numbers between 0.0 and 1.0 inclusive ")
-  //  +---+-------------------+
-  //  | id|                  r|
-  //  +---+-------------------+
-  //  |  1| 0.7572661909962807|
-  //  |  2|0.03528305261129272|
-  //  |  3|  0.766871164475284|
-  //  |  4|0.21273894980149388|
-  //  |  5|0.26240350624366104|
-  //  |  6| 0.7924567526350429|
-  //  +---+-------------------+
-  customerDF.select($"id", rand().as("r")).show()
+  orderDetailsDF.select($"*", lit(1).as("Min Discount"), rand().as("r")).show(5)
+  //  +-------+---------+---------+---+--------+------------+--------------------+
+  //  |OrderID|ProductID|UnitPrice|Qty|Discount|Min Discount|                   r|
+  //  +-------+---------+---------+---+--------+------------+--------------------+
+  //  |  10248|       11|     14.0| 12|     0.0|           1|0.020392164663888157|
+  //  |  10248|       42|      9.8| 10|     0.0|           1|  0.4268059459785989|
+  //  |  10248|       72|     34.8|  5|     0.0|           1|  0.4950364695956071|
+  //  |  10249|       14|     18.6|  9|     0.0|           1|   0.730863746231909|
+  //  |  10249|       51|     42.4| 40|     0.0|           1|  0.3231373463001569|
+  //  +-------+---------+---------+---+--------+------------+--------------------+
 }
 

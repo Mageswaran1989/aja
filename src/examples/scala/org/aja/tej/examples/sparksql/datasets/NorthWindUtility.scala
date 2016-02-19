@@ -7,10 +7,10 @@ import org.apache.spark.sql.{Row, SQLContext}
 /**
   * Created by mdhandapani on 16/2/16.
   *
-  * Small SparkSQL /utility to explore NorthWind Databse
+  * Small SparkSQL utility to explore NorthWind Database
   * URL: https://northwinddatabase.codeplex.com/releases/view/71634
   */
-object NorthWindUtility extends App {
+trait NorthWindUtility {
 
   val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
   val sqlContext = new SQLContext(sc)
@@ -33,7 +33,7 @@ object NorthWindUtility extends App {
   /**
     * Returns the Employee CSV file as DF
     */
-  val getEmployeesDF = sqlContext.read
+  val employeesDF = sqlContext.read
     .format("com.databricks.spark.csv")
     .option("header", "true")
     .schema(employesSchema)
@@ -42,26 +42,26 @@ object NorthWindUtility extends App {
   /**
     * Displays Employee DataFrame
     */
-  def showEmployeesDF = getEmployeesDF.show()
+  def showEmployeesDF() = employeesDF.show()
 
   /**
     * Registers EmployeesDF to query with Spark SQL
     * @param name Table name to be registered
     */
-  def registerEmployeeDFAs(name: String) = getEmployeesDF.registerTempTable(name)
+  def registerEmployeeDFAs(name: String) = employeesDF.registerTempTable(name)
 
   protected val orderDetailsSchema = StructType(Seq(
     StructField("OrderID",   IntegerType, true),
     StructField("ProductID", IntegerType, true),
     StructField("UnitPrice", DoubleType, true),
-    StructField("Qty",       StringType, true),
+    StructField("Qty",       IntegerType, true),
     StructField("Discount",  DoubleType, true)
   ))
 
   /**
     * Returns the OrderDetail CSV file as DF
     */
-  val getOrderDetailsDF = sqlContext.read
+  val orderDetailsDF = sqlContext.read
     .format("com.databricks.spark.csv")
     .option("header", "true")
     .schema(orderDetailsSchema)
@@ -70,26 +70,26 @@ object NorthWindUtility extends App {
   /**
     * Displays OrderDetail DataFrame
     */
-  def showOrderDetailsDF = getOrderDetailsDF.show()
+  def showOrderDetailsDF = orderDetailsDF.show()
 
   /**
     * Registers OrderDetailDF to query with Spark SQL
     * @param name Table name to be registered
     */
-  def registerOrderDetailsDFAs(name: String) = getOrderDetailsDF.registerTempTable(name)
+  def registerOrderDetailsDFAs(name: String) = orderDetailsDF.registerTempTable(name)
 
   protected val ordersSchema = StructType(Seq(
     StructField("OrderID", IntegerType, true),
     StructField("CustomerID", StringType, true),
     StructField("EmployeeID", IntegerType, true),
     StructField("OrderDate", StringType, true),
-    StructField("ShipCuntry", StringType, true)
+    StructField("ShipCountry", StringType, true)
   ))
 
   /**
     * Returns the Orders CSV file as DF
     */
-  val getOrdersDF = sqlContext.read
+  val ordersDF = sqlContext.read
     .format("com.databricks.spark.csv")
     .option("header", "true")
     .schema(ordersSchema)
@@ -98,13 +98,13 @@ object NorthWindUtility extends App {
   /**
     * Displays Orders DataFrame
     */
-  def showOrdersDF = getOrdersDF.show()
+  def showOrdersDF = ordersDF.show()
 
   /**
     * Registers OrdersDF to query with Spark SQL
     * @param name Table name to be registered
     */
-  def registergetOrdersDFAs(name: String) = getOrdersDF.registerTempTable(name)
+  def registergetOrdersDFAs(name: String) = ordersDF.registerTempTable(name)
 
   protected val productsSchema = StructType(Seq(
     StructField("ProductID", IntegerType, true),
@@ -119,7 +119,7 @@ object NorthWindUtility extends App {
   /**
     * Returns the Products CSV file as DF
     */
-  val getProductsDF = sqlContext.read
+  val productsDF = sqlContext.read
     .format("com.databricks.spark.csv")
     .option("header", "true")
     .schema(productsSchema)
@@ -128,11 +128,11 @@ object NorthWindUtility extends App {
   /**
     * Displays Products DataFrame
     */
-  def showProductsDF = getProductsDF.show()
+  def showProductsDF = productsDF.show()
 
   /**
     * Registers ProductsDF to query with Spark SQL
     * @param name Table name to be registered
     */
-  def registerProductsDF(name: String) = getProductsDF.registerTempTable(name)
+  def registerProductsDF(name: String) = productsDF.registerTempTable(name)
 }
