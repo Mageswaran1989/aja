@@ -18,8 +18,7 @@ prints the results for each batch in a DStream
 object SimpleAnalytics {
 
   def main(args: Array[String]): Unit = {
-    val ssc = new StreamingContext("local[2]",
-      "First Streaming App", Seconds(10))
+    val ssc = new StreamingContext("local[2]", "First Streaming App", Seconds(1))
     val stream = ssc.socketTextStream("localhost", 9999)
     // create stream of events from raw text elements
     val events = stream.map { record =>
@@ -55,8 +54,8 @@ object SimpleAnalytics {
       println(s"== Batch start time: $dateStr ==")
 
       println("Total purchases: " + numPurchases)
-      println("Unique users: " + uniqueUsers)
-      println("Total revenue: " + totalRevenue)
+      println("Unique users: "    + uniqueUsers)
+      println("Total revenue: "   + totalRevenue)
       println("Most popular product: %s with %d purchases".format(mostPopular._1, mostPopular._2))
     }
     // start the context

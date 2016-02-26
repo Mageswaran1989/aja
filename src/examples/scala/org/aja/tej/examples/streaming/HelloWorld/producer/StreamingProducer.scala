@@ -34,10 +34,10 @@ object StreamingProducer {
       .toSeq
 
     // Generate a sequence of possible products
-    val products = Seq("iPhone Cover" -> 999,
-      "Headphones" -> 549,
-      "Samsung Galaxy Cover" -> 895,
-      "iPad Cover" -> 749
+    val products = Seq("iPhone Cover" -> 499,
+      "Headphones" -> 899,
+      "Samsung Galaxy Cover" -> 299,
+      "iPad Cover" -> 999
     )
 
     /** Generate a number of random product events */

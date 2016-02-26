@@ -42,9 +42,9 @@ object PopularTags {
       .map{case (topic, count) => (count, topic)}
       .transform(_.sortByKey(false))
 
-    val topCountsFor10Seconds = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(10))
-      .map{case (topic, count) => (count, topic)}
-      .transform(_.sortByKey(false))
+//    val topCountsFor10Seconds = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(10))
+//      .map{case (topic, count) => (count, topic)}
+//      .transform(_.sortByKey(false))
 
     // Print popular hashtags
     topCountdFor60Secs.foreachRDD(rdd => {
@@ -53,11 +53,11 @@ object PopularTags {
       topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
     })
 
-    topCountsFor10Seconds.foreachRDD(rdd => {
-      val topList = rdd.take(5)
-      println("\nPopular topics in last 10 seconds (%s total):".format(rdd.count()))
-      topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
-    })
+//    topCountsFor10Seconds.foreachRDD(rdd => {
+//      val topList = rdd.take(5)
+//      println("\nPopular topics in last 10 seconds (%s total):".format(rdd.count()))
+//      topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
+//    })
 
     ssc.start()
     ssc.awaitTermination()

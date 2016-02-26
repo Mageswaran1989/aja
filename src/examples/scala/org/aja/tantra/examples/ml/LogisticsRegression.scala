@@ -1,8 +1,9 @@
 package org.aja.tantra.examples.ml
 
+
 import breeze.linalg._
 import breeze.numerics._
-import breeze.stats.distributions.Uniform
+import breeze.stats.distributions._
 import org.jfree.chart.axis.{NumberAxis, ValueAxis}
 import org.jfree.chart.renderer.xy.{XYLineAndShapeRenderer, XYItemRenderer}
 import org.jfree.chart.{JFreeChart, ChartFrame, ChartFactory}
@@ -229,22 +230,22 @@ object LogisticsRegression {
    */
   def lrSGA(dataSet: DataSet) = {
     val dmFeatures = dataSet.toDenseMatrixFeatures
-    val dmLabels = dataSet.toDenseMatrixLabels
+    val dmLabels = dataSet.toDenseMatrixLabels.toDenseVector
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
     val alpha = 0.01
 
-    var weights = DenseMatrix.fill[Double](1,cols)(1.0)
-    //var weights = DenseVector.fill[Double](cols)(1.0)
+    //var weights = DenseMatrix.fill[Double](1,cols)(1.0)
+    var weights = DenseVector.fill[Double](cols)(1.0)
 
     for ( i <- 0 until rows) {
       //Gradients of one piece of data
       // 1 x 3 * 3 x 1 => 1 x 1
       //(i,::) => extract each row
 
-      val h = sigmoid(dmFeatures(i,::) * weights.t)
-      val error = dmLabels(i, ::) - h //TODO: Optimize?
-      weights = weights + alpha * error *  dmFeatures(i,::)
+      val h = sigmoid(dmFeatures(i,::).t.dot( weights))
+      val error = dmLabels(i) - h
+      weights = weights + (alpha * error *  dmFeatures(i,::).t)
     }
     weights
   }
@@ -260,14 +261,15 @@ object LogisticsRegression {
    * @param numberOfIterations Nu,ber of iterations over the given dataset
    * @return
    */
-  def lrSGA(dataSet: DataSet, numberOfIterations: Int) = {
+  def lrSGA1(dataSet: DataSet, numberOfIterations: Int) = {
     val dmFeatures = dataSet.toDenseMatrixFeatures
-    val dmLabels = dataSet.toDenseMatrixLabels
+    val dmLabels = dataSet.toDenseMatrixLabels.toDenseVector
     val rows = dmFeatures.rows
     val cols = dmFeatures.cols
-    var alpha = 0.001
+    var alpha = 0.0
 
-    var weights = DenseMatrix.fill[Double](1,cols)(1) //1 x 3
+    //var weights = DenseMatrix.fill[Double](1,cols)(1) //1 x 3
+    var weights = DenseVector.fill[Double](cols)(1.0)
     val rand = Random
 
     for ( j <- 0 until numberOfIterations) {
@@ -279,9 +281,9 @@ object LogisticsRegression {
         //Gradients of one piece of data
         // 1 x 3 * 3 x 1 => 1 x 1
         //(i,::) => extract each row
-        val h = sigmoid(dmFeatures(randomIndex,::) * weights.t)
-        val error = dmLabels(randomIndex, ::) - h //TODO: Optimize?
-        weights = weights + (alpha * error *  dmFeatures(i,::))
+        val h = sigmoid(dmFeatures(randomIndex,::).t.dot(weights))
+        val error = dmLabels(randomIndex) - h
+        weights = weights + alpha * error *  dmFeatures(randomIndex,::).t
         length = length - 1
       }
     }
@@ -300,9 +302,9 @@ object LogisticsRegression {
     println("Stochastic Gradient LR weights: " + weights1)
     plotLRDataSet(dataSet, weights1.toArray, "Second")
 
-    val weights2 = lrSGA(dataSet, 500)
+    val weights2 = lrSGA1(dataSet, 150)
     println("Stochastic Gradient LR weights: " + weights2)
-    plotLRDataSet(dataSet, weights1.toArray, "Third")
+    plotLRDataSet(dataSet, weights2.toArray, "Third")
 
   }
 }

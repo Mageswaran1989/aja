@@ -91,7 +91,7 @@ object PrintTweets {
           case Row(hashtags: Seq[Row]) => hashtags.map(tagRow => HashTag(tagRow(2).asInstanceOf[String]))
         }.select("tag").show()
       } catch {
-        case e: AnalysisException => println("$$$$$$$$$$$$$$$$$$$$$$$$$$ Somehting wrong with incoming tweet #########################" + e.toString)
+        case e: AnalysisException => println("$$$$$$$$$$$$$$$$$$$$$$$$$$ Something wrong with incoming tweet #########################" + e.toString)
       }
 
 
