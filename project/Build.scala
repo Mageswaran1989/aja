@@ -46,7 +46,7 @@ object Resolvers {
 //Dont use %% for thir party libraries for which appending Scala version might not help in fetching
 object Dependency {
   object Version {
-    val Spark        = "1.5.1"
+    val Spark        = "1.6.0"
     val ScalaTest    = "2.2.4"
     val ScalaCheck   = "1.12.2"
     val Twitter      = "3.0.3"
@@ -60,33 +60,33 @@ object Dependency {
   }
 
   //                                       %% means use scala version
-  val sparkCore      = "org.apache.spark"  %% "spark-core"      % Version.Spark  withSources()
-  val sparkMLLib     = "org.apache.spark"  %% "spark-mllib"     % Version.Spark  withSources()
-  val sparkStreaming = "org.apache.spark"  %% "spark-streaming" % Version.Spark  withSources()
-  val sparkStreamingKafta = "org.apache.spark" %% "spark-streaming-kafka" % Version.Spark  withSources()
-  val sparkStreamingflume = "org.apache.spark" %% "spark-streaming-flume" % Version.Spark  withSources()
-  val sparkStreamingTwitter = "org.apache.spark" %% "spark-streaming-twitter" % Version.Spark  withSources()
-  val sparkSQL       = "org.apache.spark"  %% "spark-sql"       % Version.Spark  withSources()
-  val sparkGrapx     = "org.apache.spark"  %% "spark-graphx"    % Version.Spark  withSources()
-  val sparkHive      = "org.apache.spark"  %% "spark-hive"      % Version.Spark  withSources()
-  val sparkRepl      = "org.apache.spark"  %% "spark-repl"      % Version.Spark  withSources()
-  val scalaTest      = "org.scalatest"     %% "scalatest"       % Version.ScalaTest  % "test"
-  val scalaCheck     = "org.scalacheck"    %% "scalacheck"      % Version.ScalaCheck % "test"
-  val twitterCoreAddon    = "org.twitter4j"  % "twitter4j-core"   % Version.Spark  withSources()
-  val twitterStreamAddon  = "org.twitter4j"  % "twitter4j-stream" % Version.Spark  withSources()
-  val gsonLib        = "com.google.code.gson" % "gson"           % "2.3" withSources()
-  val cli            = "commons-cli"          % "commons-cli"    % "1.2" withSources()
-  val breeze         = "org.scalanlp"         %% "breeze"         % Version.Breeze withSources()
+  val sparkCore             = "org.apache.spark"      %% "spark-core"       % Version.Spark  withSources()
+  val sparkMLLib            = "org.apache.spark"      %% "spark-mllib"      % Version.Spark  withSources()
+  val sparkStreaming        = "org.apache.spark"      %% "spark-streaming"  % Version.Spark  withSources()
+  val sparkStreamingKafta   = "org.apache.spark"      %% "spark-streaming-kafka" % Version.Spark  withSources()
+  val sparkStreamingflume   = "org.apache.spark"      %% "spark-streaming-flume" % Version.Spark  withSources()
+  val sparkStreamingTwitter = "org.apache.spark"      %% "spark-streaming-twitter" % Version.Spark  withSources()
+  val sparkSQL              = "org.apache.spark"      %% "spark-sql"        % Version.Spark  withSources()
+  val sparkGrapx            = "org.apache.spark"      %% "spark-graphx"     % Version.Spark  withSources()
+  val sparkHive             = "org.apache.spark"      %% "spark-hive"       % Version.Spark  withSources()
+  val sparkRepl             = "org.apache.spark"      %% "spark-repl"       % Version.Spark  withSources()
+  val scalaTest             = "org.scalatest"         %% "scalatest"        % Version.ScalaTest  % "test"
+  val scalaCheck            = "org.scalacheck"        %% "scalacheck"       % Version.ScalaCheck % "test"
+  val twitterCoreAddon      = "org.twitter4j"         % "twitter4j-core"    % Version.Spark  withSources()
+  val twitterStreamAddon    = "org.twitter4j"         % "twitter4j-stream"  % Version.Spark  withSources()
+  val gsonLib               = "com.google.code.gson"  % "gson"              % "2.3" withSources()
+  val cli                   = "commons-cli"           % "commons-cli"       % "1.2" withSources()
+  val breeze                = "org.scalanlp"          %% "breeze"           % Version.Breeze withSources()
   //Breeze native uses OpenBlass and ATLAS
-  val breezeNatives  = "org.scalanlp"         %% "breeze-natives" % Version.Breeze withSources()
-  val akka           = "com.typesafe.akka"    %% "akka-actor"     % Version.Akka withSources()
-  val breeezeViz     =  "org.scalanlp"        %% "breeze-viz"     % Version.BreezeViz withSources()
+  val breezeNatives         = "org.scalanlp"          %% "breeze-natives"   % Version.Breeze withSources()
+  val akka                  = "com.typesafe.akka"     %% "akka-actor"       % Version.Akka withSources()
+  val breeezeViz            =  "org.scalanlp"         %% "breeze-viz"       % Version.BreezeViz withSources()
   //  val scalaActor     =  "org.scala-lang"       %% "scala-actors"     % Version.scalaActors withSources()
-  val sparkCSV       = "com.databricks"      % "spark-csv_2.11" % Version.sparkCSV withSources()
-  val sparkTS        = "com.cloudera.sparkts" %% "sparkts" % Version.sparkts withSources()
+  val sparkCSV              = "com.databricks"        % "spark-csv_2.11"    % Version.sparkCSV withSources()
+  val sparkTS               = "com.cloudera.sparkts"  %% "sparkts" % Version.sparkts withSources()
   //val neo4jScalaCypher = "org.anormcypher" % "anormcypher_2.11" % Version.neo4JScalaCypher withSources()
-  val scalaChart     = "com.github.wookietreiber" %% "scala-chart" % "latest.integration" withSources()
-  val scalaPlot      = "org.sameersingh.scalaplot" % "scalaplot" % "0.0.4" withSources()
+  val scalaChart            = "com.github.wookietreiber" %% "scala-chart"   % "latest.integration" withSources()
+  val scalaPlot             = "org.sameersingh.scalaplot" % "scalaplot"     % "0.0.4" withSources()
 }
 
 object Dependencies {

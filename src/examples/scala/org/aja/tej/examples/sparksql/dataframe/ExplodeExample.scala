@@ -6,8 +6,8 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.types._
 
 /**
- * Created by mageswaran on 6/2/16.
- */
+  * Created by mageswaran on 6/2/16.
+  */
 object ExplodeExample extends App {
 
 
@@ -64,8 +64,10 @@ object ExplodeExample extends App {
   //  [[123456,Engineering],WrappedArray([michael,armbrust,abc123@prodigy.net], [chris,fregly,def456@compuserve.net]),michael,armbrust,abc123@prodigy.net]
   //  [[123456,Psychology],WrappedArray([michael,armbrust,abc123@prodigy.net], [chris,fregly,def456@compuserve.net]),chris,fregly,def456@compuserve.net]
   //  [[123456,Engineering],WrappedArray([michael,armbrust,abc123@prodigy.net], [chris,fregly,def456@compuserve.net]),chris,fregly,def456@compuserve.net]
-  println(explodedDepartmentWithEmployeesDF.getClass.getTypeName)
+
+  // println(explodedDepartmentWithEmployeesDF.getClass.getTypeName)
   //  org.apache.spark.sql.DataFrame
+
   explodedDepartmentWithEmployeesDF.printSchema()
   //  root
   //  |-- department: struct (nullable = true)
@@ -97,12 +99,12 @@ object ExplodeExample extends App {
   }.show()
 
 
-//  +--------------------+--------------------+---------+--------+--------------------+
-//  |          department|           employees|firstName|lastName|               email|
-//  +--------------------+--------------------+---------+--------+--------------------+
-//  | [123456,Psychology]|[[michael,armbrus...|  michael|armbrust|  abc123@prodigy.net|
-//  | [123456,Psychology]|[[michael,armbrus...|    chris|  fregly|def456@compuserve...|
-//  |[123456,Engineering]|[[michael,armbrus...|  michael|armbrust|  abc123@prodigy.net|
-//  |[123456,Engineering]|[[michael,armbrus...|    chris|  fregly|def456@compuserve...|
-//  +--------------------+--------------------+---------+--------+--------------------+
+  //  +--------------------+--------------------+---------+--------+--------------------+
+  //  |          department|           employees|firstName|lastName|               email|
+  //  +--------------------+--------------------+---------+--------+--------------------+
+  //  | [123456,Psychology]|[[michael,armbrus...|  michael|armbrust|  abc123@prodigy.net|
+  //  | [123456,Psychology]|[[michael,armbrus...|    chris|  fregly|def456@compuserve...|
+  //  |[123456,Engineering]|[[michael,armbrus...|  michael|armbrust|  abc123@prodigy.net|
+  //  |[123456,Engineering]|[[michael,armbrus...|    chris|  fregly|def456@compuserve...|
+  //  +--------------------+--------------------+---------+--------+--------------------+
 }
