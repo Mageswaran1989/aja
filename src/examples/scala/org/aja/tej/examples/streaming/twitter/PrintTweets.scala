@@ -13,7 +13,6 @@ import scala.collection.mutable
  */
 
 /*
-10
 --consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw
 --consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3
 --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
@@ -70,14 +69,15 @@ object PrintTweets {
 
       println("1.>>>>>>>>>>>  Raw Tweets")
       rdd.foreach(println)
+
       println("2.>>>>>>>>>>>" + " Count: " + count + " Size: " + rdd.count() )
       if (printSchema && rdd.count() > 0) {
         println("3.>>>>>>>>>>> Tweet scema")
         df.printSchema()
         printSchema = false
-      } else
-        println("3.>>>>>>>>>>> Tweet scema skipped")
-
+      } else {
+        println("3.>>>>>>>>>>> Tweet schema skipped")
+      }
 
       println("4.>>>>>>>>>>> Print Tweet tabel")
       df.show()
@@ -85,13 +85,15 @@ object PrintTweets {
       try {
         println("5.>>>>>>>>>>> Hashtags")
         df.select("hashtagEntities").foreach(println)
+
         println("6.>>>>>>>>>>> TagTabel")
         df.explode($"hashtagEntities"){
           //case Row(hashtags: mutable.WrappedArray[String]) => println(hashtags); hashtags.map(HashTag(_))
           case Row(hashtags: Seq[Row]) => hashtags.map(tagRow => HashTag(tagRow(2).asInstanceOf[String]))
         }.select("tag").show()
       } catch {
-        case e: AnalysisException => println("$$$$$$$$$$$$$$$$$$$$$$$$$$ Something wrong with incoming tweet #########################" + e.toString)
+        case e: AnalysisException =>
+          println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! Something wrong with incoming tweet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + e.toString)
       }
 
 
@@ -154,7 +156,7 @@ Sample tweet
  */
 
 /*
-Tweet Schema: Thats a big list indeed!
+Tweet Schema: That's a big list indeed!
 
 root
  |-- contributorsIDs: array (nullable = true)

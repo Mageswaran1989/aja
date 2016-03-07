@@ -2,7 +2,8 @@
 
 import breeze.linalg._
 import breeze.numerics._
-
+//Computing basic statistics
+import  breeze.stats._
 
 //Working with matrices
 //Creating matrices
@@ -84,8 +85,7 @@ val inverse=inv(simpleMatrix)
 simpleMatrix * inverse
 
 
-//Computing basic statistics
-import  breeze.stats._
+
 meanAndVariance(simpleMatrixAsDouble)
 // MeanAndVariance(12.0,75.75,9)
 

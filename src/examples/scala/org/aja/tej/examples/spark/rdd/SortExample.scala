@@ -25,16 +25,16 @@ object SortExample  extends App {
 
   def useCases(sc: SparkContext) = {
 
-    val a = sc . parallelize ( List (" dog " , " cat " , " owl " , " gnu " , " ant ") , 2)
-    val b = sc . parallelize (1 to a . count . toInt , 2)
-    val c = a . zip ( b )
-    c . sortByKey ( true ) . collect
-    c . sortByKey ( false ) . collect
+    val a = sc.parallelize(List("dog","cat","owl","gnu","ant"), 2)
+    val b = sc.parallelize(1 to a.count.toInt, 2)
+    val c = a.zip(b)
+    c.sortByKey(true).collect
+    c.sortByKey(false).collect
 
-    val a1 = sc . parallelize (1 to 100 , 5)
-    val b1 = a1 . cartesian ( a1 )
-    val c1 = sc . parallelize ( b1 . takeSample ( true , 5 , 13) , 2)
-    val d1 = c1 . sortByKey ( false )
+    val a1 = sc.parallelize(1 to 100, 5)
+    val b1 = a1.cartesian(a1)
+    val c1 = sc.parallelize(b1.takeSample(true, 5, 13), 2)
+    val d1 = c1.sortByKey(false)
 
   }
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

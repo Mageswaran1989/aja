@@ -17,7 +17,7 @@ object StatefulAnalytics {
   }
 
   def main(args: Array[String]) {
-    val ssc = new StreamingContext("local[2]", "First Streaming App", Seconds(10))
+    val ssc = new StreamingContext("local[*]", "First Streaming App", Seconds(10))
     // for stateful operations, we need to set a checkpoint
     // location
 

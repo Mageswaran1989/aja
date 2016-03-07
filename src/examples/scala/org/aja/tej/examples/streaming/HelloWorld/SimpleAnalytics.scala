@@ -18,7 +18,7 @@ prints the results for each batch in a DStream
 object SimpleAnalytics {
 
   def main(args: Array[String]): Unit = {
-    val ssc = new StreamingContext("local[2]", "First Streaming App", Seconds(1))
+    val ssc = new StreamingContext("local[2]", "First Streaming App", Seconds(5))
     val stream = ssc.socketTextStream("localhost", 9999)
     // create stream of events from raw text elements
     val events = stream.map { record =>
