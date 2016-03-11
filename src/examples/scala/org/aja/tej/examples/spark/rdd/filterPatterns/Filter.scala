@@ -28,42 +28,46 @@ function has to return either true or false (i.e. Apply the filter).
 
 
  */
+
+//SQL : SELECT * FROM table WHERE value < 3;
+
 object Filter extends App{
 
   def useCases(sc: SparkContext) = {
-    val a = sc . parallelize (1 to 10 , 3)
-    a . filter ( _ % 2 == 0)
-    a . collect
+    val a = sc.parallelize (1 to 10 , 3)
+    a.filter( _ % 2 == 0)
+    a.collect
 
-    val b = sc . parallelize (1 to 8)
-    b . filter ( _ < 4) . collect
+    val b = sc.parallelize(1 to 8)
+    b.filter(_ < 4).collect
+
 
     //Error
     // val a1 = sc . parallelize ( List (" cat " , " horse " , 4.0 , 3.5 , 2 , " dog ") )
-   //a1 . filter ( _ < 4) . collect
+    //a1 . filter ( _ < 4) . collect
     /*This fails because some components of a are not implicitly comparable against integers.
       Collect uses the isDefinedAt property of a function-object to determine whether the test-
       function is compatible with each data item. Only data items that pass this test (=filter)
     are then mapped using the function-object. */
 
-    val a2 = sc . parallelize ( List (" cat " , " horse " , 4.0 , 3.5 , 2 , " dog ") )
+    val a2 = sc.parallelize ( List (" cat " , " horse " , 4.0 , 3.5 , 2 , " dog ") )
     a2 . collect ({ case a : Int => " is integer "
-                    case b : String => " is string " }) . collect
+    case b : String => " is string " }) . collect
 
     val myfunc : PartialFunction [ Any , Any ] = {
       case a : Int  => " is integer "
       case b : String => " is string " }
 
-    myfunc . isDefinedAt ("")
-    myfunc . isDefinedAt (1)
-    myfunc . isDefinedAt (1.5)
+    myfunc.isDefinedAt("")
+    myfunc.isDefinedAt(1)
+    myfunc.isDefinedAt(1.5)
 
-//    Be careful! The above code works because it only checks the type itself! If you use
-//    operations on this type, you have to explicitly declare what type you want instead of any.
-//    Otherwise the compiler does (apparently) not know what bytecode it should produce:
+    //    Be careful! The above code works because it only checks the type itself! If you use
+    //    operations on this type, you have to explicitly declare what type you want instead of any.
+    //    Otherwise the compiler does (apparently) not know what bytecode it should produce:
 
     //val myfunc2 : PartialFunction [ Any , Any ] = { case x if ( x < 4) => " x "} //error
-    val myfunc3 : PartialFunction [ Int , Any ] = { case x if ( x < 4) => " x "}
+    val myfunc3 : PartialFunction[Int,Any] = { case x if (x < 4) => "x"}
 
 
     //============================================================================

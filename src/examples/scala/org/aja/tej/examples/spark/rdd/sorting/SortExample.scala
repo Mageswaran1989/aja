@@ -1,4 +1,4 @@
-package org.aja.tej.examples.spark.rdd
+package org.aja.tej.examples.spark.rdd.sorting
 
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
