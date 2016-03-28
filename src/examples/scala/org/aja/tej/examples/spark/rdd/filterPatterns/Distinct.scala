@@ -10,6 +10,8 @@ import org.apache.spark.SparkContext
 Returns a new RDD that contains each unique value only once.
 
  */
+//SELECT DISTINCT * FROM table;
+
 object Distinct extends App{
 
   def useCases(sc: SparkContext) = {

@@ -1,6 +1,6 @@
 package org.aja.tej.examples.spark.rdd.summarizationPatterns
 
-import org.aja.tej.examples.dataset.StackOverFlowUtility
+import org.aja.tej.examples.dataset.StackOverFlowDS
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 

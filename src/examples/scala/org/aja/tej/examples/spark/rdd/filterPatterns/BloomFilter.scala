@@ -13,6 +13,7 @@ object BloomFilterExample extends App {
   val nums = List(1 to 20: _*).map(_.toString)
   val rdd = sc.parallelize(nums,5)
 
+
   val bf = rdd.mapPartitions{ iter =>
     val bf = BloomFilter.optimallySized[String](10000, 0.0001)
     iter.foreach(i => bf += i)

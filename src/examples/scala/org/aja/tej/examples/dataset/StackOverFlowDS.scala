@@ -128,7 +128,7 @@ object Comments extends StackTable[Comments] {
   )
 }
 
-class StackOverFlowUtility(sc: SparkContext) {
+class StackOverFlowDS(sc: SparkContext) {
 
   private val xmlBadgeFile = sc.textFile(Badges.file.getAbsolutePath)
   val rddBadges = xmlBadgeFile.flatMap(Badges.parse)
@@ -141,8 +141,8 @@ class StackOverFlowUtility(sc: SparkContext) {
 
 }
 
-object StackOverFlowUtility {
-  def apply(sc: SparkContext) = new StackOverFlowUtility(sc)
+object StackOverFlowDS {
+  def apply(sc: SparkContext) = new StackOverFlowDS(sc)
 
   val dateParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 

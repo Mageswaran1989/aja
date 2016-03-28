@@ -1,6 +1,6 @@
 package org.aja.tej.examples.spark.rdd.summarizationPatterns
 
-import org.aja.tej.examples.dataset.StackOverFlowUtility
+import org.aja.tej.examples.dataset.StackOverFlowDS
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.SparkContext
 
@@ -15,7 +15,7 @@ object SummaryPatternInAction  extends App {
     //Problem1: Given a list of user’s comments, determine the first and last time a user com‐
     //mented and the total number of comments from that user.
 
-    val userIdCreationDateMap = StackOverFlowUtility(sc).rddComments.map(comments => (comments.UserId, comments.CreationDate))
+    val userIdCreationDateMap = StackOverFlowDS(sc).rddComments.map(comments => (comments.UserId, comments.CreationDate))
     val groupedByUser = userIdCreationDateMap.groupByKey()
     //( (userId1, (time1, time2) ...), (userId2, (time1, time2) ...) )
     //So what we want? UserId,Minimum,Maximum,Count
@@ -24,8 +24,8 @@ object SummaryPatternInAction  extends App {
 
     //Problem2: Given a list of user’s comments, determine the average comment length per
     //hour of day.
-    val commentsHoursTuple = StackOverFlowUtility(sc).rddComments
-      .map(comments => (StackOverFlowUtility.getHour(comments.CreationDate), comments.Text.length))
+    val commentsHoursTuple = StackOverFlowDS(sc).rddComments
+      .map(comments => (StackOverFlowDS.getHour(comments.CreationDate), comments.Text.length))
       .groupByKey()
 
     val solution2 = commentsHoursTuple.map{case (hour, commentsLength) => (hour,commentsLength.sum/commentsLength.size)}.take(10)
@@ -59,7 +59,7 @@ object SummaryPatternInAction  extends App {
 
 
     //    val urlPattern = """/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/""".r.findAllIn(text)
-    val commentIdUrlTuple = StackOverFlowUtility(sc).rddComments
+    val commentIdUrlTuple = StackOverFlowDS(sc).rddComments
       .map{comments => {
         val urlPattern = """(https?):\/\/(www\.)?[a-z0-9\.:].*?(?=\s)""".r.findAllIn(comments.Text)
         (comments.PostId,  urlPattern.toList)

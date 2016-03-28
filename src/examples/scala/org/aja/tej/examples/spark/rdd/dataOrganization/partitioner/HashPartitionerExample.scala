@@ -1,4 +1,4 @@
-package org.aja.tej.examples.spark.rdd.partitioner
+package org.aja.tej.examples.spark.rdd.dataOrganization.partitioner
 
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.{HashPartitioner, SparkContext}
@@ -50,7 +50,7 @@ object HashPartitionerExample extends App {
     println("----------------------------------------------------------")
 
     val rddDataWith2Partition = rddData.partitionBy(new HashPartitioner(2))
-    println("rddDataWith2Partition partitons: " + rddDataWith2Partition.partitions.length) //rddDataWith1Partition partitons: 1
+    println("rddDataWith2Partition partitons: " + rddDataWith2Partition.partitions.length) //rddDataWith1Partition partitons: 2
     println("rddDataWith2Partition contents: " + rddDataWith2Partition.collect.foreach(print))
     //(2,None)(2,None)(1,None)(1,None)(3,None)(3,None)
     ////i.e partitionBy -> ShuffleRDD -> partition for current element is selected by (k.hashcode % numPartition)

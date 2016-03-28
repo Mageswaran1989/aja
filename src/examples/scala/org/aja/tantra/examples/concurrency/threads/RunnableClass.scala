@@ -8,11 +8,15 @@ object RunnableDemo extends Runnable{
     println(" I am in thread: " + Thread.currentThread().getName)
 
     while(true) {
-      print("-")
+      println("-")
+      Thread.sleep(100)
     }
   }
 }
 
 object RunnableClass extends App {
 
+  val newThread = new Thread(RunnableDemo)
+
+  newThread.start()
 }

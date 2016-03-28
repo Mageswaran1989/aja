@@ -7,7 +7,7 @@ import java.io.File
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
-import org.aja.tej.examples.dataset.StackOverFlowUtility._
+import org.aja.tej.examples.dataset.StackOverFlowDS._
 
 
 object StackOverFlow extends App {
