@@ -54,5 +54,10 @@ Spark SQL is used to examine the dataset of Tweets. Then Spark MLLib is used to 
 Spark Streaming and Spark MLLib are used to filter a live stream of Tweets for those that match the specified cluster.
 
 
-Twitter API credentials: https://apps.twitter.com/
-https://databricks-training.s3.amazonaws.com/realtime-processing-with-spark-streaming.html#twitter-credential-setup
+##Twitter API credentials:
+- https://apps.twitter.com/  
+- https://databricks-training.s3.amazonaws.com/realtime-processing-with-spark-streaming.html#twitter-credential-setup  
+
+##Schema
+- https://github.com/episod/twitter-api-fields-as-crowdsourced/wiki  
+- http://support.gnip.com/sources/twitter/data_format.html  

@@ -1,5 +1,9 @@
 /* begin table creation */
 
+CREATE DATABASE aja;
+USE aja;
+SHOW DATABASES;
+
 create table department
  (dept_id smallint unsigned not null auto_increment,
   name varchar(20) not null,

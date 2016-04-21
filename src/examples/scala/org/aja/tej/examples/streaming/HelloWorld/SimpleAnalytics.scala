@@ -18,8 +18,7 @@ prints the results for each batch in a DStream
 object SimpleAnalytics {
 
   def main(args: Array[String]): Unit = {
-    val ssc = new StreamingContext("local[2]",
-      "First Streaming App", Seconds(10))
+    val ssc = new StreamingContext("local[2]", "First Streaming App", Seconds(5))
     val stream = ssc.socketTextStream("localhost", 9999)
     // create stream of events from raw text elements
     val events = stream.map { record =>
@@ -28,15 +27,16 @@ object SimpleAnalytics {
       //(user, product, price)
     }
 
-    /*
-We compute and print out stats for each batch.
-Since each batch is an RDD, we call forEeachRDD on the
-DStream, and apply the usual RDD functions
-we used in Chapter 1.
-*/
+
+    //We compute and print out stats for each batch.
+    //Since each batch is an RDD, we call forEeachRDD on the
+    //DStream, and apply the usual RDD functions
+    //we normally use
+
     events.foreachRDD { (rdd, time) =>
       val numPurchases = rdd.count()
-      val uniqueUsers = rdd.map { case (user, _, _) => user
+      val uniqueUsers = rdd.map {
+        case (user, _, _) => user
       }.distinct().count()
 
       val totalRevenue = rdd.map { case (_, _, price) =>
@@ -54,8 +54,8 @@ we used in Chapter 1.
       println(s"== Batch start time: $dateStr ==")
 
       println("Total purchases: " + numPurchases)
-      println("Unique users: " + uniqueUsers)
-      println("Total revenue: " + totalRevenue)
+      println("Unique users: "    + uniqueUsers)
+      println("Total revenue: "   + totalRevenue)
       println("Most popular product: %s with %d purchases".format(mostPopular._1, mostPopular._2))
     }
     // start the context

@@ -36,13 +36,10 @@ object PopularTags {
 
     val twitterStream = TwitterUtils.createStream(ssc, TejTwitterUtils.getAuth)
 
-    val hashTags = twitterStream.flatMap(status => status.getText.split(" ")).filter(_.startsWith("#"))
+    val hashTags = twitterStream.flatMap(status => status.getText.split(" "))
+      .filter(_.startsWith("#"))
 
     val topCountdFor60Secs = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(60))
-      .map{case (topic, count) => (count, topic)}
-      .transform(_.sortByKey(false))
-
-    val topCountsFor10Seconds = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(10))
       .map{case (topic, count) => (count, topic)}
       .transform(_.sortByKey(false))
 
@@ -50,12 +47,6 @@ object PopularTags {
     topCountdFor60Secs.foreachRDD(rdd => {
       val topList = rdd.take(5)
       println("\nPopular topics in last 60 seconds (%s total):".format(rdd.count()))
-      topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
-    })
-
-    topCountsFor10Seconds.foreachRDD(rdd => {
-      val topList = rdd.take(5)
-      println("\nPopular topics in last 10 seconds (%s total):".format(rdd.count()))
       topList.foreach{case (count, tag) => println("%s (%s tweets)".format(tag, count))}
     })
 

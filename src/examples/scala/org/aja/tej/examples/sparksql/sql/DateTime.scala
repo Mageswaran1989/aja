@@ -8,8 +8,8 @@ import org.apache.spark.sql.types._
 import org.apache.spark.{SparkContext, SparkConf}
 
 /**
- * Created by mageswaran on 24/1/16.
- */
+  * Created by mageswaran on 24/1/16.
+  */
 object DateTime extends  App{
 
   val sc = TejUtils.getSparkContext(this.getClass.getSimpleName)
@@ -50,6 +50,13 @@ object DateTime extends  App{
 
   println("*** Here's the whole table")
   sqlContext.sql("SELECT * FROM dates_times").show()
+  //  +---+----------+--------------------+
+  //  | id|        dt|                  ts|
+  //  +---+----------+--------------------+
+  //  |  1|2000-01-11|2011-10-02 09:48:...|
+  //  |  1|2004-04-14|2011-10-02 12:30:...|
+  //  |  1|2008-12-31|2011-10-02 15:00:...|
+  //  +---+----------+--------------------+
 
   println("*** Query for a date range")
   sqlContext.sql(
@@ -66,5 +73,4 @@ object DateTime extends  App{
        |  WHERE ts < cast('2011-10-02 12:00:00' as timestamp)
        |     OR ts > cast('2011-10-02 13:00:00' as timestamp)
        """.stripMargin).show()
-
 }

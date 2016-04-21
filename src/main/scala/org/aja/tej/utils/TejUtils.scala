@@ -6,14 +6,15 @@ import org.apache.spark.{SparkContext, SparkConf}
 /**
  * Created by mageswaran on 26/7/15.
  */
+
 object TejUtils {
 
   def getSparkContext(applicationName: String, master: String = "local[4]") = {
     val conf = new SparkConf()
       .setAppName(applicationName)
       .setMaster(master /*"spark://myhost:7077"*/)
-//      .set("spark.ui.port","7077")
-//    .set("spark.driver.host","localhost")
+    //      .set("spark.ui.port","7077")
+    //    .set("spark.driver.host","localhost")
     new SparkContext(conf)
   }
 
@@ -72,28 +73,28 @@ object TejUtils {
   //  val tpe = typeOf[className]
   //  tpe.baseClasses foreach { s => println(s.fullName) }
 
-//  sys.ShutdownHookThread {
-//    logInfo("Gracefully stopping StreamingApp")
-//    scc.stop(true, true)
-//    logInfo("StreamingApp stopped")
-//
-//  val shutdownHook = scala.sys.addShutdownHook {
-//    try {
-//
-//      sparkContext.stop()
-//      //Make sure to kill any other threads or thread pool you may be running
-//    }
-//    catch {
-//      case e: Exception =>
-//      {
-//        ...
-//
-//      }
-//    }
-//
-//  }
+  //  sys.ShutdownHookThread {
+  //    logInfo("Gracefully stopping StreamingApp")
+  //    scc.stop(true, true)
+  //    logInfo("StreamingApp stopped")
+  //
+  //  val shutdownHook = scala.sys.addShutdownHook {
+  //    try {
+  //
+  //      sparkContext.stop()
+  //      //Make sure to kill any other threads or thread pool you may be running
+  //    }
+  //    catch {
+  //      case e: Exception =>
+  //      {
+  //        ...
+  //
+  //      }
+  //    }
+  //
+  //  }
 
-//}
+  //}
 
 
 }

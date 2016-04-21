@@ -1,5 +1,7 @@
 package org.aja.tej.examples.sparksql.dataframe
 
+import org.aja.tej.examples.sparksql.datasets.DataFrameEnv
+
 import scala.util.Random
 
 /**
