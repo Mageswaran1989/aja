@@ -17,8 +17,9 @@ object HelloNeo4j extends App {
   // Provide an ExecutionContext
   implicit val ec = scala.concurrent.ExecutionContext.global
 
+  val someString = "SomeString"
   // create some test nodes
-  Cypher("""create (anorm {name:"AnormCypher"}), (test {name:"Test"})""").execute()
+  Cypher(s"""create (anorm {name:"Node-1: Aja"}), (test {name:"Node 2: ${someString}"})""").execute()
 
   // a simple query
   val req = Cypher("start n=node(*) return n.name")

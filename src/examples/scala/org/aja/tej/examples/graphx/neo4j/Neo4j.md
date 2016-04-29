@@ -6,7 +6,11 @@ echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee -a /etc/apt/sources.l
 sudo apt-get update && sudo apt-get install neo4j
 
 sudo service neo4j-service (stop|start|restart)
+http://localhost:7474/browser/
 
+#Password
+:server connect
+:server change-password
 
 #Editor 
 http://127.0.0.1:7474
