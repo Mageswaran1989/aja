@@ -1,5 +1,6 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.examples.spark.rdd.summarizationPatterns.CombineByKeyExample
 import org.aja.tej.utils.TejUtils._
 import org.apache.spark.SparkContext
 

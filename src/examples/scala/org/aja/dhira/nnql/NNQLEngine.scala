@@ -21,12 +21,15 @@ class NNQLParser extends Actor {
   var exit = false
   var manipulate: Thread = null
   override def receive: Receive = {
-    case "create" | "CREATE" => i = 5
+    case "create" | "CREATE" => NNQLServer.start()
     case "start" | "START" => {
       manipulate = new Thread(new Runnable {
         override def run(): Unit = {
+
+          exit = false
           while(!exit) {
-            i = i + 0.001
+            i = i + 1
+            Thread.sleep(1000)
           }
         }
       })
@@ -45,7 +48,7 @@ object NNQLEngine {
   object IntrupterThread extends Runnable {
     override def run(): Unit = {
       while (true) {
-        System.out.print("nnql >> ")
+        System.out.print("nnql-server >> ")
         val br: BufferedReader = new BufferedReader(new InputStreamReader(System.in));
         val input: String = br.readLine();
         nnqlParser ! input

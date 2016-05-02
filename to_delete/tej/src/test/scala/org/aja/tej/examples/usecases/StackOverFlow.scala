@@ -5,6 +5,8 @@ package org.aja.tej.examples.usecases
  */
 import java.io.File
 
+import org.aja.tej.examples.dataset.hetrogenity_activity_recognition
+import org.aja.tej.examples.dataset.hetrogenity_activity_recognition.StackTable
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 
@@ -61,12 +63,12 @@ abstract class StackTable[T] {
 
 }
 
-object Post extends StackTable[Post] {
+object Post extends StackTable[hetrogenity_activity_recognition.Post] {
 
   val file = new File("data/datascience.stackexchange.com/Posts.xml")
   assert(file.exists)
   //Update the get methods with repect to the readme.txt of stackoverflow dataset
-  override def parseXml(x: scala.xml.Elem): Post = Post(
+  override def parseXml(x: scala.xml.Elem): hetrogenity_activity_recognition.Post = hetrogenity_activity_recognition.Post(
     getInt(x \ "@Id"),
     getInt(x \ "@PostTypeId"),
     getInt(x \ "@ParentID"),
@@ -99,11 +101,11 @@ object StackOverFlow extends App {
 
   val sc = new SparkContext("local", "Main")
   val minSplits = 1
-  val jsonData = sc.textFile(Post.file.getAbsolutePath, minSplits)
-  val objData = jsonData.flatMap(Post.parse)
+  val jsonData = sc.textFile(hetrogenity_activity_recognition.Post.file.getAbsolutePath, minSplits)
+  val objData = jsonData.flatMap(hetrogenity_activity_recognition.Post.parse)
   objData.cache
 
-  var query: RDD[Post] = objData
+  var query: RDD[hetrogenity_activity_recognition.Post] = objData
 
   query.take(20).foreach(post => if(post.tags.length > 0) println(post.tags(0)))
 
@@ -128,7 +130,7 @@ object StackOverFlow extends App {
         }
         case c if c.startsWith("d:") => {
           //filter for posts that are within the date range
-          val d = c.drop(2).split(",").map(i => Post.dateFormat.parse(i + "T00:00:00.000").getTime)
+          val d = c.drop(2).split(",").map(i => hetrogenity_activity_recognition.Post.dateFormat.parse(i + "T00:00:00.000").getTime)
           query = query.filter(n => n.creationDate >= d(0) && n.creationDate < d(1))
           true
         }
