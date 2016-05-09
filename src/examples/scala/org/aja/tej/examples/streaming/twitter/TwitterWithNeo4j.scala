@@ -8,6 +8,8 @@ import org.apache.spark.streaming.twitter.TwitterUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import play.api.libs.ws.ning
 
+import scala.collection.mutable
+
 /**
  * Created by mageswaran on 24/4/16.
  */
@@ -18,6 +20,30 @@ import play.api.libs.ws.ning
 --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
 --accessTokenSecret GOWRqKf1EDjxjPSoOAuazefweKdJgidvNQBvTpri7TEd5
 */
+
+//case class HashTag(tag: String)
+
+case class UserTag(name: String, tag: String, location: String) {
+
+  def executeCQL = {
+    println("executing CQL : " )
+    println(s"""CREATE(u:USER {name:'${name}'}) -[:TWEETS]-> (t:TAG {name:'${tag}'})""")
+    println(s"""CREATE(u:USER {name:'${name}'}) -[:LOCATION]-> (t:LOCATION{name:'${location}'})""")
+
+    implicit val wsclient = ning.NingWSClient()
+
+    // Setup the Rest Client
+    implicit val connection = Neo4jREST("localhost", 7474, "/db/data/", "neo4j", "aja")//Neo4jREST()(wsclient)
+
+    // Provide an ExecutionContext
+    implicit val ec = scala.concurrent.ExecutionContext.global
+
+//    CREATE(u:USER{name:'Lalita de corazón'})-[:TWEETS]->(t:Location{name:'SoyLali40GlobalShow'})
+    Cypher(s"""CREATE(u:USER {name:'${name}'}) -[:TWEETS]-> (t:TAG {name:'${tag}'})""").execute()
+    Cypher(s"""CREATE(u:USER {name:'${name}'}) -[:LOCATION]-> (t:LOCATION{name:'${location}'})""").execute()
+  }
+}
+
 object TwitterWithNeo4j {
 
   var count = 0L
@@ -41,18 +67,6 @@ object TwitterWithNeo4j {
     val twitterStream = TwitterUtils.createStream(ssc, TejTwitterUtils.getAuth)
       .map(gson.toJson(_)) //Disable this and see the raw data
 
-    def neoFuc(user: String) = {
-      // Provide an instance of WSClient
-      implicit val wsclient = ning.NingWSClient()
-
-      // Setup the Rest Client
-      implicit val connection = Neo4jREST("localhost", 7474, "/db/data/", "neo4j", "aja")//Neo4jREST()(wsclient)
-
-      // Provide an ExecutionContext
-      implicit val ec = scala.concurrent.ExecutionContext.global
-
-      Cypher(s"""create (USER {name:"${user}"})""").execute()
-    }
 
     //**************Streaming Processing********************//
     //Each RDD can have either 0 or N tweets, since each stream is an continuous sequence of RDD
@@ -74,14 +88,13 @@ object TwitterWithNeo4j {
       println("1.>>>>>>>>>>>" + " Count: " + count + " Size: " + rdd.count() )
 
       try {
-        println("2.>>>>>>>>>>> User Name")
 
-        val users = df.select("user.name").rdd.map(r => r(0).asInstanceOf[String])
+        val users = df.select("user.name", "hashtagEntities", "user.location").explode($"hashtagEntities"){
+          //case Row(hashtags: mutable.WrappedArray[String]) => println(hashtags); hashtags.map(HashTag(_))
+          case Row(hashtags: Seq[Row]) => hashtags.map(tagRow => HashTag(tagRow(2).asInstanceOf[String]))
+        }.select("name", "tag", "location").rdd.map(r =>
+          UserTag(r(0).asInstanceOf[String],r(1).asInstanceOf[String],r(2).asInstanceOf[String])).foreach(_.executeCQL)
 
-        users.foreach(user => {
-          // create some test nodes
-          neoFuc(user)
-        })
       } catch {
         case e: AnalysisException =>
           println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! Something wrong with incoming tweet !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + e.toString)

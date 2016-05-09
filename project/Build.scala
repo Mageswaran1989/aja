@@ -22,18 +22,6 @@ object BuildSettings {
 }
 
 object Resolvers {
-  //  "Twitter4J Repository" at "http://twitter4j.org/maven2/"
-  //  "JBoss Repository" at "http://repository.jboss.org/nexus/content/repositories/releases/",
-  //  "Spray Repository" at "http://repo.spray.cc/",
-  //  " loudera Repository" at "https://repository.cloudera.com/artifactory/cloudera-repos/",
-  //  "Akka Repository" at "http://repo.akka.io/releases/"
-  //  "Apache HBase" at "https://repository.apache.org/content/repositories/releases",
-  //  "Twitter Maven Repo" at "http://maven.twttr.com/",
-  //  "scala-tools" at "https://oss.sonatype.org/content/groups/scala-tools",
-  //  "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
-  //  "Second Typesafe repo" at "http://repo.typesafe.com/typesafe/maven-releases/",
-  //  "Mesosphere Public Repository" at "http://downloads.mesosphere.io/maven",
-  //  Resolver.sonatypeRepo("public")
   val typesafe      = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
   val sonatype      = "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
   val mvnrepository = "MVN Repo" at "http://mvnrepository.com/artifact"
@@ -45,7 +33,7 @@ object Resolvers {
 
 }
 
-//Dont use %% for thir party libraries for which appending Scala version might not help in fetching
+//Dont use %% for third party libraries for which appending Scala version might not help in fetching
 object Dependency {
   object Version {
     val Spark        = "1.6.0"
@@ -55,7 +43,6 @@ object Dependency {
     val Breeze       = "0.11.2"
     val Akka         = "2.4.0"
     val BreezeViz    = "0.12"
-    //    val scalaActors  = "2.11"
     val sparkCSV = "1.3.0"
     val sparkts  = "0.1.0"
     val neo4JScalaCypher = "0.8.1"
