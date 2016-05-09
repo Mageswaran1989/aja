@@ -1,5 +1,13 @@
 package org.aja.tej.examples.spark.rdd
 
+import org.aja.tej.examples.spark.rdd.counterPattern.Count
+import org.aja.tej.examples.spark.rdd.filterPatterns.{Distinct, Filter}
+import org.aja.tej.examples.spark.rdd.iteratorPattern.ForEachExample
+import org.aja.tej.examples.spark.rdd.joinPattern.{UnionExample, LeftOuterJoinExample, JoinExample, CoalesceRepartitionExample}
+import org.aja.tej.examples.spark.rdd.misc._
+import org.aja.tej.examples.spark.rdd.sorting.SortExample
+import org.aja.tej.examples.spark.rdd.summarizationPatterns._
+import org.aja.tej.examples.spark.rdd.transformerPattern.{FlatMapExample, MapExample}
 import org.aja.tej.utils.TejUtils._
 /**
  * Created by mageswaran on 12/8/15.

@@ -14,6 +14,19 @@ in following way:
 2. Places (key, value) in partition with number Hash(key) % numPartition
 
  */
+
+/*
+Why Use a Partitioner?
+In cluster computing, the central challenge is to minimize network traffic.
+When the data is key-value oriented, partitioning becomes imperative because
+for subsequent transformations on the RDD, there’s a fair amount of shuffling
+of data across the network. If similar keys or range of keys are stored in the
+same partition then the shuffling is minimized and the processing becomes substantially fast.
+
+Transformations that require shuffling of data across worker nodes greatly
+benefit from partitioning. Such transformations are cogroup, groupWith, join,
+leftOuterJoin, rightOuterJoin, groupByKey, reduceByKey, combineByKey andlookup.
+ */
 object HashPartitionerExample extends App {
 
   def useCases(sc: SparkContext): Unit = {

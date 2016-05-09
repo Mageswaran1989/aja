@@ -13,6 +13,7 @@ import scala.collection.mutable
  */
 
 /*
+25
 --consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw
 --consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3
 --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE
@@ -83,8 +84,8 @@ object PrintTweets {
       df.show()
 
       try {
-        println("5.>>>>>>>>>>> Hashtags")
-        df.select("hashtagEntities").foreach(println)
+        println("5.>>>>>>>>>>>User name and their #tags")
+        df.select("user.name", "hashtagEntities").foreach(println)
 
         println("6.>>>>>>>>>>> TagTabel")
         df.explode($"hashtagEntities"){
