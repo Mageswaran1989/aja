@@ -1,5 +1,0 @@
-[warn] There may be incompatibilities among your library dependencies.
-[warn] Here are some of the libraries that were evicted:
-[warn] 	* org.twitter4j:twitter4j-stream:1.5.0 -> 3.0.3
-[warn] 	* org.twitter4j:twitter4j-core:1.5.0 -> 3.0.3
-[warn] Run 'evicted' to see detailed eviction warnings
