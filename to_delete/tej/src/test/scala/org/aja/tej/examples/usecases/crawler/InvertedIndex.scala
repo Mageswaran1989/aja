@@ -1,4 +1,4 @@
-package org.aja.tej.examples.usecases.crawler
+package org.aja.tej.examples.spark.crawler
 
 import org.aja.tej.utils.{FileUtils, CommandLineOptions}
 import org.apache.spark.SparkContext

@@ -1,5 +1,6 @@
 package org.aja.tej.examples.usecases.wordcount
 
+import org.aja.tej.examples.spark.BibleWordCount
 import org.aja.tej.utils.TejUtils._
 
 /**

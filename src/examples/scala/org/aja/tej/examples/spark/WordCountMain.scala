@@ -1,11 +1,17 @@
-package org.aja.tej.examples.usecases.wordcount
+package org.aja.tej.examples.spark
 
-import org.apache.spark.SparkContext
 import org.aja.tej.utils.FileUtils
+import org.aja.tej.utils.TejUtils._
+import org.apache.spark.SparkContext
 
 /**
  * Created by mageswaran on 30/8/15.
  */
+
+/**
+ * All examples/exercises are executed/controlled from here
+ */
+
 object BibleWordCount {
 
   val inFile = "data/kjvdat.txt"
@@ -22,13 +28,13 @@ object BibleWordCount {
     sc.textFile(inFile) //Read the file as a Array of line
       .map(line => line.toLowerCase()) //Convert each line to lowercase
       .flatMap(line => line.split("""[^\p{IsAlphabetic}]+""")) //Split each line into Array[Strings],
-                    // therefore we get Arrray of Array[Strings], complex isn't? flatten it
+      // therefore we get Arrray of Array[Strings], complex isn't? flatten it
       .map(word => (word, 1))//Map each string/word to tuple of (xyz,1). Remember Hadoop Map
       .reduceByKey((count1, count2) => (count1 + count2)) //What comes after Map? Yes reduce!
-                                   // Add the values of same key or word
+      // Add the values of same key or word
       //.groupBy(tuple => tuple._2)   // group by the counts!
       .sortByKey()  //Sort the data
-    .saveAsTextFile(outDir) //Time to use our lazy Discs!
+      .saveAsTextFile(outDir) //Time to use our lazy Discs!
 
     //Lets do some analysis on the sorted data
     // Exercise: Take the output from the previous exercise and count the number
@@ -48,4 +54,21 @@ object BibleWordCount {
     //   frequently? What kind of distribution fits the counts (numbers)?
 
   }
+}
+
+object WordCountMain {
+
+  def main (args: Array[String]) {
+    val sc = getSparkContext("WordCountMain")
+
+    //try..finally block to make sure we close SparkContext no matter what happens
+    try {
+      BibleWordCount.run(sc)
+    } finally {
+      sc.stop()
+    }
+  }
+
+
+
 }

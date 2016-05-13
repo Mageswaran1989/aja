@@ -1,5 +1,6 @@
 package org.aja.tej.examples.usecases.matrix
 
+import org.aja.tej.examples.spark.Matrix
 import org.aja.tej.utils.CommandLineOptions
 import org.aja.tej.utils.CommandLineOptions.Opt
 import org.aja.tej.utils.FileUtils
