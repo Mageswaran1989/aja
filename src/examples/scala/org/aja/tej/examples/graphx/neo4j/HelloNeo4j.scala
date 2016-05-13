@@ -11,8 +11,8 @@ object HelloNeo4j extends App {
   // Provide an instance of WSClient
   implicit val wsclient = ning.NingWSClient()
 
-  // Setup the Rest Client
-  implicit val connection = Neo4jREST("localhost", 7474, "/db/data/", "neo4j", "aja")//Neo4jREST()(wsclient)
+  // Setup the Rest Client (Works in Ubuntu only!)
+  implicit val connection = Neo4jREST("localhost", 7474, "/db/data/", "neo4j", "aja")
 
   // Provide an ExecutionContext
   implicit val ec = scala.concurrent.ExecutionContext.global

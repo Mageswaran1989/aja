@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.HelloWorld
+package org.aja.tej.examples.streaming.helloWorld
 
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 

@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.HelloWorld.LR
+package org.aja.tej.examples.streaming.helloWorld.LR
 
 import breeze.linalg.DenseVector
 import org.apache.spark.mllib.linalg.Vectors

@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.HelloWorld
+package org.aja.tej.examples.streaming.helloWorld
 
 import java.text.SimpleDateFormat
 import java.util.Date

@@ -1,4 +1,4 @@
-package org.aja.tej.examples.streaming.HelloWorld.producer
+package org.aja.tej.examples.streaming.helloWorld.producer
 
 import java.io.PrintWriter
 import java.net.ServerSocket
