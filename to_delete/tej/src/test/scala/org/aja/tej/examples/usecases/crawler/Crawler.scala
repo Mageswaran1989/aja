@@ -1,4 +1,4 @@
-package org.aja.tej.examples.usecases.crawler
+package org.aja.tej.examples.spark.crawler
 
 import java.io.{File, FilenameFilter}
 import org.aja.tej.utils.CommandLineOptions

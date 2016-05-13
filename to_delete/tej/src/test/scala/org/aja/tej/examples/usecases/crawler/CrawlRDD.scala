@@ -1,4 +1,4 @@
-//package org.aja.tej.examples.usecases.crawler
+//package org.aja.tej.examples.spark.crawler
 //
 //import org.apache.spark.rdd.RDD
 //import org.apache.spark.{Partition, TaskContext, SparkContext, SparkConf}

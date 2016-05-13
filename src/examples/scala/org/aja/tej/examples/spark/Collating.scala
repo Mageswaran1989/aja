@@ -1,4 +1,4 @@
-package org.aja.tej.examples.usecases.map.reduce
+package org.aja.tej.examples.spark
 
 import org.aja.tej.utils.TejUtils
 
