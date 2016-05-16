@@ -1,4 +1,4 @@
-package org.aja.tej.examples.dataset
+package org.aja.dataset
 
 import org.apache.spark.SparkContext
 import org.apache.spark.graphx._

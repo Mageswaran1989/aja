@@ -1,7 +1,7 @@
 package org.aja.tej.examples.graphx
 
-import org.aja.tej.examples.dataset.FlavorNetworkDS.FNNode
-import org.aja.tej.examples.dataset.{FlavorNetworkDS, SocialEgoDS}
+import org.aja.dataset.FlavorNetworkDS.FNNode
+import org.aja.dataset.{FlavorNetworkDS, SocialEgoDS}
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.graphx._
 

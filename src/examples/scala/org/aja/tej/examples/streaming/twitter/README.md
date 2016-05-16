@@ -60,4 +60,14 @@ Spark Streaming and Spark MLLib are used to filter a live stream of Tweets for t
 
 ##Schema
 - https://github.com/episod/twitter-api-fields-as-crowdsourced/wiki  
-- http://support.gnip.com/sources/twitter/data_format.html  
+- http://support.gnip.com/sources/twitter/data_format.html
+  
+  
+#Package to hold examples related to Spark Streaming Library
+
+#Examples
+----------
+  
+|Program   | Description  |Run Command|
+|:---------|:------------:| |
+|TwitterWithNeo4j | Creates some nodes and relationship to play with Cypher|run-main org.aja.tej.examples.streaming.twitter.TwitterWithNeo4 20 --consumerKey yM4CdwtCfDcs6OtEfrPUFLnPw  --consumerSecret k1QEczYNMKXZYFOhPB18Jtyde6uK9dKrB7PAOmM3oouhWlmRZ3  --accessToken 68559516-eoQTbOt4sOpJCHiGnKll8DGW4ihXpmPf0u2xwXLwE --accessTokenSecret GOWRqKf1EDjxjPSoOAuazefweKdJgidvNQBvTpri7TEd5|

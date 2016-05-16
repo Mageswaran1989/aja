@@ -1,6 +1,6 @@
 package org.aja.tej.examples.spark.rdd.counterPattern
 
-import org.aja.tej.examples.dataset.StackOverFlowDS
+import org.aja.dataset.StackOverFlowDS
 import org.aja.tej.utils.TejUtils
 
 /**
