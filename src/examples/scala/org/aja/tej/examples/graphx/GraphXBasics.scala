@@ -1,6 +1,6 @@
 package org.aja.tej.examples.graphx
 
-import org.aja.tej.examples.dataset.{SocialEgoDS, FlavorNetworkDS, EnrollEmailDS, TinySocialGraphDS}
+import org.aja.dataset.{SocialEgoDS, FlavorNetworkDS, EnrollEmailDS, TinySocialGraphDS}
 import org.aja.tej.utils.TejUtils
 import org.apache.spark.graphx.{Graph, VertexId}
 import org.apache.spark.rdd.RDD

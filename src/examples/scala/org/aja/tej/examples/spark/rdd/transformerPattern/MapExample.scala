@@ -100,17 +100,6 @@ object MapExample  extends App {
     val b3 = a3 . map ( x => ( x . length , x ) )
     b3 . mapValues (" x " + _ + " x ") . collect
 
-
-    val x3 = sc . parallelize ( List (1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10) , 3)
-    x3 . mapWith ( a => a * 10) (( a , b ) => ( b + 2) ) . collect
-
-    val x4 = sc . parallelize ( List (1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10) , 3)
-    x4 . mapWith ( a => a * 10) (( a , b ) => ( a + 2) ) . collect
-
-    val a4 = sc . parallelize (1 to 9 , 3)
-    val b4 = a4 . mapWith (" Index :" + _ ) (( a , b ) => (" Value :" + a , b ) )
-    b4 . collect
-
     mapPartition(sc)
     mapPartitionWithIndex(sc)
 

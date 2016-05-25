@@ -1,4 +1,4 @@
-package org.aja.tej.examples.dataset
+package org.aja.dataset
 
 /**
  * Created by mdhandapani on 29/7/15.
@@ -7,7 +7,7 @@ import java.io.File
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
-import org.aja.tej.examples.dataset.StackOverFlowDS._
+import org.aja.dataset.StackOverFlowDS._
 
 
 object StackOverFlow extends App {
