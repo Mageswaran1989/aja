@@ -51,14 +51,16 @@ class NNQLClient(remote: InetSocketAddress, listener: ActorRef) extends Actor {
 }
 
 
-class ClientUser extends Actor {
+class NNQLParser extends Actor {
   override def receive: Receive = {
-    case data1:String => println(data1)
+    case receviedString:String => println("receviedString :" + receviedString)
+      val connection = sender()
+      connection ! ByteString(receviedString)
     case data: ByteString => println("received data from server: " + data.utf8String);
     case Received(data) => println("Received")
     case c @ Connected(remote, local) =>
+      println("Server is up and connected...")
       val connection = sender()
-      //connection ! ByteString("hello world")
       connection ! ByteString("create")
     case x => println("Got Some data -> " + x)
   }

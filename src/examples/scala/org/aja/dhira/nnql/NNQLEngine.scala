@@ -11,47 +11,22 @@ import akka.actor.{Props, ActorSystem, Actor}
 import akka.actor.Actor.Receive
 import akka.util.ByteString
 
+import scala.sys.SystemProperties
 import scala.tools.scalap.scalax.rules.Error
 import scala.util.Failure
 
+import scala.tools.nsc.Settings
+import scala.tools.nsc.interpreter.ILoop
+
 /**
- * Created by mageswaran on 29/4/16.
- */
-
-class NNQLParser extends Actor {
-  var i = 0d
-  var exit = false
-  var manipulate: Thread = _
-  override def receive: Receive = {
-    case "create" | "CREATE" => println("...")//NNQLServer.start()
-    case "start" | "START" => {
-      manipulate = new Thread(new Runnable {
-        override def run(): Unit = {
-
-          exit = false
-          while(!exit) {
-            i = i + 1
-            Thread.sleep(1000)
-          }
-        }
-      })
-      manipulate.start()
-    }
-    case "print" | "PRINT" => println("Value of i is: " + i)
-    case "stop" => exit = true
-    case "exit" | "EXIT" => context stop self
-    case "shutdown" | "SHUTDOWN" => System.exit(0)
-  }
-}
+  * Created by mageswaran on 29/4/16.
+  */
 
 object NNQLEngine {
 
   implicit val consoleReader = new jline.console.ConsoleReader()
   //Creates a actor system
   val system =  ActorSystem("NNQLEngine")
-
-  //Creates a actor or a actor handle to send message
-  val nnqlParser = system.actorOf(Props[NNQLParser])
 
   sealed trait JLineEvent
   case class Line(value: String) extends JLineEvent
@@ -63,7 +38,7 @@ object NNQLEngine {
     var finished = false
     while (!finished) {
       consoleReader.setPrompt("nnql> ");
-      val line = consoleReader.readLine()
+      val line = consoleReader.readLine("nnql> ")
       if (line == null) {
         finished = handler(EOF)
       } else if (line.size == 0) {
@@ -72,47 +47,36 @@ object NNQLEngine {
         finished = handler(Line(line))
       }
     }
+    System.exit(0)
   }
 
   object IntrupterThread extends Runnable {
     override def run(): Unit = {
-        console {
-          case EOF =>
-            consoleReader.println("Ctrl-d")
-            nnqlParser ! "exit"
-            true
-          case Line(s) if s == "q" =>
-            nnqlParser ! "shutdown"
-            true
-          case Line(s) =>
-            nnqlParser ! s
-            false
-          case _ =>
-            false
-        }
 
+      val server = system.actorOf(Props(new NNQLServer("localhost", 7890)))
+      val clientUser = system.actorOf(Props(new NNQLParser))
+      val client = system.actorOf(Props(new NNQLClient(new InetSocketAddress("localhost", 7890), clientUser)))
 
+      console {
+        case EOF =>
+          consoleReader.println("Ctrl-d")
+          clientUser ! "stop"
+          true
+        case Line(s) if s == "quit" =>
+          clientUser ! "stop"
+          true
+        case Line(s) =>
+          println("Initiating client actor to process: " + s)
+          clientUser ! s
+          false
+        case _ =>
+          false
+      }
     }
   }
 
   def main(args: Array[String]) {
-        val newThread = new Thread(IntrupterThread)
-        newThread.run()
-    //    val server = system.actorOf(Props(new NNQLServer("localhost", 9999)))
-    //
-    //    val clientUser = system.actorOf(Props(new ClientUser))
-    //
-    //    val client = system.actorOf(Props(new NNQLClient(new InetSocketAddress("localhost", 9999), clientUser)))
-
-
-
-    //    scala.io.StdIn.readLine(s"Hit ENTER to exit ...${System.getProperty("line.separator")}")
-    //    system.terminate()
+    val newThread = new Thread(IntrupterThread)
+    newThread.run()
   }
 }
-
-
-//https://github.com/p3t0r/scala-sql-dsl/blob/master/src/main/scala/com/log4p/sqldsl/AnsiSqlRenderer.scala
-//https://ivanyu.me/blog/2015/10/18/type-safe-query-builders-in-scala/
-//http://daily-scala.blogspot.in/2010/01/regular-expression-1-basics-and.html
-//http://www.tutorialspoint.com/scala/scala_regular_expressions.htm
