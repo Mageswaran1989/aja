@@ -8,6 +8,7 @@ import org.apache.spark.streaming.twitter.TwitterUtils
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import play.api.libs.ws.ning
 
+
 /**
  * Created by mageswaran on 15/5/16.
  */
@@ -234,10 +235,16 @@ object Neo4jConnector {
         partitionOfRecords.foreach(tweet => {
           //InsertEachTweetToGraphDB.executeCQL(_)
           import play.api.libs.json._
+          import scala.util.parsing.combinator._
 
           val jsonTweet = Json.parse(tweet)
 
-          val tId = (jsonTweet \"user" \ "id").as[Long]
+          def filterName(name:String) = {
+            val nameParser = """[^0-9a-zA-Z- ]g""".r
+            nameParser.replaceAllIn(name, " ")
+          }
+
+          val uId = (jsonTweet \"user" \ "id").as[Long]
           val userName = (jsonTweet \ "user" \ "name").as[String]
           val userScreenName = (jsonTweet \"user" \ "screenName").as[String]
           val hashTagsArray = (jsonTweet \ "hashtagEntities").as[JsArray]
@@ -252,8 +259,8 @@ object Neo4jConnector {
 
 
           val userCQL =
-            s"""MERGE (u:TestUser {uId: '${tId}',
-               |uName: '${userName.replace("'", "`")}',
+            s"""MERGE (u:TestUser {uId: '${uId}',
+               |uName: "${userName}",
                |screenName : '${userScreenName}',
                |favouritesCount : '${userFavouritesCount}',
                |statusesCount : '${userStatusesCount}',
@@ -268,14 +275,14 @@ object Neo4jConnector {
           if (!userHashTags.isEmpty) {
             userHashTags.foreach(tag => {
               val tagCQL =
-                s"""MERGE (t:Tag {tName: '${tag}'})
-                   |MATCH (u:TestUser {uId: '${tId}'})
+                s"""MATCH (u:TestUser {uId: '${uId}'})
+                   |MERGE (t:Tag {tName: '${tag}'})
                    |MERGE (u)-[:TWEETS_ON_TAG]-> (t)
                  """.stripMargin
 
-              println(tagCQL)
               if (!Cypher(tagCQL).execute())  {
                 println(tagCQL)
+                println(tag)
                 println("tagCQL failed to execute!")
                 System.exit(-1)
               }
@@ -296,14 +303,14 @@ object Neo4jConnector {
 
             val placeCQL =
               s"""MERGE (l:TestPlace {pId: '${pId}',
-                 |pName: '${placeName}',
+                 |pName: "${placeName}",
                  |placeCountryCode : '${placeCountryCode}',
                  |placeCountry : '${placeCountry}',
                  |placePlaceType : '${placePlaceType}',
                  |placeFullName : '${placeFullName}',
                  |geoLocationLatitude : '${geoLocationLatitude}',
                  |geoLocationLongitude : '${geoLocationLongitude}'})
-                 |MATCH ((u:TestUser {uId: '${tId}'})
+                 |MATCH (u:TestUser {uId: '${uId}'})
                  |MERGE (u) -[:LIVES_IN]-> (l)""".stripMargin
 
 
@@ -324,8 +331,8 @@ object Neo4jConnector {
 
 
             val replyCQL =
-              s"""MATCH ((u2:TestUser {uId: '${tId}'})
-                 |MATCH ((u1:TestUser {uId: '${inReplyToUserId}'})
+              s"""MATCH (u2:TestUser {uId: '${uId}'})
+                 |MATCH (u1:TestUser {uId: '${inReplyToUserId}'})
                  |MERGE (u1) -[:REPLYS_TO]-> (u2)""".stripMargin
 
             if (!Cypher(replyCQL).execute()) {

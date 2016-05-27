@@ -1,11 +1,14 @@
 package org.aja.dhira.nnql
 
 import scala.util.parsing.combinator._
-import scala.util.matching.Regex
+
 /**
  * Created by mageswaran on 29/4/16.
  */
 
+object Lexer {
+  //Tokenizer
+}
 /**
  * [a-z]+ word
  */
