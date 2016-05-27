@@ -18,17 +18,7 @@ object QLParser extends RegexParsers {
 
   private def number = """^\d*\.?\d+$""".r ^^ {_.toInt}
   def parseNumber(str: String): ParseResult[Any] = parse(number, str)
+
 }
 
 
-
-//    QLParser.parseWord("""create layer "L1" with 5 neurons""") match {
-//      case QLParser.Success(result, _) => println(result.toString)
-//      case _ => println("Could not parse the input string.")
-//    }
-//
-//    QLParser.parseNumber("""create layer "L1" with 5 neurons""") match {
-//      case QLParser.Success(result, _) => println(result.toString)
-//      case QLParser.Failure(msg,_) => println("FAILURE: " + msg)
-//      case QLParser.Error(msg,_) => println("ERROR: " + msg)
-//    }

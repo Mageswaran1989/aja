@@ -7,12 +7,33 @@ import java.net.InetSocketAddress
 
 class SimplisticHandler extends Actor {
   import Tcp._
+  var i = 0d
+  var exit = false
+  var manipulate: Thread = _
   def receive = {
     case Received(data) =>  data.utf8String match {
-      case "create" | "CREATE" => sender() ! Write(ByteString("New thread started"))
+//      case "create" | "CREATE" => sender() ! Write(ByteString("Handler started"))
+//      case "start" | "START" => {
+      case "create" | "CREATE" => {
+        println("New Start started")
+        sender() ! Write(ByteString("Handler started"))
+        manipulate = new Thread(new Runnable {
+          override def run(): Unit = {
+
+            exit = false
+            while(!exit) {
+              i = i + 1
+              Thread.sleep(1000)
+            }
+          }
+        })
+        manipulate.start()
+      }
+      case "print" | "PRINT" => println("Value of i is: " + i)
+      case "stop" | "STOP" => exit = true; context stop self
       case _ => print(data.utf8String); sender() ! Write(data)
     }
-    case PeerClosed     => context stop self
+    case PeerClosed => println("peer closed"); context stop self
   }
 }
 
@@ -36,33 +57,3 @@ class NNQLServer(hostAddress: String, port: Int) extends Actor {
   }
 
 }
-
-
-
-
-
-
-
-//import java.net.{Socket, ServerSocket}
-
-/**
- * Created by mageswaran on 1/5/16.
- */
-//object NNQLServer extends Thread("Server") {
-//
-//  val serverSocket = new ServerSocket(4567)
-//  override def run(): Unit = {
-//    // This will block until a connection comes in.
-//    val socket = serverSocket.accept()
-//    new Thread(new HandlerE(socket))
-//  }
-//}
-//
-//class HandlerE(socket: Socket) extends Runnable {
-//  def message = (Thread.currentThread.getName() + "\n").getBytes
-//
-//  def run() {
-//    socket.getOutputStream.write(message)
-//    socket.getOutputStream.close()
-//  }
-//}
