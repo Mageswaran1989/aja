@@ -1,3 +1,3 @@
 import javax.annotation.RegEx
+import scala.util.parsing.combinator._
 
-val r = new Regex("""\W""")
