@@ -68,11 +68,11 @@
 - RDDs (Resilient Distributed Datasets)
 - Functional Programming in Spark
 
-#### Working with RDDs in Spark
+####[Working with RDDs in Spark](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/spark)
 - Creating RDDs
 - Other General RDD Operations
 
-#### Aggregating Data with Pair RDDs
+####[Aggregating Data with Pair RDDs](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/spark)
 - Key-Value Pair RDDs
 - Map-Reduce
 - Other Pair RDD Operations
@@ -100,13 +100,11 @@
 - RDD Persistence Overview
 - Distributed Persistence
 
-#### Basic Spark Streaming
+####[Spark Streaming](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/streaming)
 - Spark Streaming Overview
 - Example: Streaming Request Count
 - DStreams
 - Developing Spark Streaming Applications
-
-####Advanced Spark Streaming
 - Multi-Batch Operations
 - State Operations
 - Sliding Window Operations
@@ -125,7 +123,7 @@
 - Common Performance Issues
 - Diagnosing Performance Problems
 
-#### Spark SQL and DataFrames
+####[Spark SQL and DataFrames](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/sparksql)
 - Spark SQL and the SQL Context
 - Creating DataFrames
 - Transforming and Querying DataFrames
@@ -133,6 +131,18 @@
 - DataFrames and RDDs
 - Comparing Spark SQL, Impala and Hive-on-Spark
 
+####Spark Machine Learning
+- [MLLib](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/mllib)
+- [ML](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/ml)
+
+####GraphX
+- [Basics](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/ml)
+- [Neo4j](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/graphx/neo4j)
+
+
+##Data Science
+--------------
+####[Machine Learning in Scala](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples/ml)
 
 ---------------------------------------------------------------------------------
 
