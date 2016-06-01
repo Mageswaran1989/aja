@@ -4,11 +4,12 @@
 -------------------------------------
 
 ###Topics Explored
-- Scala ~ [Tantra ](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples)
-- Spark ~ [Tej](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples)
+- Scala ~ [Tantra ](src/examples/scala/org/aja/tantra/examples)
+- Spark ~ [Tej](src/examples/scala/org/aja/tej/examples)
 - Data Science
+- Build tool called SBT 
 
-###[Introduction to Scala](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples)
+###[Introduction to Scala](src/examples/scala/org/aja/tantra/examples)
 ------------------------
 
 ####Basics
@@ -27,7 +28,7 @@
 - Arrays and Array Buffers
 - Map's, Tuples and Lists
 
-####[Object Oriented Programming in Scala](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples/classes)
+####[Object Oriented Programming in Scala](src/examples/scala/org/aja/tantra/examples/classes)
 - Implementing Classes
 - Implementing Getter & Setter
 - Object & Object Private Fields
@@ -42,7 +43,7 @@
 - Casting
 - Abstract Classes
 
-####[Functional Programming in Scala](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples/fp)
+####[Functional Programming in Scala](src/examples/scala/org/aja/tantra/examples/fp)
 - Understanding Functional programming in Scala
 - Implementing Traits
 - Layered Traits
@@ -52,10 +53,10 @@
 - Closures and Currying
 - Performing File Processing
 
-####[Breeze ~ Linear Algebra](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples/breeze)
+####[Breeze ~ Linear Algebra](src/examples/scala/org/aja/tantra/examples/breeze)
 
-###[Introduction to Spark](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples)
-------------------------
+###[Introduction to Spark](src/examples/scala/org/aja/tej/examples)
+--------------------------
 
 #### What is Spark?
 - Review: From Hadoop MapReduce to Spark
@@ -68,11 +69,11 @@
 - RDDs (Resilient Distributed Datasets)
 - Functional Programming in Spark
 
-####[Working with RDDs in Spark](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/spark)
+####[Working with RDDs in Spark](src/examples/scala/org/aja/tej/examples/spark)
 - Creating RDDs
 - Other General RDD Operations
 
-####[Aggregating Data with Pair RDDs](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/spark)
+####[Aggregating Data with Pair RDDs](src/examples/scala/org/aja/tej/examples/spark)
 - Key-Value Pair RDDs
 - Map-Reduce
 - Other Pair RDD Operations
@@ -100,7 +101,7 @@
 - RDD Persistence Overview
 - Distributed Persistence
 
-####[Spark Streaming](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/streaming)
+####[Spark Streaming](src/examples/scala/org/aja/tej/examples/streaming)
 - Spark Streaming Overview
 - Example: Streaming Request Count
 - DStreams
@@ -123,7 +124,7 @@
 - Common Performance Issues
 - Diagnosing Performance Problems
 
-####[Spark SQL and DataFrames](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/sparksql)
+####[Spark SQL and DataFrames](src/examples/scala/org/aja/tej/examples/sparksql)
 - Spark SQL and the SQL Context
 - Creating DataFrames
 - Transforming and Querying DataFrames
@@ -132,17 +133,17 @@
 - Comparing Spark SQL, Impala and Hive-on-Spark
 
 ####Spark Machine Learning
-- [MLLib](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/mllib)
-- [ML](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/ml)
+- [MLLib](src/examples/scala/org/aja/tej/examples/mllib)
+- [ML](src/examples/scala/org/aja/tej/examples/ml)
 
 ####GraphX
-- [Basics](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/ml)
-- [Neo4j](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tej/examples/graphx/neo4j)
+- [Basics](src/examples/scala/org/aja/tej/examples/ml)
+- [Neo4j](src/examples/scala/org/aja/tej/examples/graphx/neo4j)
 
 
 ##Data Science
 --------------
-####[Machine Learning in Scala](https://github.com/Mageswaran1989/aja/tree/master/src/examples/scala/org/aja/tantra/examples/ml)
+####[Machine Learning in Scala](src/examples/scala/org/aja/tantra/examples/ml)
 
 ---------------------------------------------------------------------------------
 
