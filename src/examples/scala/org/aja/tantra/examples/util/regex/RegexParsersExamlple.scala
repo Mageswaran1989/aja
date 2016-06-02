@@ -4,6 +4,15 @@ package org.aja.tantra.examples.util.regex
 /**
   * Created by mageswaran on 28/5/16.
   */
+/*
+a ~ b parse a sequence made of a then b
+a | b introduce an alternative parser that parses a or b
+a? introduce an optional parser
+a* introduce on optional and repeatable parser
+a+ introduce a repeatable parser
+a ~> b like ~ but ignore the left member (a)
+a <~ b like ~ but ignore the right member (b)
+*/
 
 import scala.util.parsing.combinator._
 
@@ -58,6 +67,48 @@ object FormulaP extends JavaTokenParsers {
   def number:Parser[Double] = floatingPointNumber ^^ (_.toDouble) | "("~> addSub <~")"
 }
 
+case class Select(val fields: String*)
+case class From(val table: String)
+case class Count (val field: String)
+abstract class Direction
+case class Asc(field: String*) extends Direction
+case class Desc(field: String*) extends Direction
+case class Where(filed: String*)
+case class NumberEquals(f: String, num: Int)
+case class LessThan(f: String, num: Int)
+case class GreaterThan(f: String, num: Int)
+
+object SQLParser extends JavaTokenParsers {
+  def selectAll: Parser[Select] = "select" ~ "*" ^^^ (Select("*"))
+  def from: Parser[From] = "from" ~> ident ^^ (From(_))
+  def select: Parser[Select] = "select" ~ repsep(ident, ",") ^^ { case "select" ~ columns => Select(columns: _*)}
+  def count: Parser[Count] = "select" ~ "count" ~> "(" ~> ident <~ ")" ^^ {case field => Count(field)}
+  def countExpr = count ~ from
+  def expr = selectAll ~ from | select ~ from
+
+  def order: Parser[Direction] = {
+    ("order" ~> "by" ~> ident ~ ("asc" | "desc") ^^ {
+      case f ~ "asc" => Asc(f)
+      case f ~ "desc" => Desc(f)
+    }) | ("order" ~> "by" ~> repsep(ident, ",") ~ ("asc" | "desc") ^^ {
+      case f ~ "asc" => Asc(f: _*)
+      case f ~ "desc" => Desc(f: _*)
+    })
+  }
+
+  def orderExpr = selectAll ~ from ~ order
+
+  //Lets do this some other day!
+  def where: Parser[Where] = "where" ~> rep(predicate) ^^ (Where(_: _*))
+
+  def predicate = (
+    ident ~ "=" ~ wholeNumber ^^ { case f ~ "=" ~ i => NumberEquals(f, i.toInt) }
+      | ident ~ "<" ~ wholeNumber ^^ { case f ~ "<" ~ i => LessThan(f, i.toInt) }
+      | ident ~ ">" ~ wholeNumber ^^ { case f ~ ">" ~ i => GreaterThan(f, i.toInt) })
+
+}
+
+
 object RegexParsersExamlple {
   def main(args: Array[String]) {
 
@@ -77,8 +128,6 @@ object RegexParsersExamlple {
     println()
 
     println(FormulaP.parseAll(FormulaP.addSub,"1+2*3-4/5").get)
-
-
     //    1
     //    mulDiv
     //    d*/: 1.0
@@ -106,6 +155,18 @@ object RegexParsersExamlple {
     //    res+- = 6.2
     //    6.2
 
+    val sqlParsed = SQLParser.parseAll(SQLParser.expr, "select * from users").getOrElse("Error parsing SQL statement!")
+    println(sqlParsed)
+    println(sqlParsed.getClass)
+    println()
+    val sqlParsed1 = SQLParser.parseAll(SQLParser.expr, "select * from users").get match {case lr => println(lr._1); println(lr._2)}
+    println()
+    val sqlParsed2 = SQLParser.parseAll(SQLParser.expr, "select name,id from users").get match {case lr => println(lr._1); println(lr._2)}
+    println()
+    val sqlParsed3 = SQLParser.parseAll(SQLParser.countExpr, "select count(name) from users").get match {case lr => println(lr._1); println(lr._2)}
+    println()
+    val sqlParsed4 = SQLParser.parseAll(SQLParser.orderExpr, "select * from users order by name,age desc").get match {case lmr => println(lmr._1); println(lmr._2);}
+    println()
   }
 }
 

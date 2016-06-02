@@ -17,7 +17,7 @@ object PipeExample  extends App {
 
   def useCases(sc: SparkContext) = {
     val a = sc . parallelize (1 to 9 , 3)
-    a . pipe (" head -n 1") . collect
+    a.pipe ("head -n 1").collect
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

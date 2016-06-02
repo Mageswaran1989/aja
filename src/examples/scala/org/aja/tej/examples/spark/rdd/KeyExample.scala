@@ -20,13 +20,13 @@ Extracts the keys from all contained tuples and returns them in a new RDD.
 object KeyExample  extends App {
 
   def useCases(sc: SparkContext) = {
-    val a = sc . parallelize ( List (" dog " , " salmon " ," salmon " , " rat " , " elephant") , 3)
-    val b = a . keyBy ( _ . length )
-    b . collect
+    val a = sc.parallelize (List(" dog " , " salmon " ," salmon " , " rat " , " elephant"), 3)
+    val b = a.keyBy (_.length)
+    b.collect
 
-    val a1 = sc . parallelize ( List (" dog " , " tiger " ," lion " , " cat " , " panther " , "eagle ") , 2)
-    val b1 = a1 . map ( x => ( x . length , x ) )
-    b1 . keys . collect
+    val a1 = sc.parallelize(List(" dog " , " tiger " ," lion " , " cat " , " panther " , "eagle "), 2)
+    val b1 = a1.map(x => (x.length,x))
+    b1.keys.collect
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))

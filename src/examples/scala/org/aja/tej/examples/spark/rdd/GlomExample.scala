@@ -15,10 +15,8 @@ Assembles an array that contains all elements of the partition and embeds it in 
 object GlomExample  extends App {
 
   def useCases(sc: SparkContext) = {
-
-    val a = sc . parallelize (1 to 100 , 3)
-    a . glom . collect // Array [ Array [ Int ]]
-
+    val a = sc.parallelize (1 to 100 , 3)
+    a . glom.collect // Array [ Array [ Int ]]
   }
 
   useCases(TejUtils.getSparkContext(this.getClass.getSimpleName))
