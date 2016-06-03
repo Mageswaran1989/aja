@@ -1,0 +1,151 @@
+%TODO: This should be made as book template for aja use!
+\documentclass[12pt, right open]{memoir}
+
+%Graphics
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{matrix,chains,positioning,decorations.pathreplacing,arrows,automata}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usetikzlibrary{shapes.geometric, calc, intersections}
+
+
+%Maths
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{float}
+\restylefloat{figure}
+\floatstyle{boxed}
+\usepackage{fixmath}
+
+%Formatting
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{listings}
+\setcounter{secnumdepth}{5}
+\setlist{nolistsep,leftmargin=*}
+\usepackage{titlesec}
+%To display augmented matrix in bmatrix package
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+% To display the text in new line after paragraph
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+% To display the text in new line after paragraph
+
+
+%Condition/Code Flow
+\usepackage{ifthen}
+\usepackage{algorithmic}
+\usepackage{umlpackage}
+%End User Ease
+\usepackage{hyperref}
+
+
+%Aja Commands
+\newcommand{\specialcell}[2][c]
+{
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+}
+%  Foo bar & \specialcell{Foo\\bar} & Foo bar \\    % vertically centered
+%Foo bar & \specialcell[t]{Foo\\bar} & Foo bar \\ % aligned with top rule
+%Foo bar & \specialcell[b]{Foo\\bar} & Foo bar \\ % aligned with bottom rule
+
+\newcommand{\matplus}
+{
+~~
+}
+\newcommand{\tabh}
+{
+~~~~
+}
+
+
+\lstset{
+    frame=tb, 
+    tabsize=4, 
+    showstringspaces=false, 
+ %   numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, 
+    keywordstyle=\color{blue}, 
+    stringstyle=\color{red},
+    breaklines=true,
+}
+
+\lstdefinestyle{codeTex}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Tex,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{codeC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+% Comment the following to have chapters numbered without interruption (numbering through parts)
+\makeatletter\@addtoreset{chapter}{part}\makeatother%
+
+\begin{document}
+%TODO: Needs to find an easy way to draw neural nets
+\tikzstyle{every pin edge}=[<-,shorten <=1pt]
+\tikzstyle{neuron}=[circle,fill=black!10,minimum size=25pt,inner sep=0pt]
+\tikzstyle{input neuron}=[neuron, fill=black!40]
+\tikzstyle{output neuron}=[neuron, fill=black!40]
+\tikzstyle{hidden neuron}=[neuron, fill=black!10]
+\tikzstyle{annot} = [text width=4em, text centered]
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+%\part{Mathematics}
+%\include{./tex/mathematics}
+
+%\part{Machine Learning}
+%\include{./tex/ml}
+
+%\part{Parallel Computing}
+
+%\part{Big Data}
+%\include{./tex/big_data}
+
+%\part{Neural Network}
+%\input{./tex/nnets}
+
+\part{Apache Spark}
+\input{./tex/spark}
+
+\end{document}

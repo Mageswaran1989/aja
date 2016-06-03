@@ -1,0 +1,35 @@
+Theorem of total probability or the rule of elimination:
+If the events B1, B2, ..., Bk constitute a partition of the sample space S such that
+P (B_i) = 0 for i = 1, 2, ..., k, then for any event A of S,
+
+P (A) = \sum(i=1)(k) P (Bi ∩ A) = \sum{i=1}{k} P(Bi) P(A|Bi).
+
+Bayes’ Rule:
+If the events B1, B2 , . . . , Bk constitute a partition of the sample
+space S such that P (Bi) = 0 for i = 1, 2, ... , k, then for any event A in S such
+that P (A) = 0,
+
+P (B_r|A) = P (B_r ∩ A) / P(A)
+          = P (B_r ∩ A) / \sum(i=1)(k) P (Bi ∩ A)
+          = P (B_r ∩ A) / \sum{i=1}{k} P(Bi) P(A|Bi)
+
+
+Formalism
+Let's start by clarifying the terminology used in the Bayesian model:
+•	 Class prior probability or class prior is the probability of a class
+•	 Likelihood is the probability of an observation given a class, also known as
+the probability of the predictor given a class
+•	 Evidence is the probability of observations occurring, also known as the
+prior probability of the predictor
+•	 Posterior probability is the probability of an observation x being in a
+given class
+
+No model can be simpler! The log likelihood, log(p(x|C), is commonly used instead
+of the likelihood, p(x|C), (probability of an observation given a class) in order to
+reduce the impact of the features y that have a low likelihood, p(y|C).
+
+The objective of the Naïve Bayes classification of a new observation, is to compute
+the class that has the higher log likelihood. The mathematical notation for the Naïve
+Bayes model is also straightforward.
+
+Scala ML Pg:142

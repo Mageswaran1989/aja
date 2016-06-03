@@ -1,0 +1,69 @@
+#GraphX vs Neo4j
+================
+Vertex = VertexRDD[VD]  = RDD[(VertexID, VD)] ~ Nodes
+Edges  = EdgeRDD[ED]    = RDD[Edge[ED]]       ~ Relationships
+
+#Cyper Clauses
+==============
+WHERE                    - Provides criteria for filtering pattern matching results.
+CREATE and CREATE UNIQUE - Create nodes and relationships.
+MERGE                    - Ensures that the supplied pattern exists in the graph, either by reusing existing
+                           nodes and relationships that match the supplied predicates, or by creating new
+                           nodes and relationships.
+DELETE                   - Removes nodes, relationships, and properties.
+SET                      - Sets property values.
+FOREACH                  - Performs an updating action for each element in a list.
+UNION                    - Merges results from two or more queries.
+WITH                     - Chains subsequent query parts and forwards results from one to the next. Similar
+                           to piping commands in Unix.
+START                    - Specifies one or more explicit starting points—nodes or relationships—in the
+                           graph. (START is deprecated in favor of specifying anchor points in a MATCH
+                           clause.)
+
+#General
+========
+()                                      => anonymous node
+<-[:EdgeLabel | EdgeLabel2*1..N]->      => N relationships going IN and OUT on the particular node
+count(var) AS newVariableName
+
+#CREATE
+=======
+CREATE 
+(nodeVar1: Label1 {Prop1_Key: Prop1_Value, Prop2_Key: Prop2_Value, ..., PropN_Key: PropN_Key}),
+(nodeVar2: Label2 {Prop1_Key: Prop1_Value, Prop2_Key: Prop2_Value, ..., PropN_Key: PropN_Key}),
+.
+.
+.
+(nodeVar1)-[edgeVar1:EdgeLabel {EdgeProp1_Key: EdgeProp1_Value, ..., EdgePropN_Key: EdgePropN_Value}]->(nodeVar2),
+.
+.
+.
+(nodeVarN: LabelN {Prop1_Key: Prop1_Value, Prop2_Key: Prop2_Value, ..., PropN_Key: PropN_Key})
+
+#MERGE
+======
+MERGE will add any missing elements
+MERGE is like a mixture of MATCH and CREATE
+
+#Return
+=======
+RETURN var
+
+#Aggregating
+============
+count()
+
+#Ordering
+=========
+ORDER BY variableName DESC
+
+#Filtering
+===========
+WITH
+
+#IO
+===
+USING PERIODIC COMMIT 100 #number of records to be processed at a time
+LOAD CSV WITH HEADERS FROM 'file:///data/location/file.csv' AS line
+
+#limiting

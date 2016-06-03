@@ -1,0 +1,127 @@
+links:
+http://spark.apache.org/docs/latest/mllib-naive-bayes.html
+http://en.wikipedia.org/wiki/Naive_Bayes_classifier
+
+Bayes?
+This interpretation of probability that we use belongs to the category called Bayesian
+probability; it’s popular and it works well. Bayesian probability is named after Thomas
+Bayes, who was an eighteenth-century theologian. Bayesian probability allows prior
+knowledge and logic to be applied to uncertain statements. There’s another
+interpretation called frequency probability, which only draws conclusions from data
+and doesn’t allow for logic and prior knowledge.
+
+
+Naïve Bayes is a probabilistic model that makes predictions by computing the
+probability of a data point that belongs to a given class. A naïve Bayes model
+assumes that each feature makes an independent contribution to the probability
+assigned to a class (it assumes conditional independence between features).
+Due to this assumption, the probability of each class becomes a function of the
+product of the probability of a feature occurring, given the class, as well as the
+probability of this class. This makes training the model tractable and relatively
+straightforward. The class prior probabilities and feature conditional probabilities are
+all estimated from the frequencies present in the dataset. Classification is performed
+by selecting the most probable class, given the features and class probabilities.
+An assumption is also made about the feature distributions (the parameters of
+which are estimated from the data). MLlib implements multinomial naïve Bayes that
+assumes that the feature distribution is a multinomial distribution that represents
+non-negative frequency counts of the features.
+
+
+|
+|
+|     X X      Y Y
+|    X X X      Y
+|   X  X X X     Y Y Y
+|     X      Y Y Y X Y Y Y
+|   X X       Y  Y  Y  Y
+|  X X       Y Y Y
+|
+|________________________________
+
+
+If p1(x, y) > p2(x, y), then the class is 1.
+If p2(x, y) > p1(x, y), then the class is 2.
+
+
+
+\textbf{Conditional probability}
+Let’s spend a few minutes talking about probability and conditional probability. If
+you’re comfortable with the p(x,y|c1) symbol, you may want to skip this section.
+
+|             |
+|             |
+| o o o       |
+| ^ ^ ^ ^     |
+|             |
+|_____________|
+
+o - Three circles
+^ - Four triangles
+
+Propability of choosinf circles P(o) = 3/7
+Propability of choosinf traingles P(^) = 4/7
+
+Now imagine 7 items are split between two jars
+
+|            |
+|            |
+|    ^  ^    |
+|    o  o    |
+|            |
+|____________|
+Bucket - A
+
+|            |
+|            |
+|    ^       |
+|    o  o    |
+|            |
+|____________|
+Bucket - B
+
+Probability of drawing ^ from bucket from B P(^|B). This is known as conditional probability. We’re
+calculating the probability of a gray stone, given that the unknown stone comes from bucket B.
+
+P(^|bucketA) = 2/4
+P(^|bucketB) = 1/3
+
+To formalize how to calculate the conditional probability, we can say
+P(^|bucketB) = P(^ and bucketB)/P(bucketB)
+
+P(^ and bucketB) = 1/7
+P(bucketB) = 3/7
+P(^|bucketB) = (1/7) / (3/7) = 1/3
+
+Another useful way to manipulate conditional probabilities is known as Bayes’ rule.
+Bayes’ rule tells us how to swap the symbols in a conditional probability statement. If
+we have P(x|c) but want to have P(c|x) , we can find it with the following:
+
+$$p(c|x) = \frac{p(x|c)p(c)}{p(x)}
+
+Lets go back to the rules
+If p1(x, y) > p2(x, y), then the class is 1.
+If p2(x, y) > p1(x, y), then the class is 2.
+
+These two rules don’t tell the whole story. I just left them as p1() and p2() to keep it
+as simple as possible. What we really need to compare are p(c1|x,y) and p(c2|x,y).
+Let’s read these out to emphasize what they mean. Given a point identified as x,y, what
+is the probability it came from class c1? What is the probability it came from class c2?.
+The problem is that the equation from our friend is p(x,y|c1 ), which is not the same.
+We can use Bayes’ rule to switch things around. Bayes’ rule is applied to these state-
+ments as follows:
+
+$$p(c_i|x,y) = \frac{p(x,y|c_i)p(c_i)}{p(x,y)}
+
+With these definitions, we can define the Bayesian classification rule:
+If P(c1|x, y) > P(c2|x, y), the class is c1.
+If P(c1|x, y) < P(c2|x, y), the class is c2.
+
+
+With these definitions, we can define the Bayesian classification rule:
+If P(c1|x, y) > P(c2|x, y), the class is c1.
+If P(c1|x, y) < P(c2|x, y), the class is c2.
+
+Using Bayes’ rule, we can calculate this unknown from three known quantities.
+
+
+

@@ -1,0 +1,1 @@
+val sig = (1 / Math.exp(-5))

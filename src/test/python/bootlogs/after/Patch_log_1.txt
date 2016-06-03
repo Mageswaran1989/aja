@@ -1,0 +1,45 @@
+shell@gminfo3:/ $ BOOT-TIME| VehicleVideo : started at |2863
+BOOT-TIME| AnimEngine: started at |3539
+BOOT-TIME| app_process main: started at |3647
+BOOT-TIME| app_process main: started at |3648
+first media_trigger invoked to M4
+BOOT-TIME| ZygotInit main: started at |4587
+BOOT-TIME| ZygotInit preload: started at |4596
+BOOT-TIME| ZygotInit preloadClasses: started at |4596
+BOOT-TIME| ZygotInit preload: ended at |6522
+BOOT-TIME| Zygote forkSystemServer : started at |6544
+BOOT-TIME| SystemServer run : started at|6660
+BOOT-TIME| SystemServer startBootstrapServices : started at|6752
+BOOT-TIME| SystemServer startBootstrapServices : ended at|9561
+BOOT-TIME| SystemServer startCoreServices : started at|9561
+BOOT-TIME| SystemServer startCoreServices : ended at|9603
+BOOT-TIME| SystemServer startOtherServices : started at|9603
+BOOT-TIME| DomainServiceController : com.gm.server.calsvc.CalibrationService : phase : 1 : took |2
+BOOT-TIME| DomainServiceController : com.gm.server.powermode.PowerModeService : phase : 1 : took |3
+BOOT-TIME| DomainServiceController : com.gm.server.vis.VehicleInformationService : phase : 1 : took |4
+BOOT-TIME| SystemServer WifiServices : started at|10752
+BOOT-TIME| SystemServer WifiServices : ended at|10992
+BOOT-TIME| SystemServer AudioService : started at|11156
+BOOT-TIME| SystemServer AudioService : ended at|11372
+BOOT-TIME| DomainServiceController : com.gm.server.timeofday.TimeofDayService : phase : 2 : took |4
+BOOT-TIME| DomainServiceController : com.gm.server.teenmode.TeenDriverService : phase : 4 : took |43
+BOOT-TIME| DomainServiceController : com.gm.server.update.UpdateService : phase : 4 : took |12
+BOOT-TIME| DomainServiceController : com.gm.server.audioproxyservice.AudioProxyService : phase : 4 : took |4
+BOOT-TIME| DomainServiceController : com.gm.server.adaptation.AdaptationSpeechService : phase : 4 : took |3
+BOOT-TIME| DomainServiceController : com.gm.server.uissappservicestarter.UissAppServiceStarterService : phase : 4 : took |0
+BOOT-TIME| DomainServiceController : com.gm.server.mediavrproxy.MediaVrProxyService : phase : 4 : took |1
+BOOT-TIME| DomainServiceController : com.gm.server.diagnostics_service.DiagnosticsService : phase : 4 : took |25
+BOOT-TIME| DomainServiceController : com.gm.server.otcservice.OnBoardTesterCoordinationService : phase : 4 : took |27
+BOOT-TIME| DomainServiceController : com.gm.server.erasedataservice.GMEraseDataService : phase : 4 : took |14
+BOOT-TIME| ActivityManagerService HomeScreen call: started at|13464
+BOOT-TIME| SystemServer startOtherServices : ended at|13475
+BOOT-TIME| DomainServiceController : com.gm.server.connection.DeviceConnectionService : phase : 3 : took |1124
+BOOT-TIME| DomainServiceController : com.gm.sdr.SdrDomainService : phase : 3 : took |3
+BOOT-TIME| DomainServiceController : com.gm.server.tuner.TunerService : phase : 3 : took |7
+BOOT-TIME| DomainServiceController : com.gm.server.speech.UISpeechService : phase : 3 : took |0
+BOOT-TIME| DomainServiceController : com.gm.server.xm.XmAudioSvcIpcImpl : phase : 3 : took |0
+BOOT-TIME| DomainServiceController : com.gm.server.xm.XmDiagnosticsSvcIpcImpl : phase : 3 : took |1
+BOOT-TIME| DomainServiceController : com.gm.server.dab.DabServiceImpl : phase : 3 : took |0
+BOOT-TIME| DomainServiceController : com.gm.server.traffic.TrafficDomainService : phase : 3 : took |91
+BOOT-TIME| DomainServiceController : com.gm.server.onstar.OnStarService : phase : 3 : took |799
+BOOT-TIME| PowerModing HMIReady at |15834

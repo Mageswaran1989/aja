@@ -1,0 +1,4 @@
+[0m[[0mdebug[0m] [0mjars to process for resources: List()[0m
+[0m[[0mdebug[0m] [0mbldr.packageApk(/home/mdhandapani/AndroidStudioProjects/myappforScala/bin/resources-debug.ap_, /home/mdhandapani/AndroidStudioProjects/myappforScala/bin, List(), null, [/home/mdhandapani/AndroidStudioProjects/myappforScala/bin/collect-jni], true, DefaultSigningConfig{storeFile=/home/mdhandapani/.android/debug.keystore, storePassword=android, keyAlias=AndroidDebugKey, keyPassword=android, storeType=jks}, /home/mdhandapani/AndroidStudioProjects/myappforScala/bin/hello-world-scala-debug-unaligned.apk, PackagingOptions(List(),List(),List()))[0m
+[0m[[0mdebug[0m] [0mIncluding predexed: List()[0m
+[0m[[0minfo[0m] [0mPackaged: hello-world-scala-debug-unaligned.apk (46.00KB)[0m

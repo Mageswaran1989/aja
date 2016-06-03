@@ -1,0 +1,41 @@
+\heading{Linear Regression}
+
+Read the following link as it gives general introduction to the topic and introduces you to the
+mathematical notations.
+
+\subheading{Reference Links}
+http://spark.apache.org/docs/latest/mllib-linear-methods.html
+
+\subheading{Jargons}
+It would be good if you go through following machine learing terms, before reading further.
+- Convex optimization
+- Regularization - to control model complexicity
+- Loss function - to find the error of the model
+- Likelihood
+
+\subheading{Developers Notes}
+\subsubheading{Summary}
+- Feature is value of type T decsribing something in real world eg: height,weight,color,gender etc.,
+- Vector is Array[T]() or array of features
+- Given set of array of vectors and it's output values(Double), come up with an function that has weights
+   which are fitted(i.e searched in a mathematical domain), such that upon giving a new vector input predict its output.
+   Or you can rememer like LinearRegression comes with a model class that has weights as its member variable and a method
+   called predict which takes the the new vector and returns a values of type T (mostly Double)
+
+\subsubheading{Mathematical Background}
+It is always good to know how a algorithms works. In this case the algorithms is not just about using loops and conditions,
+we have our most hated friend playing the major role here, MATHS!
+
+\begin{equation}
+    f(\wv) := \lambda\, R(\wv) +
+    \frac1n \sum_{i=1}^n L(\wv;\x_i,y_i)
+    \label{eq:regPrimal}
+    \ .
+\end{equation}
+
+
+
+
+
+
+

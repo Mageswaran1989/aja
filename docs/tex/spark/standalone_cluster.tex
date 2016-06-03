@@ -1,0 +1,99 @@
+\chapter{Standalone Clusters}
+
+\section{Reference Url}
+ http://spark.apache.org/docs/latest/spark-standalone.html
+
+\section{Ubuntu Environment}
+
+\subheading{JDK}
+Run scripts/openjdk.sh (or)
+Run scripts/sun_jav_install.sh
+
+\subheading{Scala}
+Run scripts/scala_install.sh
+Run scripts/sbt_install.sh
+
+\subheading{Maven}
+Run scripts/maven_install.sh
+
+\section{Building the Spark}
+Assuming the spark is download at /opt/spark
+# first, to avoid the notorious 'permgen' error
+# increase the amount memory available to the JVM:
+export MAVEN_OPTS="-Xmx1300M -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
+
+# then trigger the build:
+mvn -Phadoop2-yarn -Dhadoop.version=2.7.0 -Dyarn.version=2.7.0 -DskipTests clean package
+
+\section {Notes}
+$ cd /opt/spark/
+$ ./sbin/start-master.sh
+$ ifconfig
+my ip: 115.242.144.22
+Check Spark Master @ http://115.242.144.22:8080/ or @ http://localhost:8080/
+$ ./sbin/start-slave.sh spark://localhost:7077
+
+
+vim  /opt/spark/conf/spark-env.sh
+export STANDALONE_SPARK_MASTER_HOST=`Aja`
+export SPARK_MASTER_PORT spark://localhost:7077
+#/ SPARK_MASTER_WEBUI_PORT and SPARK_WORKER_PORT / SPARK_WORKER_WEBUI_PORT, to use non-default ports
+export SPARK_WORKER_CORES=6 #, to set the number of cores to use on this machine
+export SPARK_WORKER_MEMORY=2 GB #, to set how much memory to use (for example: 1000 MB, 2 GB)
+export SPARK_WORKER_INSTANCES=4 #, to set the number of worker processes per node
+#export SPARK_WORKER_DIR, to set the working directory of worker processes
+
+$ MASTER=spark://localhost:7077 ./bin/spark-shell
+
+/* throwing darts and examining coordinates */
+val NUM_SAMPLES = 100000
+val count = sc.parallelize(1 to NUM_SAMPLES).map{i =>
+  val x = Math.random * 2 - 1
+  val y = Math.random * 2 - 1
+  if (x * x + y * y < 1) 1.0 else 0.0
+}.reduce(_ + _)
+
+println("Pi is roughly " + 4 * count / NUM_SAMPLES)
+
+
+\section{Hadoop-Yarn}
+url: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+
+%\section{Starting and Stopping Spark Standalone Clusters:}
+%To start Spark Standalone clusters:
+%1. On one host in the cluster, start the Spark Master:
+%   $ sudo service spark-master start
+%2. On all the other hosts, start the workers:
+%   $ sudo service spark-worker start
+%3. On one node, start the History Server:
+%   $ sudo service spark-history-server start
+%
+%To stop Spark, use the following commands on the appropriate hosts:
+%$ sudo service spark-worker stop
+%$ sudo service spark-master stop
+%$ sudo service spark-history-server stop
+%
+%\section{Configuring the Spark History Server}
+%Before you can run the Spark History Server, you must create the /user/spark/applicationHistory/ directory in HDFS and
+%set ownership and permissions as follows:
+%$ sudo -u hdfs hadoop fs -mkdir /user/spark
+%$ sudo -u hdfs hadoop fs -mkdir /user/spark/applicationHistory
+%$ sudo -u hdfs hadoop fs -chown -R spark:spark /user/spark
+%$ sudo -u hdfs hadoop fs -chmod 1777 /user/spark/applicationHistory
+%
+%On Spark clients (systems from which you intend to launch Spark jobs), do the following:
+%1. Create /etc/spark/conf/spark-defaults.conf on the Spark client:
+%   $ cp /etc/spark/conf/spark-defaults.conf.template /etc/spark/conf/spark-defaults.conf
+%2. Add the following to /etc/spark/conf/spark-defaults.conf:
+%   spark.eventLog.dir=/user/spark/applicationHistory
+%   spark.eventLog.enabled=true
+%
+%This causes Spark applications running on this client to write their history to the directory that the history server reads.
+%In addition, if you want the YARN ResourceManager to link directly to the Spark History Server, you can set the
+%spark.yarn.historyServer.address property in /etc/spark/conf/spark-defaults.conf:
+
+spark.yarn.historyServer.address=http://HISTORY_HOST:HISTORY_PORT
+
+\section{Submitting Jobs}
+../spark/bin/spark-submit --class "SimpleApp" --master local[*] target/scala-2.10/simple-project_2.10-1.0.jar
