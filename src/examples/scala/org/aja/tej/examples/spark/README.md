@@ -235,7 +235,8 @@ class Reigstrer extends spark.KyroRegistrator {
   override def registerClasses(kyro: Kyro) {  
   kyro.register(classOf[MyClass])  
   }  
-}```
+}
+```  
 
 ##Caching
 - Contetns of RDD after first action can be stored in RAM for fast re-use/computation on iterative algorithms
