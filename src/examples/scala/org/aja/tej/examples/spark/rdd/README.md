@@ -26,11 +26,11 @@ later in this chapter.
 - randomSplit 
 - coalesce
 - repartition
-- sample
-**Transformations on RDD of key-value Pairs**
+- sample  
+**Transformations on RDD of key-value Pairs**  
 In addition to the transformations described in the previous sections, RDDs of key-value pairs support a few
 other transformations. The commonly used transformations available for only RDDs of key-value pairs are
-briefly described next.
+briefly described next.    
 - keys
 - values
 - mapValues
@@ -56,12 +56,12 @@ RDD actions.
 - takeOrdered
 - top
 - fold
-- reduce
-**Actions on RDD of key-value Pairs**
+- reduce  
+**Actions on RDD of key-value Pairs**  
 RDDs of key-value pairs support a few additional actions,
 - countByKey
-- lookup
-**Actions on RDD of Numeric Types**
+- lookup  
+**Actions on RDD of Numeric Types**  
 RDDs containing data elements of type Integer, Long, Float, or Double support a few additional actions that
 are useful for statistical analysis.
 - mean
@@ -69,16 +69,16 @@ are useful for statistical analysis.
 - sum
 - variance
 
-##Saving an RDD
+##Saving an RDD  
 Generally, after data is processed, results are saved on disk. Spark allows an application developer to save
 an RDD to any Hadoop-supported storage system. An RDD saved to disk can be used by another Spark or
-MapReduce application.
+MapReduce application.  
 - saveAsTextFile
 - saveAsObjectFile
 - saveAsSequenceFile
 
-##RDD Caching Methods
-The RDD class provides two methods to cache an RDD: cache and persist.
+##RDD Caching Methods   
+The RDD class provides two methods to cache an RDD: cache and persist.  
 - cache
 - persist
 - unpersist
@@ -107,7 +107,7 @@ By default, updates made to a variable by a task are not propagated back to the 
 - Partitioner
 - HashPartitioner
 
-## [Filter Pattern](filterPattern)
+## [Filter Pattern](filterPatterns)
 - **Distinct**
 ![distinct](../../../../../../../../../docs/img/spark/distinct.png)
 - Filter
