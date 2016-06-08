@@ -46,7 +46,7 @@ briefly described next.
 ##Actions
 Actions are RDD methods that return a value to a driver program. This section discusses the commonly used
 RDD actions.
-- collect
+- collect 
 - count
 - countByValue
 - first
@@ -56,6 +56,7 @@ RDD actions.
 - takeOrdered
 - top
 - fold
+- foreach  ~ Distributed Action
 - reduce  
 **Actions on RDD of key-value Pairs**  
 RDDs of key-value pairs support a few additional actions,
