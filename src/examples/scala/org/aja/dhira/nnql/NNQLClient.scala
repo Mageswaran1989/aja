@@ -51,7 +51,7 @@ class NNQLClient(remote: InetSocketAddress, listener: ActorRef) extends Actor {
 }
 
 
-class NNQLParser extends Actor {
+class NNQLParser1 extends Actor {
   override def receive: Receive = {
     case receviedString:String => println("receviedString :" + receviedString)
       val connection = sender()

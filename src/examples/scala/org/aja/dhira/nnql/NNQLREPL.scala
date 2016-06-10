@@ -11,6 +11,7 @@ import akka.actor.{Props, ActorSystem, Actor}
 import akka.actor.Actor.Receive
 import akka.util.ByteString
 
+
 import scala.sys.SystemProperties
 import scala.tools.scalap.scalax.rules.Error
 import scala.util.Failure
@@ -24,28 +25,54 @@ import scala.tools.nsc.interpreter.ILoop
 
 object NNQLREPL {
 
-  val consoleReader = new jline.console.ConsoleReader()
-  val prettyPrinter = new PrettyPrinter
-  val parser = new QLParser()
+  implicit val consoleReader = new jline.console.ConsoleReader()
+  //Creates a actor system
+  val system =  ActorSystem("NNQLEngine")
 
-  def main(args: Array[String]) {
-    while (true) {
-      val input = consoleReader.readLine("λ>>>\n")
-      consoleReader.setCopyPasteDetection(true)
-        handleExpr(input)
+  sealed trait JLineEvent
+  case class Line(value: String) extends JLineEvent
+  case object EmptyLine extends JLineEvent
+  case object EOF extends JLineEvent
+
+  def console( handler: JLineEvent => Boolean ) {
+
+    var finished = false
+    while (!finished) {
+      consoleReader.setPrompt("nnql> ");
+      val line = consoleReader.readLine()
+      if (line == null) {
+        finished = handler(EOF)
+      } else if (line.size == 0) {
+        finished = handler(EmptyLine)
+      } else if (line.size > 0) {
+        finished = handler(Line(line))
+      }
+    }
+    System.exit(0)
+  }
+
+  object IntrupterThread extends Runnable {
+    override def run(): Unit = {
+      console {
+        case EOF =>
+          consoleReader.println("Ctrl-d")
+          System.exit(0)// "stop"
+          true
+        case Line(s) if s == "quit" =>
+          System.exit(0)// "quit"
+          true
+        case Line(s) =>
+          println("Processing...  " + s)
+          NNQLParser.parseLine(s)
+          false
+        case _ =>
+          false
+      }
     }
   }
 
-  def handleExpr(input: String) =
-    parseInput(parser.parse, input) { expr =>
-
-    }
-
-  def parseInput[T](p: String => parser.ParseResult[T], input: String)(success: T => Unit): Unit = {
-    import parser.{ Success, NoSuccess }
-    p(input) match {
-      case Success(res, _) => success(res)
-      case NoSuccess(err, _) => println(err)
-    }
+  def main(args: Array[String]) {
+    val newThread = new Thread(IntrupterThread)
+    newThread.run()
   }
 }

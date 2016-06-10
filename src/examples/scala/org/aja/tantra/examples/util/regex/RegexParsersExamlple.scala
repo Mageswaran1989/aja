@@ -99,7 +99,7 @@ object SQLParser extends JavaTokenParsers {
   def orderExpr = selectAll ~ from ~ order
 
   //Lets do this some other day!
-  def where: Parser[Where] = "where" ~> rep(predicate) ^^ (Where(_: _*))
+//  def where: Parser[Where] = "where" ~> rep(predicate) ^^ (Where(_: _*))
 
   def predicate = (
     ident ~ "=" ~ wholeNumber ^^ { case f ~ "=" ~ i => NumberEquals(f, i.toInt) }

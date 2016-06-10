@@ -12,7 +12,8 @@ object LambdaREPL {
 
   def main(args: Array[String]) {
     while (true) {
-      val input = "λt. λf. t" //consoleReader.readLine("λ>>>\n")
+      //val input = "λt. λf. t"
+      val input =  consoleReader.readLine("λ>>>\n")
       consoleReader.setCopyPasteDetection(true)
       if (input startsWith ":")
         handleCommand(input substring 1)

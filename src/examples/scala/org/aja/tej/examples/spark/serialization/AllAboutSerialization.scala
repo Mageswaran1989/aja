@@ -87,7 +87,7 @@ object AllAboutSerialization extends App {
 
   val sc = TejUtils.getSparkContext("AllAboutSerialization")
 
-  simpleR8cfjlnostvwzDDManipulation(sc)
+  simpleRDDManipulation(sc)
 
   val classRDDManupulation_Ver2 = new ClassRDDManupulation_Ver2
   classRDDManupulation_Ver2.listIncrement(sc)

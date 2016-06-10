@@ -5,12 +5,13 @@ package org.aja.dhira.nnql
   */
 object NNQLCommands {
 
-  class Command()
-  case class CreateCommand() extends Command
+  trait RunTimeActions
+  trait NNQlExpr
+  case class CreateNeurons(n: Long, interconnections: Boolean) extends NNQlExpr
+  case class CreateLayer(n: Long) extends NNQlExpr
 
+  case class LoadData(csvPath: String, referenceName: Option[String]) extends NNQlExpr
+  case class StartTraining() extends NNQlExpr with RunTimeActions
+  case class StopTraining() extends NNQlExpr with RunTimeActions
 
-  class RTActions()
-  case class StartAction() extends RTActions
-  case class StopAction() extends RTActions
-  case class PauseAction() extends RTActions
 }
