@@ -2,11 +2,13 @@ package org.aja.dhira.nnql
 
 
 /**
- * Created by mageswaran on 29/4/16.
- */
+  * Created by mageswaran on 29/4/16.
+  */
 
 
 import scala.language.implicitConversions
+import scala.util.matching.Regex
+import scala.util.parsing.input._
 
 import scala.util.parsing.combinator.syntactical.{StandardTokenParsers, StdTokenParsers}
 import scala.util.parsing.combinator.lexical.StdLexical
@@ -74,6 +76,14 @@ abstract class NNQLParserBase extends StandardTokenParsers with PackratParsers {
         in.source.subSequence(in.offset, in.source.length()).toString,
         in.drop(in.source.length()))
   }
+
+  import lexical.StringLit
+  //Converts Regex query to String
+  def regexStringLit(r: Regex): Parser[String] = acceptMatch(
+    "string literal matching regex " + r,
+    { case StringLit( s ) if r.unapplySeq(s).isDefined => s }
+  )
+
 }
 
 
@@ -132,10 +142,14 @@ class NNQLLexer extends StdLexical {
 
   override def identChar: Parser[Elem] = letter | elem('_')
 
+
+
   private lazy val scientificNotation: Parser[String] =
     (elem('e') | elem('E')) ~> (elem('+') | elem('-')).? ~ rep1(digit) ^^ {
       case s ~ rest => "e" + s.mkString + rest.mkString
     }
+
+  //  private lazy val FilePath: Parser[String] =
 
   override def whitespace: Parser[Any] =
     ( whitespaceChar
@@ -148,8 +162,8 @@ class NNQLLexer extends StdLexical {
 }
 
 /**
- * Parser using StdTokenParsers
- */
+  * Parser using StdTokenParsers
+  */
 class NNQLParser extends NNQLParserBase  {
 
   // Keyword is a convention with NNQLParserBase, which will scan all of the `Keyword`
@@ -164,7 +178,23 @@ class NNQLParser extends NNQLParserBase  {
   protected val DATA = Keyword("DATA")
   protected val FROM = Keyword("FROM")
   protected val PRINT = Keyword("PRINT")
+  protected val FILE = Keyword("FILE")
 
+
+  //  (\/[\w\/\-\_]*.\w*)/
+  //1st Capturing group (\/[\w\/\-\_]*.\w*)
+  //\/ matches the character / literally
+  //[\w\/\-\_]* match a single character present in the list below
+  //Quantifier: * Between zero and unlimited times, as many times as possible, giving back as needed [greedy]
+  //\w match any word character [a-zA-Z0-9_]
+  //\/ matches the character / literally
+  //\- matches the character - literally
+  //\_ matches the character _ literally
+  //. matches any character (except newline)
+  //\w* match any word character [a-zA-Z0-9_]
+  //Quantifier: * Between zero and unlimited times, as many times as possible, giving back as needed [greedy]
+
+  lazy val filePath: Parser[String] = regexStringLit("""([a-zA-Z]:\\[\w\\?]*)|(\/[\w\/\-\_]*.\w*)""".r)
 
   def start: Parser[NNQlExpr] = createNeuronWithInterConnection | createLayer | createNeuron | loadData
 
@@ -184,7 +214,8 @@ class NNQLParser extends NNQLParserBase  {
   }
 
   //To parse line like: LOAD DATA FROM path_to_csv AS name
-  lazy val loadData: Parser[NNQlExpr] = LOAD ~ DATA ~ FROM ~> ident ~ opt(AS ~> ident) ^^ {
+  //LOAD DATA FROM FILE="/home/mdhandapani/aja/data/car-milage-no-hdr.csv" AS test
+  lazy val loadData: Parser[NNQlExpr] = LOAD ~ DATA ~ FROM ~ FILE ~> "=" ~> filePath ~ opt(AS ~> ident) ^^ {
     case path ~ refName => LoadData(path, refName)
   }
 

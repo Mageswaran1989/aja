@@ -1,10 +1,16 @@
-import scala.io.Source
+import java.io.File
 
-val carMilageCSVBuffer = Source.fromFile("/opt/aja/data/car-milage-no-hdr.csv")
+  import scala.io.Source
 
-val lines = carMilageCSVBuffer.getLines().toList
+//print(new File(".").getAbsolutePath)
+
+val carMilageCSVBuffer = Source.fromFile("/home/mdhandapani/aja/data/car-milage-no-hdr.csv")
+
+val lines = carMilageCSVBuffer.getLines().toArray
+val firstLine = lines.take(1)(0).split(",").map(_.toDouble)
+val numCols = lines.take(1)(0).split(",").size
+
 lines.getClass
-
 lines.foreach{ line =>
   println(line)
   val cols =  line.split(",")

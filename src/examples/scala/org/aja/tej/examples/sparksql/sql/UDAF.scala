@@ -6,10 +6,12 @@ import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAg
 import org.apache.spark.sql.types._
 import org.apache.spark.{SparkConf, SparkContext}
 
-//
-// An example of the experimental User Defined Aggregation Function mechanism
-// added in Spark 1.5.0.
-//
+/*
+An UDAF inherits the base class UserDefinedAggregateFunction and implements the following eight methods,
+which are defined as:
+
+*/
+
 /**
  * Created by mageswaran on 24/1/16.
  */
@@ -20,26 +22,42 @@ object UDAF {
   //
   private class ScalaAggregateFunction extends UserDefinedAggregateFunction {
 
+    //inputSchema: inputSchema returns a StructType and every field of this StructType
+    // represents an input argument of this UDAF.
+
     // an aggregation function can take multiple arguments in general. but
     // this one just takes one
     def inputSchema: StructType =
       new StructType().add("sales", DoubleType)
+
+    //bufferSchema: bufferSchema returns a StructType and every field of this StructType
+    // represents a field of this UDAF’s intermediate results.
 
     // the aggregation buffer can also have multiple values in general but
     // this one just has one: the partial sum
     def bufferSchema: StructType =
       new StructType().add("sumLargeSales", DoubleType)
 
+    //dataType: dataType returns a DataType representing the data type of this UDAF’s returned value.
+
     // returns just a double: the sum
     def dataType: DataType = DoubleType
 
-    // always gets the same result
+    //deterministic: deterministic returns a boolean indicating if this UDAF always generate the same
+    // result for a given set of input values.
+
+    // always gets the same result/
     def deterministic: Boolean = true
+
+
+    //initialize: initialize is used to initialize values of an aggregation buffer, represented by a MutableAggregationBuffer.
 
     // each partial sum is initialized to zero
     def initialize(buffer: MutableAggregationBuffer): Unit = {
       buffer.update(0, 0.0)
     }
+
+    //update: update is used to update an aggregation buffer represented by a MutableAggregationBuffer for an input Row.
 
     // an individual sales value is incorporated by adding it if it exceeds 500.0
     def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
@@ -52,10 +70,15 @@ object UDAF {
       }
     }
 
+    //  merge: merge is used to merge two aggregation buffers and store the result to a MutableAggregationBuffer.
+
     // buffers are merged by adding the single values in them
     def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
       buffer1.update(0, buffer1.getDouble(0) + buffer2.getDouble(0))
     }
+
+    //evaluate: evaluate is used to generate the final result value of this UDAF based on values
+    // stored in an aggregation buffer represented by a Row.
 
     // the aggregation buffer just has one value: so return it
     def evaluate(buffer: Row): Any = {

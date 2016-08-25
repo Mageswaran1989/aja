@@ -5,6 +5,8 @@
  * to the functions just like objects.
  */
 
+//Function "f" takes a integer and converts that to string
+//This gives flexibility of defining the pattern of how the string can be
 def apply(f: Int => String, v: Int) = f(v)
 def layout[A](x: A) = "[" + x.toString() + "]"
 println(apply(layout, 10))
@@ -29,3 +31,8 @@ formatResult("Increment", 7, x => {val r = x + 1; r})
 //for a function
 val f = (x: Int) => {val r = x + 1; r}
 formatResult("Increment", 8, f)
+
+
+println("/////////////////////////////////////////////////////////////////////////")
+
+
