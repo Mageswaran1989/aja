@@ -29,14 +29,16 @@ object Resolvers {
   val neo4Cyper     = "anormcypher" at "http://repo.anormcypher.org/"
   val neo4Cyper1    = "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
   val JsError       = "mandubian maven bintray" at "http://dl.bintray.com/mandubian/maven"
-  val allResolvers  = Seq(typesafe, sonatype, mvnrepository, cloudera,neo4Cyper, neo4Cyper1, JsError)
+  val sparkPackages = "Spark Packages Repo" at "http://dl.bintray.com/spark-packages/maven"
+  val sparkSnapshot = "apache-snapshots" at "http://repository.apache.org/snapshots/"
+  val allResolvers  = Seq(typesafe, sonatype, mvnrepository, cloudera,neo4Cyper, neo4Cyper1, JsError, sparkPackages, sparkSnapshot)
 
 }
 
 //Dont use %% for third party libraries for which appending Scala version might not help in fetching
 object Dependency {
   object Version {
-    val Spark        = "1.6.0"
+    val Spark        = "2.0.0"
     val ScalaTest    = "2.2.4"
     val ScalaCheck   = "1.12.2"
     val Twitter      = "3.0.3"
@@ -60,6 +62,7 @@ object Dependency {
   val sparkHive             = "org.apache.spark"      %% "spark-hive"       % Version.Spark  withSources()
   val sparkRepl             = "org.apache.spark"      %% "spark-repl"       % Version.Spark  withSources()
   val sparkCSV              = "com.databricks"        % "spark-csv_2.11"    % Version.sparkCSV withSources()
+
   val sparkTS               = "com.cloudera.sparkts"  %% "sparkts"          % Version.sparkts withSources()
   val scalaTest             = "org.scalatest"         %% "scalatest"        % Version.ScalaTest  % "test"
   val scalaCheck            = "org.scalacheck"        %% "scalacheck"       % Version.ScalaCheck % "test"
@@ -78,6 +81,9 @@ object Dependency {
   //  val scalaActor     =  "org.scala-lang"          %% "scala-actors"     % Version.scalaActors withSources()
 
   val neo4jScalaCypher      = "org.anormcypher"       %% "anormcypher"      % Version.neo4JScalaCypher withSources()
+  val graphFrames           = "graphframes"           % "graphframes"       % "0.1.0-spark1.6"
+  val neo4jSparkConnector   = "neo4j-contrib"        % "neo4j-spark-connector" % "1.0.0-RC1"
+
   val JsErrorGet            = "com.mandubian"         %% "play-json-zipper"    % "1.2" withSources()
 
   //Visualization
@@ -98,7 +104,7 @@ object Dependencies {
     Seq(neo4jScalaCypher, JsErrorGet, sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
       scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
-      breezeNatives, breeezeViz, akka, sparkCSV, scalaChart, scalaPlot, graphStreamCore, graphStreamUI)
+      breezeNatives, breeezeViz, akka, sparkCSV, scalaChart, scalaPlot, graphStreamCore, graphStreamUI, neo4jSparkConnector, graphFrames)
 }
 
 object TejSparkBuild extends Build {
@@ -131,7 +137,7 @@ object TejSparkBuild extends Build {
       // unmanagedResourceDirectories in Compile += baseDirectory.value / "conf",
       mainClass := Some("run"),
       // Must run the examples and tests in separate JVMs to avoid mysterious
-      // scala.reflect.internal.MissingRequirementError errors. (TODO)
+      // scala.reflect.internal.MissingRequirementError errors.
       // fork := true,
       // Must run Spark tests sequentially because they compete for port 4040!
       parallelExecution in Test := false))
