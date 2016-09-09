@@ -29,3 +29,58 @@ formatResult("Increment", 7, x => {val r = x + 1; r})
 //for a function
 val f = (x: Int) => {val r = x + 1; r}
 formatResult("Increment", 8, f)
+
+
+println("---------------------------------------------------------------------------")
+
+def sumInts(a: Int, b: Int): Int = {
+  if (a > b) 0 else a + sumInts(a+1, b)
+}
+
+sumInts(1,5)
+
+
+def cube(x: Int): Int = x * x * x
+
+def sumOfCubes(lowerLimit: Int, upperLimit: Int): Int = {
+  if (lowerLimit > upperLimit)
+    0
+  else
+    cube(lowerLimit) + sumOfCubes(lowerLimit + 1, upperLimit)
+}
+
+def summation(f: Int => Int, lowerLimit: Int, upperLimit: Int): Int = {
+  if (lowerLimit > upperLimit) 0
+  else f(lowerLimit) + summation(f, lowerLimit + 1, upperLimit)
+}
+
+def identity(x: Int) = x
+def square(x: Int): Int = x * x
+def cube1(x: Int) = x * x * x
+
+def sumOfInts(a: Int, b: Int) = summation(identity, a , b)
+def sumOfSquares(a: Int, b: Int) = summation(square, a , b)
+def sumOfCubes1(a: Int, b: Int) = summation(cube1, a , b)
+
+sumOfSquares(1,5)
+
+println("----------------------------------------")
+
+def sumX(f: Int => Int, a: Int, b: Int): Int = {
+  def loop(a: Int, acc: Int): Int = {
+    if (a > b) acc
+    else loop(a+1, acc + f(a))
+  }
+  loop(a, 0)
+}
+
+def sumOfSquares2(a: Int, b: Int) = sumX(square, a,b)
+
+sumOfSquares2(1,5)
+
+sumX(x => x * x, 3, 5)
+
+val s = Set(1,2,3)
+s.map()
+
+

@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 /**
  * Created by mdhandapani on 10/8/15.
  */
@@ -92,6 +94,59 @@ val byTen = multiplier(10) _
 
 byFive(5)
 byTen(5)
+
+
+println("-------------------------------------------------------")
+
+//Lets dtart with higher order function
+def square(x: Int): Int = x * x
+
+def sumX(f: Int => Int, a: Int, b: Int): Int = {
+  @tailrec
+  def loop(a: Int, acc: Int): Int = {
+    if (a > b) acc
+    else loop(a+1, acc + f(a))
+  }
+  loop(a, 0)
+}
+
+def sumOfSquares2(a: Int, b: Int) = sumX(square, a,b)
+
+sumOfSquares2(1,5)
+
+sumX(x => x * x, 3, 5)
+
+def product(f: Int => Int)(a: Int, b: Int): Int = {
+  @tailrec
+ def loop(a: Int, acc: Int): Int = {
+  if (a > b) acc
+  else loop(a+1, acc * f(a))
+ }
+ loop(a, 1)
+}
+
+def factorial(a:Int, b:Int) = product(x => x)(a,b)
+
+factorial(1,5)
+
+//Lets generalize above two operation with currying
+def mapReduce(f: Int => Int)
+             (combine:(Int,Int) => Int)
+             (zero: Int)
+             (a: Int, b: Int) = {
+
+  def loop(a: Int, acc: Int): Int = {
+    if (a > b) acc
+    else  loop(a+1, combine(acc, f(a)))
+  }
+
+  loop(a, zero)
+}
+
+def sumMR(a: Int, b:Int) = mapReduce(x => x)((x,y) => x + y)(0)(a,b)
+
+sumMR(1,5)
+
 
 
 
