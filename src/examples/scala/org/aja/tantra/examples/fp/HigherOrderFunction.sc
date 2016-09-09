@@ -5,6 +5,8 @@
  * to the functions just like objects.
  */
 
+//Function "f" takes a integer and converts that to string
+//This gives flexibility of defining the pattern of how the string can be
 def apply(f: Int => String, v: Int) = f(v)
 def layout[A](x: A) = "[" + x.toString() + "]"
 println(apply(layout, 10))
@@ -82,5 +84,6 @@ sumX(x => x * x, 3, 5)
 
 val s = Set(1,2,3)
 s.map()
+println("/////////////////////////////////////////////////////////////////////////")
 
 

@@ -17,6 +17,10 @@
 
 #Cheatsheet
 
+[Visual SQL Joins](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)
+
+
+
 | Spark Dataset API | SQL                                                                                                                                                                                                                                                                                       | HIVE QL |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 |                   | **SELECT general form**  <br> SELECT column-names <br> FROM table-name <br> WHERE condition  <br> ORDER BY sort-order                                                                                                                                                                     |         |
