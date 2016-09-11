@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.bytedeco:javacpp:1.2.3:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bytedeco/javacpp/jars/javacpp-1.2.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bytedeco/javacpp/docs/javacpp-1.2.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.bytedeco/javacpp/srcs/javacpp-1.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

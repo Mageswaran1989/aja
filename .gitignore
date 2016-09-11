@@ -14,6 +14,9 @@
 *.swp 
 *.*~
 .idea/*
+src/main/scala/org/aja/dhira/.idea/*
+src/main/scala/org/aja/dhira/target/*
+src/main/scala/org/aja/dhira/project/target/*
 target/*
 project/target/*
 tej/.idea/*

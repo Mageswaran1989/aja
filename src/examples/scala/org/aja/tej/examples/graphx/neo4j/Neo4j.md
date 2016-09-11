@@ -25,3 +25,5 @@ https://github.com/kbastani/neo4j-mazerunner
 
 Cyper on Scala => https://github.com/AnormCypher/AnormCypher
 Neo4j on Scala => https://github.com/FaKod/neo4j-scala/
+
+bin/spark-shell  --conf spark.neo4j.bolt.password=neo4j --jars ../neo4j-spark-connector/target/neo4j-spark-connector-full-2.0.0-M1.jar 
