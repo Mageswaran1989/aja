@@ -799,9 +799,9 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#test-interface;1.0!test-interface.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.7!apply-macro.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.10.5!scala-library.jar
-[debug] :: resolution report :: resolve 1748ms :: artifacts dl 21ms
+[debug] :: resolution report :: resolve 2292ms :: artifacts dl 17ms
 [debug] 	report for Aja#dhira$sbt_2.11;0.0.1 default produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sbt_2.11-default.xml
-[debug] 	resolve done (1748ms resolve - 21ms download)
+[debug] 	resolve done (2292ms resolve - 17ms download)
 [debug] Using inline dependencies specified in Scala.
 [debug] :: resolving dependencies :: Aja#dhira$sources_2.11;0.0.1
 [debug] 	confs: [default]
@@ -1196,6 +1196,6 @@
 [debug] 	[NOT REQUIRED] org.scalaz#scalaz-effect_2.10;7.1.0!scalaz-effect_2.10.jar(src)
 [debug] 	[NOT REQUIRED] com.github.mpeltonen#sbt-idea;1.6.0!sbt-idea.jar(src)
 [debug] 	[NOT REQUIRED] commons-io#commons-io;2.0.1!commons-io.jar(src)
-[debug] :: resolution report :: resolve 129ms :: artifacts dl 24ms
+[debug] :: resolution report :: resolve 123ms :: artifacts dl 22ms
 [debug] 	report for Aja#dhira$sources_2.11;0.0.1 default produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_2.11-default.xml
-[debug] 	resolve done (129ms resolve - 24ms download)
+[debug] 	resolve done (123ms resolve - 22ms download)

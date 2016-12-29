@@ -6,7 +6,7 @@
 [debug] == resolving dependencies for Aja#dhira$sources_javadoc_2.11;0.0.1 [compile]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-cli#commons-cli;1.2 [compile->default(compile)]
 [info] Resolving commons-cli#commons-cli;1.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@754c3b35
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@69236516
 [debug] sbt-chain: module revision found in cache: commons-cli#commons-cli;1.2
 [debug] 	found commons-cli#commons-cli;1.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-cli#commons-cli;1.2 [compile->runtime]
@@ -14,7 +14,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-cli#commons-cli;1.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@192cc0b3
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1a1e9576
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1
 [debug] 	found com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1 [compile->runtime]
@@ -22,7 +22,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.dataformat#jackson-dataformat-yaml;2.5.1 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-core;2.5.1 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-core;2.5.1 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@460a7a69
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1a465765
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-core;2.5.1
 [debug] 	found com.fasterxml.jackson.core#jackson-core;2.5.1 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-core;2.5.1 [compile->runtime]
@@ -30,7 +30,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-core;2.5.1 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-databind;2.4.4 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-databind;2.4.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4239afa6
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3e990c2e
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-databind;2.4.4
 [debug] 	found com.fasterxml.jackson.core#jackson-databind;2.4.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-databind;2.4.4 [compile->runtime]
@@ -38,7 +38,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-databind;2.4.4 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-annotations;2.4.0 [compile->default(compile)]
 [info] Resolving com.fasterxml.jackson.core#jackson-annotations;2.4.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7fbf0ae4
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4126cb80
 [debug] sbt-chain: module revision found in cache: com.fasterxml.jackson.core#jackson-annotations;2.4.0
 [debug] 	found com.fasterxml.jackson.core#jackson-annotations;2.4.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-annotations;2.4.0 [compile->runtime]
@@ -46,7 +46,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.fasterxml.jackson.core#jackson-annotations;2.4.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.yaml#snakeyaml;1.12 [compile->default(compile)]
 [info] Resolving org.yaml#snakeyaml;1.12 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3d00e214
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7fad4e1c
 [debug] sbt-chain: module revision found in cache: org.yaml#snakeyaml;1.12
 [debug] 	found org.yaml#snakeyaml;1.12 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.yaml#snakeyaml;1.12 [compile->runtime]
@@ -54,7 +54,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.yaml#snakeyaml;1.12 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-compress;1.8 [compile->default(compile)]
 [info] Resolving org.apache.commons#commons-compress;1.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@fe55f40
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@19b9f4a3
 [debug] sbt-chain: module revision found in cache: org.apache.commons#commons-compress;1.8
 [debug] 	found org.apache.commons#commons-compress;1.8 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-compress;1.8 [compile->runtime]
@@ -62,7 +62,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-compress;1.8 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.tukaani#xz;1.5 [compile->default(compile)]
 [info] Resolving org.tukaani#xz;1.5 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4a3f3b9
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4bdf6c47
 [debug] sbt-chain: module revision found in cache: org.tukaani#xz;1.5
 [debug] 	found org.tukaani#xz;1.5 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.tukaani#xz;1.5 [compile->runtime]
@@ -70,7 +70,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.tukaani#xz;1.5 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-io#commons-io;2.4 [compile->default(compile)]
 [info] Resolving commons-io#commons-io;2.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6bf17ede
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@609640a5
 [debug] sbt-chain: module revision found in cache: commons-io#commons-io;2.4
 [debug] 	found commons-io#commons-io;2.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-io#commons-io;2.4 [compile->runtime]
@@ -78,7 +78,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->commons-io#commons-io;2.4 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4s_2.11;0.5.0 [compile->default(compile)]
 [info] Resolving org.nd4j#nd4s_2.11;0.5.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3c340459
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@48773b95
 [debug] sbt-chain: module revision found in cache: org.nd4j#nd4s_2.11;0.5.0
 [debug] 	found org.nd4j#nd4s_2.11;0.5.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4s_2.11;0.5.0 [compile->runtime]
@@ -86,7 +86,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4s_2.11;0.5.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-library;2.11.8 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.11.8 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@64ae6bcb
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@24ad892e
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.8
 [debug] 	found org.scala-lang#scala-library;2.11.8 in sbt-chain
 [debug] 	[2.11.8] org.scala-lang#scala-library;2.11.8
@@ -95,7 +95,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-library;2.11.8 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-loops_2.11;0.3.4 [compile->default(compile)]
 [info] Resolving com.nativelibs4java#scalaxy-loops_2.11;0.3.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@732e794a
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1a7eacad
 [debug] sbt-chain: module revision found in cache: com.nativelibs4java#scalaxy-loops_2.11;0.3.4
 [debug] 	found com.nativelibs4java#scalaxy-loops_2.11;0.3.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-loops_2.11;0.3.4 [compile->runtime]
@@ -103,7 +103,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-loops_2.11;0.3.4 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-compiler;2.11.2 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-compiler;2.11.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4c085ea4
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1e958fd
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.11.2
 [debug] 	found org.scala-lang#scala-compiler;2.11.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-compiler;2.11.2 [compile->runtime]
@@ -111,7 +111,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-compiler;2.11.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-reflect;2.11.2 [compile->default(compile)]
 [info] Resolving org.scala-lang#scala-reflect;2.11.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@77dc4406
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2910d62c
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.11.2
 [debug] 	found org.scala-lang#scala-reflect;2.11.2 in sbt-chain
 [debug] 	[2.11.2] org.scala-lang#scala-reflect;2.11.2
@@ -120,7 +120,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang#scala-reflect;2.11.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-xml_2.11;1.0.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3fb03e78
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@73b0479e
 [debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.2
 [debug] 	found org.scala-lang.modules#scala-xml_2.11;1.0.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime]
@@ -128,7 +128,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2 [compile->default(compile)]
 [info] Resolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5b309b13
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@45e0efbc
 [debug] sbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2
 [debug] 	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2 [compile->runtime]
@@ -136,7 +136,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-streams_2.11;0.3.4 [compile->default(compile)]
 [info] Resolving com.nativelibs4java#scalaxy-streams_2.11;0.3.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@51d019a0
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3444bcf9
 [debug] sbt-chain: module revision found in cache: com.nativelibs4java#scalaxy-streams_2.11;0.3.4
 [debug] 	found com.nativelibs4java#scalaxy-streams_2.11;0.3.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-streams_2.11;0.3.4 [compile->runtime]
@@ -144,7 +144,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.nativelibs4java#scalaxy-streams_2.11;0.3.4 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-api;0.5.0 [compile->default(compile)]
 [info] Resolving org.nd4j#nd4j-api;0.5.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6db68282
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@57098d4b
 [debug] sbt-chain: module revision found in cache: org.nd4j#nd4j-api;0.5.0
 [debug] 	found org.nd4j#nd4j-api;0.5.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-api;0.5.0 [compile->runtime]
@@ -152,7 +152,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-api;0.5.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-api;1.7.10 [compile->default(compile)]
 [info] Resolving org.slf4j#slf4j-api;1.7.10 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6e0e26e6
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2ece82d0
 [debug] sbt-chain: module revision found in cache: org.slf4j#slf4j-api;1.7.10
 [debug] 	found org.slf4j#slf4j-api;1.7.10 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-api;1.7.10 [compile->runtime]
@@ -160,7 +160,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-api;1.7.10 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.projectlombok#lombok;1.16.4 [compile->default(compile)]
 [info] Resolving org.projectlombok#lombok;1.16.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@66fa9629
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@216b8504
 [debug] sbt-chain: module revision found in cache: org.projectlombok#lombok;1.16.4
 [debug] 	found org.projectlombok#lombok;1.16.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.projectlombok#lombok;1.16.4 [compile->runtime]
@@ -168,7 +168,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.projectlombok#lombok;1.16.4 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-buffer;0.5.0 [compile->default(compile)]
 [info] Resolving org.nd4j#nd4j-buffer;0.5.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6adecc3d
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@68d6dc04
 [debug] sbt-chain: module revision found in cache: org.nd4j#nd4j-buffer;0.5.0
 [debug] 	found org.nd4j#nd4j-buffer;0.5.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-buffer;0.5.0 [compile->runtime]
@@ -176,7 +176,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-buffer;0.5.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-common;0.5.0 [compile->default(compile)]
 [info] Resolving org.nd4j#nd4j-common;0.5.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2d06f76a
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1ec73525
 [debug] sbt-chain: module revision found in cache: org.nd4j#nd4j-common;0.5.0
 [debug] 	found org.nd4j#nd4j-common;0.5.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-common;0.5.0 [compile->runtime]
@@ -184,7 +184,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-common;0.5.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.reflections#reflections;0.9.10 [compile->default(compile)]
 [info] Resolving org.reflections#reflections;0.9.10 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7ea461da
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6b9a2943
 [debug] sbt-chain: module revision found in cache: org.reflections#reflections;0.9.10
 [debug] 	found org.reflections#reflections;0.9.10 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.reflections#reflections;0.9.10 [compile->runtime]
@@ -192,7 +192,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.reflections#reflections;0.9.10 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.google.guava#guava;18.0 [compile->default(compile)]
 [info] Resolving com.google.guava#guava;18.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5ce3d3b6
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4e49fc1b
 [debug] sbt-chain: module revision found in cache: com.google.guava#guava;18.0
 [debug] 	found com.google.guava#guava;18.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.google.guava#guava;18.0 [compile->runtime]
@@ -200,7 +200,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->com.google.guava#guava;18.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.javassist#javassist;3.18.2-GA [compile->default(compile)]
 [info] Resolving org.javassist#javassist;3.18.2-GA ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@15f4a2ea
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1d753f86
 [debug] sbt-chain: module revision found in cache: org.javassist#javassist;3.18.2-GA
 [debug] 	found org.javassist#javassist;3.18.2-GA in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.javassist#javassist;3.18.2-GA [compile->runtime]
@@ -208,7 +208,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.javassist#javassist;3.18.2-GA [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-math3;3.4.1 [compile->default(compile)]
 [info] Resolving org.apache.commons#commons-math3;3.4.1 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6626b654
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4c5ae094
 [debug] sbt-chain: module revision found in cache: org.apache.commons#commons-math3;3.4.1
 [debug] 	found org.apache.commons#commons-math3;3.4.1 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-math3;3.4.1 [compile->runtime]
@@ -216,7 +216,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-math3;3.4.1 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-lang3;3.3.1 [compile->default(compile)]
 [info] Resolving org.apache.commons#commons-lang3;3.3.1 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@17805284
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@138a251b
 [debug] sbt-chain: module revision found in cache: org.apache.commons#commons-lang3;3.3.1
 [debug] 	found org.apache.commons#commons-lang3;3.3.1 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-lang3;3.3.1 [compile->runtime]
@@ -224,7 +224,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.apache.commons#commons-lang3;3.3.1 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-context;0.5.0 [compile->default(compile)]
 [info] Resolving org.nd4j#nd4j-context;0.5.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@79a40210
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@52876757
 [debug] sbt-chain: module revision found in cache: org.nd4j#nd4j-context;0.5.0
 [debug] 	found org.nd4j#nd4j-context;0.5.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-context;0.5.0 [compile->runtime]
@@ -232,7 +232,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.nd4j#nd4j-context;0.5.0 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.bytedeco#javacpp;1.2.3 [compile->default(compile)]
 [info] Resolving org.bytedeco#javacpp;1.2.3 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1e64650
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5b3e310c
 [debug] sbt-chain: module revision found in cache: org.bytedeco#javacpp;1.2.3
 [debug] 	found org.bytedeco#javacpp;1.2.3 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.bytedeco#javacpp;1.2.3 [compile->runtime]
@@ -240,7 +240,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.bytedeco#javacpp;1.2.3 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-log4j12;1.2 [compile->default(compile)]
 [info] Resolving org.slf4j#slf4j-log4j12;1.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@79bb57f7
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@56abcb47
 [debug] sbt-chain: module revision found in cache: org.slf4j#slf4j-log4j12;1.2
 [debug] 	found org.slf4j#slf4j-log4j12;1.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-log4j12;1.2 [compile->runtime]
@@ -248,7 +248,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.slf4j#slf4j-log4j12;1.2 [compile->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->log4j#log4j;1.2.13 [compile->default(compile)]
 [info] Resolving log4j#log4j;1.2.13 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@6327711
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@500e50a2
 [debug] sbt-chain: module revision found in cache: log4j#log4j;1.2.13
 [debug] 	found log4j#log4j;1.2.13 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->log4j#log4j;1.2.13 [compile->runtime]
@@ -883,7 +883,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->log4j#log4j;1.2.13 [test->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalatest#scalatest_2.11;2.2.4 [test->default(compile)]
 [info] Resolving org.scalatest#scalatest_2.11;2.2.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1f342a95
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@32b94851
 [debug] sbt-chain: module revision found in cache: org.scalatest#scalatest_2.11;2.2.4
 [debug] 	found org.scalatest#scalatest_2.11;2.2.4 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalatest#scalatest_2.11;2.2.4 [test->runtime]
@@ -891,7 +891,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalatest#scalatest_2.11;2.2.4 [test->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalacheck#scalacheck_2.11;1.12.2 [test->default(compile)]
 [info] Resolving org.scalacheck#scalacheck_2.11;1.12.2 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@124345a3
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@48cdcfe3
 [debug] sbt-chain: module revision found in cache: org.scalacheck#scalacheck_2.11;1.12.2
 [debug] 	found org.scalacheck#scalacheck_2.11;1.12.2 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalacheck#scalacheck_2.11;1.12.2 [test->runtime]
@@ -899,7 +899,7 @@
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scalacheck#scalacheck_2.11;1.12.2 [test->master]
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-sbt#test-interface;1.0 [test->default(compile)]
 [info] Resolving org.scala-sbt#test-interface;1.0 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@407b4b1e
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@479dfe12
 [debug] sbt-chain: module revision found in cache: org.scala-sbt#test-interface;1.0
 [debug] 	found org.scala-sbt#test-interface;1.0 in sbt-chain
 [debug] == resolving dependencies Aja#dhira$sources_javadoc_2.11;0.0.1->org.scala-sbt#test-interface;1.0 [test->runtime]
@@ -2238,7 +2238,7 @@
 [debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4!scala-parser-combinators_2.11.jar(src)
 [debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(src)
 [debug] 	[NOT REQUIRED] jline#jline;2.12.1!jline.jar(doc)
-[debug] :: resolution report :: resolve 1522ms :: artifacts dl 57ms
+[debug] :: resolution report :: resolve 2811ms :: artifacts dl 195ms
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 compile produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-compile.xml
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 runtime produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-runtime.xml
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 test produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-test.xml
@@ -2252,4 +2252,4 @@
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 docs produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-docs.xml
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 pom produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-pom.xml
 [debug] 	report for Aja#dhira$sources_javadoc_2.11;0.0.1 scala-tool produced in /opt/aja/src/main/scala/org/aja/dhira/target/resolution-cache/reports/Aja-dhira$sources_javadoc_2.11-scala-tool.xml
-[debug] 	resolve done (1522ms resolve - 57ms download)
+[debug] 	resolve done (2811ms resolve - 195ms download)

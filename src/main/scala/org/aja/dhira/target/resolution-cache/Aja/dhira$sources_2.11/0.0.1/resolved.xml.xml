@@ -4,7 +4,7 @@
 		module="dhira$sources_2.11"
 		revision="0.0.1"
 		status="integration"
-		publication="20160911211047"
+		publication="20161105171406"
 	/>
 	<configurations>
 		<conf name="default" visibility="public" description=""/>

@@ -78,6 +78,7 @@ object Dependency {
   val breezeNatives         = "org.scalanlp"          %% "breeze-natives"   % Version.Breeze withSources()
 
   val akka                  = "com.typesafe.akka"     %% "akka-actor"       % Version.Akka withSources()
+  val akkaStrem             = "com.typesafe.akka"     %% "akka-stream"       % Version.Akka withSources()
   //  val scalaActor     =  "org.scala-lang"          %% "scala-actors"     % Version.scalaActors withSources()
 
   val neo4jScalaCypher      = "org.anormcypher"       %% "anormcypher"      % Version.neo4JScalaCypher withSources()
@@ -104,7 +105,7 @@ object Dependencies {
     Seq(neo4jScalaCypher, JsErrorGet, sparkCore, sparkMLLib, sparkStreaming, sparkStreamingKafta, sparkStreamingflume,
       sparkStreamingTwitter, sparkSQL, sparkGrapx, sparkHive, sparkRepl,
       scalaTest, scalaCheck, twitterCoreAddon, twitterStreamAddon, gsonLib, cli, breeze,
-      breezeNatives, breeezeViz, akka, sparkCSV, scalaChart, scalaPlot, graphStreamCore, graphStreamUI, neo4jSparkConnector, graphFrames)
+      breezeNatives, breeezeViz, akka, akkaStrem, sparkCSV, scalaChart, scalaPlot, graphStreamCore, graphStreamUI, neo4jSparkConnector, graphFrames)
 }
 
 object TejSparkBuild extends Build {

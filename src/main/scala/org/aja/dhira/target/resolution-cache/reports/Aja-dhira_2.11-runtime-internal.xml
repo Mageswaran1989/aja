@@ -7,114 +7,114 @@
 		revision="0.0.1"
 		conf="runtime-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20160911210644"/>
+		date="20161014204338"/>
 	<dependencies>
 		<module organisation="org.slf4j" name="slf4j-log4j12">
-			<revision name="1.2" status="release" pubdate="20070125014757" resolver="public" artresolver="public" homepage="http://www.slf4j.org" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="30">
-				<metadata-artifact status="successful" details="" size="1304" time="1074" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/ivy-1.2.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/ivy-1.2.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.2/slf4j-log4j12-1.2.pom"/>
+			<revision name="1.2" status="release" pubdate="20070125014757" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.slf4j.org" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="30">
+				<metadata-artifact status="no" details="" size="3154" time="0" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/ivy-1.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.2/slf4j-log4j12-1.2.pom"/>
 				<caller organisation="Aja" name="dhira_2.11" conf="compile, runtime-internal, runtime, optional" rev="1.2" rev-constraint-default="1.2" rev-constraint-dynamic="1.2" callerrev="0.0.1"/>
 				<artifacts>
-					<artifact name="slf4j-log4j12" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="10864" time="1402" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/srcs/slf4j-log4j12-1.2-sources.jar">
+					<artifact name="slf4j-log4j12" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="10864" time="0" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/srcs/slf4j-log4j12-1.2-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.2/slf4j-log4j12-1.2-sources.jar"/>
 					</artifact>
-					<artifact name="slf4j-log4j12" type="jar" ext="jar" status="successful" details="" size="8110" time="1548" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.2.jar">
+					<artifact name="slf4j-log4j12" type="jar" ext="jar" status="no" details="" size="8110" time="0" location="/home/mageswaran/.ivy2/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.2.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/slf4j/slf4j-log4j12/1.2/slf4j-log4j12-1.2.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="log4j" name="log4j">
-			<revision name="1.2.13" status="release" pubdate="20060103230401" resolver="public" artresolver="public" homepage="http://logging.apache.org/log4j/docs/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="31">
-				<metadata-artifact status="successful" details="" size="389" time="1066" location="/home/mageswaran/.ivy2/cache/log4j/log4j/ivy-1.2.13.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/log4j/log4j/ivy-1.2.13.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/log4j/log4j/1.2.13/log4j-1.2.13.pom"/>
+			<revision name="1.2.13" status="release" pubdate="20060103230401" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://logging.apache.org/log4j/docs/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="31">
+				<metadata-artifact status="no" details="" size="2237" time="0" location="/home/mageswaran/.ivy2/cache/log4j/log4j/ivy-1.2.13.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/log4j/log4j/1.2.13/log4j-1.2.13.pom"/>
 				<caller organisation="org.slf4j" name="slf4j-log4j12" conf="default, compile, runtime, master" rev="1.2.13" rev-constraint-default="1.2.13" rev-constraint-dynamic="1.2.13" callerrev="1.2"/>
 				<artifacts>
-					<artifact name="log4j" type="jar" ext="jar" status="successful" details="" size="358180" time="1171" location="/home/mageswaran/.ivy2/cache/log4j/log4j/jars/log4j-1.2.13.jar">
+					<artifact name="log4j" type="jar" ext="jar" status="no" details="" size="358180" time="0" location="/home/mageswaran/.ivy2/cache/log4j/log4j/jars/log4j-1.2.13.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/log4j/log4j/1.2.13/log4j-1.2.13.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.nd4j" name="nd4s_2.11">
-			<revision name="0.5.0" status="release" pubdate="20160803193120" resolver="public" artresolver="public" homepage="http://nd4j.org/" downloaded="true" searched="true" default="false" conf="default, compile, runtime, default(compile), master" position="9">
+			<revision name="0.5.0" status="release" pubdate="20160803193120" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://nd4j.org/" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="9">
 				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
-				<metadata-artifact status="successful" details="" size="3300" time="1102" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/ivy-0.5.0.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/ivy-0.5.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4s_2.11/0.5.0/nd4s_2.11-0.5.0.pom"/>
+				<metadata-artifact status="no" details="" size="3554" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/ivy-0.5.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4s_2.11/0.5.0/nd4s_2.11-0.5.0.pom"/>
 				<caller organisation="Aja" name="dhira_2.11" conf="compile, runtime-internal, runtime, optional" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.0.1"/>
 				<artifacts>
-					<artifact name="nd4s_2.11" type="jar" ext="jar" status="successful" details="" size="240922" time="1647" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/jars/nd4s_2.11-0.5.0.jar">
+					<artifact name="nd4s_2.11" type="jar" ext="jar" status="no" details="" size="240922" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/jars/nd4s_2.11-0.5.0.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4s_2.11/0.5.0/nd4s_2.11-0.5.0.jar"/>
 					</artifact>
-					<artifact name="nd4s_2.11" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="13666" time="1501" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/srcs/nd4s_2.11-0.5.0-sources.jar">
+					<artifact name="nd4s_2.11" type="src" ext="jar" extra-classifier="sources" status="no" details="" size="13666" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4s_2.11/srcs/nd4s_2.11-0.5.0-sources.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4s_2.11/0.5.0/nd4s_2.11-0.5.0-sources.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.nd4j" name="nd4j-api">
-			<revision name="0.5.0" status="release" pubdate="20160803140916" resolver="public" artresolver="public" homepage="http://nd4j.org" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="17">
-				<metadata-artifact status="successful" details="" size="3952" time="1060" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-api/ivy-0.5.0.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-api/ivy-0.5.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-api/0.5.0/nd4j-api-0.5.0.pom"/>
+			<revision name="0.5.0" status="release" pubdate="20160803140916" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://nd4j.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="17">
+				<metadata-artifact status="no" details="" size="8087" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-api/ivy-0.5.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-api/0.5.0/nd4j-api-0.5.0.pom"/>
 				<caller organisation="org.nd4j" name="nd4s_2.11" conf="default, compile, runtime, master" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="nd4j-api" type="jar" ext="jar" status="successful" details="" size="663919" time="2029" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-api/jars/nd4j-api-0.5.0.jar">
+					<artifact name="nd4j-api" type="jar" ext="jar" status="no" details="" size="663919" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-api/jars/nd4j-api-0.5.0.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4j-api/0.5.0/nd4j-api-0.5.0.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.nd4j" name="nd4j-buffer">
-			<revision name="0.5.0" status="release" pubdate="20160803140846" resolver="public" artresolver="public" homepage="" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="20">
-				<metadata-artifact status="successful" details="" size="3718" time="1030" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-buffer/ivy-0.5.0.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-buffer/ivy-0.5.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-buffer/0.5.0/nd4j-buffer-0.5.0.pom"/>
+			<revision name="0.5.0" status="release" pubdate="20160803140846" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="20">
+				<metadata-artifact status="no" details="" size="5122" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-buffer/ivy-0.5.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-buffer/0.5.0/nd4j-buffer-0.5.0.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-api" conf="compile, runtime" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="nd4j-buffer" type="jar" ext="jar" status="successful" details="" size="57318" time="1130" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-buffer/jars/nd4j-buffer-0.5.0.jar">
+					<artifact name="nd4j-buffer" type="jar" ext="jar" status="no" details="" size="57318" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-buffer/jars/nd4j-buffer-0.5.0.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4j-buffer/0.5.0/nd4j-buffer-0.5.0.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.bytedeco" name="javacpp">
-			<revision name="1.2.3" status="release" pubdate="20160801064503" resolver="public" artresolver="public" homepage="http://bytedeco.org/javacpp/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="29">
+			<revision name="1.2.3" status="release" pubdate="20160801064503" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://bytedeco.org/javacpp/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="29">
 				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0"/>
 				<license name="GNU General Public License (GPL) version 2, or any later version" url="http://www.gnu.org/licenses/"/>
 				<license name="GPLv2 with Classpath exception" url="http://www.gnu.org/software/classpath/license.html"/>
-				<metadata-artifact status="successful" details="" size="9794" time="1089" location="/home/mageswaran/.ivy2/cache/org.bytedeco/javacpp/ivy-1.2.3.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.bytedeco/javacpp/ivy-1.2.3.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/bytedeco/javacpp/1.2.3/javacpp-1.2.3.pom"/>
+				<metadata-artifact status="no" details="" size="3888" time="0" location="/home/mageswaran/.ivy2/cache/org.bytedeco/javacpp/ivy-1.2.3.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/bytedeco/javacpp/1.2.3/javacpp-1.2.3.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-buffer" conf="compile, runtime" rev="1.2.3" rev-constraint-default="1.2.3" rev-constraint-dynamic="1.2.3" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="javacpp" type="jar" ext="jar" status="successful" details="" size="305615" time="1678" location="/home/mageswaran/.ivy2/cache/org.bytedeco/javacpp/jars/javacpp-1.2.3.jar">
+					<artifact name="javacpp" type="jar" ext="jar" status="no" details="" size="305615" time="0" location="/home/mageswaran/.ivy2/cache/org.bytedeco/javacpp/jars/javacpp-1.2.3.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/bytedeco/javacpp/1.2.3/javacpp-1.2.3.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.nd4j" name="nd4j-context">
-			<revision name="0.5.0" status="release" pubdate="20160803140930" resolver="public" artresolver="public" homepage="" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="28">
-				<metadata-artifact status="successful" details="" size="717" time="1091" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-context/ivy-0.5.0.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-context/ivy-0.5.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-context/0.5.0/nd4j-context-0.5.0.pom"/>
+			<revision name="0.5.0" status="release" pubdate="20160803140930" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="28">
+				<metadata-artifact status="no" details="" size="4847" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-context/ivy-0.5.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-context/0.5.0/nd4j-context-0.5.0.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-api" conf="compile, runtime" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<caller organisation="org.nd4j" name="nd4j-buffer" conf="compile, runtime" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="nd4j-context" type="jar" ext="jar" status="successful" details="" size="7214" time="1086" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-context/jars/nd4j-context-0.5.0.jar">
+					<artifact name="nd4j-context" type="jar" ext="jar" status="no" details="" size="7214" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-context/jars/nd4j-context-0.5.0.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4j-context/0.5.0/nd4j-context-0.5.0.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.nd4j" name="nd4j-common">
-			<revision name="0.5.0" status="release" pubdate="20160803140322" resolver="public" artresolver="public" homepage="" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="21">
-				<metadata-artifact status="successful" details="" size="2580" time="1099" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-common/ivy-0.5.0.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-common/ivy-0.5.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-common/0.5.0/nd4j-common-0.5.0.pom"/>
+			<revision name="0.5.0" status="release" pubdate="20160803140322" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="21">
+				<metadata-artifact status="no" details="" size="6337" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-common/ivy-0.5.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/nd4j/nd4j-common/0.5.0/nd4j-common-0.5.0.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-buffer" conf="compile, runtime" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<caller organisation="org.nd4j" name="nd4j-context" conf="compile, runtime" rev="0.5.0" rev-constraint-default="0.5.0" rev-constraint-dynamic="0.5.0" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="nd4j-common" type="jar" ext="jar" status="successful" details="" size="124360" time="1604" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-common/jars/nd4j-common-0.5.0.jar">
+					<artifact name="nd4j-common" type="jar" ext="jar" status="no" details="" size="124360" time="0" location="/home/mageswaran/.ivy2/cache/org.nd4j/nd4j-common/jars/nd4j-common-0.5.0.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/nd4j/nd4j-common/0.5.0/nd4j-common-0.5.0.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.apache.commons" name="commons-lang3">
-			<revision name="3.3.1" status="release" pubdate="20140315183434" resolver="public" artresolver="public" homepage="http://commons.apache.org/proper/commons-lang/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="27">
-				<metadata-artifact status="successful" details="" size="20397" time="1060" location="/home/mageswaran/.ivy2/cache/org.apache.commons/commons-lang3/ivy-3.3.1.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.apache.commons/commons-lang3/ivy-3.3.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.1/commons-lang3-3.3.1.pom"/>
+			<revision name="3.3.1" status="release" pubdate="20140315183434" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://commons.apache.org/proper/commons-lang/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="27">
+				<metadata-artifact status="no" details="" size="10428" time="0" location="/home/mageswaran/.ivy2/cache/org.apache.commons/commons-lang3/ivy-3.3.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.1/commons-lang3-3.3.1.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-common" conf="compile, runtime" rev="3.3.1" rev-constraint-default="3.3.1" rev-constraint-dynamic="3.3.1" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="commons-lang3" type="jar" ext="jar" status="successful" details="" size="412693" time="1468" location="/home/mageswaran/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.3.1.jar">
+					<artifact name="commons-lang3" type="jar" ext="jar" status="no" details="" size="412693" time="0" location="/home/mageswaran/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.3.1.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.1/commons-lang3-3.3.1.jar"/>
 					</artifact>
 				</artifacts>
@@ -132,39 +132,39 @@
 			</revision>
 		</module>
 		<module organisation="org.reflections" name="reflections">
-			<revision name="0.9.10" status="release" pubdate="20150516151630" resolver="public" artresolver="public" homepage="http://github.com/ronmamo/reflections" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="22">
+			<revision name="0.9.10" status="release" pubdate="20150516151630" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/ronmamo/reflections" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="22">
 				<license name="WTFPL" url="http://www.wtfpl.net/"/>
 				<license name="The New BSD License" url="http://www.opensource.org/licenses/bsd-license.html"/>
-				<metadata-artifact status="successful" details="" size="9130" time="1588" location="/home/mageswaran/.ivy2/cache/org.reflections/reflections/ivy-0.9.10.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.reflections/reflections/ivy-0.9.10.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/reflections/reflections/0.9.10/reflections-0.9.10.pom"/>
+				<metadata-artifact status="no" details="" size="4122" time="0" location="/home/mageswaran/.ivy2/cache/org.reflections/reflections/ivy-0.9.10.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/reflections/reflections/0.9.10/reflections-0.9.10.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-common" conf="compile, runtime" rev="0.9.10" rev-constraint-default="0.9.10" rev-constraint-dynamic="0.9.10" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="reflections" type="jar" ext="jar" status="successful" details="" size="129763" time="1127" location="/home/mageswaran/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.10.jar">
+					<artifact name="reflections" type="jar" ext="jar" status="no" details="" size="129763" time="0" location="/home/mageswaran/.ivy2/cache/org.reflections/reflections/jars/reflections-0.9.10.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/reflections/reflections/0.9.10/reflections-0.9.10.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.google.code.findbugs" name="annotations">
-			<revision name="2.0.1" status="release" pubdate="20120730034801" resolver="public" artresolver="public" homepage="http://findbugs.sourceforge.net/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="25">
+			<revision name="2.0.1" status="release" pubdate="20120730034801" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://findbugs.sourceforge.net/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="25">
 				<license name="GNU Lesser Public License" url="http://www.gnu.org/licenses/lgpl.html"/>
-				<metadata-artifact status="successful" details="" size="764" time="1556" location="/home/mageswaran/.ivy2/cache/com.google.code.findbugs/annotations/ivy-2.0.1.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/com.google.code.findbugs/annotations/ivy-2.0.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.pom"/>
+				<metadata-artifact status="no" details="" size="2385" time="0" location="/home/mageswaran/.ivy2/cache/com.google.code.findbugs/annotations/ivy-2.0.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.pom"/>
 				<caller organisation="org.reflections" name="reflections" conf="compile, runtime" rev="2.0.1" rev-constraint-default="2.0.1" rev-constraint-dynamic="2.0.1" callerrev="0.9.10"/>
 				<artifacts>
-					<artifact name="annotations" type="jar" ext="jar" status="successful" details="" size="74557" time="1127" location="/home/mageswaran/.ivy2/cache/com.google.code.findbugs/annotations/jars/annotations-2.0.1.jar">
+					<artifact name="annotations" type="jar" ext="jar" status="no" details="" size="74557" time="0" location="/home/mageswaran/.ivy2/cache/com.google.code.findbugs/annotations/jars/annotations-2.0.1.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.javassist" name="javassist">
-			<revision name="3.18.2-GA" status="release" pubdate="20140527222509" resolver="public" artresolver="public" homepage="http://www.javassist.org/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="24">
+			<revision name="3.18.2-GA" status="release" pubdate="20140527222509" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.javassist.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="24">
 				<license name="MPL 1.1" url="http://www.mozilla.org/MPL/MPL-1.1.html"/>
 				<license name="LGPL 2.1" url="http://www.gnu.org/licenses/lgpl-2.1.html"/>
 				<license name="Apache License 2.0" url="http://www.apache.org/licenses/"/>
-				<metadata-artifact status="successful" details="" size="9522" time="1067" location="/home/mageswaran/.ivy2/cache/org.javassist/javassist/ivy-3.18.2-GA.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.javassist/javassist/ivy-3.18.2-GA.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/javassist/javassist/3.18.2-GA/javassist-3.18.2-GA.pom"/>
+				<metadata-artifact status="no" details="" size="3073" time="0" location="/home/mageswaran/.ivy2/cache/org.javassist/javassist/ivy-3.18.2-GA.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/javassist/javassist/3.18.2-GA/javassist-3.18.2-GA.pom"/>
 				<caller organisation="org.reflections" name="reflections" conf="compile, runtime" rev="3.18.2-GA" rev-constraint-default="3.18.2-GA" rev-constraint-dynamic="3.18.2-GA" callerrev="0.9.10"/>
 				<artifacts>
-					<artifact name="javassist" type="bundle" ext="jar" status="successful" details="" size="714524" time="1525" location="/home/mageswaran/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.18.2-GA.jar">
+					<artifact name="javassist" type="bundle" ext="jar" status="no" details="" size="714524" time="0" location="/home/mageswaran/.ivy2/cache/org.javassist/javassist/bundles/javassist-3.18.2-GA.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/javassist/javassist/3.18.2-GA/javassist-3.18.2-GA.jar"/>
 					</artifact>
 				</artifacts>
@@ -183,12 +183,12 @@
 			</revision>
 		</module>
 		<module organisation="org.projectlombok" name="lombok">
-			<revision name="1.16.4" status="release" pubdate="20150415021106" resolver="public" artresolver="public" homepage="http://projectlombok.org" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="19">
+			<revision name="1.16.4" status="release" pubdate="20150415021106" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://projectlombok.org" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="19">
 				<license name="The MIT License" url="http://projectlombok.org/LICENSE"/>
-				<metadata-artifact status="successful" details="" size="1565" time="1064" location="/home/mageswaran/.ivy2/cache/org.projectlombok/lombok/ivy-1.16.4.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.projectlombok/lombok/ivy-1.16.4.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/projectlombok/lombok/1.16.4/lombok-1.16.4.pom"/>
+				<metadata-artifact status="no" details="" size="2442" time="0" location="/home/mageswaran/.ivy2/cache/org.projectlombok/lombok/ivy-1.16.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/projectlombok/lombok/1.16.4/lombok-1.16.4.pom"/>
 				<caller organisation="org.nd4j" name="nd4j-api" conf="compile, runtime" rev="1.16.4" rev-constraint-default="1.16.4" rev-constraint-dynamic="1.16.4" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="lombok" type="jar" ext="jar" status="successful" details="" size="1355970" time="2107" location="/home/mageswaran/.ivy2/cache/org.projectlombok/lombok/jars/lombok-1.16.4.jar">
+					<artifact name="lombok" type="jar" ext="jar" status="no" details="" size="1355970" time="0" location="/home/mageswaran/.ivy2/cache/org.projectlombok/lombok/jars/lombok-1.16.4.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/projectlombok/lombok/1.16.4/lombok-1.16.4.jar"/>
 					</artifact>
 				</artifacts>
@@ -214,37 +214,37 @@
 			</revision>
 		</module>
 		<module organisation="com.nativelibs4java" name="scalaxy-loops_2.11">
-			<revision name="0.3.4" status="release" pubdate="20141104061834" resolver="public" artresolver="public" homepage="https://github.com/ochafik/Scalaxy" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="11">
+			<revision name="0.3.4" status="release" pubdate="20141104061834" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/ochafik/Scalaxy" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="11">
 				<license name="BSD-3-Clause" url="http://www.opensource.org/licenses/BSD-3-Clause"/>
-				<metadata-artifact status="successful" details="" size="2428" time="1193" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-loops_2.11/ivy-0.3.4.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-loops_2.11/ivy-0.3.4.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-loops_2.11/0.3.4/scalaxy-loops_2.11-0.3.4.pom"/>
+				<metadata-artifact status="no" details="" size="3229" time="0" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-loops_2.11/ivy-0.3.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-loops_2.11/0.3.4/scalaxy-loops_2.11-0.3.4.pom"/>
 				<caller organisation="org.nd4j" name="nd4s_2.11" conf="default, compile, runtime, master" rev="0.3.4" rev-constraint-default="0.3.4" rev-constraint-dynamic="0.3.4" callerrev="0.5.0"/>
 				<artifacts>
-					<artifact name="scalaxy-loops_2.11" type="jar" ext="jar" status="successful" details="" size="29468" time="1108" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-loops_2.11/jars/scalaxy-loops_2.11-0.3.4.jar">
+					<artifact name="scalaxy-loops_2.11" type="jar" ext="jar" status="no" details="" size="29468" time="0" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-loops_2.11/jars/scalaxy-loops_2.11-0.3.4.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-loops_2.11/0.3.4/scalaxy-loops_2.11-0.3.4.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.nativelibs4java" name="scalaxy-streams_2.11">
-			<revision name="0.3.4" status="release" pubdate="20141104061646" resolver="public" artresolver="public" homepage="https://github.com/ochafik/Scalaxy" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="16">
+			<revision name="0.3.4" status="release" pubdate="20141104061646" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/ochafik/Scalaxy" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="16">
 				<license name="BSD-3-Clause" url="http://www.opensource.org/licenses/BSD-3-Clause"/>
-				<metadata-artifact status="successful" details="" size="2245" time="1063" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-streams_2.11/ivy-0.3.4.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-streams_2.11/ivy-0.3.4.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-streams_2.11/0.3.4/scalaxy-streams_2.11-0.3.4.pom"/>
+				<metadata-artifact status="no" details="" size="3077" time="0" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-streams_2.11/ivy-0.3.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-streams_2.11/0.3.4/scalaxy-streams_2.11-0.3.4.pom"/>
 				<caller organisation="com.nativelibs4java" name="scalaxy-loops_2.11" conf="compile, runtime" rev="0.3.4" rev-constraint-default="0.3.4" rev-constraint-dynamic="0.3.4" callerrev="0.3.4"/>
 				<artifacts>
-					<artifact name="scalaxy-streams_2.11" type="jar" ext="jar" status="successful" details="" size="974707" time="1716" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-streams_2.11/jars/scalaxy-streams_2.11-0.3.4.jar">
+					<artifact name="scalaxy-streams_2.11" type="jar" ext="jar" status="no" details="" size="974707" time="0" location="/home/mageswaran/.ivy2/cache/com.nativelibs4java/scalaxy-streams_2.11/jars/scalaxy-streams_2.11-0.3.4.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/nativelibs4java/scalaxy-streams_2.11/0.3.4/scalaxy-streams_2.11-0.3.4.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="org.scala-lang" name="scala-compiler">
-			<revision name="2.11.2" status="release" pubdate="20140723120926" resolver="public" artresolver="public" homepage="http://www.scala-lang.org/" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="12">
+			<revision name="2.11.2" status="release" pubdate="20140723120926" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="12">
 				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
-				<metadata-artifact status="successful" details="" size="2363" time="1147" location="/home/mageswaran/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.11.2.xml" searched="true" original-local-location="/home/mageswaran/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.11.2.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.2/scala-compiler-2.11.2.pom"/>
+				<metadata-artifact status="no" details="" size="3131" time="0" location="/home/mageswaran/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.11.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.2/scala-compiler-2.11.2.pom"/>
 				<caller organisation="com.nativelibs4java" name="scalaxy-loops_2.11" conf="compile, runtime" rev="2.11.2" rev-constraint-default="2.11.2" rev-constraint-dynamic="2.11.2" callerrev="0.3.4"/>
 				<caller organisation="com.nativelibs4java" name="scalaxy-streams_2.11" conf="compile, runtime" rev="2.11.2" rev-constraint-default="2.11.2" rev-constraint-dynamic="2.11.2" callerrev="0.3.4"/>
 				<artifacts>
-					<artifact name="scala-compiler" type="jar" ext="jar" status="successful" details="" size="13578783" time="11852" location="/home/mageswaran/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.2.jar">
+					<artifact name="scala-compiler" type="jar" ext="jar" status="no" details="" size="13578783" time="0" location="/home/mageswaran/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.2.jar">
 						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.2/scala-compiler-2.11.2.jar"/>
 					</artifact>
 				</artifacts>

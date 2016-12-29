@@ -44,7 +44,7 @@ object GetterSetter extends App{
 
   val c = new ChecksumAccumulator
   println("Only var sum3 is accessible: " + c.sum3)
-
+//  c.sum
   println("Let see what Q & QQ has ")
   val q = new Q
   val qq = new QQ

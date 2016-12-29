@@ -4,7 +4,7 @@
 		module="dhira$sbt_2.11"
 		revision="0.0.1"
 		status="integration"
-		publication="20160911211045"
+		publication="20161105171404"
 	/>
 	<configurations>
 		<conf name="default" visibility="public"/>
